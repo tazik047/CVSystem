@@ -50,7 +50,7 @@ public class RegistrationEntryPoint implements EntryPoint {
 	    
 	    TabPanel tabPanel = new TabPanel();
 	    rootPanel.add(tabPanel, 21, 10);
-	    tabPanel.setSize("523px", "459px");
+	    tabPanel.setSize("761px", "370px");
 	    
 	    AbsolutePanel absolutePanel = new AbsolutePanel();
 	    tabPanel.add(absolutePanel, "Шаг 1", false);
