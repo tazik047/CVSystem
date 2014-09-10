@@ -1,7 +1,10 @@
 package ua.nure.pi.server;
 
 import ua.nure.pi.client.GreetingService;
+import ua.nure.pi.dao.mssql.MSSqlDAOFactory;
+import ua.nure.pi.dao.mssql.MSSqlUserDAO;
 import ua.nure.pi.shared.FieldVerifier;
+
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 /**
@@ -26,9 +29,11 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements
     // Escape data from the client to avoid cross-site script vulnerabilities.
     input = escapeHtml(input);
     userAgent = escapeHtml(userAgent);
+    String con = escapeHtml(MSSqlDAOFactory.getDAOFactory(1).getUserDAO().test());
 
     return "Hello, " + input + "!<br><br>I am running " + serverInfo
-        + ".<br><br>It looks like you are using:<br>" + userAgent;
+        + ".<br><br>It looks like you are using:<br>" + userAgent
+        + "<br> connection: " + con;
   }
 
   /**
