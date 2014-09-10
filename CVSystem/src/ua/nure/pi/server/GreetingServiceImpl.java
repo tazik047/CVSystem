@@ -1,8 +1,19 @@
 package ua.nure.pi.server;
 
+import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import ua.nure.pi.Path;
 import ua.nure.pi.client.GreetingService;
+import ua.nure.pi.dao.UserDAO;
 import ua.nure.pi.dao.mssql.MSSqlDAOFactory;
 import ua.nure.pi.dao.mssql.MSSqlUserDAO;
+import ua.nure.pi.parameter.AppConstants;
 import ua.nure.pi.shared.FieldVerifier;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
@@ -14,6 +25,33 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 public class GreetingServiceImpl extends RemoteServiceServlet implements
     GreetingService {
 
+	private UserDAO userDAO;
+	@Override
+	public void init() {
+		ServletContext servletContext = getServletContext();
+		userDAO = (UserDAO) servletContext.getAttribute(AppConstants.USER_DAO);
+		
+		if (userDAO == null) {
+			//log.error("UserDAO attribute is not exists.");
+			throw new IllegalStateException("UserDAO attribute is not exists.");
+		}
+	}
+	
+	@Override
+	protected void doGet(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		/*if (log.isDebugEnabled()) {
+			log.debug("GET method starts");
+		}*/
+		RequestDispatcher dispatcher = request
+				.getRequestDispatcher(Path.PAGE__TEST);
+		dispatcher.forward(request, response);
+		/*if (log.isDebugEnabled()) {
+			log.debug("Response was sent");
+		}*/
+	}
+	
+	
   public String greetServer(String input) throws IllegalArgumentException {
     // Verify that the input is valid. 
     if (!FieldVerifier.isValidName(input)) {
@@ -29,7 +67,7 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements
     // Escape data from the client to avoid cross-site script vulnerabilities.
     input = escapeHtml(input);
     userAgent = escapeHtml(userAgent);
-    String con = escapeHtml(MSSqlDAOFactory.getDAOFactory(1).getUserDAO().test());
+    String con = userDAO.test();
 
     return "Hello, " + input + "!<br><br>I am running " + serverInfo
         + ".<br><br>It looks like you are using:<br>" + userAgent

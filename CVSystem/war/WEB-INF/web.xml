@@ -13,7 +13,8 @@
   
   <servlet-mapping>
     <servlet-name>greetServlet</servlet-name>
-    <url-pattern>/cvsystem/greet</url-pattern>
+    <url-pattern>/cvsystem</url-pattern>
+    <url-pattern>/cvsystem/</url-pattern>
   </servlet-mapping>
   
   <!-- Default page to serve -->
@@ -21,4 +22,47 @@
     <welcome-file>CVSystem.html</welcome-file>
   </welcome-file-list>
 
+  <filter>
+		<filter-name>EncodingFilter</filter-name>
+		<filter-class>ua.nure.pi.filter.EncodingFilter</filter-class>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>EncodingFilter</filter-name>
+		<url-pattern>*</url-pattern>
+	</filter-mapping>
+
+	<filter>
+		<filter-name>SecurityFilter</filter-name>
+		<filter-class>ua.nure.pi.filter.SecurityFilter</filter-class>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>SecurityFilter</filter-name>
+		<url-pattern>*</url-pattern>
+	</filter-mapping>
+
+	<context-param>
+		<param-name>securityXML</param-name>
+		<param-value>/security.xml</param-value>
+	</context-param>
+
+	<listener>
+		<listener-class>ua.nure.pi.listener.ContextListener</listener-class>
+	</listener>
+
+	<!-- <error-page>
+		<exception-type>java.lang.Throwable</exception-type>
+		<location>/WEB-INF/pages/server_error_page.html</location>
+	</error-page>
+
+	<error-page>
+		<error-code>403</error-code>
+		<location>/WEB-INF/pages/access_error_page.html</location>
+	</error-page>
+
+	<error-page>
+		<error-code>404</error-code>
+		<location>/WEB-INF/pages/page_not_found.html</location>
+	</error-page>-->
 </web-app>

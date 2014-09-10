@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<is:security xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:is="http://ua.nure.pi/CVSystem"
+	xsi:schemaLocation="http://ua.nure.pi/CVSystem security.xsd">
+
+    <!-- 
+    Rights:
+    	-student
+    	-company
+    	-admin
+    	-visitor
+
+	Example:
+	 <constraint>
+		<url-pattern>/login*</url-pattern>
+		<right>responsible_person</right>    
+		<right>admin</right>
+	</constraint>
+	
+	В правах нужно указать права, которые нужно запретить.
+	-->
+	
+	<constraint>
+		<url-pattern>/cvsystem*</url-pattern>
+		<right>admin</right>
+	</constraint>
+	
+
+</is:security>
