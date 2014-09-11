@@ -6,7 +6,7 @@ import java.util.List;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 /**
- * The async counterpart of <code>CreateSchedule</code>.
+ * The async counterpart of <code>Registration</code>.
  */
 public interface RegistrationServiceAsync {
 
