@@ -26,5 +26,11 @@
 		<right>admin</right>
 	</constraint>
 	
+	<constraint>
+		<url-pattern>/registration*</url-pattern>
+		<right>admin</right>
+		<right>company</right>
+		<right>student</right>
+	</constraint>
 
 </is:security>

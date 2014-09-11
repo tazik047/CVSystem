@@ -17,9 +17,20 @@
     <url-pattern>/cvsystem/</url-pattern>
   </servlet-mapping>
   
+  <servlet>
+    <servlet-name>registration</servlet-name>
+    <servlet-class>ua.nure.pi.server.RegistrationServiceImpl</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>registration</servlet-name>
+    <url-pattern>/registration</url-pattern>
+    <url-pattern>/registration/</url-pattern>
+  </servlet-mapping>
+  
   <!-- Default page to serve -->
   <welcome-file-list>
-    <welcome-file>CVSystem.html</welcome-file>
+    <welcome-file>registration</welcome-file>
   </welcome-file-list>
 
   <filter>
