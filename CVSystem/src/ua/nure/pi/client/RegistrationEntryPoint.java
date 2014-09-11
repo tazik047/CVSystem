@@ -65,15 +65,15 @@ public class RegistrationEntryPoint implements EntryPoint {
 	    
 	    AbsolutePanel step1panel = new AbsolutePanel();
 	    tabPanel.add(step1panel, "Шаг 1", false);
-	    step1panel.setSize("162px", "342px");
+	    //step1panel.setSize("162px", "342px");
 	    
 	    AbsolutePanel step2panel = new AbsolutePanel();
 	    tabPanel.add(step2panel, "Шаг 2", false);
-	    step2panel.setSize("5cm", "3cm");
+	    //step2panel.setSize("5cm", "3cm");
 	    
 	    AbsolutePanel step3panel = new AbsolutePanel();
 	    tabPanel.add(step3panel, "Шаг 3", false);
-	    step3panel.setSize("5cm", "338px");
+	    //step3panel.setSize("5cm", "338px");
 	    
 	    //Step 1
 	    
@@ -92,7 +92,8 @@ public class RegistrationEntryPoint implements EntryPoint {
   
         dataSource.setFields(loginField, emailField, passwordField);  
   
-        final DynamicForm form = new DynamicForm();  
+        final DynamicForm form = new DynamicForm(); 
+        step1panel.add(form);
         form.setDataSource(dataSource);  
         form.setUseAllDataSourceFields(true);  
   
