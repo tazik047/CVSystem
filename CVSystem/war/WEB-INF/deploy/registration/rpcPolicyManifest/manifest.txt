@@ -1,2 +1,3 @@
 # Module registration
 # RPC service class, partial path of RPC policy file
+ua.nure.pi.client.RegistrationService, 6F12E8105EF8004D829AFA756A7E8E8E.gwt.rpc
