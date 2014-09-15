@@ -1,2 +1,3 @@
 # Module cvsystem
 # RPC service class, partial path of RPC policy file
+ua.nure.pi.client.GreetingService, FFC4136481CD869B1DC8391822491346.gwt.rpc
