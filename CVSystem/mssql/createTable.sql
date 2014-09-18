@@ -118,7 +118,6 @@ CREATE TABLE [dbo].[Students](
 	[Lastname] [nvarchar](max) NOT NULL,
 	[DepartmentsId] [bigint] NOT NULL,
 	[CVsId] [bigint] NOT NULL,
-	[UsersId] [bigint] NULL,
  CONSTRAINT [PK_Students] PRIMARY KEY CLUSTERED 
 (
 	[StudentsId] ASC
@@ -180,15 +179,6 @@ ALTER TABLE [dbo].[Students]  WITH CHECK ADD  CONSTRAINT [FK_Students_Department
 REFERENCES [dbo].[Departments] ([DepartmentsId])
 GO
 ALTER TABLE [dbo].[Students] CHECK CONSTRAINT [FK_Students_Departments]
-GO
-ALTER TABLE [dbo].[Students]  WITH CHECK ADD  CONSTRAINT [FK_Students_Users] FOREIGN KEY([UsersId])
-REFERENCES [dbo].[Users] ([UsersId])
-ON UPDATE CASCADE
-ON DELETE CASCADE
-GO
-ALTER TABLE [dbo].[Students] CHECK CONSTRAINT [FK_Students_Users]
-GO
-USE [master]
 GO
 ALTER DATABASE [CVSystem] SET  READ_WRITE 
 GO
