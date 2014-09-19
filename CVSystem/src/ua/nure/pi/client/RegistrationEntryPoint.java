@@ -1,73 +1,39 @@
 package ua.nure.pi.client;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.LinkedHashMap;
 
-import com.smartgwt.client.widgets.Canvas;
-import com.smartgwt.client.data.DataSource;
-import com.smartgwt.client.types.TreeModelType;
-import com.smartgwt.client.widgets.form.DynamicForm;
-import com.smartgwt.client.widgets.form.fields.PickTreeItem;
-import com.smartgwt.client.widgets.tree.Tree;
-import com.smartgwt.client.widgets.tree.TreeNode;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.dev.util.Name;
-import com.smartgwt.client.types.Side;
+import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.HasHorizontalAlignment;
+import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.ListBox;
+import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.TextBox;
+import com.google.gwt.user.datepicker.client.DatePicker;
+import com.smartgwt.client.data.Record;
+import com.smartgwt.client.types.DragDataAction;
+import com.smartgwt.client.types.MultiComboBoxLayoutStyle;
+import com.smartgwt.client.types.TitleOrientation;
+import com.smartgwt.client.types.TreeModelType;
+import com.smartgwt.client.util.EventHandler;
+import com.smartgwt.client.widgets.TransferImgButton;
+import com.smartgwt.client.widgets.events.DragStartEvent;
+import com.smartgwt.client.widgets.events.DragStartHandler;
+import com.smartgwt.client.widgets.form.DynamicForm;
+import com.smartgwt.client.widgets.form.fields.CheckboxItem;
+import com.smartgwt.client.widgets.form.fields.MultiComboBoxItem;
+import com.smartgwt.client.widgets.form.fields.PickTreeItem;
+import com.smartgwt.client.widgets.form.fields.SelectItem;
 import com.smartgwt.client.widgets.form.fields.events.ChangedEvent;
 import com.smartgwt.client.widgets.form.fields.events.ChangedHandler;
-import com.smartgwt.client.widgets.form.fields.events.ClickEvent;  
-import com.smartgwt.client.widgets.form.fields.events.ClickHandler;  
-import com.google.gwt.event.logical.shared.ValueChangeEvent;
-import com.google.gwt.event.logical.shared.ValueChangeHandler;
-import com.google.gwt.i18n.client.DateTimeFormat;
-import com.google.gwt.user.client.Timer;
-import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.ui.AbsolutePanel;
-import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.CaptionPanel;
-import com.google.gwt.user.client.ui.DialogBox;
-import com.google.gwt.user.client.ui.FormPanel;
-import com.google.gwt.user.client.ui.HTML;
-import com.google.gwt.user.client.ui.TextBox;
-import com.google.gwt.user.client.ui.VerticalPanel;
-import com.google.gwt.user.client.ui.FormPanel.SubmitCompleteEvent;
-import com.google.gwt.user.client.ui.FormPanel.SubmitEvent;
-import com.google.gwt.user.client.ui.Image;
-import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.RootPanel;
-import com.google.gwt.user.client.ui.SubmitButton;
-import com.google.gwt.user.datepicker.client.CalendarUtil;
-import com.google.gwt.user.datepicker.client.DateBox;
-import com.google.gwt.user.datepicker.client.DatePicker;
-import com.google.gwt.user.client.ui.HorizontalPanel;
-import com.google.gwt.user.client.ui.TabPanel;
-import com.smartgwt.client.data.DataSource;
-import com.smartgwt.client.data.fields.DataSourcePasswordField;
-import com.smartgwt.client.data.fields.DataSourceTextField;
-import com.smartgwt.client.widgets.form.DynamicForm;
-import com.smartgwt.client.widgets.form.fields.ButtonItem;
-import com.smartgwt.client.widgets.form.fields.CheckboxItem;
-import com.smartgwt.client.widgets.form.fields.FormItem;
-import com.smartgwt.client.widgets.form.fields.HeaderItem;
-import com.smartgwt.client.widgets.form.fields.PasswordItem;
-import com.smartgwt.client.widgets.form.fields.SectionItem;
-import com.smartgwt.client.widgets.form.fields.TextItem;
-import com.smartgwt.client.widgets.form.validator.CustomValidator;
-import com.smartgwt.client.widgets.form.validator.MatchesFieldValidator;
-import com.smartgwt.client.widgets.form.validator.RegExpValidator;
+import com.smartgwt.client.widgets.form.fields.events.ClickEvent;
+import com.smartgwt.client.widgets.grid.ListGrid;
 import com.smartgwt.client.widgets.layout.HStack;
-import com.smartgwt.client.widgets.layout.VLayout;
-import com.smartgwt.client.widgets.menu.IMenuButton;
-import com.smartgwt.client.widgets.menu.Menu;
-import com.smartgwt.client.widgets.menu.MenuItem;
-import com.smartgwt.client.widgets.tab.Tab;
-import com.smartgwt.client.widgets.tab.TabSet;
-import com.smartgwt.client.widgets.Canvas;
-import com.google.gwt.user.client.ui.ListBox;
-import com.google.gwt.user.client.ui.HasHorizontalAlignment;  
+import com.smartgwt.client.widgets.layout.VStack;
+import com.smartgwt.client.widgets.tree.Tree;
+import com.smartgwt.client.widgets.tree.TreeNode;
+import com.smartgwt.client.widgets.events.ClickHandler;
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
  */
@@ -78,9 +44,9 @@ public class RegistrationEntryPoint implements EntryPoint {
 
 	public void onModuleLoad() {
 
-	    // Add the nameField and sendButton to the RootPanel
-	    // Use RootPanel.get() to get the entire body element
 	    RootPanel rootPanel = RootPanel.get("content");
+	    
+	    // Факультеты и группы
 	    
 	    TreeNode children[] = new TreeNode[3];
 	    children[0] = new TreeNode();
@@ -123,6 +89,8 @@ public class RegistrationEntryPoint implements EntryPoint {
 	    form.draw(); 
 	    
         rootPanel.add(form, 84, 55);
+        
+        // Персональная информация
         
         Label labelSurname = new Label("Фамилия");
         labelSurname.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
@@ -211,8 +179,11 @@ public class RegistrationEntryPoint implements EntryPoint {
         goalComboBox.setSize("343px", "22px");
         
         // Заполнение возможных целей из базы
+        
         goalComboBox.insertItem("Java Junior", 0);
         goalComboBox.insertItem("PHP Senior", 1);
+        
+        // Опыт работы и образование
         
         Label labelExperience = new Label("Опыт работы");
         labelExperience.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
@@ -271,9 +242,29 @@ public class RegistrationEntryPoint implements EntryPoint {
         TextBox textBox_2 = new TextBox();
         rootPanel.add(textBox_2, 612, 653);
         textBox_2.setSize("62px", "6px");
-
         
+        // Знание языков программирования и технологий
+                
+        final MultiComboBoxLayoutStyle initialLayoutStyle = MultiComboBoxLayoutStyle.FLOW;  
+        final MultiComboBoxItem languages = new MultiComboBoxItem("languages", "Языки");
         
-        		
+        LinkedHashMap<Long, String> lhm = new LinkedHashMap<>();
+        lhm.put((long) 1, "Java");
+        lhm.put((long) 2, "Haskell");
+        lhm.put((long) 3, "Python");
+        languages.setValueMap(lhm);
+        languages.setDisplayField("itemName");  
+        languages.setValueField("SKU");  
+        languages.setAutoFetchData(true);  
+        languages.setLayoutStyle(initialLayoutStyle);  
+        languages.setAddUnknownValues(true);    
+      
+        final DynamicForm suppliesForm = new DynamicForm();  
+        suppliesForm.setWidth100();  
+        suppliesForm.setNumCols(1);  
+        suppliesForm.setTitleOrientation(TitleOrientation.TOP);  
+        suppliesForm.setItems(languages);  
+  
+        rootPanel.add(suppliesForm, 118, 773);
     }  
 }
