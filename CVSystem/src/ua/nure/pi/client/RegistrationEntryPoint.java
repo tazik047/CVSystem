@@ -4,6 +4,13 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.smartgwt.client.widgets.Canvas;
+import com.smartgwt.client.data.DataSource;
+import com.smartgwt.client.types.TreeModelType;
+import com.smartgwt.client.widgets.form.DynamicForm;
+import com.smartgwt.client.widgets.form.fields.PickTreeItem;
+import com.smartgwt.client.widgets.tree.Tree;
+import com.smartgwt.client.widgets.tree.TreeNode;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dev.util.Name;
@@ -75,95 +82,100 @@ public class RegistrationEntryPoint implements EntryPoint {
 	    // Use RootPanel.get() to get the entire body element
 	    RootPanel rootPanel = RootPanel.get("content");
 	    
-	    Label labelGroup = new Label("Выберите группу");
-	    rootPanel.add(labelGroup, 84, 20);
-	    labelGroup.setSize("145px", "18px");
+	    TreeNode children[] = new TreeNode[3];
+	    children[0] = new TreeNode();
+	    children[0].setTitle("КН");
+	    children[0].setChildren(new TreeNode[] {
+	    new TreeNode("ПИ-13-1"),
+	    new TreeNode("ПИ-13-2")
+	    });
+	    children[1] = new TreeNode();
+	    children[1].setTitle("ПММ");
+	    children[1].setChildren(new TreeNode[] {
+	    new TreeNode("ПМ-13-1"),
+	    new TreeNode("СА-13-1")
+	    });
+	    children[2] = new TreeNode();
+	    children[2].setTitle("КИУ");
+	    children[2].setChildren(new TreeNode[] {
+	    new TreeNode("КИ-13-1"),
+	    new TreeNode("КИ-13-2"),
+	    new TreeNode("КИ-13-3")
+	    });
+	    TreeNode rootNode = new TreeNode();
+	    rootNode.setName("root");
+	    rootNode.setChildren(children);
 
-	    // Menu for faculty/field
-        Menu menu = new Menu();  
-        
-        menu.setShowShadow(true);  
-        menu.setShadowDepth(10);  
-  
-        // Сделать заполнение из БД, запрос на факультеты и группы, им принадлежащие.
-        
-        MenuItem CS = new MenuItem("Компьютерных наук");  
-  
-        MenuItem RT = new MenuItem("Радиотехники");  
-  
-    
-        Menu CSSubMenu = new Menu();  
-        MenuItem SE131 = new MenuItem("ПИ-13-1");  
-        MenuItem SE132 = new MenuItem("ПИ-13-2");  
-        MenuItem SE133 = new MenuItem("ПИ-13-3");  
-        CSSubMenu.setItems(SE131, SE132, SE133);  
-  
-        CS.setSubmenu(CSSubMenu);  
-  
-        menu.setItems(CS, RT);
-        
-        IMenuButton menuButton = new IMenuButton("Факультет", menu);  
-        menuButton.setWidth(100);  
-        /*
-        HStack layout = new HStack();  
-        layout.setWidth100();  
-        layout.setMembers(menuButton);  
-        layout.draw();  	 
-        */
-        rootPanel.add(menuButton, 84, 55);
+	    Tree tree = new Tree();
+	    tree.setModelType(TreeModelType.CHILDREN);
+	    tree.setRoot(rootNode);
+
+	    final DynamicForm form = new DynamicForm();
+
+	    PickTreeItem pickDepartment = new PickTreeItem();
+	    pickDepartment.setTitle("Группа");
+	    pickDepartment.setName("department");
+	    pickDepartment.setValueField("name");
+	    pickDepartment.setValueTree(tree);
+
+
+	    form.setFields(pickDepartment);
+	    form.draw(); 
+	    
+        rootPanel.add(form, 84, 55);
         
         Label labelSurname = new Label("Фамилия");
         labelSurname.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
-        rootPanel.add(labelSurname, 84, 86);
-        labelSurname.setSize("145px", "18px");
+        rootPanel.add(labelSurname, 84, 93);
+        labelSurname.setSize("180px", "18px");
         
         final TextBox SurnametextBox = new TextBox();
-        rootPanel.add(SurnametextBox, 84, 123);
+        rootPanel.add(SurnametextBox, 84, 117);
         SurnametextBox.setSize("170px", "22px");
         
         Label labelName = new Label("Имя");
         labelName.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
-        rootPanel.add(labelName, 84, 181);
-        labelName.setSize("145px", "18px");
+        rootPanel.add(labelName, 84, 157);
+        labelName.setSize("180px", "18px");
         
         final TextBox NametextBox = new TextBox();
-        rootPanel.add(NametextBox, 84, 219);
+        rootPanel.add(NametextBox, 84, 181);
         NametextBox.setSize("170px", "22px");
         
         Label labelAddress = new Label("Домашний адрес");
         labelAddress.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
-        rootPanel.add(labelAddress, 485, 20);
+        rootPanel.add(labelAddress, 498, 93);
         labelAddress.setSize("186px", "18px");
         
         final TextBox AddresstextBox = new TextBox();
-        rootPanel.add(AddresstextBox, 485, 57);
+        rootPanel.add(AddresstextBox, 498, 130);
         AddresstextBox.setSize("170px", "22px");
         
         final Label Phonelabel = new Label("Мобильный телефон");
         Phonelabel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
-        rootPanel.add(Phonelabel, 485, 115);
+        rootPanel.add(Phonelabel, 498, 188);
         Phonelabel.setSize("186px", "18px");
         
         final TextBox PhonetextBox = new TextBox();
-        rootPanel.add(PhonetextBox, 485, 153);
+        rootPanel.add(PhonetextBox, 498, 226);
         PhonetextBox.setSize("170px", "22px");
         
         Label labelEmail = new Label("Email");
         labelEmail.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
-        rootPanel.add(labelEmail, 354, 216);
+        rootPanel.add(labelEmail, 367, 289);
         labelEmail.setSize("186px", "18px");
         
         TextBox EmailtextBox = new TextBox();
-        rootPanel.add(EmailtextBox, 354, 253);
+        rootPanel.add(EmailtextBox, 367, 326);
         EmailtextBox.setSize("170px", "22px");
         
         Label labelSkype = new Label("Skype");
         labelSkype.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
-        rootPanel.add(labelSkype, 563, 216);
+        rootPanel.add(labelSkype, 576, 289);
         labelSkype.setSize("186px", "18px");
         
         TextBox SkypetextBox = new TextBox();
-        rootPanel.add(SkypetextBox, 563, 253);
+        rootPanel.add(SkypetextBox, 576, 326);
         SkypetextBox.setSize("170px", "22px");
         
         Button validation = new Button("Проверить");
@@ -187,7 +199,80 @@ public class RegistrationEntryPoint implements EntryPoint {
         			PhonetextBox.setStyleName("valid");
         	}
         });
-        rootPanel.add(validation, 80, 287);
+        rootPanel.add(validation, 669, 423);
+        
+        Label goalLabel = new Label("Цель");
+        goalLabel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
+        rootPanel.add(goalLabel, 84, 507);
+        goalLabel.setSize("186px", "18px");
+        
+        ListBox goalComboBox = new ListBox();
+        rootPanel.add(goalComboBox, 370, 507);
+        goalComboBox.setSize("343px", "22px");
+        
+        // Заполнение возможных целей из базы
+        goalComboBox.insertItem("Java Junior", 0);
+        goalComboBox.insertItem("PHP Senior", 1);
+        
+        Label labelExperience = new Label("Опыт работы");
+        labelExperience.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
+        rootPanel.add(labelExperience, 84, 565);
+        labelExperience.setSize("186px", "18px");
+        
+        Label labelStart = new Label("Год");
+        labelStart.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
+        rootPanel.add(labelStart, 367, 565);
+        labelStart.setSize("31px", "18px");
+        
+        TextBox StarttextBox = new TextBox();
+        rootPanel.add(StarttextBox, 409, 565);
+        StarttextBox.setSize("62px", "6px");
+        
+        Label labelDuration = new Label("Длительность");
+        labelDuration.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
+        rootPanel.add(labelDuration, 500, 565);
+        labelDuration.setSize("80px", "18px");
+        
+        TextBox EndTextBox = new TextBox();
+        rootPanel.add(EndTextBox, 612, 565);
+        EndTextBox.setSize("62px", "6px");
+        
+        TextBox textBox = new TextBox();
+        rootPanel.add(textBox, 367, 606);
+        textBox.setSize("336px", "18px");
+        
+        Label labelBirthday = new Label("Дата рождения");
+        labelBirthday.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
+        rootPanel.add(labelBirthday, 84, 234);
+        labelBirthday.setSize("180px", "18px");
+        
+        DatePicker datePicker = new DatePicker();
+        datePicker.setYearArrowsVisible(true);
+        rootPanel.add(datePicker, 84, 262);
+        
+        TextBox textBox_3 = new TextBox();
+        rootPanel.add(textBox_3, 367, 689);
+        textBox_3.setSize("336px", "18px");
+        
+        Label label = new Label("Год");
+        label.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
+        rootPanel.add(label, 367, 653);
+        label.setSize("31px", "18px");
+        
+        TextBox textBox_1 = new TextBox();
+        rootPanel.add(textBox_1, 409, 653);
+        textBox_1.setSize("62px", "6px");
+        
+        Label label_1 = new Label("Длительность");
+        label_1.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
+        rootPanel.add(label_1, 500, 653);
+        label_1.setSize("80px", "18px");
+        
+        TextBox textBox_2 = new TextBox();
+        rootPanel.add(textBox_2, 612, 653);
+        textBox_2.setSize("62px", "6px");
+
+        
         
         		
     }  
