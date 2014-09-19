@@ -15,9 +15,11 @@ public interface FacultyGroupDAO {
 	
 	Boolean deleteFaculties(Collection<Faculty> faculties);
 	
-	Collection<Group> getGroups();
+	Collection<Group> getGroups(long facultyId);
 	
-	Boolean insertGroups(Collection<Group> groups);
+	Collection<Group> getGroups(Faculty faculty);
+	
+	Boolean insertGroups(long FacultiesId, Collection<Group> groups);
 	
 	Boolean updateGroups(Collection<Group> groups);
 	

@@ -14,10 +14,14 @@ public class Group implements Serializable, IsSerializable {
 		
 	}
 	
-	public Group(long id, String title, long facultiesId){
-		setGroupId(id);
+	public Group(String title, long facultiesId){
 		setTitle(title);
 		setFacultiesId(facultiesId);
+	}
+	
+	public Group(long id, String title, long facultiesId){
+		this(title, facultiesId);
+		setGroupId(id);
 	}
 	
 	public String getTitle() {
