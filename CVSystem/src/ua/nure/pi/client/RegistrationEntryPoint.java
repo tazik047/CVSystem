@@ -4,6 +4,13 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.smartgwt.client.widgets.Canvas;
+import com.smartgwt.client.data.DataSource;
+import com.smartgwt.client.types.TreeModelType;
+import com.smartgwt.client.widgets.form.DynamicForm;
+import com.smartgwt.client.widgets.form.fields.PickTreeItem;
+import com.smartgwt.client.widgets.tree.Tree;
+import com.smartgwt.client.widgets.tree.TreeNode;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dev.util.Name;
@@ -75,42 +82,47 @@ public class RegistrationEntryPoint implements EntryPoint {
 	    // Use RootPanel.get() to get the entire body element
 	    RootPanel rootPanel = RootPanel.get("content");
 	    
-	    Label labelGroup = new Label("Выберите группу");
-	    rootPanel.add(labelGroup, 84, 20);
-	    labelGroup.setSize("145px", "18px");
+	    TreeNode children[] = new TreeNode[3];
+	    children[0] = new TreeNode();
+	    children[0].setTitle("КН");
+	    children[0].setChildren(new TreeNode[] {
+	    new TreeNode("ПИ-13-1"),
+	    new TreeNode("ПИ-13-2")
+	    });
+	    children[1] = new TreeNode();
+	    children[1].setTitle("ПММ");
+	    children[1].setChildren(new TreeNode[] {
+	    new TreeNode("ПМ-13-1"),
+	    new TreeNode("СА-13-1")
+	    });
+	    children[2] = new TreeNode();
+	    children[2].setTitle("КИУ");
+	    children[2].setChildren(new TreeNode[] {
+	    new TreeNode("КИ-13-1"),
+	    new TreeNode("КИ-13-2"),
+	    new TreeNode("КИ-13-3")
+	    });
+	    TreeNode rootNode = new TreeNode();
+	    rootNode.setName("root");
+	    rootNode.setChildren(children);
 
-	    // Menu for faculty/field
-        Menu menu = new Menu();  
-        
-        menu.setShowShadow(true);  
-        menu.setShadowDepth(10);  
-  
-        // Сделать заполнение из БД, запрос на факультеты и группы, им принадлежащие.
-        
-        MenuItem CS = new MenuItem("Компьютерных наук");  
-  
-        MenuItem RT = new MenuItem("Радиотехники");  
-  
-    
-        Menu CSSubMenu = new Menu();  
-        MenuItem SE131 = new MenuItem("ПИ-13-1");  
-        MenuItem SE132 = new MenuItem("ПИ-13-2");  
-        MenuItem SE133 = new MenuItem("ПИ-13-3");  
-        CSSubMenu.setItems(SE131, SE132, SE133);  
-  
-        CS.setSubmenu(CSSubMenu);  
-  
-        menu.setItems(CS, RT);
-        
-        IMenuButton menuButton = new IMenuButton("Факультет", menu);  
-        menuButton.setWidth(100);  
-        /*
-        HStack layout = new HStack();  
-        layout.setWidth100();  
-        layout.setMembers(menuButton);  
-        layout.draw();  	 
-        */
-        rootPanel.add(menuButton, 84, 55);
+	    Tree tree = new Tree();
+	    tree.setModelType(TreeModelType.CHILDREN);
+	    tree.setRoot(rootNode);
+
+	    final DynamicForm form = new DynamicForm();
+
+	    PickTreeItem pickDepartment = new PickTreeItem();
+	    pickDepartment.setTitle("Группа");
+	    pickDepartment.setName("department");
+	    pickDepartment.setValueField("name");
+	    pickDepartment.setValueTree(tree);
+
+
+	    form.setFields(pickDepartment);
+	    form.draw(); 
+	    
+        rootPanel.add(form, 84, 55);
         
         Label labelSurname = new Label("Фамилия");
         labelSurname.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
