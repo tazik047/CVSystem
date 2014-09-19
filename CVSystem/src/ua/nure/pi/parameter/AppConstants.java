@@ -10,6 +10,7 @@ public interface AppConstants {
 
 	// DAO
 	public static final String USER_DAO = "userDAO";
+	public static final String FACULTYGROUP_DAO = "facultyGroupDAO";
 
 	// security parameters
 	public static final String SECURITY_XML = "securityXML";

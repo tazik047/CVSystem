@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import ua.nure.pi.Path;
 import ua.nure.pi.client.GreetingService;
 import ua.nure.pi.client.RegistrationService;
+import ua.nure.pi.dao.FacultyGroupDAO;
 import ua.nure.pi.dao.UserDAO;
 import ua.nure.pi.dao.mssql.MSSqlDAOFactory;
 import ua.nure.pi.dao.mssql.MSSqlUserDAO;
@@ -26,6 +27,8 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 public class RegistrationServiceImpl extends RemoteServiceServlet implements
 	RegistrationService {
 	
+	private FacultyGroupDAO facultyGroupDAO;
+	
 	@Override
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
@@ -38,5 +41,16 @@ public class RegistrationServiceImpl extends RemoteServiceServlet implements
 		/*if (log.isDebugEnabled()) {
 			log.debug("Response was sent");
 		}*/
+	}
+	
+	@Override
+	public void init() {
+		ServletContext servletContext = getServletContext();
+		facultyGroupDAO = (FacultyGroupDAO) servletContext.getAttribute(AppConstants.FACULTYGROUP_DAO);
+		
+		if (facultyGroupDAO == null) {
+			//log.error("UserDAO attribute is not exists.");
+			throw new IllegalStateException("FacultyGroupDAO attribute is not exists.");
+		}
 	}
 }

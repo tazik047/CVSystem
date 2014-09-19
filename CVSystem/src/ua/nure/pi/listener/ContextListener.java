@@ -35,6 +35,7 @@ public class ContextListener implements ServletContextListener {
 		}*/
 		ServletContext servletContext = event.getServletContext();
 		setUserDAOAttribute(servletContext);
+		setFacultyGroupAttribute(servletContext);
 		/*if (log.isDebugEnabled()) {
 			log.debug("Servlet context initialization finished");
 		}*/
@@ -52,6 +53,13 @@ public class ContextListener implements ServletContextListener {
 		UserDAO userDAO = DAOFactory.getDAOFactory(DAOFactory.MSSQL)
 				.getUserDAO();
 		servletContext.setAttribute(AppConstants.USER_DAO, userDAO);
+		//log.debug("UserDAO was created");
+	}
+	
+	private void setFacultyGroupAttribute(ServletContext servletContext) {
+		UserDAO userDAO = DAOFactory.getDAOFactory(DAOFactory.MSSQL)
+				.getUserDAO();
+		servletContext.setAttribute(AppConstants.FACULTYGROUP_DAO, userDAO);
 		//log.debug("UserDAO was created");
 	}
 }
