@@ -1,0 +1,6 @@
+<module rename-to='adminPanel'>
+	<inherits name="com.google.gwt.user.User"/>
+	<inherits name="com.google.gwt.user.theme.standard.Standard"/>
+	<inherits name="com.smartgwt.SmartGwt"/>
+	<entry-point class="ua.nure.pi.client.AdminPanelEntryPoint"/>
+</module>
