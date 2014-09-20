@@ -12,6 +12,12 @@ GO
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_LanguagesCVs_CVs]') AND parent_object_id = OBJECT_ID(N'[dbo].[LanguagesCVs]'))
 ALTER TABLE [dbo].[LanguagesCVs] DROP CONSTRAINT [FK_LanguagesCVs_CVs]
 GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_ProgramLanguagesCVs_ProgramLanguages]') AND parent_object_id = OBJECT_ID(N'[dbo].[ProgramLanguagesCVs]'))
+ALTER TABLE [dbo].[ProgramLanguagesCVs] DROP CONSTRAINT [FK_ProgramLanguagesCVs_ProgramLanguages]
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_ProgramLanguagesCVs_CVs]') AND parent_object_id = OBJECT_ID(N'[dbo].[ProgramLanguagesCVs]'))
+ALTER TABLE [dbo].[ProgramLanguagesCVs] DROP CONSTRAINT [FK_ProgramLanguagesCVs_CVs]
+GO
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Groups_Faculties]') AND parent_object_id = OBJECT_ID(N'[dbo].[Groups]'))
 ALTER TABLE [dbo].[Groups] DROP CONSTRAINT [FK_Groups_Faculties]
 GO
@@ -34,9 +40,17 @@ GO
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[LanguagesCVs]') AND type in (N'U'))
 DROP TABLE [dbo].[LanguagesCVs]
 GO
+/****** Object:  Table [dbo].[ProgramLanguagesCVs]    Script Date: 19.09.2014 22:34:35 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[ProgramLanguagesCVs]') AND type in (N'U'))
+DROP TABLE [dbo].[ProgramLanguagesCVs]
+GO
 /****** Object:  Table [dbo].[Languages]    Script Date: 19.09.2014 22:34:35 ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Languages]') AND type in (N'U'))
 DROP TABLE [dbo].[Languages]
+GO
+/****** Object:  Table [dbo].[ProgramLanguages]    Script Date: 19.09.2014 22:34:35 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[ProgramLanguages]') AND type in (N'U'))
+DROP TABLE [dbo].[ProgramLanguages]
 GO
 /****** Object:  Table [dbo].[Groups]    Script Date: 19.09.2014 22:34:35 ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Groups]') AND type in (N'U'))
@@ -162,6 +176,23 @@ CREATE TABLE [dbo].[Languages](
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 END
 GO
+/****** Object:  Table [dbo].[ProgramLanguages]    Script Date: 19.09.2014 22:34:35 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[ProgramLanguages]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [dbo].[ProgramLanguages](
+	[ProgramLanguagesId] [bigint] NOT NULL,
+	[Title] [nvarchar](max) NOT NULL,
+ CONSTRAINT [PK_ProgramLanguages] PRIMARY KEY CLUSTERED 
+(
+	[ProgramLanguagesId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+END
+GO
 /****** Object:  Table [dbo].[LanguagesCVs]    Script Date: 19.09.2014 22:34:35 ******/
 SET ANSI_NULLS ON
 GO
@@ -170,12 +201,30 @@ GO
 IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[LanguagesCVs]') AND type in (N'U'))
 BEGIN
 CREATE TABLE [dbo].[LanguagesCVs](
-	[LanguagesStudentId] [bigint] NOT NULL,
+	[LanguagesCVsId] [bigint] NOT NULL,
 	[LanguagesId] [bigint] NOT NULL,
 	[CVsId] [bigint] NOT NULL,
  CONSTRAINT [PK_LanguagesCVs] PRIMARY KEY CLUSTERED 
 (
-	[LanguagesStudentId] ASC
+	[LanguagesCVsId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+END
+GO
+/****** Object:  Table [dbo].[ProgramLanguagesCVs]    Script Date: 19.09.2014 22:34:35 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[ProgramLanguagesCVs]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [dbo].[ProgramLanguagesCVs](
+	[ProgramLanguagesCVsId] [bigint] NOT NULL,
+	[ProgramLanguagesId] [bigint] NOT NULL,
+	[CVsId] [bigint] NOT NULL,
+ CONSTRAINT [PK_ProgramLanguagesCVs] PRIMARY KEY CLUSTERED 
+(
+	[ProgramLanguagesCVsId] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 END
@@ -271,6 +320,24 @@ ON DELETE CASCADE
 GO
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_LanguagesCVs_Languages]') AND parent_object_id = OBJECT_ID(N'[dbo].[LanguagesCVs]'))
 ALTER TABLE [dbo].[LanguagesCVs] CHECK CONSTRAINT [FK_LanguagesCVs_Languages]
+GO
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_ProgramLanguagesCVs_CVs]') AND parent_object_id = OBJECT_ID(N'[dbo].[ProgramLanguagesCVs]'))
+ALTER TABLE [dbo].[ProgramLanguagesCVs]  WITH CHECK ADD  CONSTRAINT [FK_ProgramLanguagesCVs_CVs] FOREIGN KEY([CVsId])
+REFERENCES [dbo].[CVs] ([CVsId])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_ProgramLanguagesCVs_CVs]') AND parent_object_id = OBJECT_ID(N'[dbo].[ProgramLanguagesCVs]'))
+ALTER TABLE [dbo].[ProgramLanguagesCVs] CHECK CONSTRAINT [FK_ProgramLanguagesCVs_CVs]
+GO
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_ProgramLanguagesCVs_ProgramLanguages]') AND parent_object_id = OBJECT_ID(N'[dbo].[ProgramLanguagesCVs]'))
+ALTER TABLE [dbo].[ProgramLanguagesCVs]  WITH CHECK ADD  CONSTRAINT [FK_ProgramLanguagesCVs_ProgramLanguages] FOREIGN KEY([ProgramLanguagesId])
+REFERENCES [dbo].[ProgramLanguages] ([ProgramLanguagesId])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_ProgramLanguagesCVs_ProgramLanguages]') AND parent_object_id = OBJECT_ID(N'[dbo].[ProgramLanguagesCVs]'))
+ALTER TABLE [dbo].[ProgramLanguagesCVs] CHECK CONSTRAINT [FK_ProgramLanguagesCVs_ProgramLanguages]
 GO
 IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Students_CVs]') AND parent_object_id = OBJECT_ID(N'[dbo].[Students]'))
 ALTER TABLE [dbo].[Students]  WITH CHECK ADD  CONSTRAINT [FK_Students_CVs] FOREIGN KEY([CVsId])
