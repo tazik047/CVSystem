@@ -276,19 +276,27 @@ public class RegistrationEntryPoint implements EntryPoint {
 	
 	public void FillTree(ArrayList<Faculty> faculties, RootPanel rootPanel)
 	{
+		
 		TreeNode children[] = new TreeNode[faculties.size()];
 	    for (int i = 0; i < faculties.size(); i++) {
-		    children[i] = new TreeNode();
+		    
 		    Faculty current = faculties.get(i);
+	    	children[i] = new TreeNode();
 		    children[i].setTitle(current.getTitle());
 		    TreeNode[] tn = new TreeNode[current.getGroups().size()];
 		    int j = 0;
 		    for (Group g : current.getGroups()) {
+		    	try {
 		    	tn[j] = new TreeNode(g.getTitle());
+		    	}
+		    	catch (Exception e){
+		    		Window.alert(e.getLocalizedMessage());
+		    	}
 		    	j++;
-		    	Window.alert(g.getTitle());
+		    	Window.alert(g.getTitle()+"  "+current.getTitle());
 		    }
 		    children[i].setChildren(tn);
+		    
 	    }
 	    
 	    TreeNode rootNode = new TreeNode();
