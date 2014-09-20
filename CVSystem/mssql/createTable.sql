@@ -97,7 +97,7 @@ GO
 IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Companies]') AND type in (N'U'))
 BEGIN
 CREATE TABLE [dbo].[Companies](
-	[CompaniesId] [bigint] NOT NULL,
+	[CompaniesId] [bigint] identity NOT NULL,
 	[Title] [nchar](10) NOT NULL,
 	[Phone] [nchar](10) NOT NULL,
 	[UsersId] [bigint] NOT NULL,
@@ -116,7 +116,7 @@ GO
 IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[CVs]') AND type in (N'U'))
 BEGIN
 CREATE TABLE [dbo].[CVs](
-	[CVsId] [bigint] NOT NULL,
+	[CVsId] [bigint] identity NOT NULL,
  CONSTRAINT [PK_CVs] PRIMARY KEY CLUSTERED 
 (
 	[CVsId] ASC
@@ -149,7 +149,7 @@ GO
 IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Groups]') AND type in (N'U'))
 BEGIN
 CREATE TABLE [dbo].[Groups](
-	[GroupsId] [bigint] NOT NULL,
+	[GroupsId] [bigint] identity NOT NULL,
 	[FacultiesId] [bigint] NOT NULL,
 	[Title] [nvarchar](max) NOT NULL,
  CONSTRAINT [PK_Groups] PRIMARY KEY CLUSTERED 
@@ -167,7 +167,7 @@ GO
 IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Languages]') AND type in (N'U'))
 BEGIN
 CREATE TABLE [dbo].[Languages](
-	[LanguagesId] [bigint] NOT NULL,
+	[LanguagesId] [bigint] identity NOT NULL,
 	[Title] [nvarchar](max) NOT NULL,
  CONSTRAINT [PK_Languages] PRIMARY KEY CLUSTERED 
 (
@@ -184,7 +184,7 @@ GO
 IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[ProgramLanguages]') AND type in (N'U'))
 BEGIN
 CREATE TABLE [dbo].[ProgramLanguages](
-	[ProgramLanguagesId] [bigint] NOT NULL,
+	[ProgramLanguagesId] [bigint] identity NOT NULL,
 	[Title] [nvarchar](max) NOT NULL,
  CONSTRAINT [PK_ProgramLanguages] PRIMARY KEY CLUSTERED 
 (
@@ -201,7 +201,7 @@ GO
 IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[LanguagesCVs]') AND type in (N'U'))
 BEGIN
 CREATE TABLE [dbo].[LanguagesCVs](
-	[LanguagesCVsId] [bigint] NOT NULL,
+	[LanguagesCVsId] [bigint] identity NOT NULL,
 	[LanguagesId] [bigint] NOT NULL,
 	[CVsId] [bigint] NOT NULL,
  CONSTRAINT [PK_LanguagesCVs] PRIMARY KEY CLUSTERED 
@@ -219,7 +219,7 @@ GO
 IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[ProgramLanguagesCVs]') AND type in (N'U'))
 BEGIN
 CREATE TABLE [dbo].[ProgramLanguagesCVs](
-	[ProgramLanguagesCVsId] [bigint] NOT NULL,
+	[ProgramLanguagesCVsId] [bigint] identity NOT NULL,
 	[ProgramLanguagesId] [bigint] NOT NULL,
 	[CVsId] [bigint] NOT NULL,
  CONSTRAINT [PK_ProgramLanguagesCVs] PRIMARY KEY CLUSTERED 
@@ -237,7 +237,7 @@ GO
 IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Roles]') AND type in (N'U'))
 BEGIN
 CREATE TABLE [dbo].[Roles](
-	[Roles] [bigint] NOT NULL,
+	[Roles] [bigint] identity NOT NULL,
  CONSTRAINT [PK_Roles] PRIMARY KEY CLUSTERED 
 (
 	[Roles] ASC
@@ -253,7 +253,7 @@ GO
 IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Students]') AND type in (N'U'))
 BEGIN
 CREATE TABLE [dbo].[Students](
-	[StudentsId] [bigint] NOT NULL,
+	[StudentsId] [bigint] identity NOT NULL,
 	[Surname] [nvarchar](max) NOT NULL,
 	[Firstname] [nvarchar](max) NOT NULL,
 	[Lastname] [nvarchar](max) NOT NULL,
@@ -274,7 +274,7 @@ GO
 IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Users]') AND type in (N'U'))
 BEGIN
 CREATE TABLE [dbo].[Users](
-	[UsersId] [bigint] NOT NULL,
+	[UsersId] [bigint] identity NOT NULL,
 	[Role] [int] NOT NULL,
 	[login] [nvarchar](max) NOT NULL,
 	[password] [nvarchar](max) NOT NULL,
