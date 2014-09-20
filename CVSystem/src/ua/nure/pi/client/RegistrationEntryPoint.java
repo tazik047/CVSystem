@@ -19,6 +19,7 @@ import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.datepicker.client.DatePicker;
 import com.smartgwt.client.data.DataSource;
@@ -33,6 +34,7 @@ import com.smartgwt.client.widgets.events.DragStartEvent;
 import com.smartgwt.client.widgets.events.DragStartHandler;
 import com.smartgwt.client.widgets.form.DynamicForm;
 import com.smartgwt.client.widgets.form.fields.CheckboxItem;
+import com.smartgwt.client.widgets.form.fields.IPickTreeItem;
 import com.smartgwt.client.widgets.form.fields.MultiComboBoxItem;
 import com.smartgwt.client.widgets.form.fields.PickTreeItem;
 import com.smartgwt.client.widgets.form.fields.SelectItem;
@@ -82,7 +84,6 @@ public class RegistrationEntryPoint implements EntryPoint {
 	    new TreeNode("КИ-13-3")
 	    });
 	    */
-	    
 	    RegistrationService.getFaculties(new AsyncCallback<Collection<Faculty>>() {
             public void onFailure(Throwable caught) {
               Window.alert("Не удалось получить список факультетов");
@@ -296,15 +297,20 @@ public class RegistrationEntryPoint implements EntryPoint {
 	    Tree tree = new Tree();
 	    tree.setModelType(TreeModelType.CHILDREN);
 	    tree.setRoot(rootNode);
+	   
 	    
-
 	    final DynamicForm form = new DynamicForm();
 
-	    PickTreeItem pickDepartment = new PickTreeItem();
+	    IPickTreeItem departmentItem = new IPickTreeItem();  
+        departmentItem.setTitle("Группа");  
+        departmentItem.setValueField("name");  
+        departmentItem.setValueTree(tree);  
+	    
+	    /*PickTreeItem pickDepartment = new PickTreeItem();
 	    pickDepartment.setTitle("Группа");
 	    pickDepartment.setName("department");
 	    pickDepartment.setValueField("name");
-	    pickDepartment.setValueTree(tree);
+	    pickDepartment.setValueTree(tree);*/
 
 	    DataSource ds = new DataSource();
 	    PickTreeItem pickCategory = new PickTreeItem();
@@ -314,10 +320,11 @@ public class RegistrationEntryPoint implements EntryPoint {
 	    pickCategory.setEmptyMenuMessage("No Sub Categories");
 	    pickCategory.setCanSelectParentItems(true); 
 
-	    form.setFields(pickDepartment);
+	    //form.setFields(pickDepartment);
+	    form.setItems(departmentItem);
 	    form.draw(); 
 	    
-        rootPanel.add(form, 84, 55);
+	    rootPanel.add(form, 84, 55);
 
 	}
 }
