@@ -21,6 +21,7 @@ import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.datepicker.client.DatePicker;
+import com.smartgwt.client.data.DataSource;
 import com.smartgwt.client.data.Record;
 import com.smartgwt.client.types.DragDataAction;
 import com.smartgwt.client.types.MultiComboBoxLayoutStyle;
@@ -44,6 +45,7 @@ import com.smartgwt.client.widgets.layout.VStack;
 import com.smartgwt.client.widgets.tree.Tree;
 import com.smartgwt.client.widgets.tree.TreeNode;
 import com.smartgwt.client.widgets.events.ClickHandler;
+
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
  */
@@ -55,7 +57,7 @@ public class RegistrationEntryPoint implements EntryPoint {
 
 	public void onModuleLoad() {
 
-	    RootPanel rootPanel = RootPanel.get("content");
+	    final RootPanel rootPanel = RootPanel.get("content");
 	    
 	    // Факультеты и группы
 	    /*
@@ -88,42 +90,10 @@ public class RegistrationEntryPoint implements EntryPoint {
 
 			@Override
 			public void onSuccess(Collection<Faculty> result) {
-				faculties = new ArrayList<Faculty>(result);			}
+				faculties = new ArrayList<Faculty>(result);		
+				FillTree(faculties, rootPanel);
+			}
           });
-	    
-	    TreeNode children[] = new TreeNode[faculties.size()];
-
-	    for (int i = 0; i < faculties.size(); i++) {
-		    children[i] = new TreeNode();
-		    Faculty current = faculties.get(i);
-		    children[i].setTitle(current.getTitle());
-		    TreeNode[] tn = new TreeNode[current.getGroups().size()];
-		    for (int j = 0; j < current.getGroups().size(); j++) {
-		    	tn[j] = new TreeNode(current.getGroups().toArray()[j].toString());
-		    }
-		    children[i].setChildren(tn);
-	    }
-	    TreeNode rootNode = new TreeNode();
-	    rootNode.setName("root");
-	    rootNode.setChildren(children);
-	    Tree tree = new Tree();
-	    tree.setModelType(TreeModelType.CHILDREN);
-	    tree.setRoot(rootNode);
-	    
-
-	    final DynamicForm form = new DynamicForm();
-
-	    PickTreeItem pickDepartment = new PickTreeItem();
-	    pickDepartment.setTitle("Группа");
-	    pickDepartment.setName("department");
-	    pickDepartment.setValueField("name");
-	    pickDepartment.setValueTree(tree);
-
-
-	    form.setFields(pickDepartment);
-	    form.draw(); 
-	    
-        rootPanel.add(form, 84, 55);
         
         // Персональная информация
         
@@ -302,4 +272,52 @@ public class RegistrationEntryPoint implements EntryPoint {
   
         rootPanel.add(suppliesForm, 118, 773);
     }  
+	
+	public void FillTree(ArrayList<Faculty> faculties, RootPanel rootPanel)
+	{
+		TreeNode children[] = new TreeNode[faculties.size()];
+	    for (int i = 0; i < faculties.size(); i++) {
+		    children[i] = new TreeNode();
+		    Faculty current = faculties.get(i);
+		    children[i].setTitle(current.getTitle());
+		    TreeNode[] tn = new TreeNode[current.getGroups().size()];
+		    int j = 0;
+		    for (Group g : current.getGroups()) {
+		    	tn[j] = new TreeNode(g.getTitle());
+		    	j++;
+		    	Window.alert(g.getTitle());
+		    }
+		    children[i].setChildren(tn);
+	    }
+	    
+	    TreeNode rootNode = new TreeNode();
+	    rootNode.setName("root");
+	    rootNode.setChildren(children);
+	    Tree tree = new Tree();
+	    tree.setModelType(TreeModelType.CHILDREN);
+	    tree.setRoot(rootNode);
+	    
+
+	    final DynamicForm form = new DynamicForm();
+
+	    PickTreeItem pickDepartment = new PickTreeItem();
+	    pickDepartment.setTitle("Группа");
+	    pickDepartment.setName("department");
+	    pickDepartment.setValueField("name");
+	    pickDepartment.setValueTree(tree);
+
+	    DataSource ds = new DataSource();
+	    PickTreeItem pickCategory = new PickTreeItem();
+	    pickCategory.setTitle("Category");
+	    pickCategory.setName("category");
+	    pickCategory.setDataSource(ds); 
+	    pickCategory.setEmptyMenuMessage("No Sub Categories");
+	    pickCategory.setCanSelectParentItems(true); 
+
+	    form.setFields(pickDepartment);
+	    form.draw(); 
+	    
+        rootPanel.add(form, 84, 55);
+
+	}
 }
