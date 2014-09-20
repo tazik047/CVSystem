@@ -23,7 +23,7 @@ public class MSSqlFacultyGroupDAO implements FacultyGroupDAO {
 	private static final String SQL__DELETE_FACULTIES = "DELETE FROM Faculties WHERE FacultiesId=?";
 	private static final String SQL__FACULTIES_IS_EMPTY = "SELECT count(*) FROM Groups WHERE FacultiesId=?";
 	
-	private static final String SQL__SELECT_GROUPS = "SELECT * FROM Groups WHERE GroupsId=?";
+	private static final String SQL__SELECT_GROUPS = "SELECT * FROM Groups WHERE FacultiesId=?";
 	private static final String SQL__INSERT_GROUPS = "INSERT INTO Groups(Title, FacultiesId) VALUES(?, ?)";
 	private static final String SQL__UPDATE_GROUPS = "UPDATE Groups SET Title=?, FacultiesId=? WHERE GroupsId=?";
 	private static final String SQL__DELETE_GROUPS = "DELETE FROM Groups WHERE GroupsId = ?";
