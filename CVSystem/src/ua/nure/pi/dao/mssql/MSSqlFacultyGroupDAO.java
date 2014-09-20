@@ -269,6 +269,7 @@ public class MSSqlFacultyGroupDAO implements FacultyGroupDAO {
 		PreparedStatement pstmt = null;
 		try {
 			pstmt = con.prepareStatement(SQL__SELECT_GROUPS);
+			pstmt.setLong(1, id);
 			ResultSet rs = pstmt.executeQuery();
 			result = new ArrayList<Group>();
 			while(rs.next()){
