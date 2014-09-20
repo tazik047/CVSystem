@@ -3,7 +3,7 @@ package ua.nure.pi.parameter;
 public interface MapperParameters {
 
 	// Faculties
-	String FACULTY__ID = "FacultiseId";
+	String FACULTY__ID = "FacultiesId";
 	String FACULTY__TITLE = "Title";
 	
 	//Groups
