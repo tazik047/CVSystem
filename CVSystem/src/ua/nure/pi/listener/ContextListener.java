@@ -14,7 +14,9 @@ import javax.servlet.ServletContextListener;
 
 //import org.apache.log4j.Logger;
 
+
 import ua.nure.pi.dao.DAOFactory;
+import ua.nure.pi.dao.FacultyGroupDAO;
 import ua.nure.pi.dao.UserDAO;
 import ua.nure.pi.parameter.AppConstants;
 
@@ -57,9 +59,9 @@ public class ContextListener implements ServletContextListener {
 	}
 	
 	private void setFacultyGroupAttribute(ServletContext servletContext) {
-		UserDAO userDAO = DAOFactory.getDAOFactory(DAOFactory.MSSQL)
-				.getUserDAO();
-		servletContext.setAttribute(AppConstants.FACULTYGROUP_DAO, userDAO);
+		FacultyGroupDAO facultyGroupDAO = DAOFactory.getDAOFactory(DAOFactory.MSSQL)
+				.getFacultyGroupDAO();
+		servletContext.setAttribute(AppConstants.FACULTYGROUP_DAO, facultyGroupDAO);
 		//log.debug("UserDAO was created");
 	}
 }

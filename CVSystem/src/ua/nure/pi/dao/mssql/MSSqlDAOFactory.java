@@ -41,5 +41,10 @@ public class MSSqlDAOFactory extends DAOFactory {
 		return new MSSqlUserDAO();
 	}
 
+	@Override
+	public FacultyGroupDAO getFacultyGroupDAO() {
+		return new MSSqlFacultyGroupDAO();
+	}
+
 
 }

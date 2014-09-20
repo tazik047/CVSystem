@@ -1,6 +1,7 @@
 package ua.nure.pi.server;
 
 import java.io.IOException;
+import java.util.Collection;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -15,6 +16,7 @@ import ua.nure.pi.dao.FacultyGroupDAO;
 import ua.nure.pi.dao.UserDAO;
 import ua.nure.pi.dao.mssql.MSSqlDAOFactory;
 import ua.nure.pi.dao.mssql.MSSqlUserDAO;
+import ua.nure.pi.entity.Faculty;
 import ua.nure.pi.parameter.AppConstants;
 import ua.nure.pi.shared.FieldVerifier;
 
@@ -53,4 +55,8 @@ public class RegistrationServiceImpl extends RemoteServiceServlet implements
 			throw new IllegalStateException("FacultyGroupDAO attribute is not exists.");
 		}
 	}
+	
+	  public Collection<Faculty> getFaculties() throws IllegalArgumentException {
+		    return facultyGroupDAO.getFaculties();
+		  }
 }

@@ -17,4 +17,6 @@ public abstract class DAOFactory {
 			return null;
 		}
 	}
+
+	public abstract FacultyGroupDAO getFacultyGroupDAO();
 }

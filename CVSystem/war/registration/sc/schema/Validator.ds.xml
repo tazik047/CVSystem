@@ -2,6 +2,7 @@ isc.DataSource.create({
     allowAdvancedCriteria:true,
     ID:"Validator",
     addGlobalId:"false",
+    strictValidation:"false",
     fields:[
         {
             type:"string",

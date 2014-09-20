@@ -1,26 +1,22 @@
 isc.DataSource.create({
     allowAdvancedCriteria:true,
     ID:"QuartzScheduler",
-    operationBinding:[
+    operationBindings:[
         {
-            operationId:"start",
-            operationType:"custom"
-        },
-        {
-            operationId:"shutdown",
-            operationType:"custom"
-        },
-        {
-            operationId:"standby",
-            operationType:"custom"
-        },
-        {
-            operationId:"doit",
             operationType:"custom",
-            serverObject:{
-                className:"com.isomorphic.scheduler.QuartzScheduler",
-                methodName:"doit"
-            }
+            operationId:"start"
+        },
+        {
+            operationType:"custom",
+            operationId:"shutdown"
+        },
+        {
+            operationType:"custom",
+            operationId:"standby"
+        },
+        {
+            operationType:"custom",
+            operationId:"doit"
         }
     ],
     fields:[

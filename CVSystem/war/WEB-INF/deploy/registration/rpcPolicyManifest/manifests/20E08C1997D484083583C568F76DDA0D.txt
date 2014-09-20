@@ -1,0 +1,2 @@
+serviceClass: ua.nure.pi.client.RegistrationService
+path: 29A71DE644A981A5FD03F968DDF70BD6.gwt.rpc

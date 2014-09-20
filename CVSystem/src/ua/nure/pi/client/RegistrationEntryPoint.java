@@ -1,9 +1,19 @@
 package ua.nure.pi.client;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.LinkedHashMap;
+
+import ua.nure.pi.dao.mssql.MSSqlFacultyGroupDAO;
+import ua.nure.pi.entity.Faculty;
+import ua.nure.pi.entity.Group;
+import ua.nure.pi.server.GreetingServiceImpl;
+import ua.nure.pi.server.RegistrationServiceImpl;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.Label;
@@ -41,13 +51,14 @@ public class RegistrationEntryPoint implements EntryPoint {
 	private final RegistrationServiceAsync RegistrationService = GWT
 			.create(RegistrationService.class);
 
+    ArrayList<Faculty> faculties;
 
 	public void onModuleLoad() {
 
 	    RootPanel rootPanel = RootPanel.get("content");
 	    
 	    // Факультеты и группы
-	    
+	    /*
 	    TreeNode children[] = new TreeNode[3];
 	    children[0] = new TreeNode();
 	    children[0].setTitle("КН");
@@ -68,13 +79,37 @@ public class RegistrationEntryPoint implements EntryPoint {
 	    new TreeNode("КИ-13-2"),
 	    new TreeNode("КИ-13-3")
 	    });
+	    */
+	    
+	    RegistrationService.getFaculties(new AsyncCallback<Collection<Faculty>>() {
+            public void onFailure(Throwable caught) {
+              Window.alert("Не удалось получить список факультетов");
+            }
+
+			@Override
+			public void onSuccess(Collection<Faculty> result) {
+				faculties = new ArrayList<Faculty>(result);			}
+          });
+	    
+	    TreeNode children[] = new TreeNode[faculties.size()];
+
+	    for (int i = 0; i < faculties.size(); i++) {
+		    children[i] = new TreeNode();
+		    Faculty current = faculties.get(i);
+		    children[i].setTitle(current.getTitle());
+		    TreeNode[] tn = new TreeNode[current.getGroups().size()];
+		    for (int j = 0; j < current.getGroups().size(); j++) {
+		    	tn[j] = new TreeNode(current.getGroups().toArray()[j].toString());
+		    }
+		    children[i].setChildren(tn);
+	    }
 	    TreeNode rootNode = new TreeNode();
 	    rootNode.setName("root");
 	    rootNode.setChildren(children);
-
 	    Tree tree = new Tree();
 	    tree.setModelType(TreeModelType.CHILDREN);
 	    tree.setRoot(rootNode);
+	    
 
 	    final DynamicForm form = new DynamicForm();
 

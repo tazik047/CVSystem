@@ -10,6 +10,11 @@ isc.DataSource.create({
             name:"ID"
         },
         {
+            xmlAttribute:"true",
+            type:"string",
+            name:"autoIdField"
+        },
+        {
             title:"Superclass",
             type:"string",
             name:"inheritsFrom"
@@ -52,11 +57,19 @@ isc.DataSource.create({
             xmlAttribute:"true",
             title:"Server Type",
             valueMap:{
-                custom:"Custom Server Binding",
+                generic:"Requests will be delivered to the server and you are expected to write Java code to create a valid response",
+                hibernate:"ISC Server Hibernate Connectors",
+                jpa:"Use SmartClient's built-in JPA 2.0 connector",
+                jpa1:"Use SmartClient's built-in JPA 1.0 connector",
                 sql:"ISC Server SQL Connectors"
             },
             type:"string",
             name:"serverType"
+        },
+        {
+            xmlAttribute:"true",
+            type:"string",
+            name:"schemaBean"
         },
         {
             xmlAttribute:"true",
@@ -110,13 +123,36 @@ isc.DataSource.create({
             name:"tableName"
         },
         {
+            xmlAttribute:"true",
+            title:"Quote Table Name?",
+            type:"boolean",
+            name:"quoteTableName"
+        },
+        {
             type:"ServerObject",
             name:"serverObject"
+        },
+        {
+            type:"string",
+            name:"serverConstructor"
         },
         {
             type:"OperationBinding",
             multiple:"true",
             name:"operationBindings"
+        },
+        {
+            hidden:"true",
+            propertiesOnly:"true",
+            type:"DataSourceField",
+            moveTo:"fields",
+            name:"field"
+        },
+        {
+            hidden:"true",
+            type:"OperationBinding",
+            moveTo:"operationBindings",
+            name:"operationBinding"
         },
         {
             xmlAttribute:"true",
@@ -239,6 +275,11 @@ isc.DataSource.create({
             name:"testFileName"
         },
         {
+            xmlAttribute:"true",
+            type:"URL",
+            name:"dbImportFileName"
+        },
+        {
             type:"Object",
             multiple:"true",
             name:"testData"
@@ -252,6 +293,11 @@ isc.DataSource.create({
             xmlAttribute:"true",
             type:"boolean",
             name:"cacheAllData"
+        },
+        {
+            xmlAttribute:"true",
+            type:"boolean",
+            name:"cacheAcrossOperationIds"
         },
         {
             visibility:"internal",
@@ -291,6 +337,11 @@ isc.DataSource.create({
             name:"showLocalFieldsOnly"
         },
         {
+            xmlAttribute:"true",
+            type:"boolean",
+            name:"showSuperClassEvents"
+        },
+        {
             type:"Object",
             name:"globalNamespaces"
         },
@@ -326,8 +377,8 @@ isc.DataSource.create({
             name:"requiresAuthentication"
         },
         {
-            type:"boolean",
-            name:"requiresRoles"
+            type:"string",
+            name:"requiresRole"
         },
         {
             type:"string",
@@ -342,6 +393,15 @@ isc.DataSource.create({
             xmlAttribute:"true",
             type:"boolean",
             name:"autoJoinTransactions"
+        },
+        {
+            type:"boolean",
+            name:"useAnsiJoins"
+        },
+        {
+            xmlAttribute:"true",
+            type:"boolean",
+            name:"useSpringTransaction"
         },
         {
             type:"boolean",
@@ -373,12 +433,152 @@ isc.DataSource.create({
             name:"script"
         },
         {
-            type:"string",
-            name:"groupBy"
+            type:"boolean",
+            name:"allowClientRequestedSummaries"
         },
         {
-            type:"FieldFunction",
-            name:"fieldFunctions"
+            type:"string",
+            multiple:"true",
+            name:"patternMultiWildcard"
+        },
+        {
+            type:"string",
+            multiple:"true",
+            name:"patternSingleWildcard"
+        },
+        {
+            valueMap:{
+                dropOnChange:"Drop on criteria change",
+                dropOnShortening:"Drop if criteria became more restrictive"
+            },
+            type:"string",
+            name:"criteriaPolicy"
+        },
+        {
+            type:"string",
+            name:"substituteClasses"
+        },
+        {
+            type:"string",
+            name:"idClassName"
+        },
+        {
+            type:"boolean",
+            name:"supportTransactions"
+        },
+        {
+            type:"boolean",
+            name:"creatorOverrides"
+        },
+        {
+            xmlAttribute:"true",
+            type:"boolean",
+            name:"loadParents"
+        },
+        {
+            type:"string",
+            name:"loadID"
+        },
+        {
+            type:"boolean",
+            name:"audit"
+        },
+        {
+            type:"string",
+            name:"auditDataSourceID"
+        },
+        {
+            type:"string",
+            name:"auditDSConstructor"
+        },
+        {
+            type:"string",
+            name:"auditRevisionFieldName"
+        },
+        {
+            type:"string",
+            name:"auditTimeStampFieldName"
+        },
+        {
+            type:"string",
+            name:"auditTypeFieldName"
+        },
+        {
+            type:"string",
+            name:"auditUserFieldName"
+        },
+        {
+            type:"boolean",
+            name:"autoCreateAuditTable"
+        },
+        {
+            valueMap:{
+                full:"Inherit fields by copying them onto the inheriting DataSource's underlying table.",
+                none:"Do not physically inherit fields onto the inheriting DataSource's SQL table"
+            },
+            type:"string",
+            name:"inheritanceMode"
+        },
+        {
+            type:"boolean",
+            name:"quoteColumnNames"
+        },
+        {
+            type:"string",
+            name:"generatedBy"
+        },
+        {
+            type:"boolean",
+            name:"useUTCDateTimes"
+        },
+        {
+            type:"boolean",
+            name:"useOfflineStorage"
+        },
+        {
+            type:"string",
+            name:"enumOrdinalProperty"
+        },
+        {
+            valueMap:{
+                bean:"Translates to/from a Javascript object containing one property for each property defined within the enum.",
+                ordinal:"Translates to/from an integer matching the ordinal number of the constant within the enumeration",
+                string:"Translates to/from a String matching the constant name."
+            },
+            type:"string",
+            name:"enumTranslateStrategy"
+        },
+        {
+            type:"boolean",
+            name:"xmlFromConfig"
+        },
+        {
+            type:"boolean",
+            name:"translatePatternOperators"
+        },
+        {
+            type:"string",
+            name:"fileNameField"
+        },
+        {
+            type:"string",
+            name:"fileTypeField"
+        },
+        {
+            type:"string",
+            name:"fileFormatField"
+        },
+        {
+            type:"string",
+            name:"fileSizeField"
+        },
+        {
+            type:"string",
+            name:"fileLastModifiedField"
+        },
+        {
+            type:"string",
+            name:"fileContentsField"
         }
     ]
 })

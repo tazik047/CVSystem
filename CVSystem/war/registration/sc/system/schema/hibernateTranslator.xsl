@@ -89,6 +89,8 @@
     
                                 <xsl:when test="@type = 'date'">date</xsl:when>
                                 <xsl:when test="@type = 'datetime'">timestamp</xsl:when>
+                                <xsl:when test="@type = 'creatorTimestamp'">timestamp</xsl:when>
+                                <xsl:when test="@type = 'modifierTimestamp'">timestamp</xsl:when>
                                 <xsl:when test="@type = 'time'">time</xsl:when>
     
                                 <xsl:when test="@type = 'binary'">binary</xsl:when>

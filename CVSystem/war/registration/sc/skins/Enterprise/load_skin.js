@@ -8,7 +8,6 @@ isc.loadSkin = function (theWindow) {
 if (theWindow == null) theWindow = window;
 with (theWindow) {
 
-
 //----------------------------------------
 // Specify skin directory
 //----------------------------------------
@@ -21,16 +20,12 @@ with (theWindow) {
 //----------------------------------------
     isc.Page.loadStyleSheet("[SKIN]/skin_styles.css", theWindow);
 
-    var useCSS3 = isc.Browser.useCSS3;
+    isc.Class.modifyFrameworkStart();
+
+    var useCSS3 = isc.Browser.useCSS3,
+        useSpriting = isc.Browser.useSpriting;
 
     if (useCSS3) {
-
-        isc.Canvas.setProperties({
-            // this skin uses custom scrollbars
-            groupBorderCSS:"1px solid #165fa7",
-            showCustomScrollbars:true
-        });
-
 
         if (isc.Browser.isIE && isc.Browser.version >= 7 && !isc.Browser.isIE9) {
             isc.Canvas.setAllowExternalFilters(false);
@@ -57,16 +52,9 @@ with (theWindow) {
         isc.SimpleScrollThumb.addProperties({
             imageWidth:10, imageHeight:10,
             baseStyle:"scrollThumb",
-            hSrc: "[SKINIMG]/blank.gif",
-            vSrc: "[SKINIMG]/blank.gif",
-            gripImgSuffix: "",
-            redrawOnStateChange: true
-        });
-        isc.VSimpleScrollThumb.addProperties({
-            imageStyle: "vScrollThumbGrip"
-        });
-        isc.HSimpleScrollThumb.addProperties({
-            imageStyle: "hScrollThumbGrip"
+            hSrc:"[SKIN]hthumb_grip.png",
+            vSrc:"[SKIN]vthumb_grip.png",
+            statelessImage:false
         });
 
         isc.Scrollbar.addProperties({
@@ -90,6 +78,27 @@ with (theWindow) {
             baseStyle:"scrollTrack"
         });
         isc.Scrollbar.changeDefaults("cornerImg", { name:"blank0", baseStyle:"scrollCorner" });
+
+        if (isc.SpritedScrollbar && useSpriting) {
+            isc.SpritedSimpleScrollThumb.addProperties({
+                hSrc: "[SKINIMG]/blank.gif",
+                vSrc: "[SKINIMG]/blank.gif",
+                gripImgSuffix: "",
+                redrawOnStateChange: true,
+                statelessImage:true
+            });
+            isc.SpritedVSimpleScrollThumb.addProperties({
+                imageStyle: "vScrollThumbGrip"
+            });
+            isc.SpritedHSimpleScrollThumb.addProperties({
+                imageStyle: "hScrollThumbGrip"
+            });
+
+            isc.SpritedScrollbar.addProperties({
+                hThumbClass:isc.SpritedHSimpleScrollThumb,
+                vThumbClass:isc.SpritedVSimpleScrollThumb
+            });
+        }
 
 
         //----------------------------------------
@@ -130,9 +139,9 @@ with (theWindow) {
                 isc.ClassFactory.overwriteClass("ITreeMenuButton", "TreeMenuButton");
                 if (isc.ITreeMenuButton.markAsFrameworkClass != null) {
                     isc.ITreeMenuButton.markAsFrameworkClass();
-                }                    
+                }
             }
-            
+
         }
 
         if (isc.MenuButton) {
@@ -176,15 +185,18 @@ with (theWindow) {
                 showEdges:false,
                 showShadow:false,
                 submenuDisabledImage:{src:"[SKIN]submenu_disabled.png", height:7, width:4},
-                submenuImage:{src:"[SKIN]submenu.png", height:7, width:4}
+                submenuImage:{src:"[SKIN]submenu.png", height:7, width:4},
+                skinUsesCSSTransitions: true
             });
 
-            isc.addProperties(isc.Menu.ICON_FIELD, {
+            isc.Menu.changeDefaults("iconFieldDefaults", {
                 baseStyle:"menuIconField",
                 width:24
             });
 
-            isc.Menu.TITLE_FIELD.baseStyle = "menuTitleField";
+            isc.Menu.changeDefaults("titleFieldDefaults", {
+                baseStyle: "menuTitleField"
+            });
         }
 
         if (isc.PickTreeItem) {
@@ -222,14 +234,6 @@ with (theWindow) {
             showRollOver:false,
             vSrc:"[SKIN]vsplit.png"
         });
-
-        isc.Layout.addProperties({
-            resizeBarSize:5,
-            // Use the Snapbar as a resizeBar by default - subclass of Splitbar that
-            // shows interactive (closed/open) grip images
-            // Other options include the Splitbar, StretchImgSplitbar or ImgSplitbar
-            resizeBarClass:"Snapbar"
-        })
 
         if (isc.SectionItem) {
             isc.SectionItem.addProperties({
@@ -288,6 +292,7 @@ with (theWindow) {
                 manyItemsImage:"[SKIN]folder_file.png",
                 nodeIcon:"[SKIN]file.png",
                 normalBaseStyle:"treeCell",
+                applyRowNumberStyle:false,
                 openerIconSize:22,
                 openerImage:"[SKIN]opener.png",
                 sortAscendingImage:{src:"[SKINIMG]ListGrid/sort_ascending.png", width:9, height:6},
@@ -295,7 +300,7 @@ with (theWindow) {
                 tallBaseStyle:"treeTallCell"
             });
         }
-        
+
         if (isc.MultiSortPanel) {
             isc.MultiSortPanel.changeDefaults("levelUpButtonDefaults", {
                 src: "[SKINIMG]TransferIcons/up.png",
@@ -315,6 +320,7 @@ with (theWindow) {
                 paneContainerClassName:"tabSetContainer",
                 paneMargin:5,
                 pickerButtonSize:20,
+                touchPickerButtonSize:26,
                 pickerButtonSrc:"[SKIN]picker.png",
                 showScrollerRollOver:false,
                 scrollerButtonSize:19,
@@ -324,7 +330,48 @@ with (theWindow) {
                 symmetricPickerButton:false,
                 tabBarThickness:24,
                 defaultTabHeight:24,
-                useSimpleTabs:true
+                useSimpleTabs:true,
+                scrollerBackHMarginSize: 1,
+                scrollerBackVMarginSize: 1,
+                getScrollerBackImgName : function () {
+                    return "blank1";
+                },
+                getScrollerForwardImgName : function () {
+                    return "blank2";
+                },
+                tabPickerHMarginSize: 1,
+                tabPickerVMarginSize: 1,
+                getTabPickerSrc : function () {
+                    return "[SKINIMG]/blank.gif";
+                }
+            });
+            isc.TabSet.changeDefaults("scrollerDefaults", {
+                renderStretchImgInTable: false
+            });
+            isc.TabSet.changeDefaults("scrollerBackImg", {
+                baseStyleKey: "scrollerPosition",
+                baseStyleMap: {
+                    "top": "tabScrollerTopBack",
+                    "right": "tabScrollerRightBack",
+                    "bottom": "tabScrollerBottomBack",
+                    "left": "tabScrollerLeftBack"
+                },
+                baseStyle: "tabScrollerBack"
+            });
+            isc.TabSet.changeDefaults("scrollerForwardImg", {
+                baseStyleKey: "scrollerPosition",
+                baseStyleMap: {
+                    "top": "tabScrollerTopForward",
+                    "right": "tabScrollerRightForward",
+                    "bottom": "tabScrollerBottomForward",
+                    "left": "tabScrollerLeftForward"
+                },
+                baseStyle: "tabScrollerForward"
+            });
+            isc.TabSet.changeDefaults("tabPickerDefaults", {
+                baseStyle: "tabPicker",
+                statelessImage: true,
+                redrawOnStateChange: false
             });
 
             // In Netscape Navigator 4.7x, set the backgroundColor directly since the css
@@ -334,8 +381,6 @@ with (theWindow) {
             }
 
             isc.TabBar.addProperties({
-                baseLineConstructor:"Canvas",
-                baseLineProperties:{ backgroundColor:"#C0C3C7", height:1, overflow:"hidden" },
                 baseLineThickness:1,
                 bottomStyleName:"tabBarBottom",
                 layoutEndMargin:5,
@@ -397,6 +442,7 @@ with (theWindow) {
 
             isc.Window.changeDefaults("maximizeButtonDefaults", {
                 height:15,
+                showDown:false,
                 showRollOver:true,
                 src:"[SKIN]/headerIcons/maximize.png",
                 width:15
@@ -441,29 +487,32 @@ with (theWindow) {
                 height:42, // 10px margins + 22px button
                 membersMargin:10
             });
-            
+
             if (isc.Dialog.Warn && isc.Dialog.Warn.toolbarDefaults) {
+            isc.logWarn("Case 1:" + isc.Dialog.Warn);
                 isc.addProperties(isc.Dialog.Warn.toolbarDefaults, {
                     buttonConstructor:"IButton",
                     height:42,
                     membersMargin:10
                 });
             }
-            
-                        
+
+
             // Modify the prompt dialog to show a header
             // In the css3-off mode header media is part of the background image, so
             // a header appears to show even though there's no true header widget.
             if (isc.Dialog.Prompt) {
+//            isc.logWarn("case 2:" + isc.Dialog.Prompt);
                 isc.addProperties(isc.Dialog.Prompt, {
                     showHeader:true,
                     showTitle:false,
+                    showTitleAsHeaderContents:false,
                     showCloseButton:false,
                     bodyStyle:"windowBody"
-                    
+
                 });
             }
-            
+
         }
 
         // Dynamic form skinning
@@ -514,6 +563,7 @@ with (theWindow) {
                 height:22,
                 pickerIconSrc:"[SKIN]/pickers/comboBoxPicker.png",
                 pickerIconWidth:18,
+                valueIconSize:12,
                 showFocusedPickerIcon:false,
                 textBoxStyle:"selectItemText"
             });
@@ -538,6 +588,12 @@ with (theWindow) {
             });
         }
 
+        if (isc.PickListMenu) {
+            isc.PickListMenu.addProperties({
+                skinUsesCSSTransitions: true
+            });
+        }
+
         if (isc.DateItem) {
             isc.DateItem.addProperties({
                 height:22,
@@ -553,7 +609,7 @@ with (theWindow) {
                 textBoxStyle:"selectItemText"
             });
 
-            isc.SpinnerItem.INCREASE_ICON = isc.addProperties(isc.SpinnerItem.INCREASE_ICON,
+            isc.SpinnerItem.changeDefaults("increaseIconDefaults",
             {
                 height:11,
                 imgOnly:true,
@@ -563,7 +619,7 @@ with (theWindow) {
                 width:16
             });
 
-            isc.SpinnerItem.DECREASE_ICON = isc.addProperties(isc.SpinnerItem.DECREASE_ICON,
+            isc.SpinnerItem.changeDefaults("decreaseIconDefaults",
             {
                 height:11,
                 imgOnly:true,
@@ -603,10 +659,6 @@ with (theWindow) {
             isc.MiniDateRangeItem.changeDefaults("pickerIconDefaults", { src:"[SKIN]/DynamicForm/date_control.png" });
         }
 
-        if (isc.RelativeDateItem) {
-            isc.RelativeDateItem.changeDefaults("pickerIconDefaults", { src:"[SKIN]/DynamicForm/date_control.png" });
-        }
-
         // Native FILE INPUT items are rendered differently in Safari from other browsers
         // Don't show standard textbox styling around them as it looks odd
         if (isc.UploadItem && isc.Browser.isSafari) {
@@ -644,7 +696,7 @@ with (theWindow) {
                 styleName:"dateChooserBorder"
             });
         }
-        
+
         if (isc.ToolStrip) {
             isc.ToolStrip.addProperties({
                 defaultLayoutAlign:"center",
@@ -680,13 +732,6 @@ with (theWindow) {
             });
         }
 
-        if (isc.RichTextEditor) {
-            isc.RichTextEditor.addProperties({
-                showEdges:false,
-                styleName:"richTextEditorBorder"
-            });
-        }
-        
         if (isc.EdgedCanvas) {
             isc.EdgedCanvas.addProperties({
                 edgeSize:6,
@@ -704,7 +749,15 @@ with (theWindow) {
                 trackConstructor:"StatefulCanvas",
                 trackWidth:5,
                 vThumbStyle:"vSliderThumb",
-                vTrackStyle:"vSliderTrack"
+                vTrackStyle:"vSliderTrack",
+                touchThumbThickWidth:30,
+                touchThumbThinWidth:30,
+                touchExtraThumbSpace:0
+            });
+            isc.Slider.changeDefaults("thumbDefaults", {
+                getCustomState : function () {
+                    return (isc.Browser.isTouch ? "touch" : this.customState);
+                }
             });
         }
 
@@ -739,6 +792,7 @@ with (theWindow) {
         }
 
         if (isc.Hover) {
+//        isc.logWarn("HoverCD:" + isc.Hover.hoverCanvasDefaults);
             isc.addProperties(isc.Hover.hoverCanvasDefaults, {
                 shadowDepth:5,
                 showShadow:false
@@ -761,7 +815,7 @@ with (theWindow) {
 //   1) Scrollbars
 //   2) Buttons
 //   3) Resizebars
-//   4) Sections
+//   4) Sections & NavigationBar
 //   5) Progressbars
 //   6) TabSets
 //   7) Windows
@@ -780,12 +834,9 @@ with (theWindow) {
 //  20) FilterBuilder
 //  21) Printing
 //  22) ToolStrip
+//  23) SplitPane
 //============================================================
 
-
-	isc.Canvas.addProperties({
-		groupBorderCSS: "1px solid #165fa7"
-	});
 
     if(isc.Browser.isIE && isc.Browser.version >= 7 && !isc.Browser.isIE9) {
         isc.Canvas.setAllowExternalFilters(false);
@@ -806,11 +857,6 @@ with (theWindow) {
 //----------------------------------------
 // 1) Scrollbars
 //----------------------------------------
-    isc.Canvas.addProperties({
-        showCustomScrollbars:true,
-        scrollbarSize:16,
-		cornerSize: 16
-    });
     isc.ScrollThumb.addProperties({
         capSize:2,
         vSrc:"[SKIN]vthumb.png",
@@ -824,6 +870,7 @@ with (theWindow) {
         showDown: true,
         backgroundColor:"transparent"
     });
+
     isc.Scrollbar.addProperties({
         btnSize:18,
         //showDown: true,
@@ -835,24 +882,74 @@ with (theWindow) {
         hSrc:"[SKIN]hscroll.png"
     });
 
-    isc.Scrollbar.changeDefaults("trackImg", {
-        name: "blank5",
-        baseStyleKey: "vertical",
-        baseStyleMap: {
-            "true": "vScrollTrackStretch",
-            "false": "hScrollTrackStretch"
-        },
-        baseStyle:"scrollTrackStretch"
-    });
-    isc.Scrollbar.changeDefaults("cornerImg", {
-        name:"blank0",
-        baseStyleKey: "vertical",
-        baseStyleMap: {
-            "true": "vScrollCorner",
-            "false": "hScrollCorner"
-        },
-        baseStyle:"scrollCorner"
-    });
+    if (isc.SpritedScrollbar && useSpriting) {
+        isc.SpritedScrollThumb.addProperties({
+            showGrip: true,
+            showRollOverGrip: false,
+            showDownGrip: false,
+            showRollOver: true,
+            showDown: true,
+            src: "[SKINIMG]/blank.gif",
+            gripImgSuffix: ""
+        });
+        isc.SpritedVScrollThumb.addProperties({
+            iconStyle: "vScrollThumbGrip",
+            items: [{
+                name: "blank1",
+                width: "capSize",
+                height: "capSize",
+                baseStyle: "vScrollThumbStart"
+            }, {
+                name: "blank2",
+                width: "*",
+                height: "*",
+                baseStyle: "vScrollThumbStretch"
+            }, {
+                name: "blank3",
+                width: "capSize",
+                height: "capSize",
+                baseStyle: "vScrollThumbEnd"
+            }]
+        });
+        isc.SpritedHScrollThumb.addProperties({
+            iconStyle: "hScrollThumbGrip",
+            items: [{
+                name: "blank1",
+                width: "capSize",
+                height: "capSize",
+                baseStyle: "hScrollThumbStart"
+            }, {
+                name: "blank2",
+                width: "*",
+                height: "*",
+                baseStyle: "hScrollThumbStretch"
+            }, {
+                name: "blank3",
+                width: "capSize",
+                height: "capSize",
+                baseStyle: "hScrollThumbEnd"
+            }]
+        });
+
+        isc.SpritedScrollbar.changeDefaults("trackImg", {
+            name: "blank5",
+            baseStyleKey: "vertical",
+            baseStyleMap: {
+                "true": "vScrollTrackStretch",
+                "false": "hScrollTrackStretch"
+            },
+            baseStyle:"scrollTrackStretch"
+        });
+        isc.SpritedScrollbar.changeDefaults("cornerImg", {
+            name:"blank0",
+            baseStyleKey: "vertical",
+            baseStyleMap: {
+                "true": "vScrollCorner",
+                "false": "hScrollCorner"
+            },
+            baseStyle:"scrollCorner"
+        });
+    }
 
 
 //----------------------------------------
@@ -948,17 +1045,9 @@ with (theWindow) {
         //capSize:8
     });
 
-    isc.Layout.addProperties({
-        resizeBarSize:5,
-        // Use the Snapbar as a resizeBar by default - subclass of Splitbar that
-        // shows interactive (closed/open) grip images
-        // Other options include the Splitbar, StretchImgSplitbar or ImgSplitbar
-        resizeBarClass:"Snapbar"
-    });
-
 
 //----------------------------------------
-// 4) Sections
+// 4) Sections & NavigationBar
 //----------------------------------------
     if (isc.SectionItem) {
         isc.SectionItem.addProperties({
@@ -1043,7 +1132,7 @@ with (theWindow) {
             paneMargin:5,
 
             showScrollerRollOver: false,
-            
+
             defaultTabHeight:24
         });
         isc.TabSet.changeDefaults("paneContainerDefaults", {
@@ -1056,21 +1145,52 @@ with (theWindow) {
             layoutStartMargin:5,
             layoutEndMargin:5,
 
-            styleName:"tabBar",
-
-            // have the baseline overlap the top edge of the TabSet, using rounded media
-            baseLineConstructor:"Canvas",
-            baseLineProperties : {
-                backgroundColor: "#C0C3C7",
-                overflow:"hidden",
-                height:1
-            }
+            styleName:"tabBar"
 
             /*baseLineSrc:"[SKIN]baseline.png",
             baseLineThickness:3,
             baseLineCapSize:4*/
 
         });
+
+        if (useSpriting) {
+            isc.TabSet.addProperties({
+                getScrollerBackImgName : function () {
+                    return "blank1";
+                },
+                getScrollerForwardImgName : function () {
+                    return "blank2";
+                },
+                getTabPickerSrc : function () {
+                    return "[SKINIMG]/blank.gif";
+                }
+            });
+            isc.TabSet.changeDefaults("scrollerBackImg", {
+                baseStyleKey: "scrollerPosition",
+                baseStyleMap: {
+                    "top": "tabScrollerTopBackSprite",
+                    "right": "tabScrollerRightBackSprite",
+                    "bottom": "tabScrollerBottomBackSprite",
+                    "left": "tabScrollerLeftBackSprite"
+                },
+                baseStyle: "tabScrollerBackSprite"
+            });
+            isc.TabSet.changeDefaults("scrollerForwardImg", {
+                baseStyleKey: "scrollerPosition",
+                baseStyleMap: {
+                    "top": "tabScrollerTopForwardSprite",
+                    "right": "tabScrollerRightForwardSprite",
+                    "bottom": "tabScrollerBottomForwardSprite",
+                    "left": "tabScrollerLeftForwardSprite"
+                },
+                baseStyle: "tabScrollerForwardSprite"
+            });
+            isc.TabSet.changeDefaults("tabPickerDefaults", {
+                statelessImage: true,
+                imageStyle: "tabPickerSprite",
+                redrawOnStateChange: true
+            });
+        }
     }
     if (isc.ImgTab) {
         isc.ImgTab.addProperties({
@@ -1188,6 +1308,7 @@ with (theWindow) {
                 membersMargin:10
             });
             if (isc.Dialog.Warn && isc.Dialog.Warn.toolbarDefaults) {
+            isc.logWarn("TBD:" + isc.Dialog.Warn.toolbarDefaults);
                 isc.addProperties(isc.Dialog.Warn.toolbarDefaults, {
                     buttonConstructor: "IButton",
                     height:42,
@@ -1246,7 +1367,7 @@ with (theWindow) {
             headerButtonConstructor:"Button",
             headerButtonProperties:{showTitle:false}
         });
-        
+
         isc.DateChooser.addProperties({
             alternateWeekStyles:false,
             backgroundColor:null,
@@ -1261,7 +1382,7 @@ with (theWindow) {
 			edgeOffsetTop:1,
 			edgeOffsetRight:3,
 			edgeOffsetLeft:3,
-			edgeOffsetBottom:5,            
+			edgeOffsetBottom:5,
             edgeSize:3,
             edgeTop:26,
             headerHeight:24,
@@ -1323,14 +1444,15 @@ with (theWindow) {
 	        checkmarkDisabledImage:{src:"[SKIN]check_disabled.png", width:7, height:6},
             bodyStyleName:"gridBody",
 			iconBodyStyleName:"menuMain",
-			iconBodyStyleName_rtl:"menuMainRTL",
             bodyBackgroundColor:null
         });
-		isc.addProperties(isc.Menu.ICON_FIELD, {
+        isc.Menu.changeDefaults("iconFieldDefaults", {
 			width:24,
 			baseStyle:"menuIconField"
 		});
-		isc.Menu.TITLE_FIELD.baseStyle = "menuTitleField";
+        isc.Menu.changeDefaults("titleFieldDefaults", {
+            baseStyle: "menuTitleField"
+        });
     }
 
     if (isc.MenuButton) {
@@ -1374,6 +1496,7 @@ with (theWindow) {
 // 11) Hovers
 //----------------------------------------
     if (isc.Hover) {
+    isc.logWarn("hoverCD:" + isc.Hover.hoverCanvasDefaults);
         isc.addProperties(isc.Hover.hoverCanvasDefaults, {
             showShadow:false,
             shadowDepth:5
@@ -1388,7 +1511,7 @@ with (theWindow) {
         isc.ListGrid.addProperties({
             alternateBodyStyleName: null,
             alternateRecordStyles: true,
-            backgroundColor: null, 
+            backgroundColor: null,
             bodyBackgroundColor: null,
             bodyStyleName: "gridBody",
             cellHeight: 22,
@@ -1433,7 +1556,7 @@ with (theWindow) {
         isc.ListGrid.changeDefaults("headerMenuButtonDefaults", {
             showDown:false
         });
-        
+
         isc.ListGrid.changeDefaults("summaryRowDefaults", {
             bodyBackgroundColor:null,
             bodyStyleName:"summaryRowBody"
@@ -1445,6 +1568,7 @@ with (theWindow) {
             alternateRecordStyles : false,
 			tallBaseStyle: "treeTallCell",
 			normalBaseStyle: "treeCell",
+			applyRowNumberStyle:false,
             openerImage:"[SKIN]opener.png",
             sortAscendingImage:{src:"[SKINIMG]ListGrid/sort_ascending.png", width:9, height:6},
             sortDescendingImage:{src:"[SKINIMG]ListGrid/sort_descending.png", width:9, height:6}
@@ -1514,7 +1638,8 @@ with (theWindow) {
         showFocusedPickerIcon:false,
         pickerIconSrc:"[SKIN]/pickers/comboBoxPicker.png",
         height:22,
-        pickerIconWidth:18
+        pickerIconWidth:18,
+        valueIconSize:12
     })}
 
     if (isc.ComboBoxItem) {isc.ComboBoxItem.addProperties({
@@ -1544,7 +1669,7 @@ with (theWindow) {
             textBoxStyle:"selectItemText",
             height:22
         });
-        isc.SpinnerItem.INCREASE_ICON = isc.addProperties(isc.SpinnerItem.INCREASE_ICON, {
+        isc.SpinnerItem.changeDefaults("increaseIconDefaults", {
             width:16,
             height:11,
             showFocused:true,
@@ -1552,7 +1677,7 @@ with (theWindow) {
             imgOnly:true,
             src:"[SKIN]/DynamicForm/spinner_control_increase.png"
         });
-        isc.SpinnerItem.DECREASE_ICON = isc.addProperties(isc.SpinnerItem.DECREASE_ICON, {
+        isc.SpinnerItem.changeDefaults("decreaseIconDefaults", {
             width:16,
             height:11,
             showFocused:true,
@@ -1593,11 +1718,7 @@ with (theWindow) {
             src: "[SKIN]/DynamicForm/date_control.png"
         });
     }
-    if(isc.RelativeDateItem) {
-        isc.RelativeDateItem.changeDefaults("pickerIconDefaults", {
-            src: "[SKIN]/DynamicForm/date_control.png"
-        });
-    }
+
 //----------------------------------------
 // 15) Drag & Drop
 //----------------------------------------
@@ -1731,11 +1852,24 @@ with (theWindow) {
 
     // Skinning not dependent on whether CSS3 is being used.
 
+    isc.Canvas.setProperties({
+        // this skin uses custom scrollbars
+        groupBorderCSS: "1px solid #165fa7",
+        showCustomScrollbars: true
+    });
+
     //----------------------------------------
     // 1) Scrollbars
     //----------------------------------------
-    if (isc.Scrollbar && (!isc.Browser.isIE || isc.Browser.version >= 7)) {
-        isc.Scrollbar.changeDefaults("startImg", {
+    isc.Canvas.addProperties({
+        scrollbarSize:16
+    });
+
+    if (isc.SpritedScrollbar && useSpriting) {
+        isc.Canvas.addProperties({
+            scrollbarConstructor: "SpritedScrollbar"
+        });
+        isc.SpritedScrollbar.changeDefaults("startImg", {
             name: "blank1",
             baseStyleKey: "vertical",
             baseStyleMap: {
@@ -1744,7 +1878,7 @@ with (theWindow) {
             },
             baseStyle:"scrollStart"
         });
-        isc.Scrollbar.changeDefaults("endImg", {
+        isc.SpritedScrollbar.changeDefaults("endImg", {
             name: "blank10",
             baseStyleKey: "vertical",
             baseStyleMap: {
@@ -1753,120 +1887,148 @@ with (theWindow) {
             },
             baseStyle:"scrollEnd"
         });
+    }
 
-        isc.ScrollThumb.addProperties({
-            showGrip: true,
-            showRollOverGrip: false,
-            showDownGrip: false,
-            showRollOver: true,
+    //----------------------------------------
+    // 3) Resizebars
+    //----------------------------------------
+
+    isc.Layout.addProperties({
+        resizeBarSize: 5,
+        resizeBarClass: "Snapbar"
+    });
+
+    //----------------------------------------
+    // 4) Sections & NavigationBar
+    //----------------------------------------
+    if (isc.MiniNavControl) {
+        isc.MiniNavControl.addProperties({
+            src: isc.Browser.isIPhone ? "[SKIN]/miniNav.svg" : "[SKIN]/miniNav~2.png",
+            showDisabled: true,
+            upButtonSrc: null,
+            downButtonSrc: null
+        });
+    }
+    if (isc.NavigationBar) {
+        
+        isc.NavigationBar.addProperties({
+            leftButtonIcon: "[SKINIMG]NavigationBar/back_arrow~2.png"
+        });
+        isc.NavigationBar.changeDefaults("leftButtonDefaults", {
+            iconWidth: 14,
+            iconHeight: 24,
+            iconSpacing: 7,
+            showRTLIcon: true
+        });
+        isc.NavigationBar.changeDefaults("titleLabelDefaults", {
+            margin: 0
+        });
+
+        if (isc.Browser.isIPhone || isc.Browser.isIPad) {
+            isc.NavigationBar.addProperties({
+                leftButtonIcon: "[SKINIMG]NavigationBar/back_arrow.svg"
+            });
+        }
+    }
+    if (isc.NavigationButton) {
+        isc.NavigationButton.addProperties({
+            padding: 0,
             showDown: true,
-            src: "[SKINIMG]/blank.gif",
-            gripImgSuffix: ""
-        });
-        isc.VScrollThumb.addProperties({
-            iconStyle: "vScrollThumbGrip",
-            items: [{
-                name: "blank1",
-                width: "capSize",
-                height: "capSize",
-                baseStyle: "vScrollThumbStart"
-            }, {
-                name: "blank2",
-                width: "*",
-                height: "*",
-                baseStyle: "vScrollThumbStretch"
-            }, {
-                name: "blank3",
-                width: "capSize",
-                height: "capSize",
-                baseStyle: "vScrollThumbEnd"
-            }]
-        });
-        isc.HScrollThumb.addProperties({
-            iconStyle: "hScrollThumbGrip",
-            items: [{
-                name: "blank1",
-                width: "capSize",
-                height: "capSize",
-                baseStyle: "hScrollThumbStart"
-            }, {
-                name: "blank2",
-                width: "*",
-                height: "*",
-                baseStyle: "hScrollThumbStretch"
-            }, {
-                name: "blank3",
-                width: "capSize",
-                height: "capSize",
-                baseStyle: "hScrollThumbEnd"
-            }]
+            showDownIcon: true
         });
     }
 
     //----------------------------------------
     // 6) TabSets
     //----------------------------------------
-    if (isc.TabSet && (!isc.Browser.isIE || isc.Browser.version >= 7)) {
-        isc.TabSet.addMethods({
-            getScrollerBackImgName : function skin_TabSet_getScrollerBackImgName() {
-                return "blank1";
-            },
-            getScrollerForwardImgName : function skin_TabSet_getScrollerForwardImgName() {
-                return "blank2";
-            },
-            getTabPickerSrc : function skin_TabSet_getTabPickerSrc() {
-                return "[SKINIMG]/blank.gif";
-            }
+    if (isc.TabBar) {
+        isc.TabBar.changeDefaults("baseLineDefaults", {
+            _constructor: "Canvas",
+            backgroundColor: "#C0C3C7"
         });
-        isc.TabSet.changeDefaults("scrollerBackImg", {
-            baseStyleKey: "scrollerPosition",
-            baseStyleMap: {
-                "top": "tabScrollerTopBack",
-                "right": "tabScrollerRightBack",
-                "bottom": "tabScrollerBottomBack",
-                "left": "tabScrollerLeftBack"
-            },
-            baseStyle: "tabScrollerBack"
+        isc.TabBar.changeDefaults("tabDefaults", {
+            showFocusOutline: !isc.Browser.isSafari
         });
-        isc.TabSet.changeDefaults("scrollerForwardImg", {
-            baseStyleKey: "scrollerPosition",
-            baseStyleMap: {
-                "top": "tabScrollerTopForward",
-                "right": "tabScrollerRightForward",
-                "bottom": "tabScrollerBottomForward",
-                "left": "tabScrollerLeftForward"
-            },
-            baseStyle: "tabScrollerForward"
+    }
+
+    //----------------------------------------
+    // 9) Pickers
+    //----------------------------------------
+    if (isc.ColorItem) {
+        
+        isc.ColorItem.addProperties({
+            showEmptyPickerIcon: true
         });
-        isc.TabSet.changeDefaults("tabPickerDefaults", {
-            statelessImage: true,
-            imageStyle: "tabPicker",
-            redrawOnStateChange: true
+        isc.ColorItem.changeDefaults("pickerIconDefaults", {
+            showRTL: true
+        });
+    }
+
+    //----------------------------------------
+    // 10) Menus
+    //----------------------------------------
+    if (isc.Menu) {
+        isc.Menu.addProperties({
+            styleName: "menuBorder",
+            iconFillSpaceStyleName: "menuFill"
         });
     }
 
     //----------------------------------------
     // 12) ListGrids
     //----------------------------------------
-    if (isc.ListGrid && (!isc.Browser.isIE || isc.Browser.version >= 7)) {
+    if (isc.ListGrid) {
         isc.ListGrid.addProperties({
-            booleanBaseStyle: "checkbox",
-            booleanTrueImage: "blank",
-            booleanFalseImage: "blank",
-            booleanPartialImage: "blank",
-            booleanImageWidth: 13,
-            booleanImageHeight: 13
+            expansionFieldImageShowRTL: true
         });
+
+        if (useSpriting) {
+            isc.ListGrid.addProperties({
+                booleanBaseStyle: "checkbox",
+                booleanTrueImage: "blank",
+                booleanFalseImage: "blank",
+                booleanPartialImage: "blank",
+                booleanImageWidth: 13,
+                booleanImageHeight: 13
+            });
+        }
     }
 
     //----------------------------------------
     // 14) Form controls
     //----------------------------------------
-    if (isc.ComboBoxItem && (!isc.Browser.isIE || isc.Browser.version >= 7)) {
-        isc.ComboBoxItem.changeDefaults("pickerIconDefaults", {
-            src: "blank",
-            baseStyle: "comboBoxItemPicker"
+    if (isc.FormItem) {
+        isc.FormItem.addProperties({
+            showRTL: true
         });
+    }
+    if (isc.ComboBoxItem) {
+        isc.ComboBoxItem.addProperties({
+            showFocusedPickerIcon: false
+        });
+        isc.ComboBoxItem.changeDefaults("pickerIconDefaults", {
+            showOver: true,
+            showRTL: true
+        });
+        if (useSpriting) {
+            isc.ComboBoxItem.addProperties({
+                pickerIconSrc: "blank",
+                pickerIconStyle: "comboBoxItemPickerCell"
+            });
+            isc.ComboBoxItem.changeDefaults("pickerIconDefaults", {
+                baseStyle: "comboBoxItemPicker"
+            });
+        }
+        // for full-screen comboBox interface, enable rounded input and inline icon for browsers that can handle it
+        // IE9 is the first version of IE to support background-size.
+        if (!isc.Browser.isIE || isc.Browser.isIE9) {
+            isc.ComboBoxItem.changeDefaults("pickerSearchFormDefaults", {
+                height: 30
+            });
+            isc.ComboBoxItem.changeDefaults("pickerSearchFieldDefaults", {
+                textBoxStyle: "pickerSearchBox"
+            });
+        }
     }
     if (isc.MultiComboBoxItem) {
         isc.MultiComboBoxItem.changeDefaults("buttonDefaults", {
@@ -1876,30 +2038,101 @@ with (theWindow) {
             iconSize: 12
         });
     }
-    if (isc.SelectItem && (!isc.Browser.isIE || isc.Browser.version >= 7)) {
+    if (isc.SelectItem) {
+        isc.SelectItem.addProperties({
+            showFocusedPickerIcon: false
+        });
         isc.SelectItem.changeDefaults("pickerIconDefaults", {
-            src: "blank",
-            baseStyle: "comboBoxItemPicker"
+            showOver: true,
+            showRTL: true
+        });
+        if (useSpriting) {
+            isc.SelectItem.addProperties({
+                pickerIconSrc: "blank",
+                pickerIconStyle: "comboBoxItemPickerCell"
+            });
+            isc.SelectItem.changeDefaults("pickerIconDefaults", {
+                baseStyle: "comboBoxItemPicker"
+            });
+        }
+    }
+    if (isc.SpinnerItem) {
+        isc.SpinnerItem.changeDefaults("increaseIconDefaults", {
+            width:16,
+            height:11,
+            showOver:false,
+            showFocused:true,
+            showFocusedWithItem:false,
+            showRTL:true
+        });
+        isc.SpinnerItem.changeDefaults("decreaseIconDefaults", {
+            width:16,
+            height:11,
+            showOver:false,
+            showFocused:true,
+            showFocusedWithItem:false,
+            showRTL:true
+        });
+
+        isc.SpinnerItem.changeDefaults("unstackedIncreaseIconDefaults", {
+            src: "[SKIN]/DynamicForm/unstacked_spinner_plus.png",
+            width: 36,
+            height: 22,
+            showFocused: true,
+            showRTL: true
+        });
+        isc.SpinnerItem.changeDefaults("unstackedDecreaseIconDefaults", {
+            src: "[SKIN]/DynamicForm/unstacked_spinner_minus.png",
+            width: 36,
+            height: 22,
+            showFocused: true,
+            showRTL: true
+        });
+
+        if (useSpriting) {
+            isc.SpinnerItem.changeDefaults("increaseIconDefaults", {
+                src:"blank",
+                baseStyle:"spinnerItemIncrease"
+            });
+            isc.SpinnerItem.changeDefaults("decreaseIconDefaults", {
+                src:"blank",
+                baseStyle:"spinnerItemDecrease"
+            });
+
+            isc.SpinnerItem.changeDefaults("unstackedIncreaseIconDefaults", {
+                src: "blank",
+                baseStyle: "unstackedSpinnerItemIncrease"
+            });
+            isc.SpinnerItem.changeDefaults("unstackedDecreaseIconDefaults", {
+                src: "blank",
+                baseStyle: "unstackedSpinnerItemDecrease"
+            });
+        }
+    }
+
+    if (isc.RelativeDateItem) {
+        isc.RelativeDateItem.changeDefaults("pickerIconDefaults", {
+            neverDisable: false,
+            src: "[SKIN]/DynamicForm/date_control.png"
         });
     }
-    if (isc.SpinnerItem && (!isc.Browser.isIE || isc.Browser.version >= 7)) {
-        isc.SpinnerItem.INCREASE_ICON = isc.addProperties(isc.SpinnerItem.INCREASE_ICON, {
-            width:16,
-            height:11,
-            showOver:false,
-            showFocused:true,
-            showFocusedWithItem:false,
-            src:"blank",
-            baseStyle:"spinnerItemIncrease"
+
+    if (isc.RichTextEditor) {
+        isc.RichTextEditor.addProperties({
+            showEdges:false,
+            styleName:"richTextEditorBorder"
         });
-        isc.SpinnerItem.DECREASE_ICON = isc.addProperties(isc.SpinnerItem.DECREASE_ICON, {
-            width:16,
-            height:11,
-            showOver:false,
-            showFocused:true,
-            showFocusedWithItem:false,
-            src:"blank",
-            baseStyle:"spinnerItemDecrease"
+    }
+
+    //----------------------------------------
+    // 17) Sliders
+    //----------------------------------------
+    if (isc.Slider) {
+        isc.Slider.changeDefaults("rangeLabelDefaults", {
+            showDisabled: true
+        });
+        isc.Slider.changeDefaults("valueLabelDefaults", {
+            showDisabled: true
         });
     }
 
@@ -1912,8 +2145,45 @@ with (theWindow) {
         });
     }
 
+    // -------------------------------------------
+    // 23) SplitPane
+    // -------------------------------------------
+    if (isc.SplitPanePagedPanel) {
+        isc.SplitPanePagedPanel.addProperties({
+            skinUsesCSSTransitions: true
+        });
+    }
+    if (isc.SplitPaneSidePanel) {
+        isc.SplitPaneSidePanel.addProperties({
+            skinUsesCSSTransitions: true
+        });
+    }
+    if (isc.SplitPane) {
+        isc.SplitPane.changeDefaults("backButtonDefaults", {
+            icon: "[SKINIMG]NavigationBar/back_arrow~2.png",
+            iconWidth: 14,
+            iconHeight: 24,
+            iconSpacing: 7,
+            showRTLIcon: true
+        });
+        if (isc.Browser.isIPhone || isc.Browser.isIPad) {
+            isc.SplitPane.changeDefaults("backButtonDefaults", {
+                icon: "[SKINIMG]NavigationBar/back_arrow.svg"
+            });
+        }
+
+        isc.SplitPane.changeDefaults("detailTitleLabelDefaults", {
+            baseStyle: "detailPaneTitle"
+        });
+        isc.SplitPane.changeDefaults("listTitleLabelDefaults", {
+            baseStyle: "listPaneTitle"
+        });
+    }
+
     // remember the current skin so we can detect multiple skins being loaded
     if (isc.setCurrentSkin) isc.setCurrentSkin("Enterprise");
+
+    isc.Class.modifyFrameworkDone();
 }   // end with()
 }   // end loadSkin()
 

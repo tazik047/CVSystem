@@ -188,6 +188,15 @@ isc.DataSource.create({
         },
         {
             xmlAttribute:"true",
+            valueMap:{
+                inner:"A regular inner join",
+                outer:"An outer join"
+            },
+            type:"string",
+            name:"joinType"
+        },
+        {
+            xmlAttribute:"true",
             title:"Tree Root Value",
             type:"string",
             name:"rootValue"
@@ -197,6 +206,18 @@ isc.DataSource.create({
             title:"Include From",
             type:"string",
             name:"includeFrom"
+        },
+        {
+            xmlAttribute:"true",
+            title:"Include Via",
+            type:"string",
+            name:"includeVia"
+        },
+        {
+            xmlAttribute:"true",
+            title:"Related Table Alias",
+            type:"string",
+            name:"relatedTableAlias"
         },
         {
             xmlAttribute:"true",
@@ -269,6 +290,16 @@ isc.DataSource.create({
         },
         {
             xmlAttribute:"true",
+            valueMap:{
+                json:"JSON serialisation",
+                none:"No transformation is applied to values",
+                simpleString:"Delimeter-separated string"
+            },
+            type:"string",
+            name:"multipleStorage"
+        },
+        {
+            xmlAttribute:"true",
             type:"boolean",
             name:"canFilter"
         },
@@ -313,6 +344,11 @@ isc.DataSource.create({
         {
             xmlAttribute:"true",
             type:"string",
+            name:"exportTitle"
+        },
+        {
+            xmlAttribute:"true",
+            type:"string",
             name:"sqlStorageStrategy"
         },
         {
@@ -338,7 +374,7 @@ isc.DataSource.create({
         {
             xmlAttribute:"true",
             type:"string",
-            name:"groupFunction"
+            name:"summaryFunction"
         },
         {
             xmlAttribute:"true",
@@ -354,6 +390,166 @@ isc.DataSource.create({
             xmlAttribute:"true",
             type:"string",
             name:"joinSuffix"
+        },
+        {
+            type:"boolean",
+            name:"allowClientRequestedSummaries"
+        },
+        {
+            xmlAttribute:"true",
+            type:"string",
+            name:"defaultValue"
+        },
+        {
+            xmlAttribute:"true",
+            type:"string",
+            name:"group"
+        },
+        {
+            xmlAttribute:"true",
+            type:"string",
+            name:"ID"
+        },
+        {
+            xmlAttribute:"true",
+            type:"string",
+            name:"inheritsFrom"
+        },
+        {
+            xmlAttribute:"true",
+            type:"string",
+            name:"javaClass"
+        },
+        {
+            xmlAttribute:"true",
+            type:"string",
+            name:"javaCollectionClass"
+        },
+        {
+            xmlAttribute:"true",
+            type:"string",
+            name:"javaKeyClass"
+        },
+        {
+            xmlAttribute:"true",
+            valueMap:{
+                MD5:"Message Digest algorithm 5",
+                SHA:"Secure Hashing Algorithm (SHA-1)"
+            },
+            type:"string",
+            name:"storeWithHash"
+        },
+        {
+            type:"string",
+            name:"sqlDateFormat"
+        },
+        {
+            type:"boolean",
+            name:"initRequiresAuthentication"
+        },
+        {
+            type:"boolean",
+            name:"viewRequiresAuthentication"
+        },
+        {
+            type:"boolean",
+            name:"editRequiresAuthentication"
+        },
+        {
+            type:"boolean",
+            name:"updateRequiresAuthentication"
+        },
+        {
+            type:"string",
+            name:"initRequiresRole"
+        },
+        {
+            type:"string",
+            name:"viewRequiresRole"
+        },
+        {
+            type:"string",
+            name:"editRequiresRole"
+        },
+        {
+            type:"string",
+            name:"updateRequiresRole"
+        },
+        {
+            type:"string",
+            name:"initRequires"
+        },
+        {
+            type:"string",
+            name:"viewRequires"
+        },
+        {
+            type:"string",
+            name:"editRequires"
+        },
+        {
+            type:"string",
+            name:"updateRequires"
+        },
+        {
+            type:"string",
+            name:"customSelectExpression"
+        },
+        {
+            type:"string",
+            name:"customCriteriaExpression"
+        },
+        {
+            type:"string",
+            name:"customInsertExpression"
+        },
+        {
+            type:"string",
+            name:"customUpdateExpression"
+        },
+        {
+            type:"boolean",
+            name:"customSQL"
+        },
+        {
+            type:"boolean",
+            name:"autoQuoteCustomExpressions"
+        },
+        {
+            type:"boolean",
+            name:"creatorOverrides"
+        },
+        {
+            type:"string",
+            name:"valueWriteXPath"
+        },
+        {
+            type:"boolean",
+            name:"useJoin"
+        },
+        {
+            type:"string",
+            name:"tableName"
+        },
+        {
+            type:"string",
+            name:"multipleStorageSeparator"
+        },
+        {
+            type:"boolean",
+            name:"defineSQLColumnAsNotNull"
+        },
+        {
+            type:"string",
+            name:"valueMapEnum"
+        },
+        {
+            type:"string",
+            name:"sqlFalseValue"
+        },
+        {
+            type:"string",
+            name:"sqlTrueValue"
         }
     ]
 })

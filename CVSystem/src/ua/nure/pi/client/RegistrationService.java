@@ -1,7 +1,10 @@
 package ua.nure.pi.client;
 
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
+
+import ua.nure.pi.entity.Faculty;
 
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
@@ -11,5 +14,6 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
  */
 @RemoteServiceRelativePath("")
 public interface RegistrationService extends RemoteService {
+	  Collection<Faculty> getFaculties() throws IllegalArgumentException;
 
 }
