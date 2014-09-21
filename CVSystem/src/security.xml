@@ -32,5 +32,11 @@
 		<right>company</right>
 		<right>student</right>
 	</constraint>
+	
+	<constraint>
+		<url-pattern>/adminPanel*</url-pattern>
+		<right>company</right>
+		<right>student</right>
+	</constraint>
 
 </is:security>

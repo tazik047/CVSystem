@@ -132,7 +132,7 @@ GO
 IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Faculties]') AND type in (N'U'))
 BEGIN
 CREATE TABLE [dbo].[Faculties](
-	[FacultiesId] [bigint] NOT NULL,
+	[FacultiesId] [bigint] identity NOT NULL,
 	[Title] [nvarchar](max) NULL,
  CONSTRAINT [PK_Faculties] PRIMARY KEY CLUSTERED 
 (

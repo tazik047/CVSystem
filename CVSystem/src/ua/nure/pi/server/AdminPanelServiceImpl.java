@@ -14,11 +14,74 @@
  *******************************************************************************/
 package ua.nure.pi.server;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import ua.nure.pi.Path;
 import ua.nure.pi.client.AdminPanelService;
+import ua.nure.pi.dao.FacultyGroupDAO;
+import ua.nure.pi.entity.Faculty;
+import ua.nure.pi.entity.Group;
+import ua.nure.pi.parameter.AppConstants;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 @SuppressWarnings("serial")
 public class AdminPanelServiceImpl extends RemoteServiceServlet 
 	implements AdminPanelService {
+
+	FacultyGroupDAO facultyGroupDAO;
+	
+	@Override
+	public void init() {
+		ServletContext servletContext = getServletContext();
+		facultyGroupDAO = (FacultyGroupDAO) servletContext.getAttribute(AppConstants.FACULTYGROUP_DAO);
+		
+		if (facultyGroupDAO == null) {
+			//log.error("UserDAO attribute is not exists.");
+			throw new IllegalStateException("FacultyGroupDAO attribute is not exists.");
+		}
+	}
+	
+	@Override
+	protected void doGet(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		/*if (log.isDebugEnabled()) {
+			log.debug("GET method starts");
+		}*/
+		RequestDispatcher dispatcher = request
+				.getRequestDispatcher(Path.PAGE__ADMIN_PANEL);
+		dispatcher.forward(request, response);
+		/*if (log.isDebugEnabled()) {
+			log.debug("Response was sent");
+		}*/
+	}
+	
+	@Override
+	public Collection<Faculty> getFaculties() throws IllegalArgumentException {
+		Collection<Faculty> faculties = facultyGroupDAO.getFaculties();
+		if(faculties == null)
+			return new ArrayList<Faculty>();
+		else
+			return faculties;
+	}
+
+	@Override
+	public void setFaculties(Faculty faculty) throws IllegalArgumentException {
+		if(!facultyGroupDAO.insertFaculty(faculty))
+			throw new IllegalArgumentException("Невозможно добавить этот факультет");
+	}
+
+	@Override
+	public void setGroup(Group group) throws IllegalArgumentException {
+		if(!facultyGroupDAO.insertGroup(group))
+			throw new IllegalArgumentException("Невозможно добавить эту групу");		
+	}
 }

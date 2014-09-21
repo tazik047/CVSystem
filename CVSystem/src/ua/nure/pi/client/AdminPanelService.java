@@ -14,6 +14,11 @@
  *******************************************************************************/
 package ua.nure.pi.client;
 
+import java.util.Collection;
+
+import ua.nure.pi.entity.Faculty;
+import ua.nure.pi.entity.Group;
+
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
@@ -32,4 +37,10 @@ public interface AdminPanelService extends RemoteService {
 			return instance;
 		}
 	}
+	
+	public Collection<Faculty> getFaculties() throws IllegalArgumentException;
+	
+	public void setFaculties(Faculty faculty) throws IllegalArgumentException;
+	
+	public void setGroup(Group group) throws IllegalArgumentException;
 }

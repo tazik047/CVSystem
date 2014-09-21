@@ -110,13 +110,14 @@ public class MSSqlFacultyGroupDAO implements FacultyGroupDAO {
 				if(pstmt.executeUpdate()!=1)
 					return false;
 				ResultSet rs = pstmt.getGeneratedKeys();
+				if(f.getGroups()==null)
+					continue;
 				if(rs.next()){
 					if(!insertGroups(rs.getLong(1), f.getGroups(), con))
 						return false;
 				}
 					
 			}
-			result = pstmt.executeBatch().length == faculties.size();
 		} catch (SQLException e) {
 			throw e;
 		} finally {
@@ -484,5 +485,47 @@ public class MSSqlFacultyGroupDAO implements FacultyGroupDAO {
 	private void mapGroupForUpdate(Group g, PreparedStatement pstmt)  throws SQLException{
 		mapGroupForInsert(g, pstmt);
 		pstmt.setLong(3, g.getGroupId());
+	}
+
+	@Override
+	public Boolean insertFaculty(Faculty faculty) {
+		Collection<Faculty> faculties = new ArrayList<Faculty>();
+		faculties.add(faculty);
+		return insertFaculties(faculties);
+	}
+
+	@Override
+	public Boolean updateFaculty(Faculty faculty) {
+		Collection<Faculty> faculties = new ArrayList<Faculty>();
+		faculties.add(faculty);
+		return updateFaculties(faculties);
+	}
+
+	@Override
+	public Boolean deleteFaculty(Faculty faculty) {
+		Collection<Faculty> faculties = new ArrayList<Faculty>();
+		faculties.add(faculty);
+		return deleteFaculties(faculties);
+	}
+
+	@Override
+	public Boolean insertGroup(Group group) {
+		Collection<Group> groups = new ArrayList<Group>();
+		groups.add(group);
+		return insertGroups(group.getGroupId(), groups);
+	}
+
+	@Override
+	public Boolean updateGroup(Group group) {
+		Collection<Group> groups = new ArrayList<Group>();
+		groups.add(group);
+		return updateGroups(groups);
+	}
+
+	@Override
+	public Boolean deleteGroup(Group group) {
+		Collection<Group> groups = new ArrayList<Group>();
+		groups.add(group);
+		return deleteGroups(groups);
 	}
 }

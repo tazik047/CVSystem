@@ -15,7 +15,7 @@
 package ua.nure.pi.client;
 
 import com.google.gwt.core.client.EntryPoint;
-
+import com.google.gwt.core.client.GWT;
 import com.smartgwt.client.types.Overflow;  
 import com.smartgwt.client.types.VisibilityMode;  
 import com.smartgwt.client.widgets.Canvas;  
@@ -32,6 +32,10 @@ import com.smartgwt.client.widgets.layout.VLayout;
  * Entry point classes define <code>onModuleLoad()</code>.
  */
 public class AdminPanelEntryPoint implements EntryPoint {
+	
+	private final AdminPanelServiceAsync adminPanelService = GWT
+			.create(AdminPanelService.class);
+	
 	public void onModuleLoad() {  
         HTMLFlow htmlFlow = new HTMLFlow();  
         htmlFlow.setOverflow(Overflow.AUTO);  
@@ -52,7 +56,7 @@ public class AdminPanelEntryPoint implements EntryPoint {
         sectionStack.setHeight(350);  
   
         SectionStackSection section1 = new SectionStackSection("Blue Pawn");
-        section1.addItem(new AddFacultiesCanvas());  
+        section1.addItem(new AddFacultiesCanvas(adminPanelService));  
         sectionStack.addSection(section1); 
 
         sectionStack.draw();
