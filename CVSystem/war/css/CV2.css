@@ -1,5 +1,5 @@
 
-body {
+html>body {
 	background-color: rgba(241,243,203,0.45);
     font-family: 'Times New Roman';
     font-size: 16px;
@@ -68,7 +68,8 @@ h3 {
     background-image: url("/img/background.jpg");
 }
 #menu-right{}
-#menu-left
+
+.menu-left
 {
 	background: transparent;
 }
@@ -211,4 +212,16 @@ h3.assistive-text {
     text-shadow: 0 0 1px #706E63;
 	position: relative;
 	background-color: rgba(76,114,192,0.30);
+}
+
+/* Registration
+----------------------------------------------------------------------------*/
+.invalid {
+	background-color : Pink;
+	border-width : 2px;
+}
+
+.valid {
+	background-color : white;
+	border-width : 1px;
 }
