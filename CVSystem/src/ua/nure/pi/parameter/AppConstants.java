@@ -11,6 +11,10 @@ public interface AppConstants {
 	// DAO
 	public static final String USER_DAO = "userDAO";
 	public static final String FACULTYGROUP_DAO = "facultyGroupDAO";
+	
+	// TagName
+	public static final String TABLE_PROGRAM_LANGUAGE = "ProgramLanguages";
+	public static final String TABLE_LANGUAGE = "Languages";
 
 	// security parameters
 	public static final String SECURITY_XML = "securityXML";
