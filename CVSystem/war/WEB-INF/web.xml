@@ -28,6 +28,17 @@
     <url-pattern>/registration/</url-pattern>
   </servlet-mapping>
   
+  <servlet>
+    <servlet-name>adminPanel</servlet-name>
+    <servlet-class>ua.nure.pi.server.AdminPanelServiceImpl</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>adminPanel</servlet-name>
+    <url-pattern>/adminPanel</url-pattern>
+    <url-pattern>/adminPanel/</url-pattern>
+  </servlet-mapping>
+  
   <!-- Default page to serve -->
   <welcome-file-list>
     <welcome-file>registration</welcome-file>
