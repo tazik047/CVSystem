@@ -39,9 +39,20 @@
     <url-pattern>/adminPanel/</url-pattern>
   </servlet-mapping>
   
+  <servlet>
+    <servlet-name>main</servlet-name>
+    <servlet-class>ua.nure.pi.server.MainServiceImpl</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>main</servlet-name>
+    <url-pattern>/main</url-pattern>
+    <url-pattern>/main/</url-pattern>
+  </servlet-mapping>
+  
   <!-- Default page to serve -->
   <welcome-file-list>
-    <welcome-file>registration</welcome-file>
+    <welcome-file>main</welcome-file>
   </welcome-file-list>
 
   <filter>

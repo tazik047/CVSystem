@@ -1,0 +1,2 @@
+serviceClass: ua.nure.pi.client.MainService
+path: DEF7DCFC9635B5684E8FEA506F7EA550.gwt.rpc

@@ -13,12 +13,14 @@ public class UIManager {
 	
 	public UIManager(RootPanel root, SimplePanel simple){
 		this(root);
+		root.clear(true);
 		current=simple;
 	}
 	
 	public boolean removePanel(){
 		if(current!=null && rootPanel.remove(current)) {
 			current = null;
+			rootPanel.clear(true);
 			return true;
 		}
 		return false;
@@ -26,6 +28,7 @@ public class UIManager {
 	
 	public boolean setPanel(SimplePanel simp){
 		if(current==null){
+			rootPanel.clear(true);
 			rootPanel.add(simp);
 			current=simp;
 			return true;
@@ -38,5 +41,9 @@ public class UIManager {
 			rootPanel.add(current);
 			return true;
 		}
+	}
+
+	public RootPanel getPanel() {
+		return rootPanel;
 	}
 }

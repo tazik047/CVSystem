@@ -9,7 +9,7 @@ import ua.nure.pi.dao.*;
 public class MSSqlDAOFactory extends DAOFactory {
 
 	private static final String DRIVER = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
-	private static final String DB_URL = "jdbc:sqlserver://localhost:1433; instanceName=SQLEXPRESS; database=CVSystem; user=sa; password=master;";
+	private static final String DB_URL = "jdbc:sqlserver://localhost:1433; instanceName=SQLSERVER; database=CVSystem; user=sa; password=master;";
 
 	public MSSqlDAOFactory() {
 	}
