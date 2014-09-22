@@ -12,16 +12,21 @@ import ua.nure.pi.server.RegistrationServiceImpl;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.DockPanel;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
+import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.TextBox;
+import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.user.datepicker.client.DateBox;
 import com.google.gwt.user.datepicker.client.DatePicker;
 import com.smartgwt.client.data.DataSource;
 import com.smartgwt.client.data.Record;
@@ -65,8 +70,19 @@ public class RegistrationSimplePanel extends SimplePanel {
     
 	public void onModuleLoad() {
 
-	    final AbsolutePanel rootPanel = new AbsolutePanel();
-	    rootPanel.setSize("100%", "100%");
+	    VerticalPanel rootPanel = new VerticalPanel();
+	    rootPanel.setWidth("100%");
+	    HorizontalPanel upPanel = new HorizontalPanel();
+	    rootPanel.add(upPanel);
+	    
+	    VerticalPanel leftUpPanel = new VerticalPanel();
+	    VerticalPanel rightUpPanel = new VerticalPanel();
+	    VerticalPanel mainPanel = new VerticalPanel();
+	    final SimplePanel facultiesPanel = new SimplePanel();
+	    upPanel.add(leftUpPanel);
+	    upPanel.add(rightUpPanel);
+	    rootPanel.add(mainPanel);
+	    leftUpPanel.add(facultiesPanel);
 	    
 	    // Факультеты и группы
 	    /*
@@ -99,7 +115,7 @@ public class RegistrationSimplePanel extends SimplePanel {
 			@Override
 			public void onSuccess(Collection<Faculty> result) {
 				faculties = new ArrayList<Faculty>(result);		
-				FillTree(faculties, rootPanel);
+				FillTree(faculties, facultiesPanel);
 			}
           });
         
@@ -107,56 +123,66 @@ public class RegistrationSimplePanel extends SimplePanel {
         
         Label labelSurname = new Label("Фамилия");
         labelSurname.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
-        rootPanel.add(labelSurname, 84, 93);
+        leftUpPanel.add(labelSurname);
         labelSurname.setSize("180px", "18px");
         
         final TextBox SurnametextBox = new TextBox();
-        rootPanel.add(SurnametextBox, 84, 117);
+        leftUpPanel.add(SurnametextBox);
         SurnametextBox.setSize("170px", "22px");
         
         Label labelName = new Label("Имя");
         labelName.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
-        rootPanel.add(labelName, 84, 157);
+        leftUpPanel.add(labelName);
         labelName.setSize("180px", "18px");
         
         final TextBox NametextBox = new TextBox();
-        rootPanel.add(NametextBox, 84, 181);
+        leftUpPanel.add(NametextBox);
         NametextBox.setSize("170px", "22px");
+        
+        Label labelBirthday = new Label("Дата рождения");
+        labelBirthday.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
+        leftUpPanel.add(labelBirthday);
+        labelBirthday.setSize("180px", "18px");
+        
+        DateBox dateBox = new DateBox();
+		dateBox.setFormat(new DateBox.DefaultFormat(DateTimeFormat
+				.getFormat("dd.MM.yyyy")));
+        leftUpPanel.add(dateBox);
         
         Label labelAddress = new Label("Домашний адрес");
         labelAddress.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
-        rootPanel.add(labelAddress, 498, 93);
+        rightUpPanel.add(labelAddress);
         labelAddress.setSize("186px", "18px");
         
         final TextBox AddresstextBox = new TextBox();
-        rootPanel.add(AddresstextBox, 498, 130);
+        rightUpPanel.add(AddresstextBox);
         AddresstextBox.setSize("170px", "22px");
         
         final Label Phonelabel = new Label("Мобильный телефон");
         Phonelabel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
-        rootPanel.add(Phonelabel, 498, 188);
+        rightUpPanel.add(Phonelabel);
         Phonelabel.setSize("186px", "18px");
         
         final TextBox PhonetextBox = new TextBox();
-        rootPanel.add(PhonetextBox, 498, 226);
+        rightUpPanel.add(PhonetextBox);
         PhonetextBox.setSize("170px", "22px");
         
         Label labelEmail = new Label("Email");
         labelEmail.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
-        rootPanel.add(labelEmail, 367, 289);
+        rightUpPanel.add(labelEmail);
         labelEmail.setSize("186px", "18px");
         
         TextBox EmailtextBox = new TextBox();
-        rootPanel.add(EmailtextBox, 367, 326);
+        rightUpPanel.add(EmailtextBox);
         EmailtextBox.setSize("170px", "22px");
         
         Label labelSkype = new Label("Skype");
-        labelSkype.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
-        rootPanel.add(labelSkype, 576, 289);
+        rightUpPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
+        rightUpPanel.add(labelSkype);
         labelSkype.setSize("186px", "18px");
         
         TextBox SkypetextBox = new TextBox();
-        rootPanel.add(SkypetextBox, 576, 326);
+        rightUpPanel.add(SkypetextBox);
         SkypetextBox.setSize("170px", "22px");
         
         Button validation = new Button("Проверить");
@@ -174,21 +200,22 @@ public class RegistrationSimplePanel extends SimplePanel {
         			AddresstextBox.setStyleName("invalid");
         		else 
         			AddresstextBox.setStyleName("valid");
-        		if (PhonetextBox.getText().length()>13 || PhonetextBox.getText().toCharArray()[0]!='+')
+        		if (PhonetextBox.getText().length()>13 || PhonetextBox.getText().length()==0 
+        				|| PhonetextBox.getText().toCharArray()[0]!='+')
         			PhonetextBox.setStyleName("invalid");
         		else 
         			PhonetextBox.setStyleName("valid");
         	}
         });
-        rootPanel.add(validation, 669, 423);
+        rightUpPanel.add(validation);
         
         Label goalLabel = new Label("Цель");
         goalLabel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
-        rootPanel.add(goalLabel, 84, 507);
+        mainPanel.add(goalLabel);
         goalLabel.setSize("186px", "18px");
         
         ListBox goalComboBox = new ListBox();
-        rootPanel.add(goalComboBox, 370, 507);
+        mainPanel.add(goalComboBox);
         goalComboBox.setSize("343px", "22px");
         
         // Заполнение возможных целей из базы
@@ -200,10 +227,10 @@ public class RegistrationSimplePanel extends SimplePanel {
         
         Label labelExperience = new Label("Опыт работы");
         labelExperience.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
-        rootPanel.add(labelExperience, 84, 565);
+        mainPanel.add(labelExperience);
         labelExperience.setSize("186px", "18px");
         
-        Label labelStart = new Label("Год");
+       /* Label labelStart = new Label("Год");
         labelStart.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
         rootPanel.add(labelStart, 367, 565);
         labelStart.setSize("31px", "18px");
@@ -223,18 +250,9 @@ public class RegistrationSimplePanel extends SimplePanel {
         
         TextBox textBox = new TextBox();
         rootPanel.add(textBox, 367, 606);
-        textBox.setSize("336px", "18px");
+        textBox.setSize("336px", "18px");*/
         
-        Label labelBirthday = new Label("Дата рождения");
-        labelBirthday.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
-        rootPanel.add(labelBirthday, 84, 234);
-        labelBirthday.setSize("180px", "18px");
-        
-        DatePicker datePicker = new DatePicker();
-        datePicker.setYearArrowsVisible(true);
-        rootPanel.add(datePicker, 84, 262);
-        
-        TextBox textBox_3 = new TextBox();
+       /* TextBox textBox_3 = new TextBox();
         rootPanel.add(textBox_3, 367, 689);
         textBox_3.setSize("336px", "18px");
         
@@ -254,7 +272,7 @@ public class RegistrationSimplePanel extends SimplePanel {
         
         TextBox textBox_2 = new TextBox();
         rootPanel.add(textBox_2, 612, 653);
-        textBox_2.setSize("62px", "6px");
+        textBox_2.setSize("62px", "6px");*/
         
         // Знание языков программирования и технологий
                 
@@ -277,17 +295,17 @@ public class RegistrationSimplePanel extends SimplePanel {
         suppliesForm.setNumCols(1);  
         suppliesForm.setTitleOrientation(TitleOrientation.TOP);  
         suppliesForm.setItems(languages);  
-  
-        rootPanel.add(suppliesForm, 118, 773);
+        //languages.redraw();
+        mainPanel.add(suppliesForm);
         
         setWidget(rootPanel);
     }  
 	
-	public void FillTree(ArrayList<Faculty> faculties, AbsolutePanel rootPanel)
+	public void FillTree(ArrayList<Faculty> faculties, SimplePanel facultiesPanel)
 	{
-	    TreeNode children[] = new TreeNode[3];
+	    //TreeNode children[] = new TreeNode[3];
 
-	    /*
+	    
 		TreeNode[] children = new TreeNode[faculties.size()];
 	    
 		for (int i = 0; i < faculties.size(); i++) {
@@ -310,27 +328,28 @@ public class RegistrationSimplePanel extends SimplePanel {
 		    children[i].setChildren(tn);
 		    
 	    }
-	    */
+	    
 	    TreeNode rootNode = new TreeNode();
 	    rootNode.setName("root");
 	    rootNode.setChildren(children);
 	    Tree tree = new Tree();
 	    tree.setModelType(TreeModelType.CHILDREN);
 	    tree.setRoot(rootNode);
-	   
+	    
 	    
 	    final DynamicForm form = new DynamicForm();
 
 	    IPickTreeItem departmentItem = new IPickTreeItem();  
         departmentItem.setTitle("Группа");  
         departmentItem.setValueField("name");  
-        departmentItem.setValueTree(tree);  
+        departmentItem.setValueTree(tree);
+        //departmentItem.redraw();
 	    
 	    /*PickTreeItem pickDepartment = new PickTreeItem();
 	    pickDepartment.setTitle("Группа");
 	    pickDepartment.setName("department");
 	    pickDepartment.setValueField("name");
-	    pickDepartment.setValueTree(tree);*/
+	    pickDepartment.setValueTree(tree);
 
 	    DataSource ds = new DataSource();
 	    PickTreeItem pickCategory = new PickTreeItem();
@@ -338,13 +357,13 @@ public class RegistrationSimplePanel extends SimplePanel {
 	    pickCategory.setName("category");
 	    pickCategory.setDataSource(ds); 
 	    pickCategory.setEmptyMenuMessage("No Sub Categories");
-	    pickCategory.setCanSelectParentItems(true); 
+	    pickCategory.setCanSelectParentItems(true);*/ 
 
 	    //form.setFields(pickDepartment);
 	    form.setItems(departmentItem);
 	    form.draw(); 
 	    
-	    rootPanel.add(form, 84, 55);
+	    facultiesPanel.add(form);
 
 	}
 }

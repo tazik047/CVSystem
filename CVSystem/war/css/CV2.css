@@ -225,6 +225,10 @@ h3.assistive-text {
 	background-color : white;
 	border-width : 1px;
 }
+
+.dateBoxPopup{
+	z-index:1000001;	
+}
 .buttons:hover {
     color: #F32D13;
     text-decoration: none;
