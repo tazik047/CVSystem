@@ -53,6 +53,7 @@ public class MainEntryPoint implements EntryPoint {
     uiManager = new UIManager(RootPanel.get("content"));
     
     Button btnNewButton = new Button("New button");
+    btnNewButton.setStyleName("buttons");
     btnNewButton.setFocus(true);
    
     btnNewButton.setText("Главная");
@@ -61,30 +62,35 @@ public class MainEntryPoint implements EntryPoint {
     btnNewButton.setSize("70px", "23px");
     
     Button btnNewButton_1 = new Button("New button");
+    btnNewButton_1.setStyleName("buttons");
     btnNewButton_1.setText("Вакансии");
     btnNewButton_1.addStyleName("buttons");
     rootPanel.add(btnNewButton_1);
     btnNewButton_1.setSize("80px", "23px");
     
     Button btnNewButton_2 = new Button("New button");
+    btnNewButton_2.setStyleName("buttons");
     btnNewButton_2.setText("Статистика");
     btnNewButton_2.addStyleName("buttons");
     rootPanel.add(btnNewButton_2);
     btnNewButton_2.setSize("97px", "23px");
     
     Button btnNewButton_3 = new Button("New button");
+    btnNewButton_3.setStyleName("buttons");
     btnNewButton_3.setText("Партнеры");
     btnNewButton_3.addStyleName("buttons");
     rootPanel.add(btnNewButton_3);
     btnNewButton_3.setSize("82px", "23px");
     
     Button btnNewButton_4 = new Button("New button");
+    btnNewButton_4.setStyleName("buttons");
     btnNewButton_4.setText("О нас");
     btnNewButton_4.addStyleName("buttons");
     rootPanel.add(btnNewButton_4);
     btnNewButton_4.setSize("60px", "23px");
     
     Button btnNewButton_5 = new Button("New button");
+    btnNewButton_5.setStyleName("buttons");
     btnNewButton_5.setText("Контакты");
     btnNewButton_5.addStyleName("buttons");
     rootPanel.add(btnNewButton_5);
