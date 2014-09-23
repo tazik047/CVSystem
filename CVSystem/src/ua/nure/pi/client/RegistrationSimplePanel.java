@@ -287,8 +287,8 @@ public class RegistrationSimplePanel extends SimplePanel {
         languages.setDisplayField("itemName");  
         languages.setValueField("SKU");  
         languages.setAutoFetchData(true);  
-        languages.setLayoutStyle(initialLayoutStyle);  
-        languages.setAddUnknownValues(true);    
+        languages.setLayoutStyle(initialLayoutStyle);
+        //languages.setAddUnknownValues(false);    
       
         final DynamicForm suppliesForm = new DynamicForm();  
         suppliesForm.setWidth100();  
@@ -297,6 +297,7 @@ public class RegistrationSimplePanel extends SimplePanel {
         suppliesForm.setItems(languages);  
         //languages.redraw();
         mainPanel.add(suppliesForm);
+        suppliesForm.markForRedraw();
         
         setWidget(rootPanel);
     }  
@@ -336,22 +337,21 @@ public class RegistrationSimplePanel extends SimplePanel {
 	    tree.setModelType(TreeModelType.CHILDREN);
 	    tree.setRoot(rootNode);
 	    
-	    
 	    final DynamicForm form = new DynamicForm();
-
+/*
 	    IPickTreeItem departmentItem = new IPickTreeItem();  
         departmentItem.setTitle("Группа");  
         departmentItem.setValueField("name");  
-        departmentItem.setValueTree(tree);
+        departmentItem.setValueTree(tree);*/
         //departmentItem.redraw();
 	    
-	    /*PickTreeItem pickDepartment = new PickTreeItem();
+	    PickTreeItem pickDepartment = new PickTreeItem();
 	    pickDepartment.setTitle("Группа");
 	    pickDepartment.setName("department");
 	    pickDepartment.setValueField("name");
 	    pickDepartment.setValueTree(tree);
 
-	    DataSource ds = new DataSource();
+	    /*DataSource ds = new DataSource();
 	    PickTreeItem pickCategory = new PickTreeItem();
 	    pickCategory.setTitle("Category");
 	    pickCategory.setName("category");
@@ -360,10 +360,12 @@ public class RegistrationSimplePanel extends SimplePanel {
 	    pickCategory.setCanSelectParentItems(true);*/ 
 
 	    //form.setFields(pickDepartment);
-	    form.setItems(departmentItem);
+	    form.setItems(pickDepartment);
 	    form.draw(); 
 	    
 	    facultiesPanel.add(form);
+	    
+	    form.markForRedraw();
 
 	}
 }
