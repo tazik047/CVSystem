@@ -21,9 +21,10 @@ public class WorkExperinceElementSimplePanel extends SimplePanel{
 	private TextBox durationText;
 	private ListBox durationType;
 	private TextBox text;
+	private VerticalPanel rootPanel;
 	
 	public WorkExperinceElementSimplePanel(){
-		VerticalPanel rootPanel = new VerticalPanel();
+		rootPanel = new VerticalPanel();
 		HorizontalPanel upPanel = new HorizontalPanel();
 		VerticalPanel year = new VerticalPanel();
 		VerticalPanel duration = new VerticalPanel();
@@ -71,8 +72,6 @@ public class WorkExperinceElementSimplePanel extends SimplePanel{
         	durationType.addItem(i);
         type.add(durationType);
         
-        rootPanel.add(new HTML("<hr/>"));
-        
         setWidget(rootPanel);
 	}
 	
@@ -98,5 +97,9 @@ public class WorkExperinceElementSimplePanel extends SimplePanel{
 		}
 		we.setTypeOfDuration(types);
 		return we;
+	}
+	
+	public void addSeparator(){
+		rootPanel.add(new HTML("<hr/>"));
 	}
 }
