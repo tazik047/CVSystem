@@ -274,6 +274,9 @@ public class RegistrationSimplePanel extends SimplePanel {
         rootPanel.add(textBox_2, 612, 653);
         textBox_2.setSize("62px", "6px");*/
         
+        WorkExperienceSimplePanel expPanel = new WorkExperienceSimplePanel();
+        rootPanel.add(expPanel);
+        
         // Знание языков программирования и технологий
                 
         final MultiComboBoxLayoutStyle initialLayoutStyle = MultiComboBoxLayoutStyle.FLOW;  
