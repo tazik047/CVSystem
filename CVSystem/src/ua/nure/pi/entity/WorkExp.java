@@ -33,6 +33,10 @@ public class WorkExp  implements Serializable, IsSerializable {
 		this.nameOfInstitution = nameOfInstitution;
 	}
 	
+	public WorkExp(){
+		
+	}
+	
 	public WorkExp(int start, int dur, typeOfDuration type, String name, String role) {
 		setStartYear(start);
 		setDuration(dur);
