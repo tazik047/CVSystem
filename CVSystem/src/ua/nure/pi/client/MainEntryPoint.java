@@ -47,7 +47,7 @@ public class MainEntryPoint implements EntryPoint {
     // Add the nameField and sendButton to the RootPanel
     // Use RootPanel.get() to get the entire body element
     RootPanel rootPanel = RootPanel.get("buttons");
-    rootPanel.setWidth("600");
+    rootPanel.setWidth("600px");
     rootPanel.setStyleName("#menu-left");
     
     uiManager = new UIManager(RootPanel.get("content"));
@@ -87,7 +87,7 @@ public class MainEntryPoint implements EntryPoint {
     btnNewButton_4.setText("О нас");
     btnNewButton_4.addStyleName("buttons");
     rootPanel.add(btnNewButton_4);
-    btnNewButton_4.setSize("70px", "23px");
+    btnNewButton_4.setSize("60px", "23px");
     
     Button btnNewButton_5 = new Button("New button");
     btnNewButton_5.setStyleName("buttons");
