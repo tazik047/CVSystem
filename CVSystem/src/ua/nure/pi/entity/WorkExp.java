@@ -1,6 +1,11 @@
 package ua.nure.pi.entity;
 
-public class WorkExp {
+import java.io.Serializable;
+
+import com.google.gwt.user.client.rpc.IsSerializable;
+
+public class WorkExp  implements Serializable, IsSerializable {
+	private static final long serialVersionUID = 1L;
 	
 	private int startYear;
 	
