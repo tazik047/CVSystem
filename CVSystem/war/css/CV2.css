@@ -172,8 +172,9 @@ h3.assistive-text {
 	overflow: hidden;
 }
 #content {
-	border-right: 1px solid rgba(251,200,91,0.98);
-	padding: 0 270px 0 0;
+	/*border-right: 1px solid rgba(251,200,91,0.98);
+	padding: 0 270px 0 0;*/
+	margin:auto;
 }
 
 

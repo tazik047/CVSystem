@@ -9,6 +9,7 @@ public class UIManager {
 	
 	public UIManager(RootPanel root){
 		rootPanel = root;
+		rootPanel.setWidth("40%");
 	}
 	
 	public UIManager(RootPanel root, SimplePanel simple){
