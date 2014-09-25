@@ -14,4 +14,14 @@ public interface MapperParameters {
 	// AnyTag
 	String ANY_TAG_TITLE = "Title";
 	String ANY_TAG_CVsId = "CVsId";
+	
+	// WorkExp
+	String WORKEXP_ID = "WorkExpsId";
+	String WORKEXP_START = "StartDate";
+	String WORKEXP_DURATION = "Duration";
+	String WORKEXP_TYPEDURATION = "TypeDuration";
+	String WORKEXP_NAMEOFINSTITUTION = "NameOfInstitution";
+	String WORKEXP_ROLE = "Role";
+	String WORKEXP_CVsId = "CVsId";
+	
 }

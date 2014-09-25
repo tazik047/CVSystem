@@ -16,6 +16,10 @@ public class WorkExp  implements Serializable, IsSerializable {
 	private String nameOfInstitution;
 	
 	private String role;
+	
+	private long CVsId;
+	
+	private long WorkExpsId;
 
 	public int getStartYear() {
 		return startYear;
@@ -67,6 +71,22 @@ public class WorkExp  implements Serializable, IsSerializable {
 
 	public void setRole(String role) {
 		this.role = role;
+	}
+
+	public long getCVsId() {
+		return CVsId;
+	}
+
+	public void setCVsId(long cVsId) {
+		CVsId = cVsId;
+	}
+
+	public long getWorkExpsId() {
+		return WorkExpsId;
+	}
+
+	public void setWorkExpsId(long workExpsId) {
+		WorkExpsId = workExpsId;
 	}
 
 }
