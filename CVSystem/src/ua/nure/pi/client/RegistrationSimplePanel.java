@@ -30,6 +30,7 @@ import com.google.gwt.user.datepicker.client.DateBox;
 import com.google.gwt.user.datepicker.client.DatePicker;
 import com.smartgwt.client.data.DataSource;
 import com.smartgwt.client.data.Record;
+import com.smartgwt.client.data.RecordList;
 import com.smartgwt.client.types.DragDataAction;
 import com.smartgwt.client.types.MultiComboBoxLayoutStyle;
 import com.smartgwt.client.types.TitleOrientation;
@@ -47,6 +48,10 @@ import com.smartgwt.client.widgets.form.fields.SelectItem;
 import com.smartgwt.client.widgets.form.fields.events.ChangedEvent;
 import com.smartgwt.client.widgets.form.fields.events.ChangedHandler;
 import com.smartgwt.client.widgets.form.fields.events.ClickEvent;
+import com.smartgwt.client.widgets.form.fields.events.EditorExitEvent;
+import com.smartgwt.client.widgets.form.fields.events.EditorExitHandler;
+import com.smartgwt.client.widgets.form.fields.events.ValueHoverEvent;
+import com.smartgwt.client.widgets.form.fields.events.ValueHoverHandler;
 import com.smartgwt.client.widgets.grid.ListGrid;
 import com.smartgwt.client.widgets.layout.HStack;
 import com.smartgwt.client.widgets.layout.VStack;
@@ -275,34 +280,51 @@ public class RegistrationSimplePanel extends SimplePanel {
         textBox_2.setSize("62px", "6px");*/
         
         WorkExperienceSimplePanel expPanel = new WorkExperienceSimplePanel();
-        rootPanel.add(expPanel);
+        mainPanel.add(expPanel);
         
         // Знание языков программирования и технологий
                 
         final MultiComboBoxLayoutStyle initialLayoutStyle = MultiComboBoxLayoutStyle.FLOW;  
         final MultiComboBoxItem languages = new MultiComboBoxItem("languages", "Языки");
         
-        LinkedHashMap<Long, String> lhm = new LinkedHashMap<>();
-        lhm.put((long) 1, "Java");
-        lhm.put((long) 2, "Haskell");
-        lhm.put((long) 3, "Python");
+        final LinkedHashMap<String, String> lhm = new LinkedHashMap<>();
+        lhm.put("Java", "Java");
+        lhm.put("Haskell", "Haskell");
+        lhm.put("Python", "Python");
         languages.setValueMap(lhm);
-        languages.setDisplayField("itemName");  
-        languages.setValueField("SKU");  
-        languages.setAutoFetchData(true);  
+       // languages.setDisplayField("itemName");  
+        //languages.setValueField("SKU");  
+        //languages.setAutoFetchData(true);  
         languages.setLayoutStyle(initialLayoutStyle);
-        //languages.setAddUnknownValues(false);    
-      
+           
+        languages.setAddUnknownValues(false);
         final DynamicForm suppliesForm = new DynamicForm();  
         suppliesForm.setWidth100();  
         suppliesForm.setNumCols(1);  
         suppliesForm.setTitleOrientation(TitleOrientation.TOP);  
-        suppliesForm.setItems(languages);  
+        //suppliesForm.setItems(languages);  
+        languages.setAddUnknownValues(false); 
         //languages.redraw();
         mainPanel.add(suppliesForm);
-        suppliesForm.markForRedraw();
         
+        languages.addChangedHandler(new ChangedHandler() {
+			
+			@Override
+			public void onChanged(ChangedEvent event) {
+				if(!lhm.containsKey(languages.getValues()[0])){
+					Collection<String> col = new ArrayList<String>();
+					for(int i = 1; i < languages.getValues().length; i++)
+						col.add(languages.getValues()[i]);
+					languages.clearValue();
+					languages.setValues(col.toArray());
+				}
+			}
+		});
+
+        suppliesForm.setItems(languages);
         setWidget(rootPanel);
+        languages.setAddUnknownValues(false);
+        suppliesForm.markForRedraw();
     }  
 	
 	public void FillTree(ArrayList<Faculty> faculties, SimplePanel facultiesPanel)
