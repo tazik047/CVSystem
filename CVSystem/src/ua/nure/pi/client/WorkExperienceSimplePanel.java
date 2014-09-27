@@ -25,6 +25,7 @@ public class WorkExperienceSimplePanel extends SimplePanel{
 	private DynamicForm form;
 	public WorkExperienceSimplePanel() {
 		VerticalPanel hp = new VerticalPanel();
+		hp.setWidth("100%");
 		final AbsolutePanel absP = new AbsolutePanel();
 		
 		works = new ArrayList<WorkExperinceElementSimplePanel>();
