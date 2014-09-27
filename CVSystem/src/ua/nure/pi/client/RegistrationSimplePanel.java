@@ -230,10 +230,10 @@ public class RegistrationSimplePanel extends SimplePanel {
         
         // Опыт работы и образование
         
-        Label labelExperience = new Label("Опыт работы");
+        /*Label labelExperience = new Label("Опыт работы");
         labelExperience.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
         mainPanel.add(labelExperience);
-        labelExperience.setSize("186px", "18px");
+        labelExperience.setSize("186px", "18px");*/
         
        /* Label labelStart = new Label("Год");
         labelStart.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
