@@ -3,6 +3,8 @@ package ua.nure.pi.client;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import ua.nure.pi.entity.WorkExp;
+
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.AbsolutePanel;
@@ -63,6 +65,8 @@ public class WorkExperienceSimplePanel extends SimplePanel{
 			public void onClick(ClickEvent event) {
 				vp.remove(hp);
 				works.remove(exp);
+				if(works.size()==0)
+					form.hide();
 				form.markForRedraw();
 			}
 		});
@@ -73,4 +77,10 @@ public class WorkExperienceSimplePanel extends SimplePanel{
 		works.add(exp);
 	}
 
+	public Collection<WorkExp> getExp() throws IllegalArgumentException{
+		Collection<WorkExp> studentWorks = new ArrayList<WorkExp>();
+		for(WorkExperinceElementSimplePanel we : works)
+			studentWorks.add(we.getWorkExp());
+		return studentWorks;
+	}
 }

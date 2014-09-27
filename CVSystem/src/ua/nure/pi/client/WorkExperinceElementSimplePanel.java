@@ -20,18 +20,23 @@ public class WorkExperinceElementSimplePanel extends SimplePanel{
 	private TextBox yearText;
 	private TextBox durationText;
 	private ListBox durationType;
-	private TextBox text;
+	private TextBox role;
+	private TextBox nameOfInstitute;
 	private VerticalPanel rootPanel;
 	
 	public WorkExperinceElementSimplePanel(){
 		rootPanel = new VerticalPanel();
 		HorizontalPanel upPanel = new HorizontalPanel();
+		HorizontalPanel rolePanel = new HorizontalPanel();
+		HorizontalPanel instPanel = new HorizontalPanel();
 		VerticalPanel year = new VerticalPanel();
 		VerticalPanel duration = new VerticalPanel();
 		VerticalPanel type = new VerticalPanel();
 		upPanel.setSpacing(5);
 		rootPanel.setSpacing(5);
 		rootPanel.add(upPanel);
+		rootPanel.add(rolePanel);
+		rootPanel.add(instPanel);
 		upPanel.add(year);
 		upPanel.add(duration);
 		upPanel.add(type);
@@ -54,9 +59,24 @@ public class WorkExperinceElementSimplePanel extends SimplePanel{
         duration.add(durationText);
         durationText.setSize("70px", "18px");
         
-        text = new TextBox();
-        rootPanel.add(text);
-        text.setSize("100%", "18px");
+        
+        Label label_role = new Label("Должность");
+        label_role.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
+        rolePanel.add(label_role);
+        label_role.setSize("80px", "18px");
+        
+        role = new TextBox();
+        rolePanel.add(role);
+        role.setSize("100%", "18px");
+        
+        Label label_place = new Label("Место работы");
+        label_place.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
+        instPanel.add(label_place);
+        label_place.setHeight("18px");
+        
+        nameOfInstitute = new TextBox();
+        instPanel.add(nameOfInstitute);
+        nameOfInstitute.setSize("100%", "18px");
         
         Label label_3 = new Label(" ");
         label_3.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
@@ -75,7 +95,7 @@ public class WorkExperinceElementSimplePanel extends SimplePanel{
         setWidget(rootPanel);
 	}
 	
-	public WorkExp getWorkExp(){
+	public WorkExp getWorkExp() throws IllegalArgumentException{
 		WorkExp we = new WorkExp();
 		int year = Integer.parseInt(yearText.getText());
 		int durat = Integer.parseInt(durationText.getText());
