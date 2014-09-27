@@ -33,6 +33,7 @@ public class WorkExperienceSimplePanel extends SimplePanel{
         form.setIsGroup(true);  
         form.setGroupTitle("Опыт работы");
         form.setNumCols(4);
+        form.setWidth("100%");
         final VerticalPanel vp = new VerticalPanel();
         form.addChild(vp);
         Button btAdd = new Button("Добавить опыт работы");
