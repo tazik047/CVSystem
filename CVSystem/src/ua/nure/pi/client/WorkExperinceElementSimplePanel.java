@@ -42,14 +42,16 @@ public class WorkExperinceElementSimplePanel extends SimplePanel{
 		upPanel.add(type);
 		setWidth("100%");
 		
+		upPanel.setSpacing(10);
+		
 		Label label = new Label("Год");
         label.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
         year.add(label);
-        label.setSize("31px", "18px");
+        label.setSize("30%", "18px");
 		
 		yearText = new TextBox();
         year.add(yearText);
-        yearText.setSize("70px", "18px");
+        yearText.setSize("30%", "18px");
         
         Label label_1 = new Label("Длительность");
         label_1.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
@@ -94,6 +96,7 @@ public class WorkExperinceElementSimplePanel extends SimplePanel{
         type.add(durationType);
         
         setWidget(rootPanel);
+        durationType.setWidth("30%");
 	}
 	
 	public WorkExp getWorkExp() throws IllegalArgumentException{
