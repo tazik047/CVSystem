@@ -27,20 +27,23 @@ public class WorkExperinceElementSimplePanel extends SimplePanel{
 	public WorkExperinceElementSimplePanel(){
 		rootPanel = new VerticalPanel();
 		HorizontalPanel upPanel = new HorizontalPanel();
-		HorizontalPanel rolePanel = new HorizontalPanel();
-		HorizontalPanel instPanel = new HorizontalPanel();
+		HorizontalPanel downPanel = new HorizontalPanel();
+		VerticalPanel labelPanel = new VerticalPanel();
+		VerticalPanel textPanel = new VerticalPanel();
 		VerticalPanel year = new VerticalPanel();
 		VerticalPanel duration = new VerticalPanel();
 		VerticalPanel type = new VerticalPanel();
 		upPanel.setSpacing(5);
 		rootPanel.setSpacing(5);
 		rootPanel.add(upPanel);
-		rootPanel.add(rolePanel);
-		rootPanel.add(instPanel);
+		rootPanel.add(downPanel);
+		downPanel.add(labelPanel);
+		downPanel.add(textPanel);
 		upPanel.add(year);
 		upPanel.add(duration);
 		upPanel.add(type);
 		setWidth("343px");
+		labelPanel.setSpacing(5);
 		
 		upPanel.setSpacing(10);
 		
@@ -65,20 +68,20 @@ public class WorkExperinceElementSimplePanel extends SimplePanel{
         
         Label label_role = new Label("Должность");
         label_role.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
-        rolePanel.add(label_role);
+        labelPanel.add(label_role);
         label_role.setSize("80px", "18px");
         
         role = new TextBox();
-        rolePanel.add(role);
+        textPanel.add(role);
         role.setSize("100%", "18px");
         
         Label label_place = new Label("Место работы");
         label_place.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
-        instPanel.add(label_place);
+        labelPanel.add(label_place);
         //label_place.setHeight("18px");
         
         nameOfInstitute = new TextBox();
-        instPanel.add(nameOfInstitute);
+        textPanel.add(nameOfInstitute);
         nameOfInstitute.setSize("100%", "18px");
         
         Label label_3 = new Label(" ");
