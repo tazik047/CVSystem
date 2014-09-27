@@ -24,7 +24,7 @@ public class WorkExperienceSimplePanel extends SimplePanel{
 	private ArrayList<WorkExperinceElementSimplePanel> works;
 	private DynamicForm form;
 	public WorkExperienceSimplePanel() {
-		HorizontalPanel hp = new HorizontalPanel();
+		VerticalPanel hp = new VerticalPanel();
 		final AbsolutePanel absP = new AbsolutePanel();
 		
 		works = new ArrayList<WorkExperinceElementSimplePanel>();
@@ -37,7 +37,6 @@ public class WorkExperienceSimplePanel extends SimplePanel{
         Button btAdd = new Button("Добавить опыт работы");
         hp.add(absP);
         hp.add(btAdd);
-        hp.setCellVerticalAlignment(btAdd, HasVerticalAlignment.ALIGN_BOTTOM);
         btAdd.addClickHandler(new ClickHandler() {
 			
 			@Override

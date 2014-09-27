@@ -40,6 +40,7 @@ public class WorkExperinceElementSimplePanel extends SimplePanel{
 		upPanel.add(year);
 		upPanel.add(duration);
 		upPanel.add(type);
+		setWidth("100%");
 		
 		Label label = new Label("Год");
         label.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
@@ -72,7 +73,7 @@ public class WorkExperinceElementSimplePanel extends SimplePanel{
         Label label_place = new Label("Место работы");
         label_place.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
         instPanel.add(label_place);
-        label_place.setHeight("18px");
+        //label_place.setHeight("18px");
         
         nameOfInstitute = new TextBox();
         instPanel.add(nameOfInstitute);
