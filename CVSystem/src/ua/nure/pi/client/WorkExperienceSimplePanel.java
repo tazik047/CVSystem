@@ -66,7 +66,7 @@ public class WorkExperienceSimplePanel extends SimplePanel{
 				vp.remove(hp);
 				works.remove(exp);
 				if(works.size()==0)
-					form.hide();
+					form.removeFromParent();
 				form.markForRedraw();
 			}
 		});
