@@ -40,7 +40,7 @@ public class WorkExperinceElementSimplePanel extends SimplePanel{
 		upPanel.add(year);
 		upPanel.add(duration);
 		upPanel.add(type);
-		setWidth("300px");
+		setWidth("343px");
 		
 		upPanel.setSpacing(10);
 		
