@@ -282,8 +282,11 @@ public class RegistrationSimplePanel extends SimplePanel {
         WorkExperienceSimplePanel expPanel = new WorkExperienceSimplePanel();
         mainPanel.add(expPanel);
         
-        EducationElementSimplePanel eduPanel = new EducationElementSimplePanel();
+        EducationSimplePanel eduPanel = new EducationSimplePanel();
         mainPanel.add(eduPanel);
+        
+        LanguageSimplePanel lanPanel = new LanguageSimplePanel();
+        mainPanel.add(lanPanel);
         
         // Знание языков программирования и технологий
                 
