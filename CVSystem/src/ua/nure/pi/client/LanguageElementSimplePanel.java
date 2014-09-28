@@ -2,126 +2,93 @@ package ua.nure.pi.client;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.LinkedHashMap;
 
 import ua.nure.pi.entity.WorkExp;
 import ua.nure.pi.entity.typeOfDuration;
 
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
+import com.google.gwt.user.client.ui.HasVerticalAlignment;
+import com.google.gwt.user.client.ui.HasVerticalAlignment.VerticalAlignmentConstant;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import com.smartgwt.client.types.VerticalAlignment;
+import com.smartgwt.client.widgets.form.DynamicForm;
+import com.smartgwt.client.widgets.form.fields.RadioGroupItem;
+import com.smartgwt.client.widgets.form.fields.events.ChangedEvent;  
+import com.smartgwt.client.widgets.form.fields.events.ChangedHandler; 
+
 
 public class LanguageElementSimplePanel extends SimplePanel{
 	
-	private TextBox yearText;
-	private TextBox durationText;
-	private ListBox durationType;
-	private TextBox role;
-	private TextBox nameOfInstitute;
+	private ListBox langBox;
+	private int levelType;
 	private VerticalPanel rootPanel;
 	
 	public LanguageElementSimplePanel(){
 		rootPanel = new VerticalPanel();
 		HorizontalPanel upPanel = new HorizontalPanel();
-		HorizontalPanel downPanel = new HorizontalPanel();
-		VerticalPanel labelPanel = new VerticalPanel();
-		VerticalPanel textPanel = new VerticalPanel();
-		VerticalPanel year = new VerticalPanel();
-		VerticalPanel duration = new VerticalPanel();
-		VerticalPanel type = new VerticalPanel();
+		VerticalPanel lang = new VerticalPanel();
+		VerticalPanel level = new VerticalPanel();
+		
 		upPanel.setSpacing(5);
 		rootPanel.setSpacing(5);
 		rootPanel.add(upPanel);
-		rootPanel.add(downPanel);
-		downPanel.add(labelPanel);
-		downPanel.add(textPanel);
-		upPanel.add(year);
-		upPanel.add(duration);
-		upPanel.add(type);
+		upPanel.add(lang);
+		upPanel.add(level);
+		
+		upPanel.setCellVerticalAlignment(lang, HasVerticalAlignment.ALIGN_MIDDLE);
 		setWidth("343px");
-		labelPanel.setSpacing(5);
 		
 		upPanel.setSpacing(10);
 		
-		Label label = new Label("Год");
+		Label label = new Label("Язык");
         label.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
-        year.add(label);
+        lang.add(label);
         label.setSize("70px", "18px");
 		
-		yearText = new TextBox();
-        year.add(yearText);
-        yearText.setSize("70px", "18px");
+		langBox = new ListBox();
+        lang.add(langBox);
+        langBox.setSize("70px", "18px");
         
-        Label label_1 = new Label("Длительность");
+        Label label_1 = new Label("Уровень знаний");
         label_1.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
-        duration.add(label_1);
+        level.add(label_1);
         label_1.setSize("80px", "18px");
         
-        durationText = new TextBox();
-        duration.add(durationText);
-        durationText.setSize("70px", "18px");
         
         
-        Label label_role = new Label("Должность");
-        label_role.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
-        labelPanel.add(label_role);
-        label_role.setSize("80px", "18px");
-        
-        role = new TextBox();
-        textPanel.add(role);
-        role.setSize("100%", "18px");
-        
-        Label label_place = new Label("Место работы");
-        label_place.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
-        labelPanel.add(label_place);
-        //label_place.setHeight("18px");
-        
-        nameOfInstitute = new TextBox();
-        textPanel.add(nameOfInstitute);
-        nameOfInstitute.setSize("100%", "18px");
-        
-        Label label_3 = new Label(" ");
-        label_3.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
-        type.add(label_3);
-        label_3.setSize("80px", "18px");
-        
-        durationType = new ListBox();
-        Collection<String> items = new ArrayList<String>();
-        items.add("Недель");
-        items.add("Месяцев");
-        items.add("Лет");
-        for(String i : items)
-        	durationType.addItem(i);
-        type.add(durationType);
+        LinkedHashMap<Integer, String> styleMap = new LinkedHashMap<Integer, String>();  
+        styleMap.put(0, "Начинающий");  
+        styleMap.put(1, "Базовый уровень");  
+        styleMap.put(2, "Средний уровень");  
+        styleMap.put(3, "Продвинутый уровень");
+        styleMap.put(4, "Свободное владение");  
+          
+        RadioGroupItem style = new RadioGroupItem();  
+        style.setDefaultValue(0);  
+        style.setShowTitle(false);  
+        style.setValueMap(styleMap);  
+        style.addChangedHandler(new ChangedHandler() {  
+            public void onChanged(ChangedEvent event) {  
+                levelType = ((int)event.getValue());  
+            }  
+        });  
+          
+        DynamicForm controls = new DynamicForm();  
+        controls.setFields(style);
+        level.add(controls);
         
         setWidget(rootPanel);
 	}
 	
 	public WorkExp getWorkExp() throws IllegalArgumentException{
 		WorkExp we = new WorkExp();
-		int year = Integer.parseInt(yearText.getText());
-		int durat = Integer.parseInt(durationText.getText());
-		
-		we.setStartYear(year);
-		we.setDuration(durat);
-		
-		typeOfDuration types = null;
-		switch(durationType.getSelectedIndex()){
-			case 0:
-				types = typeOfDuration.WEEK;
-				break;
-			case 1:
-				types = typeOfDuration.MONTH;
-				break;
-			case 2:
-				types = typeOfDuration.YEAR;
-				break;
-		}
-		we.setTypeOfDuration(types);
 		return we;
 	}
 	

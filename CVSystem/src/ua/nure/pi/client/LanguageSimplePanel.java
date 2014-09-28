@@ -31,11 +31,11 @@ public class LanguageSimplePanel extends SimplePanel{
 		works = new ArrayList<WorkExperinceElementSimplePanel>();
 		form = new DynamicForm();  
         form.setIsGroup(true);  
-        form.setGroupTitle("Опыт работы");
+        form.setGroupTitle("Языки");
         form.setNumCols(4);
         final VerticalPanel vp = new VerticalPanel();
         form.addChild(vp);
-        Button btAdd = new Button("Добавить опыт работы");
+        Button btAdd = new Button("Добавить язык");
         hp.add(absP);
         hp.add(btAdd);
         btAdd.addClickHandler(new ClickHandler() {
