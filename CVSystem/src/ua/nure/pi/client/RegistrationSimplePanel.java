@@ -282,6 +282,9 @@ public class RegistrationSimplePanel extends SimplePanel {
         WorkExperienceSimplePanel expPanel = new WorkExperienceSimplePanel();
         mainPanel.add(expPanel);
         
+        EducationElementSimplePanel eduPanel = new EducationElementSimplePanel();
+        mainPanel.add(eduPanel);
+        
         // Знание языков программирования и технологий
                 
         final MultiComboBoxLayoutStyle initialLayoutStyle = MultiComboBoxLayoutStyle.FLOW;  

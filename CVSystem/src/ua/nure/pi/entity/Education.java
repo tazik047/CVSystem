@@ -9,7 +9,11 @@ public class Education {
 	private String nameOfInstitution;
 	
 	private String specialty;
-
+	
+	private long educationId;
+	
+	private long CVsId;
+	
 	public int getStartYear() {
 		return startYear;
 	}
@@ -49,4 +53,24 @@ public class Education {
 		setNameOfInstitution(name);
 		setSpecialty(spec);
 	}
+
+	public Education() {
+	}
+
+	public long getEducationId() {
+		return educationId;
+	}
+
+	public void setEducationId(long educationId) {
+		this.educationId = educationId;
+	}
+
+	public long getCVsId() {
+		return CVsId;
+	}
+
+	public void setCVsId(long cVsId) {
+		CVsId = cVsId;
+	}
+
 }
