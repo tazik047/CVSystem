@@ -73,6 +73,7 @@ public class LanguageElementSimplePanel extends SimplePanel{
         styleMap.put(4, "Свободное владение");  
           
         RadioGroupItem style = new RadioGroupItem();  
+        style.setCellStyle("fixRadio");
         style.setDefaultValue(0);  
         style.setShowTitle(false);
         style.setValueMap(styleMap);
@@ -83,7 +84,8 @@ public class LanguageElementSimplePanel extends SimplePanel{
         });
         style.setWidth(250);
           
-        DynamicForm controls = new DynamicForm();  
+        DynamicForm controls = new DynamicForm();
+        controls.setStyleName("fixForm");
         controls.setFields(style);
         controls.setHeight(110);
         controls.markForRedraw();

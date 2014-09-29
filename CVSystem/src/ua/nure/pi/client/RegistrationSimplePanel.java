@@ -24,6 +24,7 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.SimplePanel;
+import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.datepicker.client.DateBox;
@@ -90,28 +91,7 @@ public class RegistrationSimplePanel extends SimplePanel {
 	    leftUpPanel.add(facultiesPanel);
 	    
 	    // Факультеты и группы
-	    /*
-	    TreeNode children[] = new TreeNode[3];
-	    children[0] = new TreeNode();
-	    children[0].setTitle("КН");
-	    children[0].setChildren(new TreeNode[] {
-	    new TreeNode("ПИ-13-1"),
-	    new TreeNode("ПИ-13-2")
-	    });
-	    children[1] = new TreeNode();
-	    children[1].setTitle("ПММ");
-	    children[1].setChildren(new TreeNode[] {
-	    new TreeNode("ПМ-13-1"),
-	    new TreeNode("СА-13-1")
-	    });
-	    children[2] = new TreeNode();
-	    children[2].setTitle("КИУ");
-	    children[2].setChildren(new TreeNode[] {
-	    new TreeNode("КИ-13-1"),
-	    new TreeNode("КИ-13-2"),
-	    new TreeNode("КИ-13-3")
-	    });
-	    */
+	    
 	    registrationService.getFaculties(new AsyncCallback<Collection<Faculty>>() {
             public void onFailure(Throwable caught) {
               Window.alert("Не удалось получить список факультетов");
@@ -230,55 +210,6 @@ public class RegistrationSimplePanel extends SimplePanel {
         
         // Опыт работы и образование
         
-        /*Label labelExperience = new Label("Опыт работы");
-        labelExperience.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
-        mainPanel.add(labelExperience);
-        labelExperience.setSize("186px", "18px");*/
-        
-       /* Label labelStart = new Label("Год");
-        labelStart.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
-        rootPanel.add(labelStart, 367, 565);
-        labelStart.setSize("31px", "18px");
-        
-        TextBox StarttextBox = new TextBox();
-        rootPanel.add(StarttextBox, 409, 565);
-        StarttextBox.setSize("62px", "6px");
-        
-        Label labelDuration = new Label("Длительность");
-        labelDuration.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
-        rootPanel.add(labelDuration, 500, 565);
-        labelDuration.setSize("80px", "18px");
-        
-        TextBox EndTextBox = new TextBox();
-        rootPanel.add(EndTextBox, 612, 565);
-        EndTextBox.setSize("62px", "6px");
-        
-        TextBox textBox = new TextBox();
-        rootPanel.add(textBox, 367, 606);
-        textBox.setSize("336px", "18px");*/
-        
-       /* TextBox textBox_3 = new TextBox();
-        rootPanel.add(textBox_3, 367, 689);
-        textBox_3.setSize("336px", "18px");
-        
-        Label label = new Label("Год");
-        label.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
-        rootPanel.add(label, 367, 653);
-        label.setSize("31px", "18px");
-        
-        TextBox textBox_1 = new TextBox();
-        rootPanel.add(textBox_1, 409, 653);
-        textBox_1.setSize("62px", "6px");
-        
-        Label label_1 = new Label("Длительность");
-        label_1.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
-        rootPanel.add(label_1, 500, 653);
-        label_1.setSize("80px", "18px");
-        
-        TextBox textBox_2 = new TextBox();
-        rootPanel.add(textBox_2, 612, 653);
-        textBox_2.setSize("62px", "6px");*/
-        
         WorkExperienceSimplePanel expPanel = new WorkExperienceSimplePanel();
         mainPanel.add(expPanel);
         
@@ -298,9 +229,6 @@ public class RegistrationSimplePanel extends SimplePanel {
         lhm.put("Haskell", "Haskell");
         lhm.put("Python", "Python");
         languages.setValueMap(lhm);
-       // languages.setDisplayField("itemName");  
-        //languages.setValueField("SKU");  
-        //languages.setAutoFetchData(true);  
         languages.setLayoutStyle(initialLayoutStyle);
            
         languages.setAddUnknownValues(false);
@@ -313,6 +241,22 @@ public class RegistrationSimplePanel extends SimplePanel {
         //languages.redraw();
         mainPanel.add(suppliesForm);
         
+	    TextArea first = new TextArea();
+	    first.setWidth("343px");
+	    first.addStyleName("fixTextArea");
+	    TextArea second = new TextArea();
+	    second.addStyleName("fixTextArea");
+	    second.setWidth("343px");
+        HorizontalPanel hpFirst = new HorizontalPanel();
+	    HorizontalPanel hpSecond = new HorizontalPanel();
+	    Label lbHobby = new Label("Личные качества");
+	    Label lbOther = new Label("Прочее");
+	    mainPanel.add(lbHobby);
+	    mainPanel.add(first);
+	    mainPanel.add(lbOther);
+	    mainPanel.add(second);
+        
+	    
         languages.addChangedHandler(new ChangedHandler() {
 			
 			@Override
@@ -335,22 +279,17 @@ public class RegistrationSimplePanel extends SimplePanel {
 	
 	public void FillTree(ArrayList<Faculty> faculties, SimplePanel facultiesPanel)
 	{
-	    //TreeNode children[] = new TreeNode[3];
-
-	    
 		TreeNode[] children = new TreeNode[faculties.size()];
 	    
 		for (int i = 0; i < faculties.size(); i++) {
 		    
 		    Faculty current = faculties.get(i);
-		    Window.alert(current.getTitle());
 		    children[i] = new TreeNode(current.getTitle());
 		    TreeNode[] tn = new TreeNode[current.getGroups().size()];
 		    int j = 0;
 		    for (Group g : current.getGroups()) {
 		    	try {
 		    	tn[j] = new TreeNode(g.getTitle());
-		    	Window.alert(g.getTitle());
 		    	}
 		    	catch (Exception e){
 		    		Window.alert(e.getLocalizedMessage());
@@ -369,28 +308,12 @@ public class RegistrationSimplePanel extends SimplePanel {
 	    tree.setRoot(rootNode);
 	    
 	    final DynamicForm form = new DynamicForm();
-/*
-	    IPickTreeItem departmentItem = new IPickTreeItem();  
-        departmentItem.setTitle("Группа");  
-        departmentItem.setValueField("name");  
-        departmentItem.setValueTree(tree);*/
-        //departmentItem.redraw();
-	    
 	    PickTreeItem pickDepartment = new PickTreeItem();
 	    pickDepartment.setTitle("Группа");
 	    pickDepartment.setName("department");
 	    pickDepartment.setValueField("name");
 	    pickDepartment.setValueTree(tree);
 
-	    /*DataSource ds = new DataSource();
-	    PickTreeItem pickCategory = new PickTreeItem();
-	    pickCategory.setTitle("Category");
-	    pickCategory.setName("category");
-	    pickCategory.setDataSource(ds); 
-	    pickCategory.setEmptyMenuMessage("No Sub Categories");
-	    pickCategory.setCanSelectParentItems(true);*/ 
-
-	    //form.setFields(pickDepartment);
 	    form.setItems(pickDepartment);
 	    form.draw(); 
 	    
