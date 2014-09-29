@@ -1,6 +1,7 @@
 package ua.nure.pi.client;
 
 import ua.nure.pi.shared.FieldVerifier;
+
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -8,6 +9,7 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.event.dom.client.KeyUpHandler;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DialogBox;
@@ -58,6 +60,15 @@ public class MainEntryPoint implements EntryPoint {
    
     btnNewButton.setText("Главная");
     btnNewButton.addStyleName("buttons");
+    btnNewButton.addClickHandler(new ClickHandler() {
+		
+		@Override
+		public void onClick(ClickEvent event) {
+			Window.alert("go event");
+			uiManager.setPanel(new MainStaticPanel());
+		}
+	});
+    
     rootPanel.add(btnNewButton);
     btnNewButton.setSize("70px", "23px");
     

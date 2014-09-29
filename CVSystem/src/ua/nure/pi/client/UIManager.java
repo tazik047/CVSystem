@@ -1,5 +1,6 @@
 package ua.nure.pi.client;
 
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.SimplePanel;
 
@@ -28,14 +29,17 @@ public class UIManager {
 	}
 	
 	public boolean setPanel(SimplePanel simp){
+		Window.alert("start set panel");
 		if(current==null){
 			rootPanel.clear(true);
 			rootPanel.add(simp);
 			current=simp;
 			return true;
 		}
-		else if(simp.getClass().toString().equals(current.getClass().toString()))
+		else if(simp.getClass().toString().equals(current.getClass().toString())){
+			Window.alert("повтор");
 			return false;
+		}
 		else{
 			removePanel();
 			current = simp;
