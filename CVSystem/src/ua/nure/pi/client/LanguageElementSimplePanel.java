@@ -42,6 +42,8 @@ public class LanguageElementSimplePanel extends SimplePanel{
 		upPanel.add(lang);
 		upPanel.add(level);
 		
+		level.setWidth("200px");
+		
 		upPanel.setCellVerticalAlignment(lang, HasVerticalAlignment.ALIGN_MIDDLE);
 		setWidth("343px");
 		
@@ -59,7 +61,7 @@ public class LanguageElementSimplePanel extends SimplePanel{
         Label label_1 = new Label("Уровень знаний");
         label_1.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
         level.add(label_1);
-        label_1.setSize("80px", "18px");
+        label_1.setSize("150px", "18px");
         
         
         
@@ -72,16 +74,19 @@ public class LanguageElementSimplePanel extends SimplePanel{
           
         RadioGroupItem style = new RadioGroupItem();  
         style.setDefaultValue(0);  
-        style.setShowTitle(false);  
-        style.setValueMap(styleMap);  
+        style.setShowTitle(false);
+        style.setValueMap(styleMap);
         style.addChangedHandler(new ChangedHandler() {  
             public void onChanged(ChangedEvent event) {  
-                levelType = ((int)event.getValue());  
+                levelType = Integer.parseInt(event.getValue().toString());  
             }  
-        });  
+        });
+        style.setWidth(250);
           
         DynamicForm controls = new DynamicForm();  
         controls.setFields(style);
+        controls.setHeight(110);
+        controls.markForRedraw();
         level.add(controls);
         
         setWidget(rootPanel);

@@ -21,14 +21,14 @@ import com.smartgwt.client.widgets.form.DynamicForm;
 
 public class LanguageSimplePanel extends SimplePanel{
 	
-	private ArrayList<WorkExperinceElementSimplePanel> works;
+	private ArrayList<LanguageElementSimplePanel> languages;
 	private DynamicForm form;
 	public LanguageSimplePanel() {
 		VerticalPanel hp = new VerticalPanel();
 		hp.setWidth("100%");
 		final AbsolutePanel absP = new AbsolutePanel();
 		
-		works = new ArrayList<WorkExperinceElementSimplePanel>();
+		languages = new ArrayList<LanguageElementSimplePanel>();
 		form = new DynamicForm();  
         form.setIsGroup(true);  
         form.setGroupTitle("Языки");
@@ -52,11 +52,11 @@ public class LanguageSimplePanel extends SimplePanel{
 	}
 	
 	private void addExp(final VerticalPanel vp, AbsolutePanel absP){
-		if(works.size()!=0)
-			works.get(works.size()-1).addSeparator();
+		if(languages.size()!=0)
+			languages.get(languages.size()-1).addSeparator();
 		else
 			absP.add(form);
-		final WorkExperinceElementSimplePanel exp = new WorkExperinceElementSimplePanel();
+		final LanguageElementSimplePanel lang = new LanguageElementSimplePanel();
 		final HorizontalPanel hp = new HorizontalPanel();
 		Image imgDel = new Image("img/close.png", 0, 0, 16, 16);
 		imgDel.addClickHandler(new ClickHandler() {
@@ -64,22 +64,22 @@ public class LanguageSimplePanel extends SimplePanel{
 			@Override
 			public void onClick(ClickEvent event) {
 				vp.remove(hp);
-				works.remove(exp);
-				if(works.size()==0)
+				languages.remove(lang);
+				if(languages.size()==0)
 					form.removeFromParent();
 				form.markForRedraw();
 			}
 		});
-		hp.add(exp);
+		hp.add(lang);
 		hp.add(imgDel);
 		hp.setCellVerticalAlignment(imgDel, HasVerticalAlignment.ALIGN_MIDDLE);
 		vp.add(hp);
-		works.add(exp);
+		languages.add(lang);
 	}
 
 	public Collection<WorkExp> getExp() throws IllegalArgumentException{
 		Collection<WorkExp> studentWorks = new ArrayList<WorkExp>();
-		for(WorkExperinceElementSimplePanel we : works)
+		for(LanguageElementSimplePanel we : languages)
 			studentWorks.add(we.getWorkExp());
 		return studentWorks;
 	}
