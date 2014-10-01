@@ -14,6 +14,17 @@ ul, li {
 a {
     color: #0052A3;
 }
+
+.fixUpPanel{
+	height:50px !important;
+}
+
+.fixForm{
+	height:150px !important;
+}
+.fixRadio{
+	width: 150px !important;
+}
 a:hover {
     color: #1A8DFF;
 }
@@ -235,4 +246,10 @@ h3.assistive-text {
     text-decoration: none;
     text-shadow: 0 0 1px #F32D13;
     cursor: hand;
+}
+
+
+
+.Fiix{
+	width: 100%;
 }

@@ -52,6 +52,8 @@ public class WorkExperinceElementSimplePanel extends SimplePanel{
 		upPanel.setSpacing(10);
 		
 		DynamicForm form = new DynamicForm();  
+		form.setStyleName("fixUpPanel");
+		
   
         TextItem yearField = new TextItem("year", "Год");  
         yearField.setWidth(70);
