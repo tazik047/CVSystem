@@ -2,10 +2,13 @@ package ua.nure.pi.client;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.LinkedHashMap;
 
 import ua.nure.pi.entity.WorkExp;
 import ua.nure.pi.entity.typeOfDuration;
 
+import com.google.gwt.event.dom.client.ChangeEvent;
+import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HorizontalPanel;
@@ -14,6 +17,11 @@ import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import com.smartgwt.client.types.ReadOnlyDisplayAppearance;
+import com.smartgwt.client.types.TitleOrientation;
+import com.smartgwt.client.widgets.form.DynamicForm;
+import com.smartgwt.client.widgets.form.fields.ComboBoxItem;
+import com.smartgwt.client.widgets.form.fields.TextItem;
 
 public class WorkExperinceElementSimplePanel extends SimplePanel{
 	
@@ -30,40 +38,45 @@ public class WorkExperinceElementSimplePanel extends SimplePanel{
 		HorizontalPanel downPanel = new HorizontalPanel();
 		VerticalPanel labelPanel = new VerticalPanel();
 		VerticalPanel textPanel = new VerticalPanel();
-		VerticalPanel year = new VerticalPanel();
-		VerticalPanel duration = new VerticalPanel();
-		VerticalPanel type = new VerticalPanel();
 		upPanel.setSpacing(5);
 		rootPanel.setSpacing(5);
 		rootPanel.add(upPanel);
 		rootPanel.add(downPanel);
 		downPanel.add(labelPanel);
 		downPanel.add(textPanel);
-		upPanel.add(year);
-		upPanel.add(duration);
-		upPanel.add(type);
+		
 		setWidth("343px");
 		labelPanel.setSpacing(5);
+		textPanel.setSpacing(5);
 		
 		upPanel.setSpacing(10);
 		
-		Label label = new Label("Год");
-        label.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
-        year.add(label);
-        label.setSize("70px", "18px");
-		
-		yearText = new TextBox();
-        year.add(yearText);
-        yearText.setSize("70px", "18px");
+		DynamicForm form = new DynamicForm();  
+  
+        TextItem yearField = new TextItem("year", "Год");  
+        yearField.setWidth(70);
+        yearField.setHeight(18);
+        yearField.setKeyPressFilter("[0-9.]");
         
-        Label label_1 = new Label("Длительность");
-        label_1.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
-        duration.add(label_1);
-        label_1.setSize("80px", "18px");
+        TextItem durationField = new TextItem("duration", "Длительность");  
+        durationField.setWidth(70);
+        durationField.setHeight(18);
+        durationField.setKeyPressFilter("[0-9.]");
         
-        durationText = new TextBox();
-        duration.add(durationText);
-        durationText.setSize("70px", "18px");
+        LinkedHashMap<typeOfDuration, String> valueMap = new LinkedHashMap<typeOfDuration, String>();
+        valueMap.put(typeOfDuration.WEEK, "недель");
+        valueMap.put(typeOfDuration.MONTH, "месяцев");
+        valueMap.put(typeOfDuration.YEAR, "лет");
+        ComboBoxItem durTypeField = new ComboBoxItem("type","Тип");
+        durTypeField.setReadOnlyDisplay(ReadOnlyDisplayAppearance.STATIC);
+        durTypeField.setValueMap(valueMap);
+        durTypeField.setWidth(100);
+        form.setNumCols(3);
+        form.setFields(yearField, durationField, durTypeField);
+        form.setTitleOrientation(TitleOrientation.TOP);
+        form.draw(); 
+
+		upPanel.add(form);
         
         
         Label label_role = new Label("Должность");
@@ -83,20 +96,6 @@ public class WorkExperinceElementSimplePanel extends SimplePanel{
         nameOfInstitute = new TextBox();
         textPanel.add(nameOfInstitute);
         nameOfInstitute.setSize("100%", "18px");
-        
-        Label label_3 = new Label(" ");
-        label_3.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
-        type.add(label_3);
-        label_3.setSize("80px", "18px");
-        
-        durationType = new ListBox();
-        Collection<String> items = new ArrayList<String>();
-        items.add("Недель");
-        items.add("Месяцев");
-        items.add("Лет");
-        for(String i : items)
-        	durationType.addItem(i);
-        type.add(durationType);
         
         setWidget(rootPanel);
 	}
