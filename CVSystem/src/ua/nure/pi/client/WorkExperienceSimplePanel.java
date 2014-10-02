@@ -23,6 +23,8 @@ public class WorkExperienceSimplePanel extends SimplePanel{
 	
 	private ArrayList<WorkExperinceElementSimplePanel> works;
 	private DynamicForm form;
+	private int countColor = -1;
+	
 	public WorkExperienceSimplePanel() {
 		VerticalPanel hp = new VerticalPanel();
 		hp.setWidth("100%");
@@ -52,28 +54,35 @@ public class WorkExperienceSimplePanel extends SimplePanel{
 	}
 	
 	private void addExp(final VerticalPanel vp, AbsolutePanel absP){
-		if(works.size()!=0)
+		/*if(works.size()!=0)
 			works.get(works.size()-1).addSeparator();
-		else
+		else*/
+		if(works.size() == 0)
 			absP.add(form);
 		final WorkExperinceElementSimplePanel exp = new WorkExperinceElementSimplePanel();
-		final HorizontalPanel hp = new HorizontalPanel();
-		Image imgDel = new Image("img/close.png", 0, 0, 16, 16);
-		imgDel.addClickHandler(new ClickHandler() {
+		countColor = (++countColor)%2;
+		if(countColor == 0){
+			exp.setStyleName("stylePanel1");
+		}
+		else
+			exp.setStyleName("stylePanel2");
+		/*final HorizontalPanel hp = new HorizontalPanel();
+		Image imgDel = new Image("img/close.png", 0, 0, 16, 16);*/
+		exp.imgDel.addClickHandler(new ClickHandler() {
 			
 			@Override
 			public void onClick(ClickEvent event) {
-				vp.remove(hp);
+				vp.remove(exp);
 				works.remove(exp);
 				if(works.size()==0)
 					form.removeFromParent();
 				form.markForRedraw();
 			}
 		});
-		hp.add(exp);
+		/*hp.add(exp);
 		hp.add(imgDel);
-		hp.setCellVerticalAlignment(imgDel, HasVerticalAlignment.ALIGN_MIDDLE);
-		vp.add(hp);
+		hp.setCellVerticalAlignment(imgDel, HasVerticalAlignment.ALIGN_MIDDLE);*/
+		vp.add(exp);
 		works.add(exp);
 	}
 

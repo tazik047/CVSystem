@@ -9,9 +9,11 @@ import ua.nure.pi.entity.typeOfDuration;
 
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
+import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.SimplePanel;
@@ -21,6 +23,7 @@ import com.smartgwt.client.types.ReadOnlyDisplayAppearance;
 import com.smartgwt.client.types.TitleOrientation;
 import com.smartgwt.client.widgets.form.DynamicForm;
 import com.smartgwt.client.widgets.form.fields.ComboBoxItem;
+import com.smartgwt.client.widgets.form.fields.SelectItem;
 import com.smartgwt.client.widgets.form.fields.TextItem;
 
 public class WorkExperinceElementSimplePanel extends SimplePanel{
@@ -32,6 +35,7 @@ public class WorkExperinceElementSimplePanel extends SimplePanel{
 	private TextBox nameOfInstitute;
 	private VerticalPanel rootPanel;
 	
+	public Image imgDel; 
 	public WorkExperinceElementSimplePanel(){
 		rootPanel = new VerticalPanel();
 		HorizontalPanel upPanel = new HorizontalPanel();
@@ -44,6 +48,10 @@ public class WorkExperinceElementSimplePanel extends SimplePanel{
 		rootPanel.add(downPanel);
 		downPanel.add(labelPanel);
 		downPanel.add(textPanel);
+		imgDel = new Image("img/close.png", 0, 0, 16, 16);
+		imgDel.setStyleName("imgDelStyle");
+		imgDel.setTitle("Удалить опыт работы");
+		rootPanel.add(imgDel);
 		
 		setWidth("343px");
 		labelPanel.setSpacing(5);
@@ -69,8 +77,8 @@ public class WorkExperinceElementSimplePanel extends SimplePanel{
         valueMap.put(typeOfDuration.WEEK, "недель");
         valueMap.put(typeOfDuration.MONTH, "месяцев");
         valueMap.put(typeOfDuration.YEAR, "лет");
-        ComboBoxItem durTypeField = new ComboBoxItem("type","Тип");
-        durTypeField.setReadOnlyDisplay(ReadOnlyDisplayAppearance.STATIC);
+        SelectItem durTypeField = new SelectItem("type","Тип");
+        //durTypeField.setReadOnlyDisplay(ReadOnlyDisplayAppearance.STATIC);
         durTypeField.setValueMap(valueMap);
         durTypeField.setWidth(100);
         form.setNumCols(3);
@@ -100,6 +108,7 @@ public class WorkExperinceElementSimplePanel extends SimplePanel{
         nameOfInstitute.setSize("100%", "18px");
         
         setWidget(rootPanel);
+        
 	}
 	
 	public WorkExp getWorkExp() throws IllegalArgumentException{

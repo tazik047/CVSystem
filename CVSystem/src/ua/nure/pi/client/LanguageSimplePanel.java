@@ -23,6 +23,8 @@ public class LanguageSimplePanel extends SimplePanel{
 	
 	private ArrayList<LanguageElementSimplePanel> languages;
 	private DynamicForm form;
+	private int countColor = -1;
+	
 	public LanguageSimplePanel() {
 		VerticalPanel hp = new VerticalPanel();
 		hp.setWidth("100%");
@@ -42,7 +44,7 @@ public class LanguageSimplePanel extends SimplePanel{
 			
 			@Override
 			public void onClick(ClickEvent event) {
-				addExp(vp, absP);
+				addLang(vp, absP);
 				form.markForRedraw();
 			}
 		});
@@ -51,8 +53,8 @@ public class LanguageSimplePanel extends SimplePanel{
         
 	}
 	
-	private void addExp(final VerticalPanel vp, AbsolutePanel absP){
-		if(languages.size()!=0)
+	private void addLang(final VerticalPanel vp, AbsolutePanel absP){
+		/*if(languages.size()!=0)
 			languages.get(languages.size()-1).addSeparator();
 		else
 			absP.add(form);
@@ -74,6 +76,34 @@ public class LanguageSimplePanel extends SimplePanel{
 		hp.add(imgDel);
 		hp.setCellVerticalAlignment(imgDel, HasVerticalAlignment.ALIGN_MIDDLE);
 		vp.add(hp);
+		languages.add(lang);*/
+		
+		if(languages.size() == 0)
+			absP.add(form);
+		final LanguageElementSimplePanel lang = new LanguageElementSimplePanel();
+		countColor  = (++countColor)%2;
+		if(countColor == 0){
+			lang.setStyleName("stylePanel1");
+		}
+		else
+			lang.setStyleName("stylePanel2");
+		/*final HorizontalPanel hp = new HorizontalPanel();
+		Image imgDel = new Image("img/close.png", 0, 0, 16, 16);*/
+		lang.imgDel.addClickHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				vp.remove(lang);
+				languages.remove(lang);
+				if(languages.size()==0)
+					form.removeFromParent();
+				form.markForRedraw();
+			}
+		});
+		/*hp.add(exp);
+		hp.add(imgDel);
+		hp.setCellVerticalAlignment(imgDel, HasVerticalAlignment.ALIGN_MIDDLE);*/
+		vp.add(lang);
 		languages.add(lang);
 	}
 

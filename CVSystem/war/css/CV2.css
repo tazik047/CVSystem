@@ -20,7 +20,7 @@ a {
 }
 
 .fixForm{
-	height:150px !important;
+	height:105px !important;
 }
 .fixRadio{
 	width: 150px !important;
@@ -252,4 +252,35 @@ h3.assistive-text {
 
 .Fiix{
 	width: 100%;
+}
+
+.stylePanel1{
+	background-color:rgba(75, 132, 204, 0.5);
+	margin:5px;
+	text-align:center;
+	position: relative;
+}
+
+.stylePanel1 .imgDelStyle,
+.stylePanel2 .imgDelStyle{
+	display:none;
+}
+
+.stylePanel1:hover .imgDelStyle,
+.stylePanel2:hover .imgDelStyle{
+	display:block;
+}
+
+.stylePanel2{
+	background-color:rgba(143, 204, 245, 0.5);
+	margin:5px;
+	text-align:center;
+	position: relative;
+}
+
+.imgDelStyle{
+	position:absolute;
+	top:0px;
+	right:0px;
+	cursor:pointer;
 }

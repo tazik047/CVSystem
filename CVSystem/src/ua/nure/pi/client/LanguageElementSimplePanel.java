@@ -12,11 +12,13 @@ import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HasVerticalAlignment;
 import com.google.gwt.user.client.ui.HasVerticalAlignment.VerticalAlignmentConstant;
 import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.user.client.ui.Widget;
 import com.smartgwt.client.types.VerticalAlignment;
 import com.smartgwt.client.widgets.form.DynamicForm;
 import com.smartgwt.client.widgets.form.fields.RadioGroupItem;
@@ -29,6 +31,7 @@ public class LanguageElementSimplePanel extends SimplePanel{
 	private ListBox langBox;
 	private int levelType;
 	private VerticalPanel rootPanel;
+	public Image imgDel;
 	
 	public LanguageElementSimplePanel(){
 		rootPanel = new VerticalPanel();
@@ -41,6 +44,11 @@ public class LanguageElementSimplePanel extends SimplePanel{
 		rootPanel.add(upPanel);
 		upPanel.add(lang);
 		upPanel.add(level);
+		
+		imgDel = new Image("img/close.png", 0, 0, 16, 16);
+		imgDel.setStyleName("imgDelStyle");
+		imgDel.setTitle("Удалить опыт работы");
+		rootPanel.add(imgDel);
 		
 		level.setWidth("200px");
 		
