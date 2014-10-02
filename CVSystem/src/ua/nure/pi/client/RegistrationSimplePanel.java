@@ -17,6 +17,7 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.DockPanel;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HorizontalPanel;
@@ -256,6 +257,10 @@ public class RegistrationSimplePanel extends SimplePanel {
 	    mainPanel.add(lbOther);
 	    mainPanel.add(second);
         
+	    CheckBox cb = new CheckBox();
+	    cb.setText("Даю право на обработку и хранение личной информации администрации ресурса");
+	    cb.setWidth("343px");
+	    mainPanel.add(cb);
 	    
         languages.addChangedHandler(new ChangedHandler() {
 			
@@ -313,7 +318,6 @@ public class RegistrationSimplePanel extends SimplePanel {
 	    pickDepartment.setName("department");
 	    pickDepartment.setValueField("name");
 	    pickDepartment.setValueTree(tree);
-
 	    form.setItems(pickDepartment);
 	    form.draw(); 
 	    
