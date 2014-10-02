@@ -25,6 +25,9 @@ a {
 .fixRadio{
 	width: 150px !important;
 }
+.fixTextArea{
+	resize:none;
+}
 a:hover {
     color: #1A8DFF;
 }
