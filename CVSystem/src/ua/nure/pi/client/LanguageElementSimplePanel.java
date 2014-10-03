@@ -4,8 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedHashMap;
 
-import ua.nure.pi.entity.WorkExp;
-import ua.nure.pi.entity.typeOfDuration;
+import ua.nure.pi.entity.Language;
 
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
@@ -74,11 +73,9 @@ public class LanguageElementSimplePanel extends SimplePanel{
         
         
         LinkedHashMap<Integer, String> styleMap = new LinkedHashMap<Integer, String>();  
-        styleMap.put(0, "Начинающий");  
-        styleMap.put(1, "Базовый уровень");  
-        styleMap.put(2, "Средний уровень");  
-        styleMap.put(3, "Продвинутый уровень");
-        styleMap.put(4, "Свободное владение");  
+        styleMap.put(0, "Начальный");  
+        styleMap.put(1, "Средний");  
+        styleMap.put(2, "Высокий");  
           
         RadioGroupItem style = new RadioGroupItem();
         style.setCellStyle("Fiix");
@@ -103,12 +100,8 @@ public class LanguageElementSimplePanel extends SimplePanel{
         setWidget(rootPanel);
 	}
 	
-	public WorkExp getWorkExp() throws IllegalArgumentException{
-		WorkExp we = new WorkExp();
-		return we;
-	}
-	
-	public void addSeparator(){
-		rootPanel.add(new HTML("<hr/>"));
+	public Language getLanguage() throws IllegalArgumentException{
+		Language lang = new Language();
+		return lang;
 	}
 }
