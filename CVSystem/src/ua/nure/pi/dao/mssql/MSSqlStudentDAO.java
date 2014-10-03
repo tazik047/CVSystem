@@ -114,12 +114,12 @@ public class MSSqlStudentDAO implements StudentDAO {
 	
 	private Student unMapStudent(ResultSet rs) throws SQLException{
 		Student st = new Student();
-		/*st.setStudentsId(rs.getLong(MapperParameters.STUDENT_ID));
+		st.setStudentsId(rs.getLong(MapperParameters.STUDENT_ID));
 		st.setFirstname(rs.getString(MapperParameters.STUDENT_FIRSTNAME));
 		st.setSurname(rs.getString(MapperParameters.STUDENT_SURNAME));
 		st.setCVsId(rs.getLong(MapperParameters.STUDENT_CVSID));
 		st.setGroupsId(rs.getLong(MapperParameters.STUDENT_GROUPSID));
-		st.setPatronymic(rs.getString(MapperParameters.STUDENT_PATRONYMIC));*/
+		st.setPatronymic(rs.getString(MapperParameters.STUDENT_PATRONYMIC));
 		return st;
 	}
 	
