@@ -1,11 +1,16 @@
 
 html>body {
-	background-color: rgba(241,243,203,0.45);
     font-family: 'Times New Roman';
     font-size: 16px;
     margin: 0;
     min-width: 900px;
-    
+    background-color: rgba(241,243,203,0.45);
+}
+
+#wrapper {
+	width: 900px !important;
+	margin: 0 auto;
+	border-top:  10px solid rgba(255,255,255,0);
 }
 ul, li {
     color: #000000;
@@ -52,9 +57,9 @@ h3 {
 #header {
     background: url("/img/background.jpg") repeat-x scroll 0 0 rgba(0, 0, 0, 0);
     height: 115px;
-    margin: 0 auto;
     position: relative;
     width: auto;
+    
 }
 #logo {
 	background: url("/img/background.jpg");
@@ -62,6 +67,7 @@ h3 {
     height: 115px;
     position: relative;
     width: 100%;
+    overflow: hidden;
 }
 #social {
     height: 30px;
@@ -78,8 +84,10 @@ h3 {
     top: 25px;
 }
 #menu {
+	font-size: 0px;
     height: 30px;
     background-image: url("/img/background.jpg");
+    overflow: hidden;
 }
 #menu-right{}
 
@@ -162,18 +170,17 @@ h3.assistive-text {
 }
 
 
-.wrapper {
-	width: 100%;
-	min-width: 1000px;
-	border-top:  10px solid rgba(255,255,255,0);
-}
+
 /* Middle
 -----------------------------------------------------------------------------*/
 .middle {
 	border-left: 10px solid rgba(255,255,255,0);
 	border-top: 10px solid rgba(255,255,255,0);
 	width: 100%;
+	margin-top: 5 px;
 	position: relative;
+	border: 2px solid #ffffff;
+	background-color: #ffffff;
 }
 .middle:after {
 	display: table;
@@ -195,8 +202,9 @@ h3.assistive-text {
 /* Right Sidebar
 -----------------------------------------------------------------------------*/
 #right-sidebar {
+	margin-top: 50px;
 	float: left;
-	width: 250;
+	width: 250 px;
 	margin-left: -250px;
 	position: relative;
 	text-align: center;
@@ -221,7 +229,7 @@ h3.assistive-text {
 }
 .addCV {
 
-    color: rgba(241,243,203,1);
+    color: #4855EF;
     font: 16px PT Serif,sans-serif;
     text-decoration: none;
     text-shadow: 0 0 1px #706E63;
