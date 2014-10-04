@@ -64,7 +64,6 @@ public class MainEntryPoint implements EntryPoint {
 		
 		@Override
 		public void onClick(ClickEvent event) {
-			Window.alert("go event");
 			uiManager.setPanel(new MainStaticPanel());
 		}
 	});
