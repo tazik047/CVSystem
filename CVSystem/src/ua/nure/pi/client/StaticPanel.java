@@ -8,6 +8,7 @@ public class StaticPanel extends SimplePanel {
 	protected HTML html;
 	
 	public StaticPanel() {
+		html = new HTML();
 		add(html);
 	}
 	

@@ -3,6 +3,7 @@ package ua.nure.pi.client;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import ua.nure.pi.entity.Language;
 import ua.nure.pi.entity.WorkExp;
 
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -107,10 +108,10 @@ public class LanguageSimplePanel extends SimplePanel{
 		languages.add(lang);
 	}
 
-	public Collection<WorkExp> getExp() throws IllegalArgumentException{
-		Collection<WorkExp> studentWorks = new ArrayList<WorkExp>();
+	public Collection<Language> getLanguages() throws IllegalArgumentException{
+		Collection<Language> studentLanguages = new ArrayList<Language>();
 		for(LanguageElementSimplePanel we : languages)
-			studentWorks.add(we.getWorkExp());
-		return studentWorks;
+			studentLanguages.add(we.getLanguage());
+		return studentLanguages;
 	}
 }
