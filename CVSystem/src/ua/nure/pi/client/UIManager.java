@@ -29,7 +29,6 @@ public class UIManager {
 	}
 	
 	public boolean setPanel(SimplePanel simp){
-		Window.alert("start set panel");
 		if(current==null){
 			rootPanel.clear(true);
 			rootPanel.add(simp);
@@ -37,7 +36,6 @@ public class UIManager {
 			return true;
 		}
 		else if(simp.getClass().toString().equals(current.getClass().toString())){
-			Window.alert("повтор");
 			return false;
 		}
 		else{
