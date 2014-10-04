@@ -8,17 +8,15 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import ua.nure.pi.dao.WorkExpDAO;
-import ua.nure.pi.entity.AnyTag;
-import ua.nure.pi.entity.Faculty;
-import ua.nure.pi.entity.Group;
 import ua.nure.pi.entity.WorkExp;
 import ua.nure.pi.entity.typeOfDuration;
 import ua.nure.pi.parameter.MapperParameters;
 
 public class MSSqlWorkExpDAO implements WorkExpDAO {
 	
-	private static final String SQL__SELECT_WORKEXP = "SELECT * FROM WorkExp WHERE StudentId = ?";
-	private static final String SQL__INSERT_WORKEXP = "INSERT INTO WorkExp VALUES(?,?,?,?,?,?,?)";
+	private static final String SQL__SELECT_WORKEXP = "SELECT * FROM WorkExp WHERE CVsId = ?";
+	private static final String SQL__INSERT_WORKEXP = "INSERT INTO WorkExp(StartDate, "+
+	"Duration, TypeDuration, NameOfInstitution,	Role, CVsId) VALUES(?,?,?,?,?,?)";
 
 
 	@Override
@@ -71,12 +69,12 @@ public class MSSqlWorkExpDAO implements WorkExpDAO {
 
 
 	@Override
-	public Collection<WorkExp> getWorkExps(long studentId) {
+	public Collection<WorkExp> getWorkExps(long CVsId) {
 		Collection<WorkExp> result = null;
 		Connection con = null;
 		try {
 			con = MSSqlDAOFactory.getConnection();
-			result = getWorkExps(studentId, con);
+			result = getWorkExps(CVsId, con);
 		} catch (SQLException e) {
 			System.err.println("Can not get groups." + e.getMessage());
 		} finally {
@@ -90,12 +88,12 @@ public class MSSqlWorkExpDAO implements WorkExpDAO {
 		return result;
 	}
 	
-	private Collection<WorkExp> getWorkExps(long studentId, Connection con) throws SQLException {
+	private Collection<WorkExp> getWorkExps(long CVsId, Connection con) throws SQLException {
 		Collection<WorkExp> result = null;
 		PreparedStatement pstmt = null;
 		try {
 			pstmt = con.prepareStatement(SQL__SELECT_WORKEXP);
-			pstmt.setLong(1, studentId);
+			pstmt.setLong(1, CVsId);
 			ResultSet rs = pstmt.executeQuery();
 			result = new ArrayList<WorkExp>();
 			while(rs.next()){
@@ -142,23 +140,22 @@ public class MSSqlWorkExpDAO implements WorkExpDAO {
 	
 	private void mapWorkExpForInsert(WorkExp we, PreparedStatement pstmt) 
 			throws SQLException{
-		pstmt.setLong(1, we.getWorkExpsId());
-		pstmt.setInt(2, we.getStartYear());
-		pstmt.setInt(3, we.getStartYear());
+		pstmt.setInt(1, we.getStartYear());
+		pstmt.setInt(2, we.getDuration());
 		switch (we.getTypeOfDuration()) {
 		case WEEK : 
-			pstmt.setInt(4, 0);
+			pstmt.setInt(3, 0);
 			break;
 		case MONTH :
-			pstmt.setInt(4, 1);
+			pstmt.setInt(3, 1);
 			break;
 		case YEAR :
-			pstmt.setInt(4, 2);
+			pstmt.setInt(3, 2);
 			break;
 		}			
-		pstmt.setString(5, we.getNameOfInstitution());
-		pstmt.setString(6, we.getRole());
-		pstmt.setLong(7, we.getCVsId());
+		pstmt.setString(4, we.getNameOfInstitution());
+		pstmt.setString(5, we.getRole());
+		pstmt.setLong(6, we.getCVsId());
 	}
 
 }

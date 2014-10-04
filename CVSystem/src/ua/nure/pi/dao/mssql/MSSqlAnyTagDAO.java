@@ -10,7 +10,6 @@ import java.util.Collection;
 
 import ua.nure.pi.dao.AnyTagDAO;
 import ua.nure.pi.entity.AnyTag;
-import ua.nure.pi.entity.Faculty;
 import ua.nure.pi.parameter.MapperParameters;
 
 public class MSSqlAnyTagDAO implements AnyTagDAO {
@@ -268,7 +267,7 @@ public class MSSqlAnyTagDAO implements AnyTagDAO {
 		Connection con = null;
 		try {
 			con = MSSqlDAOFactory.getConnection();
-			result = getStudentsAnyTags(tableName, con);
+			result = getStudentsAnyTags(tableName, CVsId, con);
 		} catch (SQLException e) {
 			System.err.println(String.format("Can not get from %1$s. %2$s",tableName ,e.getMessage()));
 		} finally {
@@ -283,12 +282,13 @@ public class MSSqlAnyTagDAO implements AnyTagDAO {
 	}
 
 	private Collection<AnyTag> getStudentsAnyTags(String tableName,
-			Connection con) throws SQLException {
+			long CVsId, Connection con) throws SQLException {
 		Collection<AnyTag> result = null;
-		Statement stmt = null;
+		PreparedStatement pstmt = null;
 		try {
-			stmt = con.createStatement();
-			ResultSet rs = stmt.executeQuery(String.format(SQL__SELECT_ANY_TAG, tableName));
+			pstmt = con.prepareStatement(SQL__SELECT_STUDENT_ANY_TAG);
+			pstmt.setLong(1, CVsId);
+			ResultSet rs = pstmt.executeQuery();
 			result = new ArrayList<AnyTag>();
 			while(rs.next()){
 				AnyTag fc = unMapAnyTag(tableName, rs);
@@ -298,9 +298,9 @@ public class MSSqlAnyTagDAO implements AnyTagDAO {
 		} catch (SQLException e) {
 			throw e;
 		} finally {
-			if (stmt != null) {
+			if (pstmt != null) {
 				try {
-					stmt.close();
+					pstmt.close();
 				} catch (SQLException e) {
 					System.err.println("Can not close statement. " + e.getMessage());
 				}

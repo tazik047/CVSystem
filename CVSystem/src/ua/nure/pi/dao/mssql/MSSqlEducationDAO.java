@@ -8,28 +8,23 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import ua.nure.pi.dao.EducationDAO;
-import ua.nure.pi.dao.WorkExpDAO;
-import ua.nure.pi.entity.AnyTag;
 import ua.nure.pi.entity.Education;
-import ua.nure.pi.entity.Faculty;
-import ua.nure.pi.entity.Group;
-import ua.nure.pi.entity.WorkExp;
-import ua.nure.pi.entity.typeOfDuration;
 import ua.nure.pi.parameter.MapperParameters;
 
 public class MSSqlEducationDAO implements EducationDAO {
 	
-	private static final String SQL__SELECT_EDUCATION = "SELECT * FROM Educations WHERE StudentId = ?";
-	private static final String SQL__INSERT_EDUCATION = "INSERT INTO Educations VALUES(?,?,?,?,?,?,?)";
+	private static final String SQL__SELECT_EDUCATION = "SELECT * FROM Educations WHERE CVsId = ?";
+	private static final String SQL__INSERT_EDUCATION = "INSERT INTO Educations(StartYear, EndYear, "
+			+ "NameOfInstitution, Specialty, CVsId) VALUES(?,?,?,?,?,)";
 
 
 	@Override
-	public Boolean insertEducations(Collection<Education> eds) {
+	public Boolean insertEducations(long CVsId, Collection<Education> eds) {
 		Boolean result = false;
 		Connection con = null;
 		try {
 			con = MSSqlDAOFactory.getConnection();
-			result = insertEducations(eds, con);
+			result = insertEducations(CVsId, eds, con);
 			if(result)
 				con.commit();
 		} catch (SQLException e) {
@@ -45,7 +40,7 @@ public class MSSqlEducationDAO implements EducationDAO {
 		return result;
 	}
 
-	private Boolean insertEducations(Collection<Education> eds, Connection con) 
+	private Boolean insertEducations(long cVsId, Collection<Education> eds, Connection con) 
 			throws SQLException {
 		boolean result = true;
 		PreparedStatement pstmt = null;
@@ -73,12 +68,12 @@ public class MSSqlEducationDAO implements EducationDAO {
 
 
 	@Override
-	public Collection<Education> getEducations(long studentId) {
+	public Collection<Education> getEducations(long CVsId) {
 		Collection<Education> result = null;
 		Connection con = null;
 		try {
 			con = MSSqlDAOFactory.getConnection();
-			result = getEducations(studentId, con);
+			result = getEducations(CVsId, con);
 		} catch (SQLException e) {
 			System.err.println("Can not get groups." + e.getMessage());
 		} finally {
@@ -92,12 +87,12 @@ public class MSSqlEducationDAO implements EducationDAO {
 		return result;
 	}
 	
-	private Collection<Education> getEducations(long studentId, Connection con) throws SQLException {
+	private Collection<Education> getEducations(long CVsId, Connection con) throws SQLException {
 		Collection<Education> result = null;
 		PreparedStatement pstmt = null;
 		try {
 			pstmt = con.prepareStatement(SQL__SELECT_EDUCATION);
-			pstmt.setLong(1, studentId);
+			pstmt.setLong(1, CVsId);
 			ResultSet rs = pstmt.executeQuery();
 			result = new ArrayList<Education>();
 			while(rs.next()){
@@ -121,51 +116,22 @@ public class MSSqlEducationDAO implements EducationDAO {
 
 	private Education unMapEducation(ResultSet rs) throws SQLException {
 		Education ed = new Education();
-		/*
-		WorkExp we = new WorkExp();
-		we.setWorkExpsId(rs.getLong(MapperParameters.WORKEXP_ID));
-		we.setStartYear(rs.getInt(MapperParameters.WORKEXP_START));
-		we.setDuration(rs.getInt(MapperParameters.WORKEXP_DURATION));
-		int type = rs.getInt(MapperParameters.WORKEXP_TYPEDURATION);
-		switch (type) {
-		case  0 : 
-			we.setTypeOfDuration(typeOfDuration.WEEK);
-			break;
-		case 1 :
-			we.setTypeOfDuration(typeOfDuration.MONTH);
-			break;
-		case 2 :
-			we.setTypeOfDuration(typeOfDuration.YEAR);
-			break;
-		}	
-		we.setNameOfInstitution(rs.getString(MapperParameters.WORKEXP_NAMEOFINSTITUTION));
-		we.setRole(rs.getString(MapperParameters.WORKEXP_ROLE));
-		we.setCVsId(rs.getLong(MapperParameters.WORKEXP_CVsId));
-		return we;
-		*/
+		ed.setEducationId(rs.getLong(MapperParameters.EDUCATION__ID));
+		ed.setStartYear(rs.getInt(MapperParameters.EDUCATION__START));
+		ed.setEndYear(rs.getInt(MapperParameters.EDUCATION__END));
+		ed.setNameOfInstitution(rs.getString(MapperParameters.EDUCATION__NAMEOFINSTITUTION));
+		ed.setSpecialty(rs.getString(MapperParameters.EDUCATION__SPECIALTY));
+		ed.setCVsId(rs.getLong(MapperParameters.EDUCATION__CVsId));
 		return ed;
 	}
 	
 	private void mapEducationForInsert(Education ed, PreparedStatement pstmt) 
 			throws SQLException{
-		/*
-		pstmt.setLong(1, we.getWorkExpsId());
-		pstmt.setInt(2, we.getStartYear());
-		pstmt.setInt(3, we.getStartYear());
-		switch (we.getTypeOfDuration()) {
-		case WEEK : 
-			pstmt.setInt(4, 0);
-			break;
-		case MONTH :
-			pstmt.setInt(4, 1);
-			break;
-		case YEAR :
-			pstmt.setInt(4, 2);
-			break;
-		}			
-		pstmt.setString(5, we.getNameOfInstitution());
-		pstmt.setString(6, we.getRole());
-		pstmt.setLong(7, we.getCVsId());
-		*/
+		pstmt.setInt(1, ed.getStartYear());
+		pstmt.setInt(2, ed.getEndYear());
+		pstmt.setString(3, ed.getNameOfInstitution());
+		pstmt.setString(4, ed.getSpecialty());
+		pstmt.setLong(5, ed.getCVsId());
+		
 	}
 }

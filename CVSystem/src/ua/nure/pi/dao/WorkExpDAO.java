@@ -8,7 +8,7 @@ public interface WorkExpDAO {
 		
 	Boolean insertWorkExps(Collection<WorkExp> wes);
 				
-	Collection<WorkExp> getWorkExps(long studentId);
+	Collection<WorkExp> getWorkExps(long CVsId);
 			
 
 }

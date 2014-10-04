@@ -19,9 +19,11 @@ import ua.nure.pi.parameter.MapperParameters;
 public class MSSqlStudentDAO implements StudentDAO {
 	
 	private static final String SQL__SELECT_STUDENT = "SELECT * FROM Students WHERE StudentsId = ?";
-	private static final String SQL__INSERT_ANY_TAG = "INSERT INTO Students VALUES(?, ?, ?, ?, ?, ?)";
-	private static final String SQL__DELETE_ANY_TAG = "DELETE %1$s WHERE %2$sId = ?";
+	private static final String SQL__SELECT_ALL_STUDENT = "SELECT * FROM Students";
+	private static final String SQL__INSERT_STUDENT = "INSERT INTO Students VALUES(?, ?, ?, ?, ?, ?)";
+	private static final String SQL__DELETE_ANY_TAG = "DELETE Students WHERE StudentsId = ?";
 	
+	@Override
 	public Student getStudent(long studentId) {
 		Student result = null;
 		Connection con = null;
@@ -48,7 +50,8 @@ public class MSSqlStudentDAO implements StudentDAO {
 			pstmt = con.prepareStatement(SQL__SELECT_STUDENT);
 			pstmt.setLong(1, studentId);
 			ResultSet rs = pstmt.executeQuery();
-			result = unMapStudent(rs);
+			if(rs.next())
+				result = unMapStudent(rs);
 		} catch (SQLException e) {
 			throw e;
 		} finally {
@@ -63,6 +66,7 @@ public class MSSqlStudentDAO implements StudentDAO {
 		return result;
 	}
 
+	@Override
 	public Boolean insertStudent(Student student) {
 		Boolean result = false;
 		Connection con = null;
@@ -89,7 +93,7 @@ public class MSSqlStudentDAO implements StudentDAO {
 		boolean result = true;
 		PreparedStatement pstmt = null;
 		try {
-			pstmt = con.prepareStatement(SQL__INSERT_ANY_TAG);
+			pstmt = con.prepareStatement(SQL__INSERT_STUDENT);
 			mapStudentForInsert(student, pstmt);
 			if(pstmt.executeUpdate()!=1)
 				return false;
@@ -107,9 +111,54 @@ public class MSSqlStudentDAO implements StudentDAO {
 		return result;
 	}
 
+	@Override
 	public Boolean deleteStudent(Student student) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	@Override
+	public Collection<Student> getStudents() {
+		Collection<Student> result = null;
+		Connection con = null;
+		try {
+			con = MSSqlDAOFactory.getConnection();
+			result = getStudents(con);
+		} catch (SQLException e) {
+			System.err.println("Can not get student." + e.getMessage());
+		} finally {
+			try {
+				if (con != null)
+					con.close();
+			} catch (SQLException e) {
+				System.err.println("Can not close connection. " + e.getMessage());
+			}
+		}
+		return result;
+	}
+	
+	private Collection<Student> getStudents(Connection con) throws SQLException {
+		Collection<Student> result = new ArrayList<Student>();
+		PreparedStatement pstmt = null;
+		try {
+			pstmt = con.prepareStatement(SQL__SELECT_ALL_STUDENT);
+			ResultSet rs = pstmt.executeQuery();
+			while(rs.next()){
+				result.add(unMapStudent(rs));
+			}
+			
+		} catch (SQLException e) {
+			throw e;
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					System.err.println("Can not close statement. " + e.getMessage());
+				}
+			}
+		}
+		return result;
 	}
 	
 	private Student unMapStudent(ResultSet rs) throws SQLException{
@@ -132,6 +181,5 @@ public class MSSqlStudentDAO implements StudentDAO {
 		pstmt.setLong(5, st.getGroupsId());
 		pstmt.setLong(6, st.getCVsId());
 	}
-
 	
 }
