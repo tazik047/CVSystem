@@ -99,6 +99,14 @@ public class MainEntryPoint implements EntryPoint {
     rootPanel.add(btnNewButton_4);
     btnNewButton_4.setSize("70px", "23px");
     
+    btnNewButton_4.addClickHandler(new ClickHandler() {
+		
+		@Override
+		public void onClick(ClickEvent event) {
+			uiManager.setPanel(new AboutUsStaticPanel());
+		}
+	});
+    
     Button btnNewButton_5 = new Button("New button");
     btnNewButton_5.setStyleName("buttons");
     btnNewButton_5.setText("Контакты");
