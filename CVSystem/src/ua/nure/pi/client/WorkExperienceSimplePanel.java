@@ -40,6 +40,7 @@ public class WorkExperienceSimplePanel extends SimplePanel{
         Button btAdd = new Button("Добавить опыт работы");
         hp.add(absP);
         hp.add(btAdd);
+        hp.setCellHorizontalAlignment(btAdd, HasHorizontalAlignment.ALIGN_CENTER);
         btAdd.addClickHandler(new ClickHandler() {
 			
 			@Override

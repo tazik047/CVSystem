@@ -208,7 +208,7 @@ GO
 IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Educations]') AND type in (N'U'))
 BEGIN
 CREATE TABLE [dbo].[Educations](
-	[EducationsId] [bigint] NOT NULL,
+	[EducationsId] [bigint] IDENTITY(1,1) NOT NULL,
 	[StartYear] [int] NOT NULL,
 	[EndYear] [int] NOT NULL,
 	[NameOfInstitution] [nvarchar](max) NOT NULL,
@@ -283,6 +283,7 @@ BEGIN
 CREATE TABLE [dbo].[LanguagesCVs](
 	[LanguagesCVsId] [bigint] IDENTITY(1,1) NOT NULL,
 	[LanguagesId] [bigint] NOT NULL,
+	[Level] [int] NOT NULL,
 	[CVsId] [bigint] NOT NULL,
  CONSTRAINT [PK_LanguagesCVs] PRIMARY KEY CLUSTERED 
 (
@@ -390,7 +391,7 @@ GO
 IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[WorkExps]') AND type in (N'U'))
 BEGIN
 CREATE TABLE [dbo].[WorkExps](
-	[WorkExpsId] [bigint] NOT NULL,
+	[WorkExpsId] [bigint] IDENTITY(1,1) NOT NULL,
 	[StartDate] [int] NOT NULL,
 	[Duration] [int] NOT NULL,
 	[TypeDuration] [int] NOT NULL,
