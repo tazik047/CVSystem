@@ -13,6 +13,7 @@ import ua.nure.pi.server.RegistrationServiceImpl;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.i18n.client.DateTimeFormat;
+import com.google.gwt.layout.client.Layout.Alignment;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AbsolutePanel;
@@ -27,6 +28,7 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.TextBox;
+import com.google.gwt.user.client.ui.ValueBoxBase;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.datepicker.client.DateBox;
 import com.google.gwt.user.datepicker.client.DatePicker;
@@ -56,6 +58,7 @@ import com.smartgwt.client.widgets.form.fields.events.EditorExitEvent;
 import com.smartgwt.client.widgets.form.fields.events.EditorExitHandler;
 import com.smartgwt.client.widgets.form.fields.events.ValueHoverEvent;
 import com.smartgwt.client.widgets.form.fields.events.ValueHoverHandler;
+import com.smartgwt.client.widgets.form.validator.RegExpValidator;
 import com.smartgwt.client.widgets.grid.ListGrid;
 import com.smartgwt.client.widgets.layout.HStack;
 import com.smartgwt.client.widgets.layout.VStack;
@@ -140,6 +143,10 @@ public class RegistrationSimplePanel extends SimplePanel {
         TextItem PhonetextBox = new TextItem("phone", "Введите телефон");  
         PhonetextBox.setWidth(300);  
         PhonetextBox.setHint(""); 
+        PhonetextBox.setMask("(###) ###-####");  
+        
+        RegExpValidator emailValidator = new RegExpValidator();  
+        emailValidator.setExpression("^([a-zA-Z0-9_.\\-+])+@(([a-zA-Z0-9\\-])+\\.)+[a-zA-Z0-9]{2,4}$");  
         
         Label labelEmail = new Label("Email");
         labelEmail.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
@@ -148,6 +155,7 @@ public class RegistrationSimplePanel extends SimplePanel {
         TextItem Emailtextbox = new TextItem("email", "Введите email");  
         Emailtextbox.setWidth(300);  
         Emailtextbox.setHint(""); 
+        Emailtextbox.setValidators(emailValidator);
         
         Label labelSkype = new Label("Skype");
         rootPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
@@ -159,11 +167,11 @@ public class RegistrationSimplePanel extends SimplePanel {
         
         Label goalLabel = new Label("Цель");
         goalLabel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
-        goalLabel.setSize("186px", "18px");
+        goalLabel.setSize("186px", "10px");
         
         SelectItem goalComboBox = new SelectItem("Выберите цель");
         goalComboBox.setWidth(300);
-        goalComboBox.setHeight(30);
+        goalComboBox.setHeight(22);
         // Заполнение возможных целей из базы
         
         goalComboBox.setTitle("Выберите цель");
@@ -187,7 +195,8 @@ public class RegistrationSimplePanel extends SimplePanel {
         lhm.put("Python", "Python");
         languages.setValueMap(lhm);
         languages.setLayoutStyle(initialLayoutStyle);
-           
+
+        
         languages.setAddUnknownValues(false);
         final DynamicForm suppliesForm = new DynamicForm();  
         suppliesForm.setWidth100();  
@@ -200,6 +209,7 @@ public class RegistrationSimplePanel extends SimplePanel {
 	    TextArea first = new TextArea();
 	    first.setWidth("343px");
 	    first.addStyleName("fixTextArea");
+	   
 	    TextArea second = new TextArea();
 	    second.addStyleName("fixTextArea");
 	    second.setWidth("343px");
@@ -211,12 +221,19 @@ public class RegistrationSimplePanel extends SimplePanel {
 	    cb.setSize("343px", "44px");
 	    	    
 	    
-	    mainForm.setFields(SurnametextBox, NametextBox, PhonetextBox, Emailtextbox, Skypetextbox, dateItem, goalComboBox);
+	    mainForm.setFields(SurnametextBox, NametextBox, PhonetextBox, Emailtextbox, Skypetextbox, dateItem, goalComboBox, languages);
 	    mainForm.markForRedraw();
-	    
+	    rootPanel.add(lanPanel);
 	    rootPanel.add(eduPanel);
 	    rootPanel.add(expPanel);
-	    rootPanel.add(lanPanel);
+	    
+	    rootPanel.add(lbHobby);
+	    rootPanel.add(first);
+	    rootPanel.add(lbOther);
+	    rootPanel.add(second);
+	    
+	    rootPanel.add(cb);
+	    
 	    
 	    rootPanel.setCellHorizontalAlignment(eduPanel, HasHorizontalAlignment.ALIGN_CENTER);
 	    rootPanel.setCellHorizontalAlignment(expPanel, HasHorizontalAlignment.ALIGN_CENTER);
