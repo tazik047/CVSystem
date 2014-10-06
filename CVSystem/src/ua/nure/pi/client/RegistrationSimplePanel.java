@@ -218,6 +218,10 @@ public class RegistrationSimplePanel extends SimplePanel {
 	    rootPanel.add(expPanel);
 	    rootPanel.add(lanPanel);
 	    
+	    rootPanel.setCellHorizontalAlignment(eduPanel, HasHorizontalAlignment.ALIGN_CENTER);
+	    rootPanel.setCellHorizontalAlignment(expPanel, HasHorizontalAlignment.ALIGN_CENTER);
+	    rootPanel.setCellHorizontalAlignment(lanPanel, HasHorizontalAlignment.ALIGN_CENTER);
+	    
         languages.addChangedHandler(new ChangedHandler() {
 			
 			@Override
