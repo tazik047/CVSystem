@@ -43,10 +43,12 @@ import com.smartgwt.client.widgets.events.DragStartEvent;
 import com.smartgwt.client.widgets.events.DragStartHandler;
 import com.smartgwt.client.widgets.form.DynamicForm;
 import com.smartgwt.client.widgets.form.fields.CheckboxItem;
+import com.smartgwt.client.widgets.form.fields.DateItem;
 import com.smartgwt.client.widgets.form.fields.IPickTreeItem;
 import com.smartgwt.client.widgets.form.fields.MultiComboBoxItem;
 import com.smartgwt.client.widgets.form.fields.PickTreeItem;
 import com.smartgwt.client.widgets.form.fields.SelectItem;
+import com.smartgwt.client.widgets.form.fields.TextItem;
 import com.smartgwt.client.widgets.form.fields.events.ChangedEvent;
 import com.smartgwt.client.widgets.form.fields.events.ChangedHandler;
 import com.smartgwt.client.widgets.form.fields.events.ClickEvent;
@@ -78,19 +80,10 @@ public class RegistrationSimplePanel extends SimplePanel {
 	public void onModuleLoad() {
 
 	    VerticalPanel rootPanel = new VerticalPanel();
+	    DynamicForm mainForm = new DynamicForm();
 	    rootPanel.setWidth("100%");
-	    HorizontalPanel upPanel = new HorizontalPanel();
-	    rootPanel.add(upPanel);
-	    
-	    VerticalPanel leftUpPanel = new VerticalPanel();
-	    VerticalPanel rightUpPanel = new VerticalPanel();
-	    VerticalPanel mainPanel = new VerticalPanel();
+	    rootPanel.add(mainForm);
 	    final SimplePanel facultiesPanel = new SimplePanel();
-	    upPanel.add(leftUpPanel);
-	    upPanel.add(rightUpPanel);
-	    rootPanel.add(mainPanel);
-	    leftUpPanel.add(facultiesPanel);
-	    
 	    // Факультеты и группы
 	    
 	    registrationService.getFaculties(new AsyncCallback<Collection<Faculty>>() {
@@ -109,117 +102,80 @@ public class RegistrationSimplePanel extends SimplePanel {
         
         Label labelSurname = new Label("Фамилия");
         labelSurname.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
-        leftUpPanel.add(labelSurname);
-        labelSurname.setSize("180px", "18px");
+        labelSurname.setSize("344px", "18px");
         
-        final TextBox SurnametextBox = new TextBox();
-        leftUpPanel.add(SurnametextBox);
-        SurnametextBox.setSize("170px", "22px");
+        TextItem SurnametextBox = new TextItem("surname", "Фамилия");  
+        SurnametextBox.setWidth(300);  
+        SurnametextBox.setHint("Введите фамилию");  
         
         Label labelName = new Label("Имя");
         labelName.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
-        leftUpPanel.add(labelName);
         labelName.setSize("180px", "18px");
         
-        final TextBox NametextBox = new TextBox();
-        leftUpPanel.add(NametextBox);
-        NametextBox.setSize("170px", "22px");
+        TextItem NametextBox = new TextItem("name", "Имя");  
+        NametextBox.setWidth(300);  
+        NametextBox.setHint("Введите имя");  
         
         Label labelBirthday = new Label("Дата рождения");
         labelBirthday.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
-        leftUpPanel.add(labelBirthday);
         labelBirthday.setSize("180px", "18px");
         
-        DateBox dateBox = new DateBox();
-		dateBox.setFormat(new DateBox.DefaultFormat(DateTimeFormat
-				.getFormat("dd.MM.yyyy")));
-        leftUpPanel.add(dateBox);
+        DateItem dateItem = new DateItem();
+		dateItem.setTitle("Введите дату рождения");
+		dateItem.setUseTextField(true);
+		dateItem.setWidth(300);
+		dateItem.setHint("");
+		//rootPanel.add(dateBox);
         
         Label labelAddress = new Label("Домашний адрес");
         labelAddress.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
-        rightUpPanel.add(labelAddress);
         labelAddress.setSize("186px", "18px");
-        
-        final TextBox AddresstextBox = new TextBox();
-        rightUpPanel.add(AddresstextBox);
-        AddresstextBox.setSize("170px", "22px");
+         
+
         
         final Label Phonelabel = new Label("Мобильный телефон");
         Phonelabel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
-        rightUpPanel.add(Phonelabel);
         Phonelabel.setSize("186px", "18px");
         
-        final TextBox PhonetextBox = new TextBox();
-        rightUpPanel.add(PhonetextBox);
-        PhonetextBox.setSize("170px", "22px");
+        TextItem PhonetextBox = new TextItem("phone", "Введите телефон");  
+        PhonetextBox.setWidth(300);  
+        PhonetextBox.setHint(""); 
         
         Label labelEmail = new Label("Email");
         labelEmail.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
-        rightUpPanel.add(labelEmail);
         labelEmail.setSize("186px", "18px");
         
-        TextBox EmailtextBox = new TextBox();
-        rightUpPanel.add(EmailtextBox);
-        EmailtextBox.setSize("170px", "22px");
+        TextItem Emailtextbox = new TextItem("email", "Введите email");  
+        Emailtextbox.setWidth(300);  
+        Emailtextbox.setHint(""); 
         
         Label labelSkype = new Label("Skype");
-        rightUpPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
-        rightUpPanel.add(labelSkype);
+        rootPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
         labelSkype.setSize("186px", "18px");
         
-        TextBox SkypetextBox = new TextBox();
-        rightUpPanel.add(SkypetextBox);
-        SkypetextBox.setSize("170px", "22px");
-        
-        Button validation = new Button("Проверить");
-        validation.addClickHandler(new com.google.gwt.event.dom.client.ClickHandler() {
-        	public void onClick(com.google.gwt.event.dom.client.ClickEvent event) {
-        		if (NametextBox.getText().length()>50 || NametextBox.getText().length() == 0)
-        			NametextBox.setStyleName("invalid");
-        		else 
-        			NametextBox.setStyleName("valid");
-        		if (SurnametextBox.getText().length()>50 || SurnametextBox.getText().length() == 0)
-        			SurnametextBox.setStyleName("invalid");
-        		else 
-        			SurnametextBox.setStyleName("valid");
-        		if (AddresstextBox.getText().length()>100 || AddresstextBox.getText().length() == 0)
-        			AddresstextBox.setStyleName("invalid");
-        		else 
-        			AddresstextBox.setStyleName("valid");
-        		if (PhonetextBox.getText().length()>13 || PhonetextBox.getText().length()==0 
-        				|| PhonetextBox.getText().toCharArray()[0]!='+')
-        			PhonetextBox.setStyleName("invalid");
-        		else 
-        			PhonetextBox.setStyleName("valid");
-        	}
-        });
-        rightUpPanel.add(validation);
+        TextItem Skypetextbox = new TextItem("email", "Введите skype");  
+        Skypetextbox.setWidth(300);  
+        Skypetextbox.setHint(""); 
         
         Label goalLabel = new Label("Цель");
         goalLabel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
-        mainPanel.add(goalLabel);
         goalLabel.setSize("186px", "18px");
         
-        ListBox goalComboBox = new ListBox();
-        mainPanel.add(goalComboBox);
-        goalComboBox.setSize("343px", "22px");
-        
+        SelectItem goalComboBox = new SelectItem("Выберите цель");
+        goalComboBox.setWidth(300);
+        goalComboBox.setHeight(30);
         // Заполнение возможных целей из базы
         
-        goalComboBox.insertItem("Java Junior", 0);
-        goalComboBox.insertItem("PHP Senior", 1);
+        goalComboBox.setTitle("Выберите цель");
         
         // Опыт работы и образование
         
         WorkExperienceSimplePanel expPanel = new WorkExperienceSimplePanel();
-        mainPanel.add(expPanel);
-        
+                
         EducationSimplePanel eduPanel = new EducationSimplePanel();
-        mainPanel.add(eduPanel);
-        
+                
         LanguageSimplePanel lanPanel = new LanguageSimplePanel();
-        mainPanel.add(lanPanel);
-        
+               
         // Знание языков программирования и технологий
                 
         final MultiComboBoxLayoutStyle initialLayoutStyle = MultiComboBoxLayoutStyle.FLOW;  
@@ -240,27 +196,27 @@ public class RegistrationSimplePanel extends SimplePanel {
         //suppliesForm.setItems(languages);  
         languages.setAddUnknownValues(false); 
         //languages.redraw();
-        mainPanel.add(suppliesForm);
-        
+                
 	    TextArea first = new TextArea();
 	    first.setWidth("343px");
 	    first.addStyleName("fixTextArea");
 	    TextArea second = new TextArea();
 	    second.addStyleName("fixTextArea");
 	    second.setWidth("343px");
-        HorizontalPanel hpFirst = new HorizontalPanel();
-	    HorizontalPanel hpSecond = new HorizontalPanel();
 	    Label lbHobby = new Label("Личные качества");
 	    Label lbOther = new Label("Прочее");
-	    mainPanel.add(lbHobby);
-	    mainPanel.add(first);
-	    mainPanel.add(lbOther);
-	    mainPanel.add(second);
-        
+	    
 	    CheckBox cb = new CheckBox();
 	    cb.setText("Даю право на обработку и хранение личной информации администрации ресурса");
-	    cb.setWidth("343px");
-	    mainPanel.add(cb);
+	    cb.setSize("343px", "44px");
+	    	    
+	    
+	    mainForm.setFields(SurnametextBox, NametextBox, PhonetextBox, Emailtextbox, Skypetextbox, dateItem, goalComboBox);
+	    mainForm.markForRedraw();
+	    
+	    rootPanel.add(eduPanel);
+	    rootPanel.add(expPanel);
+	    rootPanel.add(lanPanel);
 	    
         languages.addChangedHandler(new ChangedHandler() {
 			
