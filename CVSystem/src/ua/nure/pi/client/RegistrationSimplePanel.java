@@ -183,6 +183,8 @@ public class RegistrationSimplePanel extends SimplePanel {
         EducationSimplePanel eduPanel = new EducationSimplePanel();
                 
         LanguageSimplePanel lanPanel = new LanguageSimplePanel();
+        
+        SertificateSimplePanel ssp = new SertificateSimplePanel();
                
         // Знание языков программирования и технологий
                 
@@ -222,10 +224,15 @@ public class RegistrationSimplePanel extends SimplePanel {
 	    	    
 	    
 	    mainForm.setFields(SurnametextBox, NametextBox, PhonetextBox, Emailtextbox, Skypetextbox, dateItem, goalComboBox, languages);
+        mainForm.setTitleOrientation(TitleOrientation.TOP);
+
+	    
 	    mainForm.markForRedraw();
+	    
 	    rootPanel.add(lanPanel);
 	    rootPanel.add(eduPanel);
 	    rootPanel.add(expPanel);
+	    rootPanel.add(ssp);
 	    
 	    rootPanel.add(lbHobby);
 	    rootPanel.add(first);
