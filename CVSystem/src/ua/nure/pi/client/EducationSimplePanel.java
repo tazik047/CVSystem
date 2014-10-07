@@ -25,9 +25,11 @@ public class EducationSimplePanel extends SimplePanel{
 	private ArrayList<EducationElementSimplePanel> educations;
 	private DynamicForm form;
 	private int countColor = -1;
+	VerticalPanel root;
+	
 	public EducationSimplePanel() {
-		VerticalPanel hp = new VerticalPanel();
-		hp.setWidth("100%");
+		root = new VerticalPanel();
+		root.setWidth("100%");
 		final AbsolutePanel absP = new AbsolutePanel();
 		
 		educations = new ArrayList<EducationElementSimplePanel>();
@@ -37,24 +39,26 @@ public class EducationSimplePanel extends SimplePanel{
         form.setNumCols(4);
         final VerticalPanel vp = new VerticalPanel();
         form.addChild(vp);
-        Button btAdd = new Button("Добавить образование");
-        hp.add(absP);
-        hp.add(btAdd);
-        hp.setCellHorizontalAlignment(btAdd, HasHorizontalAlignment.ALIGN_CENTER);
+        final Button btAdd = new Button("Добавить образование");
+        btAdd.addStyleName("panel-startAddButton");
+        btAdd.setTitle("Добавить образование");
+        root.add(absP);
+        root.add(btAdd);
+        root.setCellHorizontalAlignment(btAdd, HasHorizontalAlignment.ALIGN_CENTER);
         btAdd.addClickHandler(new ClickHandler() {
 			
 			@Override
 			public void onClick(ClickEvent event) {
-				addExp(vp, absP);
+				addExp(vp, absP, btAdd);
 				form.markForRedraw();
 			}
 		});
-        setWidget(hp);
+        setWidget(root);
         form.markForRedraw();
         
 	}
 	
-	private void addExp(final VerticalPanel vp, AbsolutePanel absP){
+	private void addExp(final VerticalPanel vp, final AbsolutePanel absP, final Button btAdd){
 		/*if(educations.size()!=0)
 			educations.get(educations.size()-1).addSeparator();
 		else
@@ -81,8 +85,14 @@ public class EducationSimplePanel extends SimplePanel{
 		
 		*/
 		
-		if(educations.size() == 0)
+		if(educations.size() == 0){
 			absP.add(form);
+			root.remove(btAdd);
+			absP.add(btAdd);
+			btAdd.removeStyleName("panel-startAddButton");
+			btAdd.addStyleName("panel-newAddButton");
+						
+		}
 		final EducationElementSimplePanel exp = new EducationElementSimplePanel();
 		countColor  = (++countColor)%2;
 		if(countColor == 0){
@@ -98,8 +108,13 @@ public class EducationSimplePanel extends SimplePanel{
 			public void onClick(ClickEvent event) {
 				vp.remove(exp);
 				educations.remove(exp);
-				if(educations.size()==0)
+				if(educations.size()==0){
 					form.removeFromParent();
+					absP.remove(btAdd);
+					root.add(btAdd);
+					btAdd.removeStyleName("panel-newAddButton");
+					btAdd.addStyleName("panel-startAddButton");
+				}
 				form.markForRedraw();
 			}
 		});

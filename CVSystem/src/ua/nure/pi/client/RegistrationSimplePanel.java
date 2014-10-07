@@ -84,6 +84,7 @@ public class RegistrationSimplePanel extends SimplePanel {
 
 	    VerticalPanel rootPanel = new VerticalPanel();
 	    DynamicForm mainForm = new DynamicForm();
+	    mainForm.setNumCols(1);
 	    rootPanel.setWidth("100%");
 	    rootPanel.add(mainForm);
 	    final SimplePanel facultiesPanel = new SimplePanel();

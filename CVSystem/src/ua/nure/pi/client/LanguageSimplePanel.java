@@ -25,10 +25,11 @@ public class LanguageSimplePanel extends SimplePanel{
 	private ArrayList<LanguageElementSimplePanel> languages;
 	private DynamicForm form;
 	private int countColor = -1;
+	private VerticalPanel root;
 	
 	public LanguageSimplePanel() {
-		VerticalPanel hp = new VerticalPanel();
-		hp.setWidth("100%");
+		root = new VerticalPanel();
+		root.setWidth("100%");
 		final AbsolutePanel absP = new AbsolutePanel();
 		
 		languages = new ArrayList<LanguageElementSimplePanel>();
@@ -38,24 +39,26 @@ public class LanguageSimplePanel extends SimplePanel{
         form.setNumCols(4);
         final VerticalPanel vp = new VerticalPanel();
         form.addChild(vp);
-        Button btAdd = new Button("Добавить язык");
-        hp.add(absP);
-        hp.add(btAdd);
-        hp.setCellHorizontalAlignment(btAdd, HasHorizontalAlignment.ALIGN_CENTER);
+        final Button btAdd = new Button("Добавить язык");
+        btAdd.addStyleName("panel-startAddButton");
+        btAdd.setTitle("Добавить язык");
+        root.add(absP);
+        root.add(btAdd);
+        root.setCellHorizontalAlignment(btAdd, HasHorizontalAlignment.ALIGN_CENTER);
         btAdd.addClickHandler(new ClickHandler() {
 			
 			@Override
 			public void onClick(ClickEvent event) {
-				addLang(vp, absP);
+				addLang(vp, absP, btAdd);
 				form.markForRedraw();
 			}
 		});
-        setWidget(hp);
+        setWidget(root);
         form.markForRedraw();
         
 	}
 	
-	private void addLang(final VerticalPanel vp, AbsolutePanel absP){
+	private void addLang(final VerticalPanel vp, final AbsolutePanel absP, final Button btAdd){
 		/*if(languages.size()!=0)
 			languages.get(languages.size()-1).addSeparator();
 		else
@@ -80,8 +83,14 @@ public class LanguageSimplePanel extends SimplePanel{
 		vp.add(hp);
 		languages.add(lang);*/
 		
-		if(languages.size() == 0)
+		if(languages.size() == 0){
 			absP.add(form);
+			root.remove(btAdd);
+			absP.add(btAdd);
+			btAdd.removeStyleName("panel-startAddButton");
+			btAdd.addStyleName("panel-newAddButton");
+						
+		}
 		final LanguageElementSimplePanel lang = new LanguageElementSimplePanel();
 		countColor  = (++countColor)%2;
 		if(countColor == 0){
@@ -97,8 +106,13 @@ public class LanguageSimplePanel extends SimplePanel{
 			public void onClick(ClickEvent event) {
 				vp.remove(lang);
 				languages.remove(lang);
-				if(languages.size()==0)
+				if(languages.size()==0){
 					form.removeFromParent();
+					absP.remove(btAdd);
+					root.add(btAdd);
+					btAdd.removeStyleName("panel-newAddButton");
+					btAdd.addStyleName("panel-startAddButton");
+				}
 				form.markForRedraw();
 			}
 		});

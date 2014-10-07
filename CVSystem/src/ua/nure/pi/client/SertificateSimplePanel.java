@@ -22,45 +22,54 @@ import com.smartgwt.client.widgets.form.DynamicForm;
 
 public class SertificateSimplePanel extends SimplePanel{
 	
-	private ArrayList<SertificateElementSimplePanel> works;
+	private ArrayList<SertificateElementSimplePanel> sertificates;
 	private DynamicForm form;
 	private int countColor = -1;
-	
+	private VerticalPanel root;
 	public SertificateSimplePanel() {
-		VerticalPanel hp = new VerticalPanel();
-		hp.setWidth("100%");
+		
+		root = new VerticalPanel();
+		root.setWidth("100%");
 		final AbsolutePanel absP = new AbsolutePanel();
 		
-		works = new ArrayList<SertificateElementSimplePanel>();
+		sertificates = new ArrayList<SertificateElementSimplePanel>();
 		form = new DynamicForm();  
         form.setIsGroup(true);  
         form.setGroupTitle("Сертификаты");
         form.setNumCols(4);
         final VerticalPanel vp = new VerticalPanel();
         form.addChild(vp);
-        Button btAdd = new Button("Добавить сертификат");
-        hp.add(absP);
-        hp.add(btAdd);
-        hp.setCellHorizontalAlignment(btAdd, HasHorizontalAlignment.ALIGN_CENTER);
+        final Button btAdd = new Button("Добавить сертификат");
+        btAdd.addStyleName("panel-startAddButton");
+        btAdd.setTitle("Добавить сертификат");
+        root.add(absP);
+        root.add(btAdd);
+        root.setCellHorizontalAlignment(btAdd, HasHorizontalAlignment.ALIGN_CENTER);
         btAdd.addClickHandler(new ClickHandler() {
 			
 			@Override
 			public void onClick(ClickEvent event) {
-				addExp(vp, absP);
+				addExp(vp, absP, btAdd);
 				form.markForRedraw();
 			}
 		});
-        setWidget(hp);
+        setWidget(root);
         form.markForRedraw();
         
 	}
 	
-	private void addExp(final VerticalPanel vp, AbsolutePanel absP){
+	private void addExp(final VerticalPanel vp, final AbsolutePanel absP, final Button btAdd){
 		/*if(works.size()!=0)
 			works.get(works.size()-1).addSeparator();
 		else*/
-		if(works.size() == 0)
+		if(sertificates.size() == 0){
 			absP.add(form);
+			root.remove(btAdd);
+			absP.add(btAdd);
+			btAdd.removeStyleName("panel-startAddButton");
+			btAdd.addStyleName("panel-newAddButton");
+						
+		}
 		final SertificateElementSimplePanel exp = new SertificateElementSimplePanel();
 		countColor = (++countColor)%2;
 		if(countColor == 0){
@@ -75,9 +84,14 @@ public class SertificateSimplePanel extends SimplePanel{
 			@Override
 			public void onClick(ClickEvent event) {
 				vp.remove(exp);
-				works.remove(exp);
-				if(works.size()==0)
+				sertificates.remove(exp);
+				if(sertificates.size()==0){
 					form.removeFromParent();
+					absP.remove(btAdd);
+					root.add(btAdd);
+					btAdd.removeStyleName("panel-newAddButton");
+					btAdd.addStyleName("panel-startAddButton");
+				}
 				form.markForRedraw();
 			}
 		});
@@ -85,12 +99,12 @@ public class SertificateSimplePanel extends SimplePanel{
 		hp.add(imgDel);
 		hp.setCellVerticalAlignment(imgDel, HasVerticalAlignment.ALIGN_MIDDLE);*/
 		vp.add(exp);
-		works.add(exp);
+		sertificates.add(exp);
 	}
 
 	public Collection<Sertificate> getExp() throws IllegalArgumentException{
 		Collection<Sertificate> studentSerts = new ArrayList<Sertificate>();
-		for(SertificateElementSimplePanel we : works)
+		for(SertificateElementSimplePanel we : sertificates)
 			studentSerts.add(we.getSertificate());
 		return studentSerts;
 	}

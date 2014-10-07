@@ -24,10 +24,11 @@ public class WorkExperienceSimplePanel extends SimplePanel{
 	private ArrayList<WorkExperinceElementSimplePanel> works;
 	private DynamicForm form;
 	private int countColor = -1;
+	private VerticalPanel root;
 	
 	public WorkExperienceSimplePanel() {
-		VerticalPanel hp = new VerticalPanel();
-		hp.setWidth("100%");
+		root = new VerticalPanel();
+		root.setWidth("100%");
 		final AbsolutePanel absP = new AbsolutePanel();
 		
 		works = new ArrayList<WorkExperinceElementSimplePanel>();
@@ -37,29 +38,37 @@ public class WorkExperienceSimplePanel extends SimplePanel{
         form.setNumCols(4);
         final VerticalPanel vp = new VerticalPanel();
         form.addChild(vp);
-        Button btAdd = new Button("Добавить опыт работы");
-        hp.add(absP);
-        hp.add(btAdd);
-        hp.setCellHorizontalAlignment(btAdd, HasHorizontalAlignment.ALIGN_CENTER);
+        final Button btAdd = new Button("Добавить опыт работы");
+        btAdd.addStyleName("panel-startAddButton");
+        btAdd.setTitle("Добавить опыт работы");
+        root.add(absP);
+        root.add(btAdd);
+        root.setCellHorizontalAlignment(btAdd, HasHorizontalAlignment.ALIGN_CENTER);
         btAdd.addClickHandler(new ClickHandler() {
 			
 			@Override
 			public void onClick(ClickEvent event) {
-				addExp(vp, absP);
+				addExp(vp, absP, btAdd);
 				form.markForRedraw();
 			}
 		});
-        setWidget(hp);
+        setWidget(root);
         form.markForRedraw();
         
 	}
 	
-	private void addExp(final VerticalPanel vp, AbsolutePanel absP){
+	private void addExp(final VerticalPanel vp, final AbsolutePanel absP, final Button btAdd){
 		/*if(works.size()!=0)
 			works.get(works.size()-1).addSeparator();
 		else*/
-		if(works.size() == 0)
+		if(works.size() == 0){
 			absP.add(form);
+			root.remove(btAdd);
+			absP.add(btAdd);
+			btAdd.removeStyleName("panel-startAddButton");
+			btAdd.addStyleName("panel-newAddButton");
+						
+		}
 		final WorkExperinceElementSimplePanel exp = new WorkExperinceElementSimplePanel();
 		countColor = (++countColor)%2;
 		if(countColor == 0){
@@ -75,8 +84,13 @@ public class WorkExperienceSimplePanel extends SimplePanel{
 			public void onClick(ClickEvent event) {
 				vp.remove(exp);
 				works.remove(exp);
-				if(works.size()==0)
+				if(works.size()==0){
 					form.removeFromParent();
+					absP.remove(btAdd);
+					root.add(btAdd);
+					btAdd.removeStyleName("panel-newAddButton");
+					btAdd.addStyleName("panel-startAddButton");
+				}
 				form.markForRedraw();
 			}
 		});
