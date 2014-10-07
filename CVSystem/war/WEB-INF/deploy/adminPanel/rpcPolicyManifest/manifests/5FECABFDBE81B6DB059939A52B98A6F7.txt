@@ -1,0 +1,2 @@
+serviceClass: ua.nure.pi.client.AdminPanelService
+path: A6610E3E152922E8751870C7C7B7EE30.gwt.rpc
