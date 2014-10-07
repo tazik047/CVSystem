@@ -294,3 +294,19 @@ h3.assistive-text {
 	right:0px;
 	cursor:pointer;
 }
+
+.panel-startAddButton{
+	width:100%;
+}
+
+.panel-newAddButton{
+	position: absolute;
+	bottom: 5px;
+	left: 318px;
+	background: url('/img/addButton.png') no-repeat !important;
+	width: 30px;
+	height: 30px;
+	text-indent: -9999px;
+	background-size: cover !important;
+	z-index: 1000000;
+}
