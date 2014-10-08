@@ -87,8 +87,10 @@ public class RegistrationSimplePanel extends SimplePanel {
 	    DynamicForm mainForm = new DynamicForm();
 	    mainForm.setNumCols(1);
 	    rootPanel.setWidth("100%");
-	    rootPanel.add(mainForm);
 	    final SimplePanel facultiesPanel = new SimplePanel();
+	    rootPanel.add(facultiesPanel);
+	    rootPanel.add(mainForm);
+
 	    // Факультеты и группы
 	    
 	    registrationService.getFaculties(new AsyncCallback<Collection<Faculty>>() {
