@@ -21,6 +21,7 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.DockPanel;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
+import com.google.gwt.user.client.ui.HasHorizontalAlignment.HorizontalAlignmentConstant;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
@@ -144,7 +145,7 @@ public class RegistrationSimplePanel extends SimplePanel {
         TextItem PhonetextBox = new TextItem("phone", "Введите телефон");  
         PhonetextBox.setWidth(300);  
         PhonetextBox.setHint(""); 
-        PhonetextBox.setMask("(###) ###-####");  
+        PhonetextBox.setMask("+38(###) ###-####");  
         
         RegExpValidator emailValidator = new RegExpValidator();  
         emailValidator.setExpression("^([a-zA-Z0-9_.\\-+])+@(([a-zA-Z0-9\\-])+\\.)+[a-zA-Z0-9]{2,4}$");  
@@ -212,7 +213,10 @@ public class RegistrationSimplePanel extends SimplePanel {
 	    TextArea first = new TextArea();
 	    first.setWidth("343px");
 	    first.addStyleName("fixTextArea");
-	   
+	    first.setTitle("Личные качества");
+	    first.setName("Личные качества");
+	    
+	    
 	    TextArea second = new TextArea();
 	    second.addStyleName("fixTextArea");
 	    second.setWidth("343px");
@@ -242,10 +246,18 @@ public class RegistrationSimplePanel extends SimplePanel {
 	    
 	    rootPanel.add(cb);
 	    
+	    rootPanel.setCellHorizontalAlignment(lbHobby, HasHorizontalAlignment.ALIGN_LEFT);
+	    rootPanel.setCellHorizontalAlignment(lbOther, HasHorizontalAlignment.ALIGN_LEFT);
+	    rootPanel.setCellHorizontalAlignment(first, HasHorizontalAlignment.ALIGN_LEFT);
+	    rootPanel.setCellHorizontalAlignment(second, HasHorizontalAlignment.ALIGN_LEFT);
+
 	    
 	    rootPanel.setCellHorizontalAlignment(eduPanel, HasHorizontalAlignment.ALIGN_CENTER);
 	    rootPanel.setCellHorizontalAlignment(expPanel, HasHorizontalAlignment.ALIGN_CENTER);
 	    rootPanel.setCellHorizontalAlignment(lanPanel, HasHorizontalAlignment.ALIGN_CENTER);
+	    
+	    rootPanel.setCellHorizontalAlignment(cb, HasHorizontalAlignment.ALIGN_LEFT);
+
 	    
         languages.addChangedHandler(new ChangedHandler() {
 			
