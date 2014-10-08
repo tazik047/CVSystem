@@ -106,45 +106,34 @@ public class RegistrationSimplePanel extends SimplePanel {
           });
         
         // Персональная информация
-        
-        Label labelSurname = new Label("Фамилия");
-        labelSurname.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
-        labelSurname.setSize("344px", "18px");
-        
+                
         TextItem SurnametextBox = new TextItem("surname", "Фамилия");  
         SurnametextBox.setWidth(300);  
-        SurnametextBox.setHint("Введите фамилию");  
-        
-        Label labelName = new Label("Имя");
-        labelName.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
-        labelName.setSize("180px", "18px");
-        
+        SurnametextBox.setHint("Введите фамилию. Например, Иванов");  
+        SurnametextBox.setShowHintInField(true);
+        SurnametextBox.setMask(">C<CCCCCCCCCCCCCCCCCCCC");
+               
         TextItem NametextBox = new TextItem("name", "Имя");  
         NametextBox.setWidth(300);  
-        NametextBox.setHint("Введите имя");  
-        
-        Label labelBirthday = new Label("Дата рождения");
-        labelBirthday.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
-        labelBirthday.setSize("180px", "18px");
-        
-        DateItem dateItem = new DateItem();
-		dateItem.setTitle("Введите дату рождения");
-		dateItem.setUseTextField(true);
-		dateItem.setWidth(300);
-		dateItem.setHint("");
-		//rootPanel.add(dateBox);
-        
-        Label labelAddress = new Label("Домашний адрес");
-        labelAddress.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
-        labelAddress.setSize("186px", "18px");
-         
+        NametextBox.setHint("Введите имя. Например, Иван");  
+        NametextBox.setShowHintInField(true);
+        NametextBox.setMask(">C<CCCCCCCCCCCCCCCCCCCC");
 
         
-        final Label Phonelabel = new Label("Мобильный телефон");
-        Phonelabel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
-        Phonelabel.setSize("186px", "18px");
+        DateItem dateItem = new DateItem();
+		dateItem.setTitle("Дата рождения");
+		dateItem.setUseTextField(true);
+		dateItem.setWidth(300);
+		dateItem.setHint("Введите дату рождения в формате ММ:ДД:ГГГГ или выберите справа");
+		dateItem.setShowHintInField(true);
         
-        TextItem PhonetextBox = new TextItem("phone", "Введите телефон");  
+        TextItem AddresstextBox = new TextItem("address", "Домашний адрес");  
+        AddresstextBox.setWidth(300);  
+        AddresstextBox.setHint("Введите домашний адрес. Например, г. Харьков, пр.Ленина, 9, кв.3");  
+        AddresstextBox.setShowHintInField(true);
+        AddresstextBox.setMask("");
+               
+        TextItem PhonetextBox = new TextItem("phone", "Контакнтый телефон");  
         PhonetextBox.setWidth(300);  
         PhonetextBox.setHint(""); 
         PhonetextBox.setMask("+38(###) ###-####");  
@@ -152,34 +141,26 @@ public class RegistrationSimplePanel extends SimplePanel {
         RegExpValidator emailValidator = new RegExpValidator();  
         emailValidator.setExpression("^([a-zA-Z0-9_.\\-+])+@(([a-zA-Z0-9\\-])+\\.)+[a-zA-Z0-9]{2,4}$");  
         
-        Label labelEmail = new Label("Email");
-        labelEmail.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
-        labelEmail.setSize("186px", "18px");
-        
-        TextItem Emailtextbox = new TextItem("email", "Введите email");  
+        TextItem Emailtextbox = new TextItem("email", "Email");  
         Emailtextbox.setWidth(300);  
-        Emailtextbox.setHint(""); 
+        Emailtextbox.setHint("Введите email. Например, example@gmail.com"); 
+        Emailtextbox.setShowHintInField(true);
         Emailtextbox.setValidators(emailValidator);
         
-        Label labelSkype = new Label("Skype");
-        rootPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
-        labelSkype.setSize("186px", "18px");
-        
-        TextItem Skypetextbox = new TextItem("email", "Введите skype");  
+        TextItem Skypetextbox = new TextItem("email", "Skype");  
         Skypetextbox.setWidth(300);  
-        Skypetextbox.setHint(""); 
+        Skypetextbox.setHint("Введите skype"); 
+        Skypetextbox.setShowHintInField(true);
+
         
-        Label goalLabel = new Label("Цель");
-        goalLabel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
-        goalLabel.setSize("186px", "10px");
-        
-        SelectItem goalComboBox = new SelectItem("Выберите цель");
+      
+        SelectItem goalComboBox = new SelectItem("Желаемая должность");
+        goalComboBox.setHint("-Должности-");
+        goalComboBox.setShowHintInField(true);
         goalComboBox.setWidth(300);
         goalComboBox.setHeight(22);
         // Заполнение возможных целей из базы
-        
-        goalComboBox.setTitle("Выберите цель");
-        
+                
         // Опыт работы и образование
         
         WorkExperienceSimplePanel expPanel = new WorkExperienceSimplePanel();
@@ -189,28 +170,41 @@ public class RegistrationSimplePanel extends SimplePanel {
         LanguageSimplePanel lanPanel = new LanguageSimplePanel();
         
         SertificateSimplePanel ssp = new SertificateSimplePanel();
-               
+        
         // Знание языков программирования и технологий
                 
-        final MultiComboBoxLayoutStyle initialLayoutStyle = MultiComboBoxLayoutStyle.FLOW;  
-        final MultiComboBoxItem languages = new MultiComboBoxItem("languages", "Языки");
+        final MultiComboBoxLayoutStyle initialLayoutStyle = MultiComboBoxLayoutStyle.HORIZONTAL;  
+        final MultiComboBoxItem languages = new MultiComboBoxItem("languages", "Языки программирования");
         
         final LinkedHashMap<String, String> lhm = new LinkedHashMap<>();
         lhm.put("Java", "Java");
         lhm.put("Haskell", "Haskell");
         lhm.put("Python", "Python");
+        lhm.put("Java1", "Jav1a");
+        lhm.put("Haske1ll", "Ha1skell");
+        lhm.put("Pyth1on", "Py1thon");
+        lhm.put("Jav1a", "Ja2va");
+        lhm.put("Hask2ell", "Has2kell");
+        lhm.put("Pyth2on", "Py2hon");
         languages.setValueMap(lhm);
         languages.setLayoutStyle(initialLayoutStyle);
 
-        
         languages.setAddUnknownValues(false);
-        final DynamicForm suppliesForm = new DynamicForm();  
-        suppliesForm.setWidth100();  
-        suppliesForm.setNumCols(1);  
-        suppliesForm.setTitleOrientation(TitleOrientation.TOP);  
-        //suppliesForm.setItems(languages);  
-        languages.setAddUnknownValues(false); 
-        //languages.redraw();
+        languages.setColSpan(20);
+        
+		languages.addChangedHandler(new ChangedHandler() {
+					
+					@Override
+					public void onChanged(ChangedEvent event) {
+						if(!lhm.containsKey(languages.getValues()[0])){
+							Collection<String> col = new ArrayList<String>();
+							for(int i = 1; i < languages.getValues().length; i++)
+								col.add(languages.getValues()[i]);
+							languages.clearValue();
+							languages.setValues(col.toArray());
+						}
+					}
+				});
                 
 	    TextArea first = new TextArea();
 	    first.setWidth("343px");
@@ -261,24 +255,11 @@ public class RegistrationSimplePanel extends SimplePanel {
 	    rootPanel.setCellHorizontalAlignment(cb, HasHorizontalAlignment.ALIGN_LEFT);
 
 	    
-        languages.addChangedHandler(new ChangedHandler() {
-			
-			@Override
-			public void onChanged(ChangedEvent event) {
-				if(!lhm.containsKey(languages.getValues()[0])){
-					Collection<String> col = new ArrayList<String>();
-					for(int i = 1; i < languages.getValues().length; i++)
-						col.add(languages.getValues()[i]);
-					languages.clearValue();
-					languages.setValues(col.toArray());
-				}
-			}
-		});
 
-        suppliesForm.setItems(languages);
+        //suppliesForm.setItems(languages);
         setWidget(rootPanel);
-        languages.setAddUnknownValues(false);
-        suppliesForm.markForRedraw();
+        //languages.setAddUnknownValues(false);
+        //suppliesForm.markForRedraw();
     }  
 	
 	public void FillTree(ArrayList<Faculty> faculties, SimplePanel facultiesPanel)

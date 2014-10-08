@@ -132,6 +132,9 @@ public class WorkExperinceElementSimplePanel extends SimplePanel{
 				break;
 		}
 		we.setTypeOfDuration(types);
+		
+		we.setNameOfInstitution(nameOfInstitute.getText());
+		we.setRole(role.getText());
 		return we;
 	}
 	

@@ -101,6 +101,8 @@ public class EducationElementSimplePanel extends SimplePanel{
 		
 		ed.setStartYear(startYear);
 		ed.setEndYear(endYear);		
+		ed.setNameOfInstitution(nameOfInstitute.getText());
+		ed.setSpecialty(specialty.getText());
 		return ed;
 	}
 	

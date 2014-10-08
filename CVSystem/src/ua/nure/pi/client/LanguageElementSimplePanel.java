@@ -31,6 +31,7 @@ public class LanguageElementSimplePanel extends SimplePanel{
 	private int levelType;
 	private VerticalPanel rootPanel;
 	public Image imgDel;
+	private RadioGroupItem style;
 	
 	public LanguageElementSimplePanel(){
 		rootPanel = new VerticalPanel();
@@ -77,7 +78,7 @@ public class LanguageElementSimplePanel extends SimplePanel{
         styleMap.put(1, "Средний");  
         styleMap.put(2, "Высокий");  
           
-        RadioGroupItem style = new RadioGroupItem();
+        style = new RadioGroupItem();
         style.setCellStyle("Fiix");
         style.setDefaultValue(0);  
         style.setShowTitle(false);
@@ -102,6 +103,9 @@ public class LanguageElementSimplePanel extends SimplePanel{
 	
 	public Language getLanguage() throws IllegalArgumentException{
 		Language lang = new Language();
+		lang.setLevel(style.getValue().hashCode());
+		lang.setTitle(langBox.getValue(langBox.getSelectedIndex()));
+		
 		return lang;
 	}
 }

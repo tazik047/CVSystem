@@ -96,6 +96,7 @@ public class SertificateElementSimplePanel extends SimplePanel{
 		int year = Integer.parseInt(yearField.getValueAsString());
 		se.setSertificateName(desc.getText());
 		se.setSertificateYear(year);
+		
 		return se;
 	}
 	
