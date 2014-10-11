@@ -2,27 +2,34 @@ package ua.nure.pi.entity;
 
 public class Sertificate {
 	
-	private long SertificateId;
-	private String SertificateName;
-	private int SertificateYear;
+	private long sertificateId;
+	private String sertificateName;
+	private int sertificateYear;
+	private long CVsId;
 	
 	public long getSertificateId() {
-		return SertificateId;
+		return sertificateId;
 	}
 	public void setSertificateId(long sertificateId) {
-		SertificateId = sertificateId;
+		this.sertificateId = sertificateId;
 	}
 	public String getSertificateName() {
-		return SertificateName;
+		return sertificateName;
 	}
 	public void setSertificateName(String sertificateName) {
-		SertificateName = sertificateName;
+		this.sertificateName = sertificateName;
 	}
 	public int getSertificateYear() {
-		return SertificateYear;
+		return sertificateYear;
 	}
 	public void setSertificateYear(int sertificateYear) {
-		SertificateYear = sertificateYear;
+		this.sertificateYear = sertificateYear;
+	}
+	public long getCVsId() {
+		return CVsId;
+	}
+	public void setCVsId(long cVsId) {
+		CVsId = cVsId;
 	}
 	
 }
