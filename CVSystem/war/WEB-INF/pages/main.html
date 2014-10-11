@@ -6,6 +6,7 @@
 	</script>
 <script type="text/javascript" language="javascript" src="main/main.nocache.js"></script>
 <link rel="stylesheet" type="text/css" href="css/CV2.css">
+<link rel="stylesheet" href="css/nivo-slider.css" type="text/css" media="screen" />
 </head>
     
 <body>
@@ -36,22 +37,20 @@
 
 		<div class="container">
 			<div id="content">
-				<h1 align="center">"Центр - Карьера"</h1><h3 align="center">Харьковского национального университета радиоэлектроники</h3>
-    <h3> Цель:</h3>
-  Помочь студентам и выпускникам вузов создать и эффективно выполнить личный план развития профессиональной  карьеры.
- 
-     <h3>Задачи:</h3>
-  Анализ тенденций развития рынка труда и предоставление образовательных услуг студентам и выпускникам вузов в виде консультаций, тестирования, тренингов по технологии поиска работы в рыночных условиях, а также специализированных курсов по профессиональным вопросам.
-Создание и поддержка информационных ресурсов профессиональной карьеры и трудоустройства, в т. ч. компьютерных баз данных, печатных изданий, источников в Интернет.
-Организация прямых контактов с работодателями, поддержка конкурсных отборов кандидатов, и другие формы содействия трудоустройству.
- 
-    <h3> Услуги:</h3>
-  Карьера-центр предлагает свои услуги:
-  <ul>
-       <li>Студентам и выпускникам вузов;</li>
-	   <li>Предприятиям, фирмам, организациям;</li>
-      </ul>
-			</div><!-- .content -->
+			 <div id="slider-wrapper">
+        
+            <div id="slider" class="nivoSlider">
+                <img src="img/toystory.jpg" alt="" />
+                <a href="http://dev7studios.com"><img src="img/up.jpg" alt="" title="This is an example of a caption" /></a>
+                <img src="img/walle.jpg" alt="" />
+                <img src="img/nemo.jpg" alt="" title="#htmlcaption" />
+            </div>
+            <div id="htmlcaption" class="nivo-html-caption">
+                <strong>This</strong> is an example of a <em>HTML</em> caption with <a href="#">a link</a>.
+            </div>
+        
+        </div>
+						</div><!-- .content -->
 		</div><!-- .container-->
 
 		<div id="right-sidebar">
@@ -78,7 +77,13 @@
         in order for this application to display correctly.
       </div>
     </noscript>
-
+<script type="text/javascript" src="js/jquery-1.4.3.min.js"></script>
+    <script type="text/javascript" src="js/jquery.nivo.slider.pack.js"></script>
+    <script type="text/javascript">
+    $(window).load(function() {
+        $('#slider').nivoSlider();
+    });
+    </script>
 
 </div>
 </div>
