@@ -15,7 +15,7 @@ public class MSSqlEducationDAO implements EducationDAO {
 	
 	private static final String SQL__SELECT_EDUCATION = "SELECT * FROM Educations WHERE CVsId = ?";
 	private static final String SQL__INSERT_EDUCATION = "INSERT INTO Educations(StartYear, EndYear, "
-			+ "NameOfInstitution, Specialty, CVsId) VALUES(?,?,?,?,?,)";
+			+ "NameOfInstitution, Specialty, CVsId) VALUES(?,?,?,?,?)";
 
 
 	@Override
