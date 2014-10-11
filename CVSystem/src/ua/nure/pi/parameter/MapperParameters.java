@@ -46,4 +46,10 @@ public interface MapperParameters {
 	String EDUCATION__NAMEOFINSTITUTION = "NameOfInstitution";
 	String EDUCATION__END = "EndYear";
 	String EDUCATION__START = "StartYear";
+	
+	//Sertificate
+	String SERTIFICATE__ID = "SertificatsId";
+	String SERTIFICATE__NAME = "Name";
+	String SERTIFICATE__YEAR = "Year";
+	String SERTIFICATE__CVsID = "CVsId";
 }
