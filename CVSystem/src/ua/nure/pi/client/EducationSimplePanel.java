@@ -4,38 +4,46 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import ua.nure.pi.entity.Education;
-import ua.nure.pi.entity.WorkExp;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
-import com.google.gwt.user.client.ui.HasVerticalAlignment;
-import com.google.gwt.user.client.ui.HorizontalPanel;
-import com.google.gwt.user.client.ui.Image;
-import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.SimplePanel;
-import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import com.smartgwt.client.types.VisibilityMode;
 import com.smartgwt.client.widgets.form.DynamicForm;
+import com.smartgwt.client.widgets.layout.SectionStack;
+import com.smartgwt.client.widgets.layout.SectionStackSection;
+import com.smartgwt.client.widgets.layout.events.SectionHeaderClickEvent;
+import com.smartgwt.client.widgets.layout.events.SectionHeaderClickHandler;
 
 public class EducationSimplePanel extends SimplePanel{
 	
 	private ArrayList<EducationElementSimplePanel> educations;
-	private DynamicForm form;
+	private SectionStack sectionStack;
 	private int countColor = -1;
-	VerticalPanel root;
+	private int pixelCount = 26;
+	private VerticalPanel root;
+	private boolean expend = true;
 	
 	public EducationSimplePanel() {
+		sectionStack = new SectionStack();  
+        sectionStack.setVisibilityMode(VisibilityMode.MULTIPLE);
+  
+        sectionStack.setWidth("355px");
+        sectionStack.setHeight(String.valueOf(pixelCount)+"px");
+        SectionStackSection section1 = new SectionStackSection("Образование");
+        sectionStack.addSection(section1);
+        
 		root = new VerticalPanel();
 		root.setWidth("100%");
 		final AbsolutePanel absP = new AbsolutePanel();
 		
 		educations = new ArrayList<EducationElementSimplePanel>();
-		form = new DynamicForm();  
-        form.setIsGroup(true);  
-        form.setGroupTitle("Образование");
+		DynamicForm form = new DynamicForm();
+		section1.addItem(form);
         form.setNumCols(4);
         final VerticalPanel vp = new VerticalPanel();
         form.addChild(vp);
@@ -50,7 +58,21 @@ public class EducationSimplePanel extends SimplePanel{
 			@Override
 			public void onClick(ClickEvent event) {
 				addExp(vp, absP, btAdd);
-				form.markForRedraw();
+				sectionStack.markForRedraw();
+			}
+		});
+        
+        sectionStack.addSectionHeaderClickHandler(new SectionHeaderClickHandler() {
+			
+			@Override
+			public void onSectionHeaderClick(SectionHeaderClickEvent event) {
+				if(expend)
+					sectionStack.setHeight(String.valueOf("26px"));
+				else
+					sectionStack.setHeight(String.valueOf(pixelCount)+"px");
+				btAdd.setVisible(!expend);
+				sectionStack.markForRedraw();
+				expend = !expend; 
 			}
 		});
         setWidget(root);
@@ -59,34 +81,9 @@ public class EducationSimplePanel extends SimplePanel{
 	}
 	
 	private void addExp(final VerticalPanel vp, final AbsolutePanel absP, final Button btAdd){
-		/*if(educations.size()!=0)
-			educations.get(educations.size()-1).addSeparator();
-		else
-			absP.add(form);
-		final EducationElementSimplePanel exp = new EducationElementSimplePanel();
-		final HorizontalPanel hp = new HorizontalPanel();
-		Image imgDel = new Image("img/close.png", 0, 0, 16, 16);
-		imgDel.addClickHandler(new ClickHandler() {
-			
-			@Override
-			public void onClick(ClickEvent event) {
-				vp.remove(hp);
-				educations.remove(exp);
-				if(educations.size()==0)
-					form.removeFromParent();
-				form.markForRedraw();
-			}
-		});
-		hp.add(exp);
-		hp.add(imgDel);
-		hp.setCellVerticalAlignment(imgDel, HasVerticalAlignment.ALIGN_MIDDLE);
-		vp.add(hp);
-		educations.add(exp);
-		
-		*/
 		
 		if(educations.size() == 0){
-			absP.add(form);
+			absP.add(sectionStack);
 			root.remove(btAdd);
 			absP.add(btAdd);
 			btAdd.removeStyleName("panel-startAddButton");
@@ -94,33 +91,32 @@ public class EducationSimplePanel extends SimplePanel{
 						
 		}
 		final EducationElementSimplePanel exp = new EducationElementSimplePanel();
+		pixelCount+=137;
+		sectionStack.setHeight(String.valueOf(pixelCount)+"px");
 		countColor  = (++countColor)%2;
 		if(countColor == 0){
 			exp.setStyleName("stylePanel1");
 		}
 		else
 			exp.setStyleName("stylePanel2");
-		/*final HorizontalPanel hp = new HorizontalPanel();
-		Image imgDel = new Image("img/close.png", 0, 0, 16, 16);*/
 		exp.imgDel.addClickHandler(new ClickHandler() {
 			
 			@Override
 			public void onClick(ClickEvent event) {
 				vp.remove(exp);
 				educations.remove(exp);
+				pixelCount-=137;
+				sectionStack.setHeight(String.valueOf(pixelCount)+"px");
 				if(educations.size()==0){
-					form.removeFromParent();
+					sectionStack.removeFromParent();
 					absP.remove(btAdd);
 					root.add(btAdd);
 					btAdd.removeStyleName("panel-newAddButton");
 					btAdd.addStyleName("panel-startAddButton");
 				}
-				form.markForRedraw();
+				sectionStack.markForRedraw();
 			}
 		});
-		/*hp.add(exp);
-		hp.add(imgDel);
-		hp.setCellVerticalAlignment(imgDel, HasVerticalAlignment.ALIGN_MIDDLE);*/
 		vp.add(exp);
 		educations.add(exp);
 	}
