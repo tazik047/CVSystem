@@ -13,6 +13,20 @@ import ua.nure.pi.parameter.MapperParameters;
 
 public class MSSqlEducationDAO implements EducationDAO {
 	
+	private static volatile MSSqlEducationDAO instance;
+	
+	private MSSqlEducationDAO() {
+	}
+	
+	public static MSSqlEducationDAO getInstancce(){
+		if(instance == null)
+			synchronized (MSSqlEducationDAO.class){
+				if(instance == null)
+					instance = new MSSqlEducationDAO();
+			}
+		return instance;
+	}
+	
 	private static final String SQL__SELECT_EDUCATION = "SELECT * FROM Educations WHERE CVsId = ?";
 	private static final String SQL__INSERT_EDUCATION = "INSERT INTO Educations(StartYear, EndYear, "
 			+ "NameOfInstitution, Specialty, CVsId) VALUES(?,?,?,?,?)";
@@ -40,7 +54,7 @@ public class MSSqlEducationDAO implements EducationDAO {
 		return result;
 	}
 
-	private Boolean insertEducations(long cVsId, Collection<Education> eds, Connection con) 
+	public Boolean insertEducations(long cVsId, Collection<Education> eds, Connection con) 
 			throws SQLException {
 		boolean result = true;
 		PreparedStatement pstmt = null;
@@ -87,7 +101,7 @@ public class MSSqlEducationDAO implements EducationDAO {
 		return result;
 	}
 	
-	private Collection<Education> getEducations(long CVsId, Connection con) throws SQLException {
+	public Collection<Education> getEducations(long CVsId, Connection con) throws SQLException {
 		Collection<Education> result = null;
 		PreparedStatement pstmt = null;
 		try {

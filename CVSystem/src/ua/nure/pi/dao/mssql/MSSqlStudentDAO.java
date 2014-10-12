@@ -14,6 +14,20 @@ import ua.nure.pi.parameter.MapperParameters;
 
 public class MSSqlStudentDAO implements StudentDAO {
 	
+	private static volatile MSSqlStudentDAO instance;
+	
+	private MSSqlStudentDAO() {
+	}
+	
+	public static MSSqlStudentDAO getInstancce(){
+		if(instance == null)
+			synchronized (MSSqlStudentDAO.class){
+				if(instance == null)
+					instance = new MSSqlStudentDAO();
+			}
+		return instance;
+	}
+	
 	private static final String SQL__SELECT_STUDENT = "SELECT * FROM Students WHERE StudentsId = ?";
 	private static final String SQL__SELECT_ALL_STUDENT = "SELECT * FROM Students";
 	private static final String SQL__INSERT_STUDENT = "INSERT INTO Students VALUES(?, ?, ?, ?, ?, ?)";
@@ -89,6 +103,7 @@ public class MSSqlStudentDAO implements StudentDAO {
 		boolean result = true;
 		PreparedStatement pstmt = null;
 		try {
+			
 			pstmt = con.prepareStatement(SQL__INSERT_STUDENT);
 			mapStudentForInsert(student, pstmt);
 			if(pstmt.executeUpdate()!=1)

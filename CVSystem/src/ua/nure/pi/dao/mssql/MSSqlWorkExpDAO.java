@@ -14,18 +14,34 @@ import ua.nure.pi.parameter.MapperParameters;
 
 public class MSSqlWorkExpDAO implements WorkExpDAO {
 	
+	private static volatile MSSqlWorkExpDAO instance;
+	
+	private MSSqlWorkExpDAO() {
+	}
+	
+	public static MSSqlWorkExpDAO getInstancce(){
+		if(instance == null)
+			synchronized (MSSqlWorkExpDAO.class){
+				if(instance == null)
+					instance = new MSSqlWorkExpDAO();
+			}
+		return instance;
+	}
+	
+	
 	private static final String SQL__SELECT_WORKEXP = "SELECT * FROM WorkExp WHERE CVsId = ?";
 	private static final String SQL__INSERT_WORKEXP = "INSERT INTO WorkExp(StartDate, "+
 	"Duration, TypeDuration, NameOfInstitution,	Role, CVsId) VALUES(?,?,?,?,?,?)";
 
 
+	
 	@Override
-	public Boolean insertWorkExps(Collection<WorkExp> wes) {
+	public Boolean insertWorkExps(long id, Collection<WorkExp> wes) {
 		Boolean result = false;
 		Connection con = null;
 		try {
 			con = MSSqlDAOFactory.getConnection();
-			result = insertWorkExps(wes, con);
+			result = insertWorkExps(id, wes, con);
 			if(result)
 				con.commit();
 		} catch (SQLException e) {
@@ -41,14 +57,14 @@ public class MSSqlWorkExpDAO implements WorkExpDAO {
 		return result;
 	}
 
-	private Boolean insertWorkExps(Collection<WorkExp> wes, Connection con) 
+	public Boolean insertWorkExps(long id, Collection<WorkExp> wes, Connection con) 
 			throws SQLException {
 		boolean result = true;
 		PreparedStatement pstmt = null;
 		try {
 			for (WorkExp we : wes) {
 				pstmt = con.prepareStatement(SQL__INSERT_WORKEXP);
-				mapWorkExpForInsert(we, pstmt);
+				mapWorkExpForInsert(id, we, pstmt);
 				if(pstmt.executeUpdate()!=1)
 					return false;
 			}
@@ -88,7 +104,7 @@ public class MSSqlWorkExpDAO implements WorkExpDAO {
 		return result;
 	}
 	
-	private Collection<WorkExp> getWorkExps(long CVsId, Connection con) throws SQLException {
+	public Collection<WorkExp> getWorkExps(long CVsId, Connection con) throws SQLException {
 		Collection<WorkExp> result = null;
 		PreparedStatement pstmt = null;
 		try {
@@ -138,7 +154,7 @@ public class MSSqlWorkExpDAO implements WorkExpDAO {
 		return we;
 	}
 	
-	private void mapWorkExpForInsert(WorkExp we, PreparedStatement pstmt) 
+	private void mapWorkExpForInsert(long id, WorkExp we, PreparedStatement pstmt) 
 			throws SQLException{
 		pstmt.setInt(1, we.getStartYear());
 		pstmt.setInt(2, we.getDuration());
@@ -155,7 +171,7 @@ public class MSSqlWorkExpDAO implements WorkExpDAO {
 		}			
 		pstmt.setString(4, we.getNameOfInstitution());
 		pstmt.setString(5, we.getRole());
-		pstmt.setLong(6, we.getCVsId());
+		pstmt.setLong(6, id);
 	}
 
 }
