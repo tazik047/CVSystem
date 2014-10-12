@@ -103,7 +103,8 @@ public class MSSqlStudentDAO implements StudentDAO {
 		boolean result = true;
 		PreparedStatement pstmt = null;
 		try {
-			
+			if(!MSSqlCVDAO.getInstancce().insertCV(student.getCv(), con))
+				return false;			
 			pstmt = con.prepareStatement(SQL__INSERT_STUDENT);
 			mapStudentForInsert(student, pstmt);
 			if(pstmt.executeUpdate()!=1)
