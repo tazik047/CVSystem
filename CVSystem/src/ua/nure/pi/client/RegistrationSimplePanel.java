@@ -2,11 +2,13 @@ package ua.nure.pi.client;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.LinkedHashMap;
 
 import ua.nure.pi.dao.mssql.MSSqlFacultyGroupDAO;
 import ua.nure.pi.entity.Faculty;
 import ua.nure.pi.entity.Group;
+import ua.nure.pi.entity.Student;
 import ua.nure.pi.server.GreetingServiceImpl;
 import ua.nure.pi.server.RegistrationServiceImpl;
 
@@ -23,7 +25,7 @@ import com.google.gwt.user.client.ui.DockPanel;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment.HorizontalAlignmentConstant;
 import com.google.gwt.user.client.ui.HorizontalPanel;
-import com.google.gwt.user.client.ui.Label;
+import com.smartgwt.client.widgets.Label;  
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.SimplePanel;
@@ -75,6 +77,16 @@ public class RegistrationSimplePanel extends SimplePanel {
 	private MainServiceAsync registrationService;
 
     ArrayList<Faculty> faculties;
+    
+    public TextItem NametextBox;
+    
+    public TextItem SurnametextBox;
+    
+    public DateItem dateItem;
+    
+    public TextItem Emailtextbox;
+
+    public TextItem PhonetextBox;
 
     public RegistrationSimplePanel(MainServiceAsync reg){
     	registrationService = reg;
@@ -107,20 +119,20 @@ public class RegistrationSimplePanel extends SimplePanel {
         
         // Персональная информация
                 
-        TextItem SurnametextBox = new TextItem("surname", "Фамилия");  
+        SurnametextBox = new TextItem("surname", "Фамилия");  
         SurnametextBox.setWidth(300);  
         SurnametextBox.setHint("Введите фамилию. Например, Иванов");  
         SurnametextBox.setShowHintInField(true);
         SurnametextBox.setMask(">C<CCCCCCCCCCCCCCCCCCCC");
                
-        TextItem NametextBox = new TextItem("name", "Имя");  
+        NametextBox = new TextItem("name", "Имя");  
         NametextBox.setWidth(300);  
         NametextBox.setHint("Введите имя. Например, Иван");  
         NametextBox.setShowHintInField(true);
         NametextBox.setMask(">C<CCCCCCCCCCCCCCCCCCCC");
 
         
-        DateItem dateItem = new DateItem();
+        dateItem = new DateItem();
 		dateItem.setTitle("Дата рождения");
 		dateItem.setUseTextField(true);
 		dateItem.setWidth(300);
@@ -133,7 +145,7 @@ public class RegistrationSimplePanel extends SimplePanel {
         AddresstextBox.setShowHintInField(true);
         AddresstextBox.setMask("");
                
-        TextItem PhonetextBox = new TextItem("phone", "Контакнтый телефон");  
+        PhonetextBox = new TextItem("phone", "Контакнтый телефон");  
         PhonetextBox.setWidth(300);  
         PhonetextBox.setHint(""); 
         PhonetextBox.setMask("+38(###) ###-####");  
@@ -141,7 +153,7 @@ public class RegistrationSimplePanel extends SimplePanel {
         RegExpValidator emailValidator = new RegExpValidator();  
         emailValidator.setExpression("^([a-zA-Z0-9_.\\-+])+@(([a-zA-Z0-9\\-])+\\.)+[a-zA-Z0-9]{2,4}$");  
         
-        TextItem Emailtextbox = new TextItem("email", "Email");  
+        Emailtextbox = new TextItem("email", "Email");  
         Emailtextbox.setWidth(300);  
         Emailtextbox.setHint("Введите email. Например, example@gmail.com"); 
         Emailtextbox.setShowHintInField(true);
@@ -305,5 +317,15 @@ public class RegistrationSimplePanel extends SimplePanel {
 	    
 	    form.markForRedraw();
 
+	}
+	
+	public Student getStudent(){
+		Student st = new Student();
+		st.setFirstname(NametextBox.getValueAsString());
+		st.setSurname(SurnametextBox.getValueAsString());
+		st.setDateOfBirth((Date)dateItem.getValue());
+		st.setEmail(Emailtextbox.getValueAsString());
+		st.setPhone(PhonetextBox.getValueAsString());
+		return st;
 	}
 }
