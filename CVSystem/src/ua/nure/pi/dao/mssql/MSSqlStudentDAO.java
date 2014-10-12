@@ -8,12 +8,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import ua.nure.pi.dao.AnyTagDAO;
 import ua.nure.pi.dao.StudentDAO;
-import ua.nure.pi.entity.AnyTag;
-import ua.nure.pi.entity.Faculty;
 import ua.nure.pi.entity.Student;
-import ua.nure.pi.entity.WorkExp;
 import ua.nure.pi.parameter.MapperParameters;
 
 public class MSSqlStudentDAO implements StudentDAO {
@@ -166,8 +162,6 @@ public class MSSqlStudentDAO implements StudentDAO {
 		st.setStudentsId(rs.getLong(MapperParameters.STUDENT_ID));
 		st.setFirstname(rs.getString(MapperParameters.STUDENT_FIRSTNAME));
 		st.setSurname(rs.getString(MapperParameters.STUDENT_SURNAME));
-		st.setCVsId(rs.getLong(MapperParameters.STUDENT_CVSID));
-		st.setGroupsId(rs.getLong(MapperParameters.STUDENT_GROUPSID));
 		st.setPatronymic(rs.getString(MapperParameters.STUDENT_PATRONYMIC));
 		return st;
 	}
@@ -178,8 +172,8 @@ public class MSSqlStudentDAO implements StudentDAO {
 		pstmt.setString(2, st.getSurname());
 		pstmt.setString(3, st.getFirstname());
 		pstmt.setString(4, st.getPatronymic());
-		pstmt.setLong(5, st.getGroupsId());
-		pstmt.setLong(6, st.getCVsId());
+		pstmt.setLong(5, st.getGroup().getGroupId());
+		pstmt.setLong(6, st.getCv().getCvsId());
 	}
 	
 }

@@ -38,6 +38,7 @@ import com.google.gwt.user.datepicker.client.DatePicker;
 import com.smartgwt.client.data.DataSource;
 import com.smartgwt.client.data.Record;
 import com.smartgwt.client.data.RecordList;
+import com.smartgwt.client.types.DateDisplayFormat;
 import com.smartgwt.client.types.DragDataAction;
 import com.smartgwt.client.types.MultiComboBoxLayoutStyle;
 import com.smartgwt.client.types.TitleOrientation;
@@ -49,10 +50,13 @@ import com.smartgwt.client.widgets.events.DragStartHandler;
 import com.smartgwt.client.widgets.form.DynamicForm;
 import com.smartgwt.client.widgets.form.fields.CheckboxItem;
 import com.smartgwt.client.widgets.form.fields.DateItem;
+import com.smartgwt.client.widgets.form.fields.FormItem;
 import com.smartgwt.client.widgets.form.fields.IPickTreeItem;
 import com.smartgwt.client.widgets.form.fields.MultiComboBoxItem;
 import com.smartgwt.client.widgets.form.fields.PickTreeItem;
 import com.smartgwt.client.widgets.form.fields.SelectItem;
+import com.smartgwt.client.widgets.form.fields.StaticTextItem;
+import com.smartgwt.client.widgets.form.fields.TextAreaItem;
 import com.smartgwt.client.widgets.form.fields.TextItem;
 import com.smartgwt.client.widgets.form.fields.events.ChangedEvent;
 import com.smartgwt.client.widgets.form.fields.events.ChangedHandler;
@@ -218,25 +222,26 @@ public class RegistrationSimplePanel extends SimplePanel {
 					}
 				});
                 
-	    TextArea first = new TextArea();
+		DynamicForm form = new DynamicForm();
+		form.setNumCols(1);
+		
+	    TextAreaItem first = new TextAreaItem("Личные качества");
 	    first.setWidth("343px");
-	    first.addStyleName("fixTextArea");
-	    first.setTitle("Личные качества");
-	    first.setName("Личные качества");
+	    first.setControlStyle("fixTextArea");
 	    
-	    
-	    TextArea second = new TextArea();
-	    second.addStyleName("fixTextArea");
+	    TextAreaItem second = new TextAreaItem("Прочее");
+	    second.setControlStyle("fixTextArea");
 	    second.setWidth("343px");
-	    Label lbHobby = new Label("Личные качества");
-	    Label lbOther = new Label("Прочее");
 	    
 	    CheckBox cb = new CheckBox();
 	    cb.setText("Даю право на обработку и хранение личной информации администрации ресурса");
 	    cb.setSize("343px", "44px");
-	    	    
 	    
-	    mainForm.setFields(SurnametextBox, NametextBox, PhonetextBox, Emailtextbox, Skypetextbox, dateItem, goalComboBox, languages);
+	    StaticTextItem labelHint2 = new StaticTextItem();
+	    labelHint2.setShowTitle(false);
+	    labelHint2.setValue("hint2");
+	    
+	    mainForm.setFields(SurnametextBox, NametextBox, PhonetextBox, Emailtextbox, Skypetextbox, dateItem, goalComboBox, languages, labelHint2);
         mainForm.setTitleOrientation(TitleOrientation.TOP);
 
 	    
@@ -247,22 +252,17 @@ public class RegistrationSimplePanel extends SimplePanel {
 	    rootPanel.add(expPanel);
 	    rootPanel.add(ssp);
 	    
-	    rootPanel.add(lbHobby);
-	    rootPanel.add(first);
-	    rootPanel.add(lbOther);
-	    rootPanel.add(second);
+	    rootPanel.add(form);
 	    
+	    form.setFields(first,second);
+	    form.setTitleOrientation(TitleOrientation.TOP);
+	    form.markForRedraw();
 	    rootPanel.add(cb);
-	    
-	    rootPanel.setCellHorizontalAlignment(lbHobby, HasHorizontalAlignment.ALIGN_LEFT);
-	    rootPanel.setCellHorizontalAlignment(lbOther, HasHorizontalAlignment.ALIGN_LEFT);
-	    rootPanel.setCellHorizontalAlignment(first, HasHorizontalAlignment.ALIGN_LEFT);
-	    rootPanel.setCellHorizontalAlignment(second, HasHorizontalAlignment.ALIGN_LEFT);
 
 	    
-	    rootPanel.setCellHorizontalAlignment(eduPanel, HasHorizontalAlignment.ALIGN_CENTER);
-	    rootPanel.setCellHorizontalAlignment(expPanel, HasHorizontalAlignment.ALIGN_CENTER);
-	    rootPanel.setCellHorizontalAlignment(lanPanel, HasHorizontalAlignment.ALIGN_CENTER);
+	    rootPanel.setCellHorizontalAlignment(eduPanel, HasHorizontalAlignment.ALIGN_LEFT);
+	    rootPanel.setCellHorizontalAlignment(expPanel, HasHorizontalAlignment.ALIGN_LEFT);
+	    rootPanel.setCellHorizontalAlignment(lanPanel, HasHorizontalAlignment.ALIGN_LEFT);
 	    
 	    rootPanel.setCellHorizontalAlignment(cb, HasHorizontalAlignment.ALIGN_LEFT);
 
