@@ -31,6 +31,7 @@ a {
 }
 .fixTextArea{
 	resize:none;
+	width: 344px !important;
 }
 a:hover {
     color: #1A8DFF;
@@ -294,6 +295,7 @@ h3.assistive-text {
 
 .panel-startAddButton{
 	width:343px;
+	float:left;
 }
 
 .panel-newAddButton{

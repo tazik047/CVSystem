@@ -125,47 +125,65 @@ public class RegistrationSimplePanel extends SimplePanel {
                 
         SurnametextBox = new TextItem("surname", "Фамилия");  
         SurnametextBox.setWidth(300);  
-        SurnametextBox.setHint("Введите фамилию. Например, Иванов");  
+        SurnametextBox.setHint("Введите фамилию");  
         SurnametextBox.setShowHintInField(true);
         SurnametextBox.setMask(">C<CCCCCCCCCCCCCCCCCCCC");
+	    StaticTextItem surnameHint = new StaticTextItem();
+	    surnameHint.setShowTitle(false);
+	    surnameHint.setValue("Например, Иванов");
+
                
         NametextBox = new TextItem("name", "Имя");  
         NametextBox.setWidth(300);  
-        NametextBox.setHint("Введите имя. Например, Иван");  
+        NametextBox.setHint("Введите имя");  
         NametextBox.setShowHintInField(true);
         NametextBox.setMask(">C<CCCCCCCCCCCCCCCCCCCC");
+	    StaticTextItem nameHint = new StaticTextItem();
+	    nameHint.setShowTitle(false);
+	    nameHint.setValue("Например, Иван");
 
         
         dateItem = new DateItem();
 		dateItem.setTitle("Дата рождения");
 		dateItem.setUseTextField(true);
 		dateItem.setWidth(300);
-		dateItem.setHint("Введите дату рождения в формате ММ:ДД:ГГГГ или выберите справа");
+		dateItem.setHint("Введите дату рождения или выберите справа");
 		dateItem.setShowHintInField(true);
+	    StaticTextItem dateHint = new StaticTextItem();
+	    dateHint.setShowTitle(false);
+	    dateHint.setValue("Например, 21.09");
+
         
         TextItem AddresstextBox = new TextItem("address", "Домашний адрес");  
         AddresstextBox.setWidth(300);  
-        AddresstextBox.setHint("Введите домашний адрес. Например, г. Харьков, пр.Ленина, 9, кв.3");  
+        AddresstextBox.setHint("Введите домашний адрес");  
         AddresstextBox.setShowHintInField(true);
         AddresstextBox.setMask("");
-               
-        PhonetextBox = new TextItem("phone", "Контакнтый телефон");  
-        PhonetextBox.setWidth(300);  
-        PhonetextBox.setHint(""); 
-        PhonetextBox.setMask("+38(###) ###-####");  
-        
+	    StaticTextItem addressHint = new StaticTextItem();
+	    addressHint.setShowTitle(false);
+	    addressHint.setValue("Например, г. Харьков, пр.Ленина, 9, кв.3");
+
         RegExpValidator emailValidator = new RegExpValidator();  
         emailValidator.setExpression("^([a-zA-Z0-9_.\\-+])+@(([a-zA-Z0-9\\-])+\\.)+[a-zA-Z0-9]{2,4}$");  
         
         Emailtextbox = new TextItem("email", "Email");  
         Emailtextbox.setWidth(300);  
-        Emailtextbox.setHint("Введите email. Например, example@gmail.com"); 
+        Emailtextbox.setHint("Введите email. "); 
         Emailtextbox.setShowHintInField(true);
         Emailtextbox.setValidators(emailValidator);
+	    StaticTextItem emailHint = new StaticTextItem();
+	    emailHint.setShowTitle(false);
+	    emailHint.setValue("Например, example@gmail.com");
+
         
+        PhonetextBox = new TextItem("phone", "Контакнтый телефон");  
+        PhonetextBox.setWidth(300);  
+        PhonetextBox.setHint(""); 
+        PhonetextBox.setMask("+38(###) ###-####");  
+                
         TextItem Skypetextbox = new TextItem("email", "Skype");  
         Skypetextbox.setWidth(300);  
-        Skypetextbox.setHint("Введите skype"); 
+        Skypetextbox.setHint(""); 
         Skypetextbox.setShowHintInField(true);
 
         
@@ -223,15 +241,15 @@ public class RegistrationSimplePanel extends SimplePanel {
 				});
                 
 		DynamicForm form = new DynamicForm();
+		form.setStyleName("fixTextArea");
 		form.setNumCols(1);
 		
 	    TextAreaItem first = new TextAreaItem("Личные качества");
-	    first.setWidth("343px");
 	    first.setControlStyle("fixTextArea");
-	    
+	    first.setProperty("width", "344px");
+
 	    TextAreaItem second = new TextAreaItem("Прочее");
 	    second.setControlStyle("fixTextArea");
-	    second.setWidth("343px");
 	    
 	    CheckBox cb = new CheckBox();
 	    cb.setText("Даю право на обработку и хранение личной информации администрации ресурса");
@@ -241,7 +259,7 @@ public class RegistrationSimplePanel extends SimplePanel {
 	    labelHint2.setShowTitle(false);
 	    labelHint2.setValue("hint2");
 	    
-	    mainForm.setFields(SurnametextBox, NametextBox, PhonetextBox, Emailtextbox, Skypetextbox, dateItem, goalComboBox, languages, labelHint2);
+	    mainForm.setFields(SurnametextBox,surnameHint, NametextBox, nameHint, dateItem, dateHint, Emailtextbox, emailHint, PhonetextBox, Skypetextbox, goalComboBox, languages);
         mainForm.setTitleOrientation(TitleOrientation.TOP);
 
 	    
@@ -266,12 +284,7 @@ public class RegistrationSimplePanel extends SimplePanel {
 	    
 	    rootPanel.setCellHorizontalAlignment(cb, HasHorizontalAlignment.ALIGN_LEFT);
 
-	    
-
-        //suppliesForm.setItems(languages);
         setWidget(rootPanel);
-        //languages.setAddUnknownValues(false);
-        //suppliesForm.markForRedraw();
     }  
 	
 	public void FillTree(ArrayList<Faculty> faculties, SimplePanel facultiesPanel)
