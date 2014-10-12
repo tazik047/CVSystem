@@ -1,8 +1,12 @@
 package ua.nure.pi.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Student {
+import com.google.gwt.user.client.rpc.IsSerializable;
+
+public class Student implements Serializable, IsSerializable {
+	private static final long serialVersionUID = 1L;
 
 	private long studentsId;
 	
@@ -12,9 +16,9 @@ public class Student {
 	
 	private String patronymic;
 	
-	private long groupsId;
+	private Group group;
 	
-	private long CVsId;
+	private CV cv;
 	
 	private Date dateOfBirth;
 	
@@ -57,22 +61,6 @@ public class Student {
 	public void setPatronymic(String patronymic) {
 		this.patronymic = patronymic;
 	}
-
-	public long getGroupsId() {
-		return groupsId;
-	}
-
-	public void setGroupsId(long groupsId) {
-		this.groupsId = groupsId;
-	}
-
-	public long getCVsId() {
-		return CVsId;
-	}
-
-	public void setCVsId(long cVsId) {
-		CVsId = cVsId;
-	}
 	
 	public Student() {
 		
@@ -100,6 +88,30 @@ public class Student {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public CV getCv() {
+		return cv;
+	}
+
+	public void setCv(CV cv) {
+		this.cv = cv;
+	}
+
+	public Group getGroup() {
+		return group;
+	}
+
+	public void setGroup(Group group) {
+		this.group = group;
+	}
+
+	public String getSkype() {
+		return skype;
+	}
+
+	public void setSkype(String skype) {
+		this.skype = skype;
 	}
 	
 }

@@ -1,6 +1,11 @@
 package ua.nure.pi.entity;
 
-public class Sertificate {
+import java.io.Serializable;
+
+import com.google.gwt.user.client.rpc.IsSerializable;
+
+public class Sertificate implements Serializable, IsSerializable {
+	private static final long serialVersionUID = 1L;
 	
 	private long sertificateId;
 	private String sertificateName;
