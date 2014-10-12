@@ -8,11 +8,22 @@ import ua.nure.pi.dao.*;
 
 public class MSSqlDAOFactory extends DAOFactory {
 
+	private static volatile MSSqlDAOFactory instance;
+	
+	private MSSqlDAOFactory() {
+	}
+	
+	public static MSSqlDAOFactory getInstancce(){
+		if(instance == null)
+			synchronized (MSSqlDAOFactory.class){
+				if(instance == null)
+					instance = new MSSqlDAOFactory();
+			}
+		return instance;
+	}
+	
 	private static final String DRIVER = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
 	private static final String DB_URL = "jdbc:sqlserver://localhost:1433; instanceName=SQLSERVER; database=CVSystem; user=sa; password=master;";
-
-	public MSSqlDAOFactory() {
-	}
 
 	/**
 	 * method to create MSSQL connections
@@ -38,12 +49,42 @@ public class MSSqlDAOFactory extends DAOFactory {
 
 	@Override
 	public UserDAO getUserDAO() {
-		return new MSSqlUserDAO();
+		return MSSqlUserDAO.getInstancce();
 	}
 
 	@Override
 	public FacultyGroupDAO getFacultyGroupDAO() {
-		return new MSSqlFacultyGroupDAO();
+		return MSSqlFacultyGroupDAO.getInstancce();
+	}
+
+	@Override
+	public EducationDAO getEducationDAO() {
+		return MSSqlEducationDAO.getInstancce();
+	}
+
+	@Override
+	public LanguageDAO getLanguageDAO() {
+		return MSSqlLanguageDAO.getInstancce();
+	}
+
+	@Override
+	public ProgramLanguageDAO getProgramLanguageDAO() {
+		return MSSqlProgramLanguageDAO.getInstancce();
+	}
+
+	@Override
+	public SertificatsDAO getSertificatsDAO() {
+		return MSSqlSertificatsDAO.getInstancce();
+	}
+
+	@Override
+	public StudentDAO getStudentDAO() {
+		return MSSqlStudentDAO.getInstancce();
+	}
+
+	@Override
+	public WorkExpDAO getWorkExpDAO() {
+		return MSSqlWorkExpDAO.getInstancce();
 	}
 
 

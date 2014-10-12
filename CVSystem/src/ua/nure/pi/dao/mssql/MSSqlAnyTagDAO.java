@@ -14,6 +14,20 @@ import ua.nure.pi.parameter.MapperParameters;
 
 public class MSSqlAnyTagDAO implements AnyTagDAO {
 	
+	private static volatile MSSqlAnyTagDAO instance;
+	
+	private MSSqlAnyTagDAO() {
+	}
+	
+	public static MSSqlAnyTagDAO getInstancce(){
+		if(instance == null)
+			synchronized (MSSqlAnyTagDAO.class){
+				if(instance == null)
+					instance = new MSSqlAnyTagDAO();
+			}
+		return instance;
+	}
+	
 	private static final String SQL__SELECT_ANY_TAG = "SELECT * FROM %s";
 	private static final String SQL__INSERT_ANY_TAG = "INSERT INTO %s(Title) VALUES(?)";
 	private static final String SQL__UPDATE_ANY_TAG = "UPDATE %1$s SET Title = ? WHERE %2$sId = ?";

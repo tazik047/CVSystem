@@ -52,7 +52,7 @@ public class WorkExperienceSimplePanel extends SimplePanel{
         btAdd.setTitle("Добавить опыт работы");
         root.add(absP);
         root.add(btAdd);
-        root.setCellHorizontalAlignment(btAdd, HasHorizontalAlignment.ALIGN_CENTER);
+        root.setCellHorizontalAlignment(btAdd, HasHorizontalAlignment.ALIGN_LEFT);
         btAdd.addClickHandler(new ClickHandler() {
 			
 			@Override

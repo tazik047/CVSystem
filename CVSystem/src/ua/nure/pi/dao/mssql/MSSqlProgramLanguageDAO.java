@@ -14,6 +14,20 @@ import ua.nure.pi.parameter.MapperParameters;
 
 public class MSSqlProgramLanguageDAO implements ProgramLanguageDAO {
 	
+	private static volatile MSSqlProgramLanguageDAO instance;
+	
+	private MSSqlProgramLanguageDAO() {
+	}
+	
+	public static MSSqlProgramLanguageDAO getInstancce(){
+		if(instance == null)
+			synchronized (MSSqlProgramLanguageDAO.class){
+				if(instance == null)
+					instance = new MSSqlProgramLanguageDAO();
+			}
+		return instance;
+	}
+	
 	private static final String SQL__SELECT_PROGRAM_LANGUAGE = "SELECT * FROM ProgramLanguages";
 	private static final String SQL__INSERT_PROGRAM_LANGUAGE = "INSERT INTO ProgramLanguages(Title) VALUES(?)";
 	private static final String SQL__UPDATE_PROGRAM_LANGUAGE = "UPDATE ProgramLanguages SET Title = ? WHERE ProgramLanguagesId = ?";
@@ -231,7 +245,7 @@ public class MSSqlProgramLanguageDAO implements ProgramLanguageDAO {
 		return result;
 	}
 
-	private Boolean addProgramLanguage(long id, Collection<ProgramLanguage> programLanguages, Connection con) throws SQLException {
+	public Boolean addProgramLanguage(long id, Collection<ProgramLanguage> programLanguages, Connection con) throws SQLException {
 		boolean result = true;
 		PreparedStatement pstmt = null;
 		try {
@@ -275,7 +289,7 @@ public class MSSqlProgramLanguageDAO implements ProgramLanguageDAO {
 		return result;
 	}
 
-	private Collection<ProgramLanguage> getStudentsProgramLanguages(long CVsId, Connection con) throws SQLException {
+	public Collection<ProgramLanguage> getStudentsProgramLanguages(long CVsId, Connection con) throws SQLException {
 		Collection<ProgramLanguage> result = null;
 		PreparedStatement pstmt = null;
 		try {

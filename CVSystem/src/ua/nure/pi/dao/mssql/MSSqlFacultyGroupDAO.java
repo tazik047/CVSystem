@@ -17,6 +17,20 @@ import ua.nure.pi.parameter.MapperParameters;
 
 public class MSSqlFacultyGroupDAO implements FacultyGroupDAO {
 	
+	private static volatile MSSqlFacultyGroupDAO instance;
+	
+	private MSSqlFacultyGroupDAO() {
+	}
+	
+	public static MSSqlFacultyGroupDAO getInstancce(){
+		if(instance == null)
+			synchronized (MSSqlFacultyGroupDAO.class){
+				if(instance == null)
+					instance = new MSSqlFacultyGroupDAO();
+			}
+		return instance;
+	}
+	
 	private static final String SQL__SELECT_FACULTIES = "SELECT * FROM Faculties";
 	private static final String SQL__INSERT_FACULTIES = "INSERT INTO Faculties(Title) VALUES(?)";
 	private static final String SQL__UPDATE_FACULTIES = "UPDATE Faculties SET Title=? WHERE FacultiesId=?";

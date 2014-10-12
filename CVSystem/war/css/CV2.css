@@ -309,3 +309,7 @@ h3.assistive-text {
 	background-size: cover !important;
 	z-index: 1000000;
 }
+
+.dateChooserBorder{
+	left:490px !important;
+}

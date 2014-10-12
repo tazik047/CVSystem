@@ -11,7 +11,21 @@ import ua.nure.pi.dao.SertificatsDAO;
 import ua.nure.pi.entity.Sertificate;
 import ua.nure.pi.parameter.MapperParameters;
 
-public class MSSqlSertificats implements SertificatsDAO {
+public class MSSqlSertificatsDAO implements SertificatsDAO {
+	
+	private static volatile MSSqlSertificatsDAO instance;
+	
+	private MSSqlSertificatsDAO() {
+	}
+	
+	public static MSSqlSertificatsDAO getInstancce(){
+		if(instance == null)
+			synchronized (MSSqlSertificatsDAO.class){
+				if(instance == null)
+					instance = new MSSqlSertificatsDAO();
+			}
+		return instance;
+	}
 	
 	private static final String SQL__SELECT_SERTIFICATE = "SELECT * FROM Sertificate WHERE CVsId = ?";
 	private static final String SQL__INSERT_SERTIFICATE = "INSERT INTO Sertificate(Name, Year, "
@@ -40,7 +54,7 @@ public class MSSqlSertificats implements SertificatsDAO {
 		return result;
 	}
 
-	private Boolean insertSertificats(long cVsId, Collection<Sertificate> eds, Connection con) 
+	public Boolean insertSertificats(long cVsId, Collection<Sertificate> eds, Connection con) 
 			throws SQLException {
 		boolean result = true;
 		PreparedStatement pstmt = null;
@@ -87,7 +101,7 @@ public class MSSqlSertificats implements SertificatsDAO {
 		return result;
 	}
 	
-	private Collection<Sertificate> getSertificats(long CVsId, Connection con) throws SQLException {
+	public Collection<Sertificate> getSertificats(long CVsId, Connection con) throws SQLException {
 		Collection<Sertificate> result = null;
 		PreparedStatement pstmt = null;
 		try {

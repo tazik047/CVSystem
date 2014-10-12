@@ -14,6 +14,20 @@ import ua.nure.pi.parameter.MapperParameters;
 
 public class MSSqlLanguageDAO implements LanguageDAO {
 	
+	private static volatile MSSqlLanguageDAO instance;
+	
+	private MSSqlLanguageDAO() {
+	}
+	
+	public static MSSqlLanguageDAO getInstancce(){
+		if(instance == null)
+			synchronized (MSSqlLanguageDAO.class){
+				if(instance == null)
+					instance = new MSSqlLanguageDAO();
+			}
+		return instance;
+	}
+	
 	private static final String SQL__SELECT_LANGUAGE = "SELECT * FROM Languages";
 	private static final String SQL__INSERT_LANGUAGE = "INSERT INTO Languages(Title) VALUES(?)";
 	private static final String SQL__UPDATE_LANGUAGE = "UPDATE Languages SET Title = ? WHERE LanguagesId = ?";
@@ -232,7 +246,7 @@ public class MSSqlLanguageDAO implements LanguageDAO {
 		return result;
 	}
 
-	private Boolean addLanguage(long id, Collection<Language> languages, Connection con) throws SQLException {
+	public Boolean addLanguage(long id, Collection<Language> languages, Connection con) throws SQLException {
 		boolean result = true;
 		PreparedStatement pstmt = null;
 		try {
@@ -276,7 +290,7 @@ public class MSSqlLanguageDAO implements LanguageDAO {
 		return result;
 	}
 
-	private Collection<Language> getStudentsLanguages(long CVsId, Connection con) 
+	public Collection<Language> getStudentsLanguages(long CVsId, Connection con) 
 			throws SQLException {
 		Collection<Language> result = null;
 		PreparedStatement pstmt = null;

@@ -11,5 +11,8 @@
 	<classpathentry exported="true" kind="lib" path="lib/smartgwt-skins.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/smartgwt.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/sqljdbc4.jar"/>
+	<classpathentry kind="lib" path="lib/english-1.0.jar"/>
+	<classpathentry kind="lib" path="lib/morph-1.0.jar"/>
+	<classpathentry kind="lib" path="lib/russian-1.0.jar"/>
 	<classpathentry kind="output" path="war/WEB-INF/classes"/>
 </classpath>

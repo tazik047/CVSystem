@@ -6,7 +6,7 @@ import ua.nure.pi.entity.WorkExp;
 
 public interface WorkExpDAO {
 		
-	Boolean insertWorkExps(Collection<WorkExp> wes);
+	Boolean insertWorkExps(long id, Collection<WorkExp> wes);
 				
 	Collection<WorkExp> getWorkExps(long CVsId);
 			
