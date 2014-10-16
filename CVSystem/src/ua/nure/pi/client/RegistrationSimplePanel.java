@@ -246,7 +246,6 @@ public class RegistrationSimplePanel extends SimplePanel {
 		
 	    TextAreaItem first = new TextAreaItem("Личные качества");
 	    first.setControlStyle("fixTextArea");
-	    first.setProperty("width", "344px");
 
 	    TextAreaItem second = new TextAreaItem("Прочее");
 	    second.setControlStyle("fixTextArea");
