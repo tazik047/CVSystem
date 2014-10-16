@@ -9,6 +9,7 @@ import ua.nure.pi.dao.mssql.MSSqlFacultyGroupDAO;
 import ua.nure.pi.entity.CV;
 import ua.nure.pi.entity.Faculty;
 import ua.nure.pi.entity.Group;
+import ua.nure.pi.entity.ProgramLanguage;
 import ua.nure.pi.entity.Student;
 import ua.nure.pi.server.GreetingServiceImpl;
 import ua.nure.pi.server.RegistrationServiceImpl;
@@ -97,6 +98,8 @@ public class RegistrationSimplePanel extends SimplePanel {
     EducationSimplePanel eduPanel;            
     LanguageSimplePanel lanPanel;
     SertificateSimplePanel ssp;
+    
+    MultiComboBoxItem languages;
 
     public RegistrationSimplePanel(MainServiceAsync reg){
     	registrationService = reg;
@@ -214,7 +217,7 @@ public class RegistrationSimplePanel extends SimplePanel {
         // Знание языков программирования и технологий
                 
         final MultiComboBoxLayoutStyle initialLayoutStyle = MultiComboBoxLayoutStyle.HORIZONTAL;  
-        final MultiComboBoxItem languages = new MultiComboBoxItem("languages", "Языки программирования");
+        languages = new MultiComboBoxItem("languages", "Языки программирования");
         
         final LinkedHashMap<String, String> lhm = new LinkedHashMap<>();
         lhm.put("Java", "Java");
@@ -349,6 +352,7 @@ public class RegistrationSimplePanel extends SimplePanel {
 		cv.setLanguages(lanPanel.getLanguages());
 		cv.setSertificates(ssp.getSerts());
 		cv.setWorkExps(expPanel.getExp());
+		cv.setProgramLanguages((Collection<ProgramLanguage>) languages.getValueAsRecordList());
 		st.setCv(cv);
 		return st;
 	}
