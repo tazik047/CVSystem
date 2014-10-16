@@ -121,10 +121,10 @@ public class SertificateSimplePanel extends SimplePanel{
 		sertificates.add(exp);
 	}
 
-	public Collection<Sertificate> getExp() throws IllegalArgumentException{
+	public Collection<Sertificate> getSerts() throws IllegalArgumentException{
 		Collection<Sertificate> studentSerts = new ArrayList<Sertificate>();
-		for(SertificateElementSimplePanel we : sertificates)
-			studentSerts.add(we.getSertificate());
+		for(SertificateElementSimplePanel se : sertificates)
+			studentSerts.add(se.getSertificate());
 		return studentSerts;
 	}
 }

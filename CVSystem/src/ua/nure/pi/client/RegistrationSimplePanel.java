@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.LinkedHashMap;
 
 import ua.nure.pi.dao.mssql.MSSqlFacultyGroupDAO;
+import ua.nure.pi.entity.CV;
 import ua.nure.pi.entity.Faculty;
 import ua.nure.pi.entity.Group;
 import ua.nure.pi.entity.Student;
@@ -91,6 +92,11 @@ public class RegistrationSimplePanel extends SimplePanel {
     public TextItem Emailtextbox;
 
     public TextItem PhonetextBox;
+    
+    WorkExperienceSimplePanel expPanel; 
+    EducationSimplePanel eduPanel;            
+    LanguageSimplePanel lanPanel;
+    SertificateSimplePanel ssp;
 
     public RegistrationSimplePanel(MainServiceAsync reg){
     	registrationService = reg;
@@ -197,13 +203,13 @@ public class RegistrationSimplePanel extends SimplePanel {
                 
         // Опыт работы и образование
         
-        WorkExperienceSimplePanel expPanel = new WorkExperienceSimplePanel();
+        expPanel = new WorkExperienceSimplePanel();
                 
-        EducationSimplePanel eduPanel = new EducationSimplePanel();
+        eduPanel = new EducationSimplePanel();
                 
-        LanguageSimplePanel lanPanel = new LanguageSimplePanel();
+        lanPanel = new LanguageSimplePanel();
         
-        SertificateSimplePanel ssp = new SertificateSimplePanel();
+        ssp = new SertificateSimplePanel();
         
         // Знание языков программирования и технологий
                 
@@ -338,6 +344,12 @@ public class RegistrationSimplePanel extends SimplePanel {
 		st.setDateOfBirth((Date)dateItem.getValue());
 		st.setEmail(Emailtextbox.getValueAsString());
 		st.setPhone(PhonetextBox.getValueAsString());
+		CV cv = new CV();
+		cv.setEducations(eduPanel.getEducation());
+		cv.setLanguages(lanPanel.getLanguages());
+		cv.setSertificates(ssp.getSerts());
+		cv.setWorkExps(expPanel.getExp());
+		st.setCv(cv);
 		return st;
 	}
 }
