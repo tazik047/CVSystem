@@ -4,7 +4,12 @@ package ua.nure.pi.client;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import ua.nure.pi.entity.Education;
+import ua.nure.pi.entity.Language;
+import ua.nure.pi.entity.ProgramLanguage;
+import ua.nure.pi.entity.Sertificate;
 import ua.nure.pi.entity.Student;
+import ua.nure.pi.entity.WorkExp;
 
 import com.smartgwt.client.types.Alignment;  
 import com.smartgwt.client.widgets.Canvas;  
@@ -22,6 +27,16 @@ public class PrintSimplePanel extends SimplePanel {
 	{
 		this.student = student;
 	}
+	private Collection<Education> educations = student.getCv().getEducations();
+	
+	private Collection<Language> languages = student.getCv().getLanguages();
+	
+	private Collection<ProgramLanguage> programLanguage = student.getCv().getProgramLanguages();
+	
+	private Collection<Sertificate> sertificates = student.getCv().getSertificates();
+	
+	private Collection<WorkExp> workExps = student.getCv().getWorkExps();
+	
     public void onModuleLoad() {  
   
         HLayout layout = new HLayout();
@@ -35,7 +50,8 @@ public class PrintSimplePanel extends SimplePanel {
         VLayout vLayout = new VLayout();  
         vLayout.setWidth("100%");
         vLayout.setHeight("90");
-        vLayout2.addMember(new BlueBox((Integer) null, "50%", ""));  
+        //vLayout2.addMember(new BlueBox((Integer) null, "50%", "")); по идее так будет работать 
+        vLayout2.addMember(new BlueBox((Integer) null, "25%", student.getAdress()));
         vLayout2.addMember(new BlueBox((Integer) null, "25%", student.getSkype()));  
         vLayout2.addMember(new BlueBox((Integer) null, "25%", student.getPhone()));  
         vLayout2.addMember(new BlueBox((Integer) null, "25%", student.getEmail()));
@@ -43,33 +59,43 @@ public class PrintSimplePanel extends SimplePanel {
         HLayout hLayout = new HLayout();  
         vLayout.addMember(hLayout);  
         hLayout.setHeight(80);
-        BlueBox FIO = new BlueBox("30%", "90", student.getFirstname()+student.getSurname());
+        BlueBox FIO = new BlueBox("30%", "90", "<h3>" +  student.getSurname() + student.getFirstname() + student.getPatronymic()+ "</h3>\n<a>"+ student.getGroup()+"</a>");
         FIO.setStyleName("FIO");
         hLayout.addMember(FIO);  
         hLayout.addMember(new BlueBox("40%", null, ""));  
         hLayout.addMember(vLayout2);
         vLayout.addMember(new BlueBox(null, "30", "Опыт работы", true));
+
+        for(WorkExp I : workExps){
         HLayout hLayout2 = new HLayout();  
         vLayout.addMember(hLayout2);  
         hLayout2.setHeight100();
         hLayout2.addMember(new BlueBox("20%", null, ""));  
-        hLayout2.addMember(new BlueBox("20%", null, "2010-2014"));
-        hLayout2.addMember(new BlueBox("*", null, "nix solution 2 year jubior some another insormation and more another information"));
-        
+        hLayout2.addMember(new BlueBox("20%", null, "С " + I.getStartYear() + "\nНа протяжении" + I.getDuration() + I.getTypeOfDuration()));
+        hLayout2.addMember(new BlueBox("*", null, I.getRole() + ":" + I.getNameOfInstitution()));
+        }
+
         vLayout.addMember(new BlueBox((String) null, "30", "Образование", true));  
+
+        for(Education I : educations){
         HLayout hLayout3 = new HLayout();  
-        vLayout.addMember(hLayout3);  
+       vLayout.addMember(hLayout3);  
         hLayout3.setHeight100();
         hLayout3.addMember(new BlueBox("20%", null, ""));  
-        hLayout3.addMember(new BlueBox("20%", null, "2010-2014"));
-        hLayout3.addMember(new BlueBox("*", null, "ХНУРЭ"));
+        hLayout3.addMember(new BlueBox("20%", null, I.getStartYear() + " - " + I.getEndYear()));
+        hLayout3.addMember(new BlueBox("*", null, I.getSpecialty() + ": " + I.getNameOfInstitution()));
+        }
         vLayout.addMember(new BlueBox((String) null, "30", "Профессиональные навыки", true));
         HLayout hLayout4 = new HLayout();  
         vLayout.addMember(hLayout4);  
         hLayout4.setHeight100();
         hLayout4.addMember(new BlueBox("20%", null, ""));  
         hLayout4.addMember(new BlueBox("20%", null, "Языки программирования"));
-        hLayout4.addMember(new BlueBox("*", null, "Java, Haskell, C#"));
+        String lan = "";
+        for(ProgramLanguage I : programLanguage)
+        	lan = lan + " " + I.getTitle();
+        hLayout4.addMember(new BlueBox("*", null, lan));
+        /*
         HLayout hLayout5 = new HLayout();  
         vLayout.addMember(hLayout5);  
         hLayout5.setHeight100();
@@ -94,37 +120,35 @@ public class PrintSimplePanel extends SimplePanel {
         hLayout8.addMember(new BlueBox("20%", null, ""));  
         hLayout8.addMember(new BlueBox("20%", null, "Офисные программы"));
         hLayout8.addMember(new BlueBox("*", null, "MS Word, MS Power Point, MS Acces, Open Office"));
-        HLayout hLayout9 = new HLayout();  
+        HLayout hLayout9 = new HLayout(); 
+         
         vLayout.addMember(hLayout9);  
         hLayout9.setHeight100();
         hLayout9.addMember(new BlueBox("20%", null, ""));  
         hLayout9.addMember(new BlueBox("20%", null, "Графические программы"));
         hLayout9.addMember(new BlueBox("*", null, "Photoshop"));
+        */
         vLayout.addMember(new BlueBox((String) null, "30", "Сертификаты", true));
+        for(Sertificate I : sertificates){
         HLayout hLayout10 = new HLayout();  
         vLayout.addMember(hLayout10);  
         hLayout10.setHeight100();
-        hLayout10.addMember(new BlueBox("40%", null, ""));  
-        hLayout10.addMember(new BlueBox("*", null, "Где выдан, почему выдан, какой компанией, другие данные, нужно больше текста для тестирования, отфонарные слова, день радио, спааааааать, nix"));
+        
+        hLayout10.addMember(new BlueBox("20%", null, ""));
+        hLayout10.addMember(new BlueBox("20%", null, ""+I.getSertificateYear()));
+        hLayout10.addMember(new BlueBox("*", null, I.getSertificateName()));
+        }
+        
         vLayout.addMember(new BlueBox((String) null, "30", "Знания языков", true));
+        for(Language I : languages){
+            
         HLayout hLayout11 = new HLayout();  
         vLayout.addMember(hLayout11);  
         hLayout11.setHeight100();
         hLayout11.addMember(new BlueBox("40%", null, ""));  
-        hLayout11.addMember(new BlueBox("*", null, "-русский - родной"));
+        hLayout11.addMember(new BlueBox("*", null, I.getTitle() + " - " + I.getLevel()));
         
-        HLayout hLayout12 = new HLayout();  
-        vLayout.addMember(hLayout12);  
-        hLayout12.setHeight100();
-        hLayout12.addMember(new BlueBox("40%", null, ""));  
-        hLayout12.addMember(new BlueBox("*", null, "-украинский - высокий уровень"));
-        
-        HLayout hLayout13 = new HLayout();  
-        vLayout.addMember(hLayout13);  
-        hLayout13.setHeight100();
-        hLayout13.addMember(new BlueBox("40%", null, ""));  
-        hLayout13.addMember(new BlueBox("*", null, "-английский - средний уровень"));
-        
+        }
         vLayout.addMember(new BlueBox((String) null, "30", "Личные качества", true));
 
         HLayout hLayout14 = new HLayout();  
@@ -137,7 +161,9 @@ public class PrintSimplePanel extends SimplePanel {
         vLayout.addMember(hLayout15);  
         hLayout15.setHeight100();
         hLayout15.addMember(new BlueBox("40%", null, ""));  
-        hLayout15.addMember(new BlueBox("*", null, "год рождения-1994, не женать, не курю, хобби-баскетбол"));
+        hLayout15.addMember(new BlueBox("*", null, student.getDateOfBirth()+"\n"));
+        
+ 
         
         
               layout.addMember(vLayout);  
