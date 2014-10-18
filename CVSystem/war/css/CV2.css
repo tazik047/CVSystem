@@ -325,3 +325,26 @@ h3.assistive-text {
 .hint>table{
 	margin-bottom:20px;
 }
+.leftbox
+{	
+	font-weight: bold;
+	font-style: italic;
+	font-size: 20px;
+	vertical-align: bottom; 
+	border-top: 1px solid #808080;
+	border-bottom: 1px solid #808080; 
+	
+}
+
+.FIO
+{
+	text-align: right;
+	font-size: 20px;
+}
+.textbox
+{
+	font-size: 15px;
+	border-top: 3px solid #ffffff;
+	border-bottom: 3px solid #ffffff; 
+	
+}
