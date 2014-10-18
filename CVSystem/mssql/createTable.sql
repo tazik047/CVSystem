@@ -379,9 +379,9 @@ CREATE TABLE [dbo].[Students](
 	[StudentsId] [bigint] IDENTITY(1,1) NOT NULL,
 	[Surname] [nvarchar](max) NOT NULL,
 	[Firstname] [nvarchar](max) NOT NULL,
-	[Lastname] [nvarchar](max) NOT NULL,
+	[Patronymic] [nvarchar](max) NOT NULL,
 	[GroupsId] [bigint] NOT NULL,
-	[Address] [nvarchar](max) NOT NULL,
+	[Adress] [nvarchar](max) NOT NULL,
 	[CVsId] [bigint] NOT NULL,
  CONSTRAINT [PK_Students] PRIMARY KEY CLUSTERED 
 (

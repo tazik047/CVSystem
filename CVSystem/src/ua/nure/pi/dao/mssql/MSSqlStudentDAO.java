@@ -30,7 +30,9 @@ public class MSSqlStudentDAO implements StudentDAO {
 	
 	private static final String SQL__SELECT_STUDENT = "SELECT * FROM Students WHERE StudentsId = ?";
 	private static final String SQL__SELECT_ALL_STUDENT = "SELECT * FROM Students";
-	private static final String SQL__INSERT_STUDENT = "INSERT INTO Students VALUES(?, ?, ?, ?, ?, ?)";
+	private static final String SQL__INSERT_STUDENT = "INSERT INTO Students(Surname, Firstname, Lastname, "
+			+ "GroupsId, CVsId, Adress) VALUES(?, ?, ?, ?, ?, ?)";
+	
 	private static final String SQL__DELETE_ANY_TAG = "DELETE Students WHERE StudentsId = ?";
 	
 	@Override
@@ -179,6 +181,7 @@ public class MSSqlStudentDAO implements StudentDAO {
 		st.setFirstname(rs.getString(MapperParameters.STUDENT_FIRSTNAME));
 		st.setSurname(rs.getString(MapperParameters.STUDENT_SURNAME));
 		st.setPatronymic(rs.getString(MapperParameters.STUDENT_PATRONYMIC));
+		st.setAdress(rs.getString(MapperParameters.STUDENT_ADRESS));
 		return st;
 	}
 	
@@ -190,6 +193,7 @@ public class MSSqlStudentDAO implements StudentDAO {
 		pstmt.setString(4, st.getPatronymic());
 		pstmt.setLong(5, st.getGroup().getGroupId());
 		pstmt.setLong(6, st.getCv().getCvsId());
+		pstmt.setString(7, st.getAdress());
 	}
 	
 }
