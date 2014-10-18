@@ -27,6 +27,7 @@ import com.google.gwt.user.client.ui.DockPanel;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment.HorizontalAlignmentConstant;
 import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.smartgwt.client.widgets.DateChooser;
 import com.smartgwt.client.widgets.Label;  
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.RootPanel;
@@ -160,6 +161,9 @@ public class RegistrationSimplePanel extends SimplePanel {
 		dateItem.setWidth(300);
 		dateItem.setHint("Введите дату рождения или выберите справа");
 		dateItem.setShowHintInField(true);
+		dateItem.setEndDate(new Date());
+		/*DateChooser dc = dateItem.getPickerProperties();
+		dc.setPageLeft(dc.getPageLeft() + dc.getWidth()/2 + 5);*/
 	    StaticTextItem dateHint = new StaticTextItem();
 	    dateHint.setShowTitle(false);
 	    dateHint.setValue("Например, 21.09");
