@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import ua.nure.pi.entity.Faculty;
+import ua.nure.pi.entity.Student;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
@@ -14,5 +15,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 public interface RegistrationServiceAsync {
 
 	void getFaculties(AsyncCallback<Collection<Faculty>> callback);
+
+	void sendStudent(Student st, AsyncCallback asyncCallback);
 
 }

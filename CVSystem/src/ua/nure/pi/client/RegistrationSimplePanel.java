@@ -16,6 +16,8 @@ import ua.nure.pi.server.RegistrationServiceImpl;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.layout.client.Layout.Alignment;
 import com.google.gwt.user.client.Window;
@@ -63,7 +65,6 @@ import com.smartgwt.client.widgets.form.fields.TextAreaItem;
 import com.smartgwt.client.widgets.form.fields.TextItem;
 import com.smartgwt.client.widgets.form.fields.events.ChangedEvent;
 import com.smartgwt.client.widgets.form.fields.events.ChangedHandler;
-import com.smartgwt.client.widgets.form.fields.events.ClickEvent;
 import com.smartgwt.client.widgets.form.fields.events.EditorExitEvent;
 import com.smartgwt.client.widgets.form.fields.events.EditorExitHandler;
 import com.smartgwt.client.widgets.form.fields.events.ValueHoverEvent;
@@ -74,7 +75,6 @@ import com.smartgwt.client.widgets.layout.HStack;
 import com.smartgwt.client.widgets.layout.VStack;
 import com.smartgwt.client.widgets.tree.Tree;
 import com.smartgwt.client.widgets.tree.TreeNode;
-import com.smartgwt.client.widgets.events.ClickHandler;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
@@ -103,6 +103,8 @@ public class RegistrationSimplePanel extends SimplePanel {
     SertificateSimplePanel ssp;
     
     MultiComboBoxItem languages;
+    
+    Student st;
 
     public RegistrationSimplePanel(MainServiceAsync reg){
     	registrationService = reg;
@@ -240,8 +242,26 @@ public class RegistrationSimplePanel extends SimplePanel {
 
         languages.setAddUnknownValues(false);
         languages.setColSpan(20);
-        
-        Button commit = new Button("Отправить анкету");
+	        
+	        Button commit = new Button("Отправить анкету");
+	        commit.addClickHandler(new ClickHandler() {
+	        	
+	            public void onClick(ClickEvent event) {
+	            	st = getStudent();
+	            	registrationService.sendStudent(st, new AsyncCallback() {
+	                    public void onFailure(Throwable caught) {
+	                      Window.alert(caught.getLocalizedMessage());
+	                    }
+
+						@Override
+						public void onSuccess(Object result) {
+		                      Window.alert("Анкета сохранена");
+							
+						}
+	                  });	              }
+
+	        });
+	        
         
 		languages.addChangedHandler(new ChangedHandler() {
 					
@@ -368,7 +388,7 @@ public class RegistrationSimplePanel extends SimplePanel {
 	}
 	
 	public Student getStudent(){
-		Student st = new Student();
+		st = new Student();
 		st.setFirstname(NametextBox.getValueAsString());
 		st.setSurname(SurnametextBox.getValueAsString());
 		st.setDateOfBirth((Date)dateItem.getValue());

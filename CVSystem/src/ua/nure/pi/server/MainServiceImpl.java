@@ -16,8 +16,10 @@ import ua.nure.pi.client.RegistrationService;
 import ua.nure.pi.dao.FacultyGroupDAO;
 import ua.nure.pi.dao.UserDAO;
 import ua.nure.pi.dao.mssql.MSSqlDAOFactory;
+import ua.nure.pi.dao.mssql.MSSqlStudentDAO;
 import ua.nure.pi.dao.mssql.MSSqlUserDAO;
 import ua.nure.pi.entity.Faculty;
+import ua.nure.pi.entity.Student;
 import ua.nure.pi.parameter.AppConstants;
 import ua.nure.pi.shared.FieldVerifier;
 
@@ -60,4 +62,8 @@ public class MainServiceImpl extends RemoteServiceServlet implements
 	  public Collection<Faculty> getFaculties() throws IllegalArgumentException {
 		    return facultyGroupDAO.getFaculties();
 		  }
+	  
+	  public void sendStudent(Student st) {
+		  MSSqlStudentDAO.getInstancce().insertStudent(st);
+	  }
 }
