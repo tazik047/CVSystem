@@ -94,6 +94,8 @@ public class RegistrationSimplePanel extends SimplePanel {
 
     public TextItem PhonetextBox;
     
+    public TextItem AddresstextBox;
+    
     WorkExperienceSimplePanel expPanel; 
     EducationSimplePanel eduPanel;            
     LanguageSimplePanel lanPanel;
@@ -163,7 +165,7 @@ public class RegistrationSimplePanel extends SimplePanel {
 	    dateHint.setValue("Например, 21.09");
 
         
-        TextItem AddresstextBox = new TextItem("address", "Домашний адрес");  
+        AddresstextBox = new TextItem("address", "Домашний адрес");  
         AddresstextBox.setWidth(300);  
         AddresstextBox.setHint("Введите домашний адрес");  
         AddresstextBox.setShowHintInField(true);
@@ -254,24 +256,36 @@ public class RegistrationSimplePanel extends SimplePanel {
 	
 		
 		DynamicForm form = new DynamicForm();
-		form.setStyleName("fixTextArea");
+		form.setCellPadding(15);
+		
+		//form.setStyleName("fixTextArea");
 		form.setNumCols(1);
 		
 	    TextAreaItem first = new TextAreaItem("Личные качества");
-	    first.setControlStyle("fixTextArea");
+	    first.setCellStyle("fixTextArea");
 
 	    TextAreaItem second = new TextAreaItem("Прочее");
-	    second.setControlStyle("fixTextArea");
+	    second.setCellStyle("fixTextArea");
 	    
 	    CheckBox cb = new CheckBox();
 	    cb.setText("Даю право на обработку и хранение личной информации администрации ресурса");
 	    cb.setSize("343px", "44px");
 	    
-	    StaticTextItem labelHint2 = new StaticTextItem();
-	    labelHint2.setShowTitle(false);
-	    labelHint2.setValue("hint2");
+	    surnameHint.setCellStyle("hint");
+	    nameHint.setCellStyle("hint");
+	    dateHint.setCellStyle("hint");
+	    addressHint.setCellStyle("hint");
+	    emailHint.setCellStyle("hint");
+	    Skypetextbox.setCellStyle("hint");
+	    PhonetextBox.setCellStyle("hint");
+	    goalComboBox.setCellStyle("hint");
+	    languages.setCellStyle("hint");
 	    
-	    mainForm.setFields(SurnametextBox,surnameHint, NametextBox, nameHint, dateItem, dateHint, Emailtextbox, emailHint, PhonetextBox, Skypetextbox, goalComboBox, languages);
+	    
+	    mainForm.setCellPadding(5);
+	    mainForm.setFields(SurnametextBox,surnameHint, NametextBox, nameHint, dateItem, dateHint, 
+	    		AddresstextBox, addressHint, Emailtextbox, emailHint, PhonetextBox, Skypetextbox,
+	    		goalComboBox, languages);
         mainForm.setTitleOrientation(TitleOrientation.TOP);
 
 	    
@@ -283,6 +297,7 @@ public class RegistrationSimplePanel extends SimplePanel {
 	    rootPanel.add(ssp);
 	    
 	    rootPanel.add(form);
+	    rootPanel.setSpacing(15);
 	    
 	    form.setFields(first,second);
 	    form.setTitleOrientation(TitleOrientation.TOP);
@@ -355,6 +370,7 @@ public class RegistrationSimplePanel extends SimplePanel {
 		st.setDateOfBirth((Date)dateItem.getValue());
 		st.setEmail(Emailtextbox.getValueAsString());
 		st.setPhone(PhonetextBox.getValueAsString());
+		st.setAddress(AddresstextBox.getValueAsString());
 		CV cv = new CV();
 		cv.setEducations(eduPanel.getEducation());
 		cv.setLanguages(lanPanel.getLanguages());

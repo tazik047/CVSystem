@@ -381,7 +381,7 @@ CREATE TABLE [dbo].[Students](
 	[Firstname] [nvarchar](max) NOT NULL,
 	[Patronymic] [nvarchar](max) NOT NULL,
 	[GroupsId] [bigint] NOT NULL,
-	[Adress] [nvarchar](max) NOT NULL,
+	[Address] [nvarchar](max) NOT NULL,
 	[CVsId] [bigint] NOT NULL,
  CONSTRAINT [PK_Students] PRIMARY KEY CLUSTERED 
 (

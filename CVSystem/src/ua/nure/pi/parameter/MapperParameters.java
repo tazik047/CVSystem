@@ -31,6 +31,7 @@ public interface MapperParameters {
 	String STUDENT_PATRONYMIC = "Patronymic";
 	String STUDENT_GROUPSID = "GroupsId";
 	String STUDENT_CVSID = "CVsId";
+	String STUDENT_ADDRESS = "Address";
 	
 	//Language
 	String LANGUAGE__ID = "LanguagesId";

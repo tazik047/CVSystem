@@ -181,7 +181,7 @@ public class MSSqlStudentDAO implements StudentDAO {
 		st.setFirstname(rs.getString(MapperParameters.STUDENT_FIRSTNAME));
 		st.setSurname(rs.getString(MapperParameters.STUDENT_SURNAME));
 		st.setPatronymic(rs.getString(MapperParameters.STUDENT_PATRONYMIC));
-		st.setAdress(rs.getString(MapperParameters.STUDENT_ADRESS));
+		st.setAddress(rs.getString(MapperParameters.STUDENT_ADDRESS));
 		return st;
 	}
 	
@@ -193,7 +193,7 @@ public class MSSqlStudentDAO implements StudentDAO {
 		pstmt.setString(4, st.getPatronymic());
 		pstmt.setLong(5, st.getGroup().getGroupId());
 		pstmt.setLong(6, st.getCv().getCvsId());
-		pstmt.setString(7, st.getAdress());
+		pstmt.setString(7, st.getAddress());
 	}
 	
 }

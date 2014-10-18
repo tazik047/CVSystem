@@ -51,7 +51,7 @@ public class PrintSimplePanel extends SimplePanel {
         vLayout.setWidth("100%");
         vLayout.setHeight("90");
         //vLayout2.addMember(new BlueBox((Integer) null, "50%", "")); по идее так будет работать 
-        vLayout2.addMember(new BlueBox((Integer) null, "25%", student.getAdress()));
+        vLayout2.addMember(new BlueBox((Integer) null, "25%", student.getAddress()));
         vLayout2.addMember(new BlueBox((Integer) null, "25%", student.getSkype()));  
         vLayout2.addMember(new BlueBox((Integer) null, "25%", student.getPhone()));  
         vLayout2.addMember(new BlueBox((Integer) null, "25%", student.getEmail()));

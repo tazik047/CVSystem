@@ -29,9 +29,12 @@ a {
 .fixRadio{
 	width: 150px !important;
 }
-.fixTextArea{
+.fixTextArea>textarea{
 	resize:none;
 	width: 344px !important;
+}
+.fixTextArea{
+	padding-left: 0px;
 }
 a:hover {
     color: #1A8DFF;
@@ -311,5 +314,14 @@ h3.assistive-text {
 }
 
 .dateChooserBorder{
-	left:490px !important;
+	left:550px !important;
+}
+
+.hint>div{
+	margin-bottom:20px;
+	font-style: italic;
+}
+.hint>input,
+.hint>table{
+	margin-bottom:20px;
 }
