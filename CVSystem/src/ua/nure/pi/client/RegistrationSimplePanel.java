@@ -235,6 +235,8 @@ public class RegistrationSimplePanel extends SimplePanel {
         languages.setAddUnknownValues(false);
         languages.setColSpan(20);
         
+        Button commit = new Button("Отправить анкету");
+        
 		languages.addChangedHandler(new ChangedHandler() {
 					
 					@Override
@@ -249,6 +251,8 @@ public class RegistrationSimplePanel extends SimplePanel {
 					}
 				});
                 
+	
+		
 		DynamicForm form = new DynamicForm();
 		form.setStyleName("fixTextArea");
 		form.setNumCols(1);
@@ -284,16 +288,20 @@ public class RegistrationSimplePanel extends SimplePanel {
 	    form.setTitleOrientation(TitleOrientation.TOP);
 	    form.markForRedraw();
 	    rootPanel.add(cb);
-
+	    
+	    rootPanel.setCellHorizontalAlignment(commit, HasHorizontalAlignment.ALIGN_RIGHT);
+	    rootPanel.add(commit);
 	    
 	    rootPanel.setCellHorizontalAlignment(eduPanel, HasHorizontalAlignment.ALIGN_LEFT);
 	    rootPanel.setCellHorizontalAlignment(expPanel, HasHorizontalAlignment.ALIGN_LEFT);
 	    rootPanel.setCellHorizontalAlignment(lanPanel, HasHorizontalAlignment.ALIGN_LEFT);
 	    
 	    rootPanel.setCellHorizontalAlignment(cb, HasHorizontalAlignment.ALIGN_LEFT);
-
         setWidget(rootPanel);
-    }  
+        
+	}  
+	
+	
 	
 	public void FillTree(ArrayList<Faculty> faculties, SimplePanel facultiesPanel)
 	{
