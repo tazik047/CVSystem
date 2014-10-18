@@ -28,7 +28,7 @@ public class Student implements Serializable, IsSerializable {
 	
 	private String skype;
 	
-	
+	private String adress;
 
 	public long getStudentsId() {
 		return studentsId;
@@ -112,6 +112,14 @@ public class Student implements Serializable, IsSerializable {
 
 	public void setSkype(String skype) {
 		this.skype = skype;
+	}
+	
+	public String getAdress() {
+		return adress;
+	}
+
+	public void setAdress(String adress) {
+		this.adress = adress;
 	}
 	
 }
