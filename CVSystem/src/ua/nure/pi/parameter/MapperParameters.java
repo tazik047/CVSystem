@@ -53,4 +53,7 @@ public interface MapperParameters {
 	String SERTIFICATE__NAME = "Name";
 	String SERTIFICATE__YEAR = "Year";
 	String SERTIFICATE__CVsID = "CVsId";
+	
+	//Purpose
+	String PURPOSE__ID = "PurposesId";
 }

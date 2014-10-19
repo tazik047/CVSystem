@@ -33,8 +33,8 @@ GO
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Educations_CVs]') AND parent_object_id = OBJECT_ID(N'[dbo].[Educations]'))
 ALTER TABLE [dbo].[Educations] DROP CONSTRAINT [FK_Educations_CVs]
 GO
-IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_CVs_PurposesId]') AND parent_object_id = OBJECT_ID(N'[dbo].[CVs]'))
-ALTER TABLE [dbo].[CVs] DROP CONSTRAINT [FK_CVs_PurposesId]
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_CVs_Purposes]') AND parent_object_id = OBJECT_ID(N'[dbo].[CVs]'))
+ALTER TABLE [dbo].[CVs] DROP CONSTRAINT [FK_CVs_Purposes]
 GO
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Companies_Users]') AND parent_object_id = OBJECT_ID(N'[dbo].[Companies]'))
 ALTER TABLE [dbo].[Companies] DROP CONSTRAINT [FK_Companies_Users]
@@ -59,9 +59,9 @@ GO
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Roles]') AND type in (N'U'))
 DROP TABLE [dbo].[Roles]
 GO
-/****** Object:  Table [dbo].[PurposesId]    Script Date: 19.10.2014 14:14:52 ******/
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[PurposesId]') AND type in (N'U'))
-DROP TABLE [dbo].[PurposesId]
+/****** Object:  Table [dbo].[Purposes]    Script Date: 19.10.2014 14:14:52 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Purposes]') AND type in (N'U'))
+DROP TABLE [dbo].[Purposes]
 GO
 /****** Object:  Table [dbo].[ProgramLanguagesCVs]    Script Date: 19.10.2014 14:14:52 ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[ProgramLanguagesCVs]') AND type in (N'U'))
@@ -295,6 +295,7 @@ CREATE TABLE [dbo].[LanguagesCVs](
 	[LanguagesCVsId] [bigint] IDENTITY(1,1) NOT NULL,
 	[LanguagesId] [bigint] NOT NULL,
 	[CVsId] [bigint] NOT NULL,
+	[Level] [int] NOT NULL,
  CONSTRAINT [PK_LanguagesCVs] PRIMARY KEY CLUSTERED 
 (
 	[LanguagesCVsId] ASC
@@ -337,14 +338,14 @@ CREATE TABLE [dbo].[ProgramLanguagesCVs](
 ) ON [PRIMARY]
 END
 GO
-/****** Object:  Table [dbo].[PurposesId]    Script Date: 19.10.2014 14:14:53 ******/
+/****** Object:  Table [dbo].[Purposes]    Script Date: 19.10.2014 14:14:53 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[PurposesId]') AND type in (N'U'))
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Purposes]') AND type in (N'U'))
 BEGIN
-CREATE TABLE [dbo].[PurposesId](
+CREATE TABLE [dbo].[Purposes](
 	[PurposesId] [bigint] IDENTITY(1,1) NOT NULL,
 	[Title] [nvarchar](max) NOT NULL,
  CONSTRAINT [PK_PurposesId] PRIMARY KEY CLUSTERED 
@@ -470,12 +471,12 @@ GO
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Companies_Users]') AND parent_object_id = OBJECT_ID(N'[dbo].[Companies]'))
 ALTER TABLE [dbo].[Companies] CHECK CONSTRAINT [FK_Companies_Users]
 GO
-IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_CVs_PurposesId]') AND parent_object_id = OBJECT_ID(N'[dbo].[CVs]'))
-ALTER TABLE [dbo].[CVs]  WITH CHECK ADD  CONSTRAINT [FK_CVs_PurposesId] FOREIGN KEY([PurposesId])
-REFERENCES [dbo].[PurposesId] ([PurposesId])
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_CVs_Purposes]') AND parent_object_id = OBJECT_ID(N'[dbo].[CVs]'))
+ALTER TABLE [dbo].[CVs]  WITH CHECK ADD  CONSTRAINT [FK_CVs_Purposes] FOREIGN KEY([PurposesId])
+REFERENCES [dbo].[Purposes] ([PurposesId])
 GO
-IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_CVs_PurposesId]') AND parent_object_id = OBJECT_ID(N'[dbo].[CVs]'))
-ALTER TABLE [dbo].[CVs] CHECK CONSTRAINT [FK_CVs_PurposesId]
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_CVs_Purposes]') AND parent_object_id = OBJECT_ID(N'[dbo].[CVs]'))
+ALTER TABLE [dbo].[CVs] CHECK CONSTRAINT [FK_CVs_Purposes]
 GO
 IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Educations_CVs]') AND parent_object_id = OBJECT_ID(N'[dbo].[Educations]'))
 ALTER TABLE [dbo].[Educations]  WITH CHECK ADD  CONSTRAINT [FK_Educations_CVs] FOREIGN KEY([CVsId])

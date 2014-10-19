@@ -25,7 +25,8 @@ public class MSSqlCVDAO implements CVDAO {
 		return instance;
 	}
 	
-	private static final String SQL__INSERT_CV = "INSERT INTO CVs DEFAULT VALUES";
+	private static final String SQL__INSERT_CV = "INSERT INTO CVs(PurposesId) VALUES(?)";
+	private static final String SQL__SELECT_CV = "SELECT * FROM CVs WHERE CVsId=?";
 
 	@Override
 	public boolean insertCV(CV cv) {
@@ -54,6 +55,7 @@ public class MSSqlCVDAO implements CVDAO {
 		PreparedStatement pstmt = null;
 		try {
 			pstmt = con.prepareStatement(SQL__INSERT_CV, Statement.RETURN_GENERATED_KEYS);
+			pstmt.setLong(1, cv.getPurpose().getId());
 			if(pstmt.executeUpdate()!=1)
 				return false;
 			ResultSet rs = pstmt.getGeneratedKeys();
@@ -116,6 +118,12 @@ public class MSSqlCVDAO implements CVDAO {
 			result.setProgramLanguages(MSSqlProgramLanguageDAO.getInstancce().getStudentsProgramLanguages(cVsId, con));
 			result.setSertificates(MSSqlSertificatsDAO.getInstancce().getSertificats(cVsId, con));
 			result.setWorkExps(MSSqlWorkExpDAO.getInstancce().getWorkExps(cVsId, con));
+			
+			pstmt = con.prepareStatement(SQL__SELECT_CV);
+			pstmt.setLong(1, cVsId);
+			ResultSet rs = pstmt.executeQuery();
+			if(rs.next())
+				result.setPurpose(purpose);
 		} catch (SQLException e) {
 			throw e;
 		} finally {

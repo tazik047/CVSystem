@@ -10,6 +10,8 @@ public class CV implements Serializable, IsSerializable {
 
 	private long cvsId;
 	
+	private Purpose purpose;
+	
 	private Collection<Education> educations;
 	
 	private Collection<Language> languages;
@@ -66,5 +68,13 @@ public class CV implements Serializable, IsSerializable {
 	
 	public void setWorkExps(Collection<WorkExp> workExps) {
 		this.workExps = workExps;
+	}
+
+	public Purpose getPurpose() {
+		return purpose;
+	}
+
+	public void setPurpose(Purpose purpose) {
+		this.purpose = purpose;
 	}
 }
