@@ -22,13 +22,16 @@ import com.smartgwt.client.widgets.layout.events.SectionHeaderClickHandler;
 public class LanguageSimplePanel extends SimplePanel{
 	
 	private ArrayList<LanguageElementSimplePanel> languages;
+	private ArrayList<Language> langs;
+
 	private SectionStack sectionStack;
 	private int countColor = -1;
 	private int pixelCount = 26;
 	private VerticalPanel root;
 	private boolean expend = true;
 	
-	public LanguageSimplePanel() {
+	public LanguageSimplePanel(Collection<Language> langs) {
+		this.langs = new ArrayList<Language>(langs);
 		sectionStack = new SectionStack();  
         sectionStack.setVisibilityMode(VisibilityMode.MULTIPLE);
   
@@ -89,7 +92,7 @@ public class LanguageSimplePanel extends SimplePanel{
 			btAdd.addStyleName("panel-newAddButton");
 						
 		}
-		final LanguageElementSimplePanel lang = new LanguageElementSimplePanel();
+		final LanguageElementSimplePanel lang = new LanguageElementSimplePanel(langs);
 		pixelCount+=168;
 		sectionStack.setHeight(String.valueOf(pixelCount)+"px");
 		countColor  = (++countColor)%2;

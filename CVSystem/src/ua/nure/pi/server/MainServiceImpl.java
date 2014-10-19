@@ -8,17 +8,23 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.xml.crypto.KeySelector.Purpose;
 
 import ua.nure.pi.Path;
 import ua.nure.pi.client.GreetingService;
 import ua.nure.pi.client.MainService;
 import ua.nure.pi.client.RegistrationService;
 import ua.nure.pi.dao.FacultyGroupDAO;
+import ua.nure.pi.dao.LanguageDAO;
+import ua.nure.pi.dao.ProgramLanguageDAO;
+import ua.nure.pi.dao.StudentDAO;
 import ua.nure.pi.dao.UserDAO;
 import ua.nure.pi.dao.mssql.MSSqlDAOFactory;
 import ua.nure.pi.dao.mssql.MSSqlStudentDAO;
 import ua.nure.pi.dao.mssql.MSSqlUserDAO;
 import ua.nure.pi.entity.Faculty;
+import ua.nure.pi.entity.Language;
+import ua.nure.pi.entity.ProgramLanguage;
 import ua.nure.pi.entity.Student;
 import ua.nure.pi.parameter.AppConstants;
 import ua.nure.pi.shared.FieldVerifier;
@@ -33,6 +39,13 @@ public class MainServiceImpl extends RemoteServiceServlet implements
 	MainService {
 	
 	private FacultyGroupDAO facultyGroupDAO;
+	
+	private StudentDAO StudentDAO;
+	
+	private ProgramLanguageDAO ProgramLanguageDAO;
+	
+	private LanguageDAO LanguageDAO;
+
 	
 	@Override
 	protected void doGet(HttpServletRequest request,
@@ -64,6 +77,19 @@ public class MainServiceImpl extends RemoteServiceServlet implements
 		  }
 	  
 	  public void sendStudent(Student st) {
-		  MSSqlStudentDAO.getInstancce().insertStudent(st);
+		  StudentDAO.insertStudent(st);
 	  }
+	  
+	  public Collection<ProgramLanguage> getProgramLanguages() throws IllegalArgumentException {
+		    return ProgramLanguageDAO.getProgramLanguages();  
+		  }
+	  
+	  public Collection<Language> getLanguages() throws IllegalArgumentException {
+		    return LanguageDAO.getLanguages();
+		  }
+	  
+	  public Collection<Purpose> getPurposes() throws IllegalArgumentException {
+		    return null;
+		    }
+
 }

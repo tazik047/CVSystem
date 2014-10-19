@@ -5,10 +5,14 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.LinkedHashMap;
 
+import javax.xml.crypto.KeySelector.Purpose;
+
 import ua.nure.pi.dao.mssql.MSSqlFacultyGroupDAO;
+import ua.nure.pi.dao.mssql.MSSqlProgramLanguageDAO;
 import ua.nure.pi.entity.CV;
 import ua.nure.pi.entity.Faculty;
 import ua.nure.pi.entity.Group;
+import ua.nure.pi.entity.Language;
 import ua.nure.pi.entity.ProgramLanguage;
 import ua.nure.pi.entity.Student;
 import ua.nure.pi.server.GreetingServiceImpl;
@@ -84,6 +88,13 @@ public class RegistrationSimplePanel extends SimplePanel {
 	private MainServiceAsync registrationService;
 
     ArrayList<Faculty> faculties;
+    
+    ArrayList<ProgramLanguage> programLanguages;
+    
+    ArrayList<Language> langs;
+    
+    ArrayList<Purpose> purposes;
+
     
     public TextItem NametextBox;
     
@@ -210,6 +221,27 @@ public class RegistrationSimplePanel extends SimplePanel {
         goalComboBox.setShowHintInField(true);
         goalComboBox.setWidth(300);
         goalComboBox.setHeight(22);
+        
+        final LinkedHashMap<Long, String> phm = new LinkedHashMap<>();
+
+        /*
+	    registrationService.getPurposes(new AsyncCallback<Collection<Purpose>>() {
+            public void onFailure(Throwable caught) {
+              Window.alert("Не удалось получить языки программирования");
+            }
+
+			@Override
+			public void onSuccess(Collection<Purpose> result) {
+				purposes = new ArrayList<Purpose>(result);		
+			}
+          });
+                
+        for (Purpose prp : purposes) {
+        	phm.put(prp.getTitle, prl.getTitle());
+        }
+        
+        goalComboBox.setValueMap(phm);
+		/*
         // Заполнение возможных целей из базы
                 
         // Опыт работы и образование
@@ -218,7 +250,19 @@ public class RegistrationSimplePanel extends SimplePanel {
                 
         eduPanel = new EducationSimplePanel();
                 
-        lanPanel = new LanguageSimplePanel();
+        lanPanel = new LanguageSimplePanel(langs);
+        
+	    registrationService.getLanguages(new AsyncCallback<Collection<Language>>() {
+            public void onFailure(Throwable caught) {
+              Window.alert("Не удалось получить языки программирования");
+            }
+
+			@Override
+			public void onSuccess(Collection<Language> result) {
+				langs = new ArrayList<Language>(result);		
+			}
+          });
+
         
         ssp = new SertificateSimplePanel();
         
@@ -227,17 +271,28 @@ public class RegistrationSimplePanel extends SimplePanel {
         final MultiComboBoxLayoutStyle initialLayoutStyle = MultiComboBoxLayoutStyle.HORIZONTAL;  
         languages = new MultiComboBoxItem("languages", "Языки программирования");
         
-        final LinkedHashMap<String, String> lhm = new LinkedHashMap<>();
-        lhm.put("Java", "Java");
-        lhm.put("Haskell", "Haskell");
-        lhm.put("Python", "Python");
-        lhm.put("Java1", "Jav1a");
-        lhm.put("Haske1ll", "Ha1skell");
-        lhm.put("Pyth1on", "Py1thon");
-        lhm.put("Jav1a", "Ja2va");
-        lhm.put("Hask2ell", "Has2kell");
-        lhm.put("Pyth2on", "Py2hon");
+        final LinkedHashMap<Long, String> lhm = new LinkedHashMap<>();
+        
+        /*        Без базы не работает.
+	    registrationService.getProgramLanguages(new AsyncCallback<Collection<ProgramLanguage>>() {
+            public void onFailure(Throwable caught) {
+              Window.alert("Не удалось получить языки программирования");
+            }
+
+			@Override
+			public void onSuccess(Collection<ProgramLanguage> result) {
+				programLanguages = new ArrayList<ProgramLanguage>(result);		
+			}
+          });
+                
+        for (ProgramLanguage prl : programLanguages) {
+        	lhm.put(prl.getId(), prl.getTitle());
+        }
+        
+                
+        
         languages.setValueMap(lhm);
+        */
         languages.setLayoutStyle(initialLayoutStyle);
 
         languages.setAddUnknownValues(false);
@@ -258,7 +313,8 @@ public class RegistrationSimplePanel extends SimplePanel {
 		                      Window.alert("Анкета сохранена");
 							
 						}
-	                  });	              }
+	                  });	              
+	            	}
 
 	        });
 	        

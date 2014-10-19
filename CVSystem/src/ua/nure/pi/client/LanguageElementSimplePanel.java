@@ -33,7 +33,7 @@ public class LanguageElementSimplePanel extends SimplePanel{
 	public Image imgDel;
 	private RadioGroupItem style;
 	
-	public LanguageElementSimplePanel(){
+	public LanguageElementSimplePanel(Collection<Language> langs){
 		rootPanel = new VerticalPanel();
 		HorizontalPanel upPanel = new HorizontalPanel();
 		VerticalPanel lang = new VerticalPanel();
@@ -63,6 +63,9 @@ public class LanguageElementSimplePanel extends SimplePanel{
         label.setSize("70px", "18px");
 		
 		langBox = new ListBox();
+		for (Language lan : langs) {
+			langBox.addItem(lang.getTitle());
+		}
         lang.add(langBox);
         langBox.setSize("70px", "18px");
         

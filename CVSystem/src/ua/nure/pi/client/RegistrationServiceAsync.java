@@ -16,6 +16,4 @@ public interface RegistrationServiceAsync {
 
 	void getFaculties(AsyncCallback<Collection<Faculty>> callback);
 
-	void sendStudent(Student st, AsyncCallback asyncCallback);
-
 }
