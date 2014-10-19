@@ -33,79 +33,84 @@ GO
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Educations_CVs]') AND parent_object_id = OBJECT_ID(N'[dbo].[Educations]'))
 ALTER TABLE [dbo].[Educations] DROP CONSTRAINT [FK_Educations_CVs]
 GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_CVs_PurposesId]') AND parent_object_id = OBJECT_ID(N'[dbo].[CVs]'))
+ALTER TABLE [dbo].[CVs] DROP CONSTRAINT [FK_CVs_PurposesId]
+GO
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Companies_Users]') AND parent_object_id = OBJECT_ID(N'[dbo].[Companies]'))
 ALTER TABLE [dbo].[Companies] DROP CONSTRAINT [FK_Companies_Users]
 GO
-/****** Object:  Table [dbo].[WorkExps]    Script Date: 12.10.2014 0:45:56 ******/
+/****** Object:  Table [dbo].[WorkExps]    Script Date: 19.10.2014 14:14:52 ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[WorkExps]') AND type in (N'U'))
 DROP TABLE [dbo].[WorkExps]
 GO
-/****** Object:  Table [dbo].[Users]    Script Date: 12.10.2014 0:45:57 ******/
+/****** Object:  Table [dbo].[Users]    Script Date: 19.10.2014 14:14:52 ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Users]') AND type in (N'U'))
 DROP TABLE [dbo].[Users]
 GO
-/****** Object:  Table [dbo].[Students]    Script Date: 12.10.2014 0:45:57 ******/
+/****** Object:  Table [dbo].[Students]    Script Date: 19.10.2014 14:14:52 ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Students]') AND type in (N'U'))
 DROP TABLE [dbo].[Students]
 GO
-/****** Object:  Table [dbo].[Sertificats]    Script Date: 12.10.2014 0:45:57 ******/
+/****** Object:  Table [dbo].[Sertificats]    Script Date: 19.10.2014 14:14:52 ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Sertificats]') AND type in (N'U'))
 DROP TABLE [dbo].[Sertificats]
 GO
-/****** Object:  Table [dbo].[Roles]    Script Date: 12.10.2014 0:45:57 ******/
+/****** Object:  Table [dbo].[Roles]    Script Date: 19.10.2014 14:14:52 ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Roles]') AND type in (N'U'))
 DROP TABLE [dbo].[Roles]
 GO
-/****** Object:  Table [dbo].[ProgramLanguagesCVs]    Script Date: 12.10.2014 0:45:57 ******/
+/****** Object:  Table [dbo].[PurposesId]    Script Date: 19.10.2014 14:14:52 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[PurposesId]') AND type in (N'U'))
+DROP TABLE [dbo].[PurposesId]
+GO
+/****** Object:  Table [dbo].[ProgramLanguagesCVs]    Script Date: 19.10.2014 14:14:52 ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[ProgramLanguagesCVs]') AND type in (N'U'))
 DROP TABLE [dbo].[ProgramLanguagesCVs]
 GO
-/****** Object:  Table [dbo].[ProgramLanguages]    Script Date: 12.10.2014 0:45:57 ******/
+/****** Object:  Table [dbo].[ProgramLanguages]    Script Date: 19.10.2014 14:14:52 ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[ProgramLanguages]') AND type in (N'U'))
 DROP TABLE [dbo].[ProgramLanguages]
 GO
-/****** Object:  Table [dbo].[LanguagesCVs]    Script Date: 12.10.2014 0:45:57 ******/
+/****** Object:  Table [dbo].[LanguagesCVs]    Script Date: 19.10.2014 14:14:52 ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[LanguagesCVs]') AND type in (N'U'))
 DROP TABLE [dbo].[LanguagesCVs]
 GO
-/****** Object:  Table [dbo].[Languages]    Script Date: 12.10.2014 0:45:57 ******/
+/****** Object:  Table [dbo].[Languages]    Script Date: 19.10.2014 14:14:52 ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Languages]') AND type in (N'U'))
 DROP TABLE [dbo].[Languages]
 GO
-/****** Object:  Table [dbo].[Groups]    Script Date: 12.10.2014 0:45:57 ******/
+/****** Object:  Table [dbo].[Groups]    Script Date: 19.10.2014 14:14:52 ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Groups]') AND type in (N'U'))
 DROP TABLE [dbo].[Groups]
 GO
-/****** Object:  Table [dbo].[Faculties]    Script Date: 12.10.2014 0:45:57 ******/
+/****** Object:  Table [dbo].[Faculties]    Script Date: 19.10.2014 14:14:52 ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Faculties]') AND type in (N'U'))
 DROP TABLE [dbo].[Faculties]
 GO
-/****** Object:  Table [dbo].[Educations]    Script Date: 12.10.2014 0:45:57 ******/
+/****** Object:  Table [dbo].[Educations]    Script Date: 19.10.2014 14:14:52 ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Educations]') AND type in (N'U'))
 DROP TABLE [dbo].[Educations]
 GO
-/****** Object:  Table [dbo].[CVs]    Script Date: 12.10.2014 0:45:57 ******/
+/****** Object:  Table [dbo].[CVs]    Script Date: 19.10.2014 14:14:52 ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[CVs]') AND type in (N'U'))
 DROP TABLE [dbo].[CVs]
 GO
-/****** Object:  Table [dbo].[Companies]    Script Date: 12.10.2014 0:45:57 ******/
+/****** Object:  Table [dbo].[Companies]    Script Date: 19.10.2014 14:14:52 ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Companies]') AND type in (N'U'))
 DROP TABLE [dbo].[Companies]
 GO
 USE [master]
 GO
-/****** Object:  Database [CVSystem]    Script Date: 12.10.2014 0:45:57 ******/
+/****** Object:  Database [CVSystem]    Script Date: 19.10.2014 14:14:52 ******/
 IF  EXISTS (SELECT name FROM sys.databases WHERE name = N'CVSystem')
 DROP DATABASE [CVSystem]
 GO
-/****** Object:  Database [CVSystem]    Script Date: 12.10.2014 0:45:57 ******/
+/****** Object:  Database [CVSystem]    Script Date: 19.10.2014 14:14:52 ******/
 IF NOT EXISTS (SELECT name FROM sys.databases WHERE name = N'CVSystem')
 BEGIN
 CREATE DATABASE [CVSystem]
 END
 
-GO
-ALTER DATABASE [CVSystem] SET COMPATIBILITY_LEVEL = 120
 GO
 IF (1 = FULLTEXTSERVICEPROPERTY('IsFullTextInstalled'))
 begin
@@ -168,11 +173,9 @@ ALTER DATABASE [CVSystem] SET FILESTREAM( NON_TRANSACTED_ACCESS = OFF )
 GO
 ALTER DATABASE [CVSystem] SET TARGET_RECOVERY_TIME = 0 SECONDS 
 GO
-ALTER DATABASE [CVSystem] SET DELAYED_DURABILITY = DISABLED 
-GO
 USE [CVSystem]
 GO
-/****** Object:  Table [dbo].[Companies]    Script Date: 12.10.2014 0:45:58 ******/
+/****** Object:  Table [dbo].[Companies]    Script Date: 19.10.2014 14:14:53 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -191,7 +194,7 @@ CREATE TABLE [dbo].[Companies](
 ) ON [PRIMARY]
 END
 GO
-/****** Object:  Table [dbo].[CVs]    Script Date: 12.10.2014 0:45:59 ******/
+/****** Object:  Table [dbo].[CVs]    Script Date: 19.10.2014 14:14:53 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -200,6 +203,7 @@ IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[CV
 BEGIN
 CREATE TABLE [dbo].[CVs](
 	[CVsId] [bigint] IDENTITY(1,1) NOT NULL,
+	[PurposesId] [bigint] NOT NULL,
  CONSTRAINT [PK_CVs] PRIMARY KEY CLUSTERED 
 (
 	[CVsId] ASC
@@ -207,7 +211,7 @@ CREATE TABLE [dbo].[CVs](
 ) ON [PRIMARY]
 END
 GO
-/****** Object:  Table [dbo].[Educations]    Script Date: 12.10.2014 0:45:59 ******/
+/****** Object:  Table [dbo].[Educations]    Script Date: 19.10.2014 14:14:53 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -228,7 +232,7 @@ CREATE TABLE [dbo].[Educations](
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 END
 GO
-/****** Object:  Table [dbo].[Faculties]    Script Date: 12.10.2014 0:45:59 ******/
+/****** Object:  Table [dbo].[Faculties]    Script Date: 19.10.2014 14:14:53 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -245,7 +249,7 @@ CREATE TABLE [dbo].[Faculties](
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 END
 GO
-/****** Object:  Table [dbo].[Groups]    Script Date: 12.10.2014 0:45:59 ******/
+/****** Object:  Table [dbo].[Groups]    Script Date: 19.10.2014 14:14:53 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -263,7 +267,7 @@ CREATE TABLE [dbo].[Groups](
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 END
 GO
-/****** Object:  Table [dbo].[Languages]    Script Date: 12.10.2014 0:45:59 ******/
+/****** Object:  Table [dbo].[Languages]    Script Date: 19.10.2014 14:14:53 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -280,7 +284,7 @@ CREATE TABLE [dbo].[Languages](
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 END
 GO
-/****** Object:  Table [dbo].[LanguagesCVs]    Script Date: 12.10.2014 0:45:59 ******/
+/****** Object:  Table [dbo].[LanguagesCVs]    Script Date: 19.10.2014 14:14:53 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -298,7 +302,7 @@ CREATE TABLE [dbo].[LanguagesCVs](
 ) ON [PRIMARY]
 END
 GO
-/****** Object:  Table [dbo].[ProgramLanguages]    Script Date: 12.10.2014 0:45:59 ******/
+/****** Object:  Table [dbo].[ProgramLanguages]    Script Date: 19.10.2014 14:14:53 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -315,7 +319,7 @@ CREATE TABLE [dbo].[ProgramLanguages](
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 END
 GO
-/****** Object:  Table [dbo].[ProgramLanguagesCVs]    Script Date: 12.10.2014 0:45:59 ******/
+/****** Object:  Table [dbo].[ProgramLanguagesCVs]    Script Date: 19.10.2014 14:14:53 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -333,7 +337,24 @@ CREATE TABLE [dbo].[ProgramLanguagesCVs](
 ) ON [PRIMARY]
 END
 GO
-/****** Object:  Table [dbo].[Roles]    Script Date: 12.10.2014 0:45:59 ******/
+/****** Object:  Table [dbo].[PurposesId]    Script Date: 19.10.2014 14:14:53 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[PurposesId]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [dbo].[PurposesId](
+	[PurposesId] [bigint] IDENTITY(1,1) NOT NULL,
+	[Title] [nvarchar](max) NOT NULL,
+ CONSTRAINT [PK_PurposesId] PRIMARY KEY CLUSTERED 
+(
+	[PurposesId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+END
+GO
+/****** Object:  Table [dbo].[Roles]    Script Date: 19.10.2014 14:14:53 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -349,7 +370,7 @@ CREATE TABLE [dbo].[Roles](
 ) ON [PRIMARY]
 END
 GO
-/****** Object:  Table [dbo].[Sertificats]    Script Date: 12.10.2014 0:45:59 ******/
+/****** Object:  Table [dbo].[Sertificats]    Script Date: 19.10.2014 14:14:53 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -368,7 +389,7 @@ CREATE TABLE [dbo].[Sertificats](
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 END
 GO
-/****** Object:  Table [dbo].[Students]    Script Date: 12.10.2014 0:45:59 ******/
+/****** Object:  Table [dbo].[Students]    Script Date: 19.10.2014 14:14:53 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -390,7 +411,7 @@ CREATE TABLE [dbo].[Students](
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 END
 GO
-/****** Object:  Table [dbo].[Users]    Script Date: 12.10.2014 0:45:59 ******/
+/****** Object:  Table [dbo].[Users]    Script Date: 19.10.2014 14:14:53 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -409,7 +430,7 @@ CREATE TABLE [dbo].[Users](
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 END
 GO
-/****** Object:  Table [dbo].[WorkExps]    Script Date: 12.10.2014 0:45:59 ******/
+/****** Object:  Table [dbo].[WorkExps]    Script Date: 19.10.2014 14:14:53 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -448,6 +469,13 @@ ON DELETE CASCADE
 GO
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Companies_Users]') AND parent_object_id = OBJECT_ID(N'[dbo].[Companies]'))
 ALTER TABLE [dbo].[Companies] CHECK CONSTRAINT [FK_Companies_Users]
+GO
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_CVs_PurposesId]') AND parent_object_id = OBJECT_ID(N'[dbo].[CVs]'))
+ALTER TABLE [dbo].[CVs]  WITH CHECK ADD  CONSTRAINT [FK_CVs_PurposesId] FOREIGN KEY([PurposesId])
+REFERENCES [dbo].[PurposesId] ([PurposesId])
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_CVs_PurposesId]') AND parent_object_id = OBJECT_ID(N'[dbo].[CVs]'))
+ALTER TABLE [dbo].[CVs] CHECK CONSTRAINT [FK_CVs_PurposesId]
 GO
 IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Educations_CVs]') AND parent_object_id = OBJECT_ID(N'[dbo].[Educations]'))
 ALTER TABLE [dbo].[Educations]  WITH CHECK ADD  CONSTRAINT [FK_Educations_CVs] FOREIGN KEY([CVsId])
