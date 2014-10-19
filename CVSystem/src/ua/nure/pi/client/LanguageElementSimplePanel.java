@@ -27,7 +27,7 @@ import com.smartgwt.client.widgets.form.fields.events.ChangedHandler;
 
 public class LanguageElementSimplePanel extends SimplePanel{
 	
-	private ListBox langBox;
+	public ListBox langBox;
 	private int levelType;
 	private VerticalPanel rootPanel;
 	public Image imgDel;
@@ -64,7 +64,7 @@ public class LanguageElementSimplePanel extends SimplePanel{
 		
 		langBox = new ListBox();
 		for (Language lan : langs) {
-			langBox.addItem(lang.getTitle());
+			langBox.addItem(lan.getTitle());
 		}
         lang.add(langBox);
         langBox.setSize("70px", "18px");

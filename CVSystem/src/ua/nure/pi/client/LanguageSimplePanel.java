@@ -30,8 +30,7 @@ public class LanguageSimplePanel extends SimplePanel{
 	private VerticalPanel root;
 	private boolean expend = true;
 	
-	public LanguageSimplePanel(Collection<Language> langs) {
-		this.langs = new ArrayList<Language>(langs);
+	public LanguageSimplePanel() {
 		sectionStack = new SectionStack();  
         sectionStack.setVisibilityMode(VisibilityMode.MULTIPLE);
   
@@ -83,6 +82,10 @@ public class LanguageSimplePanel extends SimplePanel{
         
 	}
 	
+	public void FillLangs(Collection<Language> langs) {
+		this.langs = new ArrayList<Language>(langs);
+	}
+	
 	private void addLang(final VerticalPanel vp, final AbsolutePanel absP, final Button btAdd){		
 		if(languages.size() == 0){
 			absP.add(sectionStack);
@@ -91,6 +94,10 @@ public class LanguageSimplePanel extends SimplePanel{
 			btAdd.removeStyleName("panel-startAddButton");
 			btAdd.addStyleName("panel-newAddButton");
 						
+		}
+		else {
+			LanguageElementSimplePanel prev = languages.get(languages.size()-1);
+			langs.remove(langs.indexOf(prev.langBox.getValue(prev.langBox.getSelectedIndex())));
 		}
 		final LanguageElementSimplePanel lang = new LanguageElementSimplePanel(langs);
 		pixelCount+=168;
@@ -105,6 +112,9 @@ public class LanguageSimplePanel extends SimplePanel{
 			
 			@Override
 			public void onClick(ClickEvent event) {
+				Language l = new Language();
+				l.setTitle(lang.langBox.getValue(lang.langBox.getSelectedIndex()));
+				langs.add(l);
 				vp.remove(lang);
 				languages.remove(lang);
 				pixelCount-=168;
