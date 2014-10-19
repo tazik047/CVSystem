@@ -29,11 +29,13 @@ a {
 .fixRadio{
 	width: 150px !important;
 }
-.fixTextArea>textarea{
+.fixTextArea>textarea,
+.fixTextAreaFocused>textarea{
 	resize:none;
 	width: 344px !important;
 }
-.fixTextArea{
+.fixTextArea,
+.fixTextAreaFocused{
 	padding-left: 0px;
 }
 a:hover {
@@ -317,12 +319,15 @@ h3.assistive-text {
 	left:550px !important;
 }
 
-.hint>div{
+.hint>div,
+.hintFocused>div{
 	margin-bottom:20px;
 	font-style: italic;
 }
 .hint>input,
-.hint>table{
+.hint>table,
+.hintFocused>input,
+.hintFocused>table{
 	margin-bottom:20px;
 }
 .leftbox

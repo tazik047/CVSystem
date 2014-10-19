@@ -5,7 +5,6 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.LinkedHashMap;
 
-import javax.xml.crypto.KeySelector.Purpose;
 
 import ua.nure.pi.dao.mssql.MSSqlFacultyGroupDAO;
 import ua.nure.pi.dao.mssql.MSSqlProgramLanguageDAO;
@@ -17,6 +16,7 @@ import ua.nure.pi.entity.ProgramLanguage;
 import ua.nure.pi.entity.Student;
 import ua.nure.pi.server.GreetingServiceImpl;
 import ua.nure.pi.server.RegistrationServiceImpl;
+import ua.nure.pi.entity.Purpose;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
@@ -216,7 +216,7 @@ public class RegistrationSimplePanel extends SimplePanel {
 
         
       
-        SelectItem goalComboBox = new SelectItem("Желаемая должность");
+        final SelectItem goalComboBox = new SelectItem("Желаемая должность");
         goalComboBox.setHint("-Должности-");
         goalComboBox.setShowHintInField(true);
         goalComboBox.setWidth(300);
@@ -224,7 +224,7 @@ public class RegistrationSimplePanel extends SimplePanel {
         
         final LinkedHashMap<Long, String> phm = new LinkedHashMap<>();
 
-        /*
+        
 	    registrationService.getPurposes(new AsyncCallback<Collection<Purpose>>() {
             public void onFailure(Throwable caught) {
               Window.alert("Не удалось получить языки программирования");
@@ -232,16 +232,13 @@ public class RegistrationSimplePanel extends SimplePanel {
 
 			@Override
 			public void onSuccess(Collection<Purpose> result) {
-				purposes = new ArrayList<Purpose>(result);		
+				purposes = new ArrayList<Purpose>(result);
+				for (Purpose prp : purposes) {
+		        	phm.put(prp.getId(), prp.getTitle());
+		        }
+				goalComboBox.setValueMap(phm);
 			}
           });
-                
-        for (Purpose prp : purposes) {
-        	phm.put(prp.getTitle, prl.getTitle());
-        }
-        
-        goalComboBox.setValueMap(phm);
-		/*
         // Заполнение возможных целей из базы
                 
         // Опыт работы и образование
@@ -249,7 +246,8 @@ public class RegistrationSimplePanel extends SimplePanel {
         expPanel = new WorkExperienceSimplePanel();
                 
         eduPanel = new EducationSimplePanel();
-                
+        
+        langs = new ArrayList<Language>();
         lanPanel = new LanguageSimplePanel(langs);
         
 	    registrationService.getLanguages(new AsyncCallback<Collection<Language>>() {
@@ -259,7 +257,7 @@ public class RegistrationSimplePanel extends SimplePanel {
 
 			@Override
 			public void onSuccess(Collection<Language> result) {
-				langs = new ArrayList<Language>(result);		
+				langs = new ArrayList<Language>(result);
 			}
           });
 
@@ -273,7 +271,6 @@ public class RegistrationSimplePanel extends SimplePanel {
         
         final LinkedHashMap<Long, String> lhm = new LinkedHashMap<>();
         
-        /*        Без базы не работает.
 	    registrationService.getProgramLanguages(new AsyncCallback<Collection<ProgramLanguage>>() {
             public void onFailure(Throwable caught) {
               Window.alert("Не удалось получить языки программирования");
@@ -281,45 +278,12 @@ public class RegistrationSimplePanel extends SimplePanel {
 
 			@Override
 			public void onSuccess(Collection<ProgramLanguage> result) {
-				programLanguages = new ArrayList<ProgramLanguage>(result);		
-			}
-          });
-                
-        for (ProgramLanguage prl : programLanguages) {
-        	lhm.put(prl.getId(), prl.getTitle());
-        }
-        
-                
-        
-        languages.setValueMap(lhm);
-        */
-        languages.setLayoutStyle(initialLayoutStyle);
-
-        languages.setAddUnknownValues(false);
-        languages.setColSpan(20);
-	        
-	        Button commit = new Button("Отправить анкету");
-	        commit.addClickHandler(new ClickHandler() {
-	        	
-	            public void onClick(ClickEvent event) {
-	            	st = getStudent();
-	            	registrationService.sendStudent(st, new AsyncCallback() {
-	                    public void onFailure(Throwable caught) {
-	                      Window.alert(caught.getLocalizedMessage());
-	                    }
-
-						@Override
-						public void onSuccess(Object result) {
-		                      Window.alert("Анкета сохранена");
-							
-						}
-	                  });	              
-	            	}
-
-	        });
-	        
-        
-		languages.addChangedHandler(new ChangedHandler() {
+				programLanguages = new ArrayList<ProgramLanguage>(result);
+				for (ProgramLanguage prl : programLanguages) {
+		        	lhm.put(prl.getId(), prl.getTitle());
+		        }
+		        languages.setValueMap(lhm);
+		        languages.addChangedHandler(new ChangedHandler() {
 					
 					@Override
 					public void onChanged(ChangedEvent event) {
@@ -332,13 +296,40 @@ public class RegistrationSimplePanel extends SimplePanel {
 						}
 					}
 				});
+			}
+          });
+
+        languages.setLayoutStyle(initialLayoutStyle);
+
+        languages.setAddUnknownValues(false);
+        languages.setColSpan(20);
+	        
+	        Button commit = new Button("Отправить анкету");
+	        commit.addClickHandler(new ClickHandler() {
+	        	
+	            public void onClick(ClickEvent event) {
+	            	st = getStudent();
+	            	registrationService.sendStudent(st, new AsyncCallback<Void>() {
+	                    public void onFailure(Throwable caught) {
+	                      Window.alert(caught.getLocalizedMessage());
+	                    }
+
+						@Override
+						public void onSuccess(Void result) {
+		                      Window.alert("Анкета сохранена");
+							
+						}
+	                  });	              
+	            	}
+
+	        });
+	        
                 
 	
 		
 		DynamicForm form = new DynamicForm();
 		form.setCellPadding(15);
-		
-		//form.setStyleName("fixTextArea");
+
 		form.setNumCols(1);
 		
 	    TextAreaItem first = new TextAreaItem("Личные качества");

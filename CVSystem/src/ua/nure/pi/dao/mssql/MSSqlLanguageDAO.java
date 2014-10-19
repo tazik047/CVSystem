@@ -301,7 +301,7 @@ public class MSSqlLanguageDAO implements LanguageDAO {
 			ResultSet rs = pstmt.executeQuery();
 			result = new ArrayList<Language>();
 			while(rs.next()){
-				Language fc = unMapLanguage(rs);
+				Language fc = unMapLanguageForStudent(rs);
 				result.add(fc);
 			}
 			
@@ -319,14 +319,19 @@ public class MSSqlLanguageDAO implements LanguageDAO {
 		return result;
 	}
 
-	private Language unMapLanguage(ResultSet rs) throws SQLException{
-		Language at = new Language();
-		at.setId(rs.getLong(MapperParameters.LANGUAGE__ID));
-		at.setTitle(rs.getString(MapperParameters.ANY_TAG_TITLE));
+	private Language unMapLanguageForStudent(ResultSet rs) throws SQLException{
+		Language at = unMapLanguage(rs);
 		at.setLevel(rs.getInt(MapperParameters.LANGUAGE__LEVEL));
 		return at;
 	}
 	
+	private Language unMapLanguage(ResultSet rs) throws SQLException {
+		Language at = new Language();
+		at.setId(rs.getLong(MapperParameters.LANGUAGE__ID));
+		at.setTitle(rs.getString(MapperParameters.ANY_TAG_TITLE));
+		return at;
+	}
+
 	private void mapLanguageForInsert(Language at, PreparedStatement pstmt) 
 			throws SQLException{
 		pstmt.setString(1, at.getTitle());
