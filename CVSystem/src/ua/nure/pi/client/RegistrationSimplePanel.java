@@ -248,7 +248,6 @@ public class RegistrationSimplePanel extends SimplePanel {
         eduPanel = new EducationSimplePanel();
         
         langs = new ArrayList<Language>();
-        lanPanel = new LanguageSimplePanel(langs);
         
 	    registrationService.getLanguages(new AsyncCallback<Collection<Language>>() {
             public void onFailure(Throwable caught) {
@@ -261,7 +260,8 @@ public class RegistrationSimplePanel extends SimplePanel {
 			}
           });
 
-        
+        lanPanel = new LanguageSimplePanel(langs);
+
         ssp = new SertificateSimplePanel();
         
         // Знание языков программирования и технологий
