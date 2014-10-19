@@ -31,4 +31,8 @@ public abstract class DAOFactory {
 	public abstract UserDAO getUserDAO();
 	
 	public abstract WorkExpDAO getWorkExpDAO();
+	
+	public abstract PurposeDAO getPurposeDAO();
+	
+	public abstract CVDAO getCVDAO();
 }

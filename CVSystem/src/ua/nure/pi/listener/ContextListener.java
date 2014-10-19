@@ -15,8 +15,16 @@ import javax.servlet.ServletContextListener;
 //import org.apache.log4j.Logger;
 
 
+
+
+
+
 import ua.nure.pi.dao.DAOFactory;
 import ua.nure.pi.dao.FacultyGroupDAO;
+import ua.nure.pi.dao.LanguageDAO;
+import ua.nure.pi.dao.ProgramLanguageDAO;
+import ua.nure.pi.dao.PurposeDAO;
+import ua.nure.pi.dao.StudentDAO;
 import ua.nure.pi.dao.UserDAO;
 import ua.nure.pi.parameter.AppConstants;
 
@@ -38,9 +46,10 @@ public class ContextListener implements ServletContextListener {
 		ServletContext servletContext = event.getServletContext();
 		setUserDAOAttribute(servletContext);
 		setFacultyGroupAttribute(servletContext);
-		/*if (log.isDebugEnabled()) {
-			log.debug("Servlet context initialization finished");
-		}*/
+		setLanguageAttribute(servletContext);
+		setProgramLanguageAttribute(servletContext);
+		setPurposeAttribute(servletContext);
+		setStudentAttribute(servletContext);
 	}
 
 	@Override
@@ -62,6 +71,29 @@ public class ContextListener implements ServletContextListener {
 		FacultyGroupDAO facultyGroupDAO = DAOFactory.getDAOFactory(DAOFactory.MSSQL)
 				.getFacultyGroupDAO();
 		servletContext.setAttribute(AppConstants.FACULTYGROUP_DAO, facultyGroupDAO);
-		//log.debug("UserDAO was created");
+	}
+	
+	private void setLanguageAttribute(ServletContext servletContext) {
+		LanguageDAO languageDAO = DAOFactory.getDAOFactory(DAOFactory.MSSQL)
+				.getLanguageDAO();
+		servletContext.setAttribute(AppConstants.LANGUAGE_DAO, languageDAO);
+	}
+	
+	private void setProgramLanguageAttribute(ServletContext servletContext) {
+		ProgramLanguageDAO programLanguagesDAO = DAOFactory.getDAOFactory(DAOFactory.MSSQL)
+				.getProgramLanguageDAO();
+		servletContext.setAttribute(AppConstants.PROGRAM_LANGUAGE_DAO, programLanguagesDAO);
+	}
+	
+	private void setStudentAttribute(ServletContext servletContext) {
+		StudentDAO studentDAO = DAOFactory.getDAOFactory(DAOFactory.MSSQL)
+				.getStudentDAO();
+		servletContext.setAttribute(AppConstants.STUDENT_DAO, studentDAO);
+	}
+	
+	private void setPurposeAttribute(ServletContext servletContext) {
+		PurposeDAO purposeDAO = DAOFactory.getDAOFactory(DAOFactory.MSSQL)
+				.getPurposeDAO();
+		servletContext.setAttribute(AppConstants.PURPOSE_DAO, purposeDAO);
 	}
 }

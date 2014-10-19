@@ -8,7 +8,6 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.xml.crypto.KeySelector.Purpose;
 
 import ua.nure.pi.Path;
 import ua.nure.pi.client.GreetingService;
@@ -17,17 +16,14 @@ import ua.nure.pi.client.RegistrationService;
 import ua.nure.pi.dao.FacultyGroupDAO;
 import ua.nure.pi.dao.LanguageDAO;
 import ua.nure.pi.dao.ProgramLanguageDAO;
+import ua.nure.pi.dao.PurposeDAO;
 import ua.nure.pi.dao.StudentDAO;
-import ua.nure.pi.dao.UserDAO;
-import ua.nure.pi.dao.mssql.MSSqlDAOFactory;
-import ua.nure.pi.dao.mssql.MSSqlStudentDAO;
-import ua.nure.pi.dao.mssql.MSSqlUserDAO;
 import ua.nure.pi.entity.Faculty;
 import ua.nure.pi.entity.Language;
 import ua.nure.pi.entity.ProgramLanguage;
+import ua.nure.pi.entity.Purpose;
 import ua.nure.pi.entity.Student;
 import ua.nure.pi.parameter.AppConstants;
-import ua.nure.pi.shared.FieldVerifier;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
@@ -40,11 +36,13 @@ public class MainServiceImpl extends RemoteServiceServlet implements
 	
 	private FacultyGroupDAO facultyGroupDAO;
 	
-	private StudentDAO StudentDAO;
+	private StudentDAO studentDAO;
 	
-	private ProgramLanguageDAO ProgramLanguageDAO;
+	private ProgramLanguageDAO programLanguageDAO;
 	
-	private LanguageDAO LanguageDAO;
+	private LanguageDAO languageDAO;
+	
+	private PurposeDAO purposeDAO;
 
 	
 	@Override
@@ -65,9 +63,27 @@ public class MainServiceImpl extends RemoteServiceServlet implements
 	public void init() {
 		ServletContext servletContext = getServletContext();
 		facultyGroupDAO = (FacultyGroupDAO) servletContext.getAttribute(AppConstants.FACULTYGROUP_DAO);
+		studentDAO = (StudentDAO) servletContext.getAttribute(AppConstants.STUDENT_DAO);
+		programLanguageDAO = (ProgramLanguageDAO) servletContext.getAttribute(AppConstants.PROGRAM_LANGUAGE_DAO);
+		languageDAO = (LanguageDAO) servletContext.getAttribute(AppConstants.LANGUAGE_DAO);
+		purposeDAO = (PurposeDAO) servletContext.getAttribute(AppConstants.PURPOSE_DAO);
 		
 		if (facultyGroupDAO == null) {
-			//log.error("UserDAO attribute is not exists.");
+			throw new IllegalStateException("FacultyGroupDAO attribute is not exists.");
+		}
+		
+		if (studentDAO == null) {
+			throw new IllegalStateException("FacultyGroupDAO attribute is not exists.");
+		}
+		if (programLanguageDAO == null) {
+			throw new IllegalStateException("FacultyGroupDAO attribute is not exists.");
+		}
+		
+		if (languageDAO == null) {
+			throw new IllegalStateException("FacultyGroupDAO attribute is not exists.");
+		}
+		
+		if (purposeDAO == null) {
 			throw new IllegalStateException("FacultyGroupDAO attribute is not exists.");
 		}
 	}
@@ -77,19 +93,19 @@ public class MainServiceImpl extends RemoteServiceServlet implements
 		  }
 	  
 	  public void sendStudent(Student st) {
-		  StudentDAO.insertStudent(st);
+		  studentDAO.insertStudent(st);
 	  }
 	  
 	  public Collection<ProgramLanguage> getProgramLanguages() throws IllegalArgumentException {
-		    return ProgramLanguageDAO.getProgramLanguages();  
+		    return programLanguageDAO.getProgramLanguages();  
 		  }
 	  
 	  public Collection<Language> getLanguages() throws IllegalArgumentException {
-		    return LanguageDAO.getLanguages();
+		    return languageDAO.getLanguages();
 		  }
 	  
 	  public Collection<Purpose> getPurposes() throws IllegalArgumentException {
-		    return null;
-		    }
+		    return purposeDAO.getPurposes();
+		   }
 
 }

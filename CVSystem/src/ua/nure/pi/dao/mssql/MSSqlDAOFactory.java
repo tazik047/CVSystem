@@ -87,5 +87,16 @@ public class MSSqlDAOFactory extends DAOFactory {
 		return MSSqlWorkExpDAO.getInstancce();
 	}
 
+	@Override
+	public PurposeDAO getPurposeDAO() {
+		return MSSqlPurposeDAO.getInstancce();
+	}
+
+	@Override
+	public CVDAO getCVDAO() {
+		return MSSqlCVDAO.getInstancce();
+	}
+	
+
 
 }

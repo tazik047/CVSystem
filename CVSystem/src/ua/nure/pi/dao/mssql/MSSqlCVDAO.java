@@ -8,6 +8,7 @@ import java.sql.Statement;
 
 import ua.nure.pi.dao.CVDAO;
 import ua.nure.pi.entity.CV;
+import ua.nure.pi.parameter.MapperParameters;
 
 public class MSSqlCVDAO implements CVDAO {
 	
@@ -123,7 +124,8 @@ public class MSSqlCVDAO implements CVDAO {
 			pstmt.setLong(1, cVsId);
 			ResultSet rs = pstmt.executeQuery();
 			if(rs.next())
-				result.setPurpose(purpose);
+				result.setPurpose(MSSqlPurposeDAO.getInstancce()
+						.findPurposes(rs.getLong(MapperParameters.CV__PURPOSES_ID), con));
 		} catch (SQLException e) {
 			throw e;
 		} finally {

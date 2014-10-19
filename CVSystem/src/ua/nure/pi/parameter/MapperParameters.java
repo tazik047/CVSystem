@@ -56,4 +56,7 @@ public interface MapperParameters {
 	
 	//Purpose
 	String PURPOSE__ID = "PurposesId";
+	
+	//CV
+	String CV__PURPOSES_ID = "PurposesId";
 }
