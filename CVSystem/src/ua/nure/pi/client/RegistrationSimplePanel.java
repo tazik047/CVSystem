@@ -108,6 +108,8 @@ public class RegistrationSimplePanel extends SimplePanel {
     
     public TextItem AddresstextBox;
     
+    public SelectItem goalComboBox;
+    
     WorkExperienceSimplePanel expPanel; 
     EducationSimplePanel eduPanel;            
     LanguageSimplePanel lanPanel;
@@ -216,7 +218,7 @@ public class RegistrationSimplePanel extends SimplePanel {
 
         
       
-        final SelectItem goalComboBox = new SelectItem("Желаемая должность");
+        goalComboBox = new SelectItem("Желаемая должность");
         goalComboBox.setHint("-Должности-");
         goalComboBox.setShowHintInField(true);
         goalComboBox.setWidth(300);
@@ -269,7 +271,7 @@ public class RegistrationSimplePanel extends SimplePanel {
         
         // Знание языков программирования и технологий
                 
-        final MultiComboBoxLayoutStyle initialLayoutStyle = MultiComboBoxLayoutStyle.HORIZONTAL;  
+        final MultiComboBoxLayoutStyle initialLayoutStyle = MultiComboBoxLayoutStyle.FLOW;  
         languages = new MultiComboBoxItem("languages", "Языки программирования");
         
         final LinkedHashMap<String, String> lhm = new LinkedHashMap<>();
@@ -450,7 +452,12 @@ public class RegistrationSimplePanel extends SimplePanel {
 		cv.setLanguages(lanPanel.getLanguages());
 		cv.setSertificates(ssp.getSerts());
 		cv.setWorkExps(expPanel.getExp());
-		cv.setProgramLanguages((Collection<ProgramLanguage>) languages.getValueAsRecordList());
+
+		for(Purpose i : purposes){
+			if(i.getId()==Integer.parseInt(goalComboBox.getValueAsString()))
+				cv.setPurpose(i);
+		}
+		//cv.setProgramLanguages((Collection<ProgramLanguage>) languages.getValueAsRecordList());
 		st.setCv(cv);
 		return st;
 	}

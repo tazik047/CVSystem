@@ -96,6 +96,7 @@ h3 {
     border-right: 2px solid rgb(241, 241, 241);
 	border-left: 2px solid rgb(241, 241, 241);
 	background-color:white;
+	box-shadow:5px 5px 80px grey;
 }
 #menu-right{}
 
@@ -187,6 +188,7 @@ h3.assistive-text {
 	margin-top: 5 px;
 	position: relative;
 	background-color: #ffffff;
+	box-shadow:5px 5px 80px grey;
 }
 .middle:after {
 	display: table;
