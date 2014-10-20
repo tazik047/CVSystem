@@ -14,14 +14,12 @@ html>body {
 .wrapper {
 	width: 900px;
 	margin: 0 auto;
-	border-top:  10px solid rgba(255,255,255,0);
 	background-color:white;
 	min-height: 100%;
 	height: auto !important;
 	height: 100%;
 	
 	background-color: #ffffff;
-	box-shadow:5px 5px 80px grey;
 }
 ul, li {
     color: #000000;
@@ -106,7 +104,6 @@ h3 {
     border-right: 2px solid rgb(241, 241, 241);
 	border-left: 2px solid rgb(241, 241, 241);
 	background-color:white;
-	box-shadow:5px 5px 80px grey;
 }
 #menu-right{}
 
@@ -254,8 +251,8 @@ h3.assistive-text {
 }
 #footer {
 	position: relative;
-	margin: -100px auto 0;
-	heigth: 100px;
+	margin: -90px auto 0;
+	heigth: 90px;
 	border-top: 1px solid #2300ab;
 	width:900px;
 }
@@ -346,7 +343,6 @@ h3.assistive-text {
 	height: 30px;
 	text-indent: -9999px;
 	background-size: cover !important;
-	border: 0px !important;
 	z-index: 1000000;
 }
 
