@@ -243,7 +243,8 @@ h3.assistive-text {
 }
 .footer {
 	position: relative;
-	border-top: 1px solid #2300ab
+	border-top: 1px solid #2300ab;
+	
 }
 #footer-left{
 	left: 10px; 
