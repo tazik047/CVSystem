@@ -102,6 +102,7 @@ public class LanguageSimplePanel extends SimplePanel{
 			
 			try{
 			LanguageElementSimplePanel prev = languages.get(languages.size()-1);
+			prev.langBox.setEnabled(false);
 			for (Language l : langs){
 				if (l.getTitle() == prev.langBox.getValue(prev.langBox.getSelectedIndex()).toString()) {
 					langs.remove(l);
