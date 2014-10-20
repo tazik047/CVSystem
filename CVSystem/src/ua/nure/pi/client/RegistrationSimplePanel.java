@@ -249,6 +249,9 @@ public class RegistrationSimplePanel extends SimplePanel {
         
         langs = new ArrayList<Language>();
         
+        lanPanel = new LanguageSimplePanel();
+
+        
 	    registrationService.getLanguages(new AsyncCallback<Collection<Language>>() {
             public void onFailure(Throwable caught) {
               Window.alert("Не удалось получить языки программирования");
@@ -257,10 +260,10 @@ public class RegistrationSimplePanel extends SimplePanel {
 			@Override
 			public void onSuccess(Collection<Language> result) {
 				langs = new ArrayList<Language>(result);
+				lanPanel.FillLangs(langs);
 			}
           });
 
-        lanPanel = new LanguageSimplePanel(langs);
 
         ssp = new SertificateSimplePanel();
         
@@ -269,7 +272,7 @@ public class RegistrationSimplePanel extends SimplePanel {
         final MultiComboBoxLayoutStyle initialLayoutStyle = MultiComboBoxLayoutStyle.HORIZONTAL;  
         languages = new MultiComboBoxItem("languages", "Языки программирования");
         
-        final LinkedHashMap<Long, String> lhm = new LinkedHashMap<>();
+        final LinkedHashMap<String, String> lhm = new LinkedHashMap<>();
         
 	    registrationService.getProgramLanguages(new AsyncCallback<Collection<ProgramLanguage>>() {
             public void onFailure(Throwable caught) {
@@ -280,7 +283,7 @@ public class RegistrationSimplePanel extends SimplePanel {
 			public void onSuccess(Collection<ProgramLanguage> result) {
 				programLanguages = new ArrayList<ProgramLanguage>(result);
 				for (ProgramLanguage prl : programLanguages) {
-		        	lhm.put(prl.getId(), prl.getTitle());
+		        	lhm.put(prl.getTitle(), prl.getTitle());
 		        }
 		        languages.setValueMap(lhm);
 		        languages.addChangedHandler(new ChangedHandler() {
@@ -339,7 +342,7 @@ public class RegistrationSimplePanel extends SimplePanel {
 	    second.setCellStyle("fixTextArea");
 	    
 	    CheckBox cb = new CheckBox();
-	    cb.setText("Даю право на обработку и хранение личной информации администрации ресурса");
+	    cb.setText("Я даю согласие Центру-Карьеры ХНУРЭ на электронную обработку моих персональных данных");
 	    cb.setSize("343px", "44px");
 	    
 	    surnameHint.setCellStyle("hint");
