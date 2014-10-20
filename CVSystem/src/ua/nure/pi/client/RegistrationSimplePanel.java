@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.LinkedHashMap;
 
 
+
 import ua.nure.pi.dao.mssql.MSSqlFacultyGroupDAO;
 import ua.nure.pi.dao.mssql.MSSqlProgramLanguageDAO;
 import ua.nure.pi.entity.CV;
@@ -73,6 +74,7 @@ import com.smartgwt.client.widgets.form.fields.events.EditorExitEvent;
 import com.smartgwt.client.widgets.form.fields.events.EditorExitHandler;
 import com.smartgwt.client.widgets.form.fields.events.ValueHoverEvent;
 import com.smartgwt.client.widgets.form.fields.events.ValueHoverHandler;
+import com.smartgwt.client.widgets.form.validator.CustomValidator;
 import com.smartgwt.client.widgets.form.validator.RegExpValidator;
 import com.smartgwt.client.widgets.grid.ListGrid;
 import com.smartgwt.client.widgets.layout.HStack;
@@ -127,7 +129,7 @@ public class RegistrationSimplePanel extends SimplePanel {
 	public void onModuleLoad() {
 
 	    VerticalPanel rootPanel = new VerticalPanel();
-	    DynamicForm mainForm = new DynamicForm();
+	    final DynamicForm mainForm = new DynamicForm();
 	    mainForm.setNumCols(1);
 	    rootPanel.setWidth("100%");
 	    final SimplePanel facultiesPanel = new SimplePanel();
@@ -149,6 +151,8 @@ public class RegistrationSimplePanel extends SimplePanel {
           });
         
         // Персональная информация
+	    
+	    
                 
         SurnametextBox = new TextItem("surname", "Фамилия");  
         SurnametextBox.setWidth(300);  
@@ -158,6 +162,7 @@ public class RegistrationSimplePanel extends SimplePanel {
 	    StaticTextItem surnameHint = new StaticTextItem();
 	    surnameHint.setShowTitle(false);
 	    surnameHint.setValue("Например, Иванов");
+	    SurnametextBox.setRequired(true);
 
                
         NametextBox = new TextItem("name", "Имя");  
@@ -168,8 +173,9 @@ public class RegistrationSimplePanel extends SimplePanel {
 	    StaticTextItem nameHint = new StaticTextItem();
 	    nameHint.setShowTitle(false);
 	    nameHint.setValue("Например, Иван");
+	    NametextBox.setRequired(true);
 
-        
+        /*
         dateItem = new DateItem();
 		dateItem.setTitle("Дата рождения");
 		dateItem.setUseTextField(true);
@@ -177,11 +183,17 @@ public class RegistrationSimplePanel extends SimplePanel {
 		dateItem.setHint("Введите дату рождения или выберите справа");
 		dateItem.setShowHintInField(true);
 		dateItem.setEndDate(new Date());
-		/*DateChooser dc = dateItem.getPickerProperties();
-		dc.setPageLeft(dc.getPageLeft() + dc.getWidth()/2 + 5);*/
+	    dateItem.setRequired(true);
+		*/
 	    StaticTextItem dateHint = new StaticTextItem();
 	    dateHint.setShowTitle(false);
-	    dateHint.setValue("Например, 21.09");
+	    dateHint.setValue("Например, 12/31/2014");
+	    
+	    dateItem = new DateItem("dob", "Date of Birth");
+	    dateItem.setWrapTitle(false);
+	    dateItem.setRequired(true);
+	    Date today = new java.util.Date();
+	    dateItem.setEndDate(today);
 
         
         AddresstextBox = new TextItem("address", "Домашний адрес");  
@@ -204,18 +216,20 @@ public class RegistrationSimplePanel extends SimplePanel {
 	    StaticTextItem emailHint = new StaticTextItem();
 	    emailHint.setShowTitle(false);
 	    emailHint.setValue("Например, example@gmail.com");
+	    Emailtextbox.setRequired(true);
 
         
         PhonetextBox = new TextItem("phone", "Контакнтый телефон");  
         PhonetextBox.setWidth(300);  
         PhonetextBox.setHint(""); 
-        PhonetextBox.setMask("+38(###) ###-####");  
+        PhonetextBox.setMask("+38(###) ###-####");
+        PhonetextBox.setRequired(true);
                 
-        TextItem Skypetextbox = new TextItem("email", "Skype");  
+        TextItem Skypetextbox = new TextItem("skype", "Skype");  
         Skypetextbox.setWidth(300);  
         Skypetextbox.setHint(""); 
         Skypetextbox.setShowHintInField(true);
-
+        Skypetextbox.setRequired(false);
         
       
         goalComboBox = new SelectItem("Желаемая должность");
@@ -223,6 +237,7 @@ public class RegistrationSimplePanel extends SimplePanel {
         goalComboBox.setShowHintInField(true);
         goalComboBox.setWidth(300);
         goalComboBox.setHeight(22);
+        goalComboBox.setRequired(true);
         
         final LinkedHashMap<Long, String> phm = new LinkedHashMap<>();
 
@@ -313,6 +328,8 @@ public class RegistrationSimplePanel extends SimplePanel {
 	        commit.addClickHandler(new ClickHandler() {
 	        	
 	            public void onClick(ClickEvent event) {
+	            	if(mainForm.validate()){
+	            	
 	            	st = getStudent();
 	            	registrationService.sendStudent(st, new AsyncCallback<Void>() {
 	                    public void onFailure(Throwable caught) {
@@ -326,12 +343,12 @@ public class RegistrationSimplePanel extends SimplePanel {
 						}
 	                  });	              
 	            	}
+            	}
 
 	        });
 	        
                 
-	
-		
+      		
 		DynamicForm form = new DynamicForm();
 		form.setCellPadding(15);
 
@@ -346,6 +363,7 @@ public class RegistrationSimplePanel extends SimplePanel {
 	    CheckBox cb = new CheckBox();
 	    cb.setText("Я даю согласие Центру-Карьеры ХНУРЭ на электронную обработку моих персональных данных");
 	    cb.setSize("343px", "44px");
+	    
 	    
 	    surnameHint.setCellStyle("hint");
 	    nameHint.setCellStyle("hint");
