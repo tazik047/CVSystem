@@ -91,7 +91,7 @@ public class WorkExperienceSimplePanel extends SimplePanel{
 						
 		}
 		final WorkExperinceElementSimplePanel exp = new WorkExperinceElementSimplePanel();
-		pixelCount+=151;
+		pixelCount+=132;
 		sectionStack.setHeight(String.valueOf(pixelCount)+"px");
 		countColor = (++countColor)%2;
 		if(countColor == 0){
@@ -105,7 +105,7 @@ public class WorkExperienceSimplePanel extends SimplePanel{
 			public void onClick(ClickEvent event) {
 				vp.remove(exp);
 				works.remove(exp);
-				pixelCount-=151;
+				pixelCount-=132;
 				sectionStack.setHeight(String.valueOf(pixelCount)+"px");
 				if(works.size()==0){
 					sectionStack.removeFromParent();

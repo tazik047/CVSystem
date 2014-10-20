@@ -27,5 +27,7 @@ public interface MainService extends RemoteService {
 	Collection<Language> getLanguages();
 
 	Collection<Purpose> getPurposes();
+	
+	String getPage(String url);
 
 }

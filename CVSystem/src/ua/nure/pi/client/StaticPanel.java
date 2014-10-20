@@ -12,8 +12,7 @@ public class StaticPanel extends SimplePanel {
 		add(html);
 	}
 	
-	protected StaticPanel(String htm){
-		this();
+	protected void setText(String htm){
 		html.setHTML(htm);
 	}
 }

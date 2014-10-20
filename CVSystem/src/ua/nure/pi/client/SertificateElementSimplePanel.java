@@ -46,7 +46,7 @@ public class SertificateElementSimplePanel extends SimplePanel{
 		rootPanel.setSpacing(5);
 		downPanel.add(labelPanel);
 		downPanel.add(textPanel);
-		imgDel = new Image("img/close.png", 0, 0, 16, 16);
+		imgDel = new Image("img/close.png", 0, 0, 30, 30);
 		imgDel.setStyleName("imgDelStyle");
 		imgDel.setTitle("Удалить сертификат");
 		rootPanel.add(imgDel);
@@ -72,7 +72,7 @@ public class SertificateElementSimplePanel extends SimplePanel{
         desc.setWidth(200);
         desc.setHeight(18);
         desc.setKeyPressFilter("[0-9.]");
-        desc.setTitleOrientation(TitleOrientation.TOP);
+        desc.setTitleOrientation(TitleOrientation.LEFT);
         desc.setRequired(true);
 
         controls.setNumCols(1);        

@@ -1,5 +1,8 @@
 package ua.nure.pi.server;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.Collection;
 
@@ -107,5 +110,23 @@ public class MainServiceImpl extends RemoteServiceServlet implements
 	  public Collection<Purpose> getPurposes() throws IllegalArgumentException {
 		    return purposeDAO.getPurposes();
 		   }
+
+	@Override
+	public String getPage(String url) {
+		url = getServletContext().getRealPath("WEB-INF") + url;
+		String res = "";
+		try{
+			BufferedReader br = new BufferedReader(new FileReader(new File(url)));
+	        String str = null;
+	        
+	        while ((str = br.readLine()) != null) {
+	            res+=str;
+	        }
+		}
+		catch(Exception e){
+			throw new IllegalArgumentException(e.getLocalizedMessage());
+		}
+		return res;
+	}
 
 }

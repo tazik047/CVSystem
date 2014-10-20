@@ -91,7 +91,7 @@ public class SertificateSimplePanel extends SimplePanel{
 						
 		}
 		final SertificateElementSimplePanel exp = new SertificateElementSimplePanel();
-		pixelCount+=128;
+		pixelCount+=65;
 		sectionStack.setHeight(String.valueOf(pixelCount)+"px");
 		countColor = (++countColor)%2;
 		if(countColor == 0){
@@ -105,7 +105,7 @@ public class SertificateSimplePanel extends SimplePanel{
 			public void onClick(ClickEvent event) {
 				vp.remove(exp);
 				sertificates.remove(exp);
-				pixelCount-=128;
+				pixelCount-=65;
 				sectionStack.setHeight(String.valueOf(pixelCount)+"px");
 				if(sertificates.size()==0){
 					sectionStack.removeFromParent();

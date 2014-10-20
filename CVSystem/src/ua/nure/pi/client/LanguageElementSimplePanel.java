@@ -46,7 +46,7 @@ public class LanguageElementSimplePanel extends SimplePanel{
 		upPanel.add(lang);
 		upPanel.add(level);
 		
-		imgDel = new Image("img/close.png", 0, 0, 16, 16);
+		imgDel = new Image("img/close.png", 0, 0, 30, 30);
 		imgDel.setStyleName("imgDelStyle");
 		imgDel.setTitle("Удалить опыт работы");
 		rootPanel.add(imgDel);

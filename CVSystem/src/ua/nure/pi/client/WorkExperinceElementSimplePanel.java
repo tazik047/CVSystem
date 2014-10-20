@@ -47,7 +47,7 @@ public class WorkExperinceElementSimplePanel extends SimplePanel{
 		rootPanel.setSpacing(5);
 		downPanel.add(labelPanel);
 		downPanel.add(textPanel);
-		imgDel = new Image("img/close.png", 0, 0, 16, 16);
+		imgDel = new Image("img/close.png", 0, 0, 30, 30);
 		imgDel.setStyleName("imgDelStyle");
 		imgDel.setTitle("Удалить опыт работы");
 		rootPanel.add(imgDel);
@@ -58,8 +58,7 @@ public class WorkExperinceElementSimplePanel extends SimplePanel{
 		
 		upPanel.setSpacing(10);
 		
-		controls = new DynamicForm();  
-		controls.setStyleName("fixUpPanel");
+		controls = new DynamicForm();
 		
   
         TextItem yearField = new TextItem("year", "Год");  

@@ -24,5 +24,7 @@ public interface MainServiceAsync {
 	void getLanguages(AsyncCallback<Collection<Language>> asyncCallback);
 
 	void getPurposes(AsyncCallback<Collection<Purpose>> asyncCallback);
+	
+	void getPage(String url, AsyncCallback<String> asyncCallback); 
 
 }

@@ -64,7 +64,7 @@ public class MainEntryPoint implements EntryPoint {
 		
 		@Override
 		public void onClick(ClickEvent event) {
-			uiManager.setPanel(new MainStaticPanel());
+			uiManager.setPanel(new MainStaticPanel(mainService));
 		}
 	});
     
@@ -103,17 +103,10 @@ public class MainEntryPoint implements EntryPoint {
 		
 		@Override
 		public void onClick(ClickEvent event) {
-			uiManager.setPanel(new AboutUsStaticPanel());
+			uiManager.setPanel(new AboutUsStaticPanel(mainService));
 		}
 	});
-    
-    Button btnNewButton_5 = new Button("New button");
-    btnNewButton_5.setStyleName("buttons");
-    btnNewButton_5.setText("Контакты");
-    btnNewButton_5.addStyleName("buttons");
-    rootPanel.add(btnNewButton_5);
-    btnNewButton_5.setSize("82px", "23px");
-    
+        
     RootPanel addCV = RootPanel.get("AddCV");
     Button butAddCV = new Button("New button");
     butAddCV.setText("Добавить резюме");

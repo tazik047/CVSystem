@@ -43,7 +43,7 @@ public class EducationElementSimplePanel extends SimplePanel{
 		rootPanel.setSpacing(5);
 
 		
-		imgDel = new Image("img/close.png", 0, 0, 16, 16);
+		imgDel = new Image("img/close.png", 0, 0, 30, 30);
 		imgDel.setStyleName("imgDelStyle");
 		imgDel.setTitle("Удалить образование");
 		rootPanel.add(imgDel);
