@@ -22,6 +22,10 @@ public class CV implements Serializable, IsSerializable {
 	
 	private Collection<WorkExp> workExps;
 	
+	private String qualities;
+	
+	private String others;
+	
 	public long getCvsId() {
 		return cvsId;
 	}
@@ -76,5 +80,21 @@ public class CV implements Serializable, IsSerializable {
 
 	public void setPurpose(Purpose purpose) {
 		this.purpose = purpose;
+	}
+
+	public String getQualities() {
+		return qualities;
+	}
+
+	public void setQualities(String qualities) {
+		this.qualities = qualities;
+	}
+
+	public String getOthers() {
+		return others;
+	}
+
+	public void setOthers(String others) {
+		this.others = others;
 	}
 }
