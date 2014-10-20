@@ -244,7 +244,18 @@ h3.assistive-text {
 	position: relative;
 	background-color: rgba(76,114,192,0.30);
 }
+#footer-left{
+	left: 10px; 
+	text-align: left;
+	position: absolute;
+}
 
+
+#footer-right{
+	right: 10px;
+	text-align: right;
+	position: absolute;
+}
 /* Registration
 ----------------------------------------------------------------------------*/
 .invalid {
