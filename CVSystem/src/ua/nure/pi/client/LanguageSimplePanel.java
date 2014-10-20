@@ -7,6 +7,7 @@ import ua.nure.pi.entity.Language;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
@@ -59,8 +60,10 @@ public class LanguageSimplePanel extends SimplePanel{
 			
 			@Override
 			public void onClick(ClickEvent event) {
+				if (langs.size()>1){
 				addLang(vp, absP, btAdd);
 				sectionStack.markForRedraw();
+				}
 			}
 		});
         
@@ -96,8 +99,21 @@ public class LanguageSimplePanel extends SimplePanel{
 						
 		}
 		else {
+			
+			try{
 			LanguageElementSimplePanel prev = languages.get(languages.size()-1);
-			langs.remove(langs.indexOf(prev.langBox.getValue(prev.langBox.getSelectedIndex())));
+			for (Language l : langs){
+				if (l.getTitle() == prev.langBox.getValue(prev.langBox.getSelectedIndex()).toString()) {
+					langs.remove(l);
+					break;
+				}
+			}
+			}
+			catch (Exception e) {
+			e.printStackTrace();
+			Window.alert(e.getLocalizedMessage());
+			}
+			
 		}
 		final LanguageElementSimplePanel lang = new LanguageElementSimplePanel(langs);
 		pixelCount+=168;
