@@ -342,7 +342,7 @@ public class RegistrationSimplePanel extends SimplePanel {
 	    second.setCellStyle("fixTextArea");
 	    
 	    CheckBox cb = new CheckBox();
-	    cb.setText("Даю право на обработку и хранение личной информации администрации ресурса");
+	    cb.setText("Я даю согласие Центру-Карьеры ХНУРЭ на электронную обработку моих персональных данных");
 	    cb.setSize("343px", "44px");
 	    
 	    surnameHint.setCellStyle("hint");
