@@ -59,4 +59,6 @@ public interface MapperParameters {
 	
 	//CV
 	String CV__PURPOSES_ID = "PurposesId";
+	String CV__QUALITIES = "Qualities";
+	String CV__OTHERS = "Others";
 }
