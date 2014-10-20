@@ -26,7 +26,7 @@ public class MSSqlCVDAO implements CVDAO {
 		return instance;
 	}
 	
-	private static final String SQL__INSERT_CV = "INSERT INTO CVs(PurposesId) VALUES(?)";
+	private static final String SQL__INSERT_CV = "INSERT INTO CVs(PurposesId, Qualities, Others) VALUES(?, ?, ?)";
 	private static final String SQL__SELECT_CV = "SELECT * FROM CVs WHERE CVsId=?";
 
 	@Override
@@ -56,7 +56,7 @@ public class MSSqlCVDAO implements CVDAO {
 		PreparedStatement pstmt = null;
 		try {
 			pstmt = con.prepareStatement(SQL__INSERT_CV, Statement.RETURN_GENERATED_KEYS);
-			pstmt.setLong(1, cv.getPurpose().getId());
+			mapCV(cv, pstmt);
 			if(pstmt.executeUpdate()!=1)
 				return false;
 			ResultSet rs = pstmt.getGeneratedKeys();
@@ -86,6 +86,12 @@ public class MSSqlCVDAO implements CVDAO {
 			}
 		}
 		return result;
+	}
+
+	private void mapCV(CV cv, PreparedStatement pstmt) throws SQLException {
+		pstmt.setLong(1, cv.getPurpose().getId());
+		pstmt.setString(2, cv.getQualities());
+		pstmt.setString(3, cv.getOthers());
 	}
 
 	@Override
@@ -123,9 +129,12 @@ public class MSSqlCVDAO implements CVDAO {
 			pstmt = con.prepareStatement(SQL__SELECT_CV);
 			pstmt.setLong(1, cVsId);
 			ResultSet rs = pstmt.executeQuery();
-			if(rs.next())
+			if(rs.next()){
 				result.setPurpose(MSSqlPurposeDAO.getInstancce()
 						.findPurposes(rs.getLong(MapperParameters.CV__PURPOSES_ID), con));
+				result.setQualities(rs.getString(MapperParameters.CV__QUALITIES));
+				result.setOthers(MapperParameters.CV__OTHERS);
+			}
 		} catch (SQLException e) {
 			throw e;
 		} finally {

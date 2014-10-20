@@ -204,6 +204,8 @@ BEGIN
 CREATE TABLE [dbo].[CVs](
 	[CVsId] [bigint] IDENTITY(1,1) NOT NULL,
 	[PurposesId] [bigint] NOT NULL,
+	[Qualities] [nvarchar(max)] NULL,
+	[Others] [nvarchar(max)] NULL,
  CONSTRAINT [PK_CVs] PRIMARY KEY CLUSTERED 
 (
 	[CVsId] ASC
