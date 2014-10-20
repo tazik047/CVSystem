@@ -79,14 +79,14 @@ h3 {
     height: 30px;
     
     position: absolute;
-    left: 120px;
+    left: 15px;
     top: -10px;
 }
 #country {
 
     height: 40px;
     position: absolute;
-    right: 70px;
+    right: 15px;
     top: 30px;
 }
 #menu {
@@ -221,10 +221,7 @@ h3.assistive-text {
 
 /* Footer
 -----------------------------------------------------------------------------*/
-.footer {
-	height: 100px;
-	border-top: 1px solid rgba(251,176,13,0.98);
-}
+
 .buttons {
 
     color: rgba(76,114,191,0.72);
@@ -244,6 +241,10 @@ h3.assistive-text {
 	position: relative;
 	background-color: rgba(76,114,192,0.30);
 }
+.footer {
+	position: relative;
+	border-top: 1px solid #2300ab
+}
 #footer-left{
 	left: 10px; 
 	text-align: left;
@@ -256,6 +257,7 @@ h3.assistive-text {
 	text-align: right;
 	position: absolute;
 }
+
 /* Registration
 ----------------------------------------------------------------------------*/
 .invalid {
