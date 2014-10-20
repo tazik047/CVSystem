@@ -34,6 +34,7 @@ public class WorkExperinceElementSimplePanel extends SimplePanel{
 	private TextBox role;
 	private TextBox nameOfInstitute;
 	private VerticalPanel rootPanel;
+	public DynamicForm controls;
 	
 	public Image imgDel; 
 	public WorkExperinceElementSimplePanel(){
@@ -44,8 +45,6 @@ public class WorkExperinceElementSimplePanel extends SimplePanel{
 		VerticalPanel textPanel = new VerticalPanel();
 		upPanel.setSpacing(5);
 		rootPanel.setSpacing(5);
-		rootPanel.add(upPanel);
-		rootPanel.add(downPanel);
 		downPanel.add(labelPanel);
 		downPanel.add(textPanel);
 		imgDel = new Image("img/close.png", 0, 0, 16, 16);
@@ -59,18 +58,21 @@ public class WorkExperinceElementSimplePanel extends SimplePanel{
 		
 		upPanel.setSpacing(10);
 		
-		DynamicForm form = new DynamicForm();  
-		form.setStyleName("fixUpPanel");
+		DynamicForm controls = new DynamicForm();  
+		controls.setStyleName("fixUpPanel");
 		
   
         TextItem yearField = new TextItem("year", "Год");  
         yearField.setWidth(70);
         yearField.setHeight(18);
+        yearField.setMask("####");
         yearField.setKeyPressFilter("[0-9.]");
+        yearField.setRequired(true);
         
         TextItem durationField = new TextItem("duration", "Длительность");  
         durationField.setWidth(70);
         durationField.setHeight(18);
+        durationField.setRequired(true);
         durationField.setKeyPressFilter("[0-9.]");
         
         LinkedHashMap<typeOfDuration, String> valueMap = new LinkedHashMap<typeOfDuration, String>();
@@ -78,35 +80,33 @@ public class WorkExperinceElementSimplePanel extends SimplePanel{
         valueMap.put(typeOfDuration.MONTH, "месяцев");
         valueMap.put(typeOfDuration.YEAR, "лет");
         SelectItem durTypeField = new SelectItem("type","Тип");
-        //durTypeField.setReadOnlyDisplay(ReadOnlyDisplayAppearance.STATIC);
         durTypeField.setValueMap(valueMap);
         durTypeField.setWidth(100);
-        form.setNumCols(3);
-        form.setFields(yearField, durationField, durTypeField);
-        form.setTitleOrientation(TitleOrientation.TOP);
-        form.draw(); 
+                
+        
+		  
+        TextItem role = new TextItem("role", "Должность");  
+        role.setWidth(200);
+        role.setHeight(18);
+        role.setKeyPressFilter("[0-9.]");
+        role.setRequired(true);
+        role.setTitleOrientation(TitleOrientation.LEFT);
 
-		upPanel.add(form);
         
+        TextItem nameOfInstitute = new TextItem("nameOfInstitute", "Место работы");  
+        nameOfInstitute.setWidth(200);
+        nameOfInstitute.setHeight(18);
+        nameOfInstitute.setKeyPressFilter("[0-9.]");;
+        nameOfInstitute.setRequired(true);
+        nameOfInstitute.setTitleOrientation(TitleOrientation.LEFT);
+
+		controls.setStyleName("fixUpPanel");
+
+        controls.setFields(yearField, durationField, durTypeField, role, nameOfInstitute);
+        controls.draw();
+        controls.markForRedraw();
         
-        Label label_role = new Label("Должность");
-        label_role.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
-        labelPanel.add(label_role);
-        label_role.setSize("80px", "18px");
-        
-        role = new TextBox();
-        textPanel.add(role);
-        role.setSize("100%", "18px");
-        
-        Label label_place = new Label("Место работы");
-        label_place.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
-        labelPanel.add(label_place);
-        //label_place.setHeight("18px");
-        
-        nameOfInstitute = new TextBox();
-        textPanel.add(nameOfInstitute);
-        nameOfInstitute.setSize("100%", "18px");
-        
+        rootPanel.add(controls);
         setWidget(rootPanel);
         
 	}

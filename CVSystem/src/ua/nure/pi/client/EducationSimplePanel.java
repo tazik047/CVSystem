@@ -21,7 +21,7 @@ import com.smartgwt.client.widgets.layout.events.SectionHeaderClickHandler;
 
 public class EducationSimplePanel extends SimplePanel{
 	
-	private ArrayList<EducationElementSimplePanel> educations;
+	public ArrayList<EducationElementSimplePanel> educations;
 	private SectionStack sectionStack;
 	private int countColor = -1;
 	private int pixelCount = 26;

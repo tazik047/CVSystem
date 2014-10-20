@@ -21,7 +21,7 @@ import com.smartgwt.client.widgets.layout.events.SectionHeaderClickHandler;
 
 public class WorkExperienceSimplePanel extends SimplePanel{
 	
-	private ArrayList<WorkExperinceElementSimplePanel> works;
+	public ArrayList<WorkExperinceElementSimplePanel> works;
 	private SectionStack sectionStack;
 	private int countColor = -1;
 	private int pixelCount = 26;

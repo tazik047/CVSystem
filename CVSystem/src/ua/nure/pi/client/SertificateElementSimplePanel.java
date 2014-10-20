@@ -29,13 +29,11 @@ import com.smartgwt.client.widgets.form.fields.TextItem;
 
 public class SertificateElementSimplePanel extends SimplePanel{
 	
-	private TextBox yearText;
-	private TextBox durationText;
-	private ListBox durationType;
-	private TextBox desc;
+	private TextItem desc;
 	private TextBox nameOfInstitute;
 	private VerticalPanel rootPanel;
 	private TextItem yearField;
+	public DynamicForm controls;
 	
 	public Image imgDel; 
 	public SertificateElementSimplePanel(){
@@ -46,8 +44,6 @@ public class SertificateElementSimplePanel extends SimplePanel{
 		VerticalPanel textPanel = new VerticalPanel();
 		upPanel.setSpacing(5);
 		rootPanel.setSpacing(5);
-		rootPanel.add(upPanel);
-		rootPanel.add(downPanel);
 		downPanel.add(labelPanel);
 		downPanel.add(textPanel);
 		imgDel = new Image("img/close.png", 0, 0, 16, 16);
@@ -61,32 +57,31 @@ public class SertificateElementSimplePanel extends SimplePanel{
 		
 		upPanel.setSpacing(10);
 		
-		DynamicForm form = new DynamicForm();  
-		form.setStyleName("fixUpPanel");
+		DynamicForm controls = new DynamicForm();  
+		controls.setStyleName("fixUpPanel");
 		
   
         yearField = new TextItem("year", "Год получения");  
-        yearField.setWidth(150);
+        yearField.setWidth(70);
         yearField.setHeight(18);
         yearField.setKeyPressFilter("[0-9.]");
-                
-        form.setFields(yearField);
-        form.setNumCols(3);
-        form.setTitleOrientation(TitleOrientation.TOP);
-        form.draw(); 
+        yearField.setTitleOrientation(TitleOrientation.LEFT);
+        yearField.setRequired(true);
+        
+        desc = new TextItem("desc", "Описание");  
+        desc.setWidth(200);
+        desc.setHeight(18);
+        desc.setKeyPressFilter("[0-9.]");
+        desc.setTitleOrientation(TitleOrientation.TOP);
+        desc.setRequired(true);
 
-		upPanel.add(form);
-        
-        
-        Label label_desc = new Label("Описание");
-        label_desc.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
-        labelPanel.add(label_desc);
-        label_desc.setSize("80px", "18px");
-        
-        desc = new TextBox();
-        textPanel.add(desc);
-        desc.setSize("100%", "18px");
-        
+                
+        controls.setFields(yearField, desc);
+        controls.setNumCols(1);
+        controls.draw(); 
+
+		rootPanel.add(controls);
+
         setWidget(rootPanel);
         
 	}
@@ -94,7 +89,7 @@ public class SertificateElementSimplePanel extends SimplePanel{
 	public Sertificate getSertificate() throws IllegalArgumentException{
 		Sertificate se = new Sertificate();
 		int year = Integer.parseInt(yearField.getValueAsString());
-		se.setSertificateName(desc.getText());
+		se.setSertificateName(desc.getValueAsString());
 		se.setSertificateYear(year);
 		
 		return se;

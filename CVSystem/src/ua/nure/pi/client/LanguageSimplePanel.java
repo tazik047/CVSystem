@@ -22,7 +22,7 @@ import com.smartgwt.client.widgets.layout.events.SectionHeaderClickHandler;
 
 public class LanguageSimplePanel extends SimplePanel{
 	
-	private ArrayList<LanguageElementSimplePanel> languages;
+	public ArrayList<LanguageElementSimplePanel> languages;
 	private ArrayList<Language> langs;
 
 	private SectionStack sectionStack;

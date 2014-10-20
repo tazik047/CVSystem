@@ -17,15 +17,19 @@ import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
+import com.smartgwt.client.widgets.form.DynamicForm;
+import com.smartgwt.client.widgets.form.fields.StaticTextItem;
+import com.smartgwt.client.widgets.form.fields.TextItem;
 
 public class EducationElementSimplePanel extends SimplePanel{
 	
-	private TextBox startYearText;
-	private TextBox endYearText;
-	private TextBox specialty;
-	private TextBox nameOfInstitute;
+	private TextItem startYearText;
+	private TextItem endYearText;
+	private TextItem specialty;
+	private TextItem nameOfInstitute;
 	private VerticalPanel rootPanel;
 	public Image imgDel;
+	public DynamicForm controls;
 	
 	public EducationElementSimplePanel(){
 		rootPanel = new VerticalPanel();
@@ -37,12 +41,7 @@ public class EducationElementSimplePanel extends SimplePanel{
 		VerticalPanel endYear = new VerticalPanel();
 		upPanel.setSpacing(5);
 		rootPanel.setSpacing(5);
-		rootPanel.add(upPanel);
-		rootPanel.add(downPanel);
-		downPanel.add(labelPanel);
-		downPanel.add(textPanel);
-		upPanel.add(startYear);
-		upPanel.add(endYear);
+
 		
 		imgDel = new Image("img/close.png", 0, 0, 16, 16);
 		imgDel.setStyleName("imgDelStyle");
@@ -54,55 +53,51 @@ public class EducationElementSimplePanel extends SimplePanel{
 		
 		upPanel.setSpacing(10);
 		
-		Label label = new Label("Год начала");
-        label.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
-        startYear.add(label);
-        label.setSize("70px", "18px");
+		startYearText = new TextItem("startYear", "Год начала");  
+		startYearText.setWidth(70);  
+		startYearText.setHint("");  
+		startYearText.setShowHintInField(true);
+		startYearText.setMask("####");
+	    startYearText.setRequired(true);
+
 		
-        startYearText = new TextBox();
-        startYear.add(startYearText);
-        startYearText.setSize("70px", "18px");
+	    endYearText = new TextItem("endYear", "Год окончания");  
+	    endYearText.setWidth(70);  
+	    endYearText.setHint("");  
+	    endYearText.setShowHintInField(true);
+	    endYearText.setMask("####");
+	    endYearText.setRequired(true);
         
-        Label label_1 = new Label("Год окончания");
-        label_1.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
-        endYear.add(label_1);
-        label_1.setSize("80px", "18px");
+	    specialty = new TextItem("specialty", "Специальность");  
+	    specialty.setWidth(200);  
+	    specialty.setHint("");  
+	    specialty.setShowHintInField(true);
+	    specialty.setRequired(true);
+
+	    nameOfInstitute = new TextItem("nameOfInstitute", "Место учёбы");  
+	    nameOfInstitute.setWidth(200);  
+	    nameOfInstitute.setHint("");  
+	    nameOfInstitute.setShowHintInField(true);
+	    nameOfInstitute.setRequired(true);
+        controls = new DynamicForm();
+        controls.setFields(startYearText, endYearText, specialty, nameOfInstitute);
         
-        endYearText = new TextBox();
-        endYear.add(endYearText);
-        endYearText.setSize("70px", "18px");
-        
-        
-        Label label_role = new Label("Специальность");
-        label_role.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
-        labelPanel.add(label_role);
-        label_role.setSize("80px", "18px");
-        
-        specialty = new TextBox();
-        textPanel.add(specialty);
-        specialty.setSize("100%", "18px");
-        
-        Label label_place = new Label("Место учёбы");
-        label_place.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
-        labelPanel.add(label_place);
-        //label_place.setHeight("18px");
-        
-        nameOfInstitute = new TextBox();
-        textPanel.add(nameOfInstitute);
-        nameOfInstitute.setSize("100%", "18px");
-                        
+        rootPanel.add(controls);
+        controls.draw();
+        controls.markForRedraw();
+	    
         setWidget(rootPanel);
 	}
 	
 	public Education getEducation() throws IllegalArgumentException{
 		Education ed = new Education();
-		int startYear = Integer.parseInt(startYearText.getText());
-		int endYear = Integer.parseInt(endYearText.getText());
+		int startYear = Integer.parseInt(startYearText.getValueAsString());
+		int endYear = Integer.parseInt(endYearText.getValueAsString());
 		
 		ed.setStartYear(startYear);
 		ed.setEndYear(endYear);		
-		ed.setNameOfInstitution(nameOfInstitute.getText());
-		ed.setSpecialty(specialty.getText());
+		ed.setNameOfInstitution(nameOfInstitute.getValueAsString());
+		ed.setSpecialty(specialty.getValueAsString());
 		return ed;
 	}
 	

@@ -328,7 +328,12 @@ public class RegistrationSimplePanel extends SimplePanel {
 	        commit.addClickHandler(new ClickHandler() {
 	        	
 	            public void onClick(ClickEvent event) {
-	            	if(mainForm.validate()){
+	            	Boolean b = mainForm.validate();
+	            	//b = ValidateLanPanel(lanPanel) && b;
+	            	b = ValidateSerPanel(ssp) && b;
+	            	//b = ValidateWorkPanel(expPanel) && b;
+	            	b = ValidateEduPanel(eduPanel) && b;
+        			if(b){
 	            	
 	            	st = getStudent();
 	            	registrationService.sendStudent(st, new AsyncCallback<Void>() {
@@ -448,6 +453,7 @@ public class RegistrationSimplePanel extends SimplePanel {
 	    pickDepartment.setName("department");
 	    pickDepartment.setValueField("name");
 	    pickDepartment.setValueTree(tree);
+	    pickDepartment.setRequired(true);
 	    form.setItems(pickDepartment);
 	    form.draw(); 
 	    
@@ -455,6 +461,42 @@ public class RegistrationSimplePanel extends SimplePanel {
 	    
 	    form.markForRedraw();
 
+	}
+	
+	public Boolean ValidateLanPanel(LanguageSimplePanel lsp){
+		Boolean f = true;
+		for (LanguageElementSimplePanel lesp : lsp.languages){
+			f = lesp.controls.validate();
+			lesp.controls.markForRedraw();
+		}
+		return f;
+	}
+	
+	public Boolean ValidateEduPanel(EducationSimplePanel esp){
+		Boolean f = true;
+		for (EducationElementSimplePanel eesp : esp.educations){
+			f = eesp.controls.validate();
+			eesp.controls.markForRedraw();
+		}
+		return f;
+	}
+	
+	public Boolean ValidateSerPanel(SertificateSimplePanel ssp){
+		Boolean f = true;
+		for (SertificateElementSimplePanel sesp : ssp.sertificates){
+			f = sesp.controls.validate();
+			sesp.controls.markForRedraw();
+		}
+		return f;
+	}
+	
+	public Boolean ValidateWorkPanel(WorkExperienceSimplePanel wsp){
+		Boolean f = true;
+		for (WorkExperinceElementSimplePanel wesp : wsp.works){
+			f = wesp.controls.validate();
+			wesp.controls.markForRedraw();
+		}
+		return f;
 	}
 	
 	public Student getStudent(){

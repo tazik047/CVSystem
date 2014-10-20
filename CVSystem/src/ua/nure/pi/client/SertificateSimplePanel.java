@@ -21,7 +21,7 @@ import com.smartgwt.client.widgets.layout.events.SectionHeaderClickHandler;
 
 public class SertificateSimplePanel extends SimplePanel{
 	
-	private ArrayList<SertificateElementSimplePanel> sertificates;
+	public ArrayList<SertificateElementSimplePanel> sertificates;
 	private SectionStack sectionStack;
 	private int countColor = -1;
 	private int pixelCount = 26;

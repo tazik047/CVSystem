@@ -29,9 +29,10 @@ public class LanguageElementSimplePanel extends SimplePanel{
 	
 	public ListBox langBox;
 	private int levelType;
-	private VerticalPanel rootPanel;
+	public VerticalPanel rootPanel;
 	public Image imgDel;
 	private RadioGroupItem style;
+	public DynamicForm controls;
 	
 	public LanguageElementSimplePanel(Collection<Language> langs){
 		rootPanel = new VerticalPanel();
@@ -92,8 +93,9 @@ public class LanguageElementSimplePanel extends SimplePanel{
             }  
         });
         style.setWidth(250);
+        style.setRequired(true);
           
-        DynamicForm controls = new DynamicForm();
+        controls = new DynamicForm();
         controls.setWidth(150);
         controls.setStyleName("fixForm");
         controls.setFields(style);
