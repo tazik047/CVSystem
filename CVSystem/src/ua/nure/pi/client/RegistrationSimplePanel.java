@@ -331,7 +331,8 @@ public class RegistrationSimplePanel extends SimplePanel {
 	            	Boolean b = mainForm.validate();
 	            	//b = ValidateLanPanel(lanPanel) && b;
 	            	b = ValidateSerPanel(ssp) && b;
-	            	//b = ValidateWorkPanel(expPanel) && b;
+
+	            	b = ValidateWorkPanel(expPanel) && b;
 	            	b = ValidateEduPanel(eduPanel) && b;
         			if(b){
 	            	
@@ -466,7 +467,7 @@ public class RegistrationSimplePanel extends SimplePanel {
 	public Boolean ValidateLanPanel(LanguageSimplePanel lsp){
 		Boolean f = true;
 		for (LanguageElementSimplePanel lesp : lsp.languages){
-			f = lesp.controls.validate();
+			f = lesp.controls.validate()&& f;
 			lesp.controls.markForRedraw();
 		}
 		return f;
@@ -475,7 +476,7 @@ public class RegistrationSimplePanel extends SimplePanel {
 	public Boolean ValidateEduPanel(EducationSimplePanel esp){
 		Boolean f = true;
 		for (EducationElementSimplePanel eesp : esp.educations){
-			f = eesp.controls.validate();
+			f = eesp.controls.validate() && f;
 			eesp.controls.markForRedraw();
 		}
 		return f;
@@ -484,7 +485,7 @@ public class RegistrationSimplePanel extends SimplePanel {
 	public Boolean ValidateSerPanel(SertificateSimplePanel ssp){
 		Boolean f = true;
 		for (SertificateElementSimplePanel sesp : ssp.sertificates){
-			f = sesp.controls.validate();
+			f = sesp.controls.validate()&& f;
 			sesp.controls.markForRedraw();
 		}
 		return f;
@@ -493,7 +494,7 @@ public class RegistrationSimplePanel extends SimplePanel {
 	public Boolean ValidateWorkPanel(WorkExperienceSimplePanel wsp){
 		Boolean f = true;
 		for (WorkExperinceElementSimplePanel wesp : wsp.works){
-			f = wesp.controls.validate();
+			f = wesp.controls.validate()&& f;
 			wesp.controls.markForRedraw();
 		}
 		return f;

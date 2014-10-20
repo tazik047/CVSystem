@@ -58,7 +58,7 @@ public class WorkExperinceElementSimplePanel extends SimplePanel{
 		
 		upPanel.setSpacing(10);
 		
-		DynamicForm controls = new DynamicForm();  
+		controls = new DynamicForm();  
 		controls.setStyleName("fixUpPanel");
 		
   
@@ -103,10 +103,12 @@ public class WorkExperinceElementSimplePanel extends SimplePanel{
 		controls.setStyleName("fixUpPanel");
 
         controls.setFields(yearField, durationField, durTypeField, role, nameOfInstitute);
-        controls.draw();
-        controls.markForRedraw();
+
         
         rootPanel.add(controls);
+        controls.draw();
+        controls.markForRedraw();
+
         setWidget(rootPanel);
         
 	}

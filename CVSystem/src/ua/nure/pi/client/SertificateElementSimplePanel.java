@@ -57,7 +57,7 @@ public class SertificateElementSimplePanel extends SimplePanel{
 		
 		upPanel.setSpacing(10);
 		
-		DynamicForm controls = new DynamicForm();  
+		controls = new DynamicForm();  
 		controls.setStyleName("fixUpPanel");
 		
   
@@ -75,12 +75,12 @@ public class SertificateElementSimplePanel extends SimplePanel{
         desc.setTitleOrientation(TitleOrientation.TOP);
         desc.setRequired(true);
 
-                
+        controls.setNumCols(1);        
         controls.setFields(yearField, desc);
-        controls.setNumCols(1);
-        controls.draw(); 
-
 		rootPanel.add(controls);
+        controls.draw(); 
+        controls.markForRedraw();
+
 
         setWidget(rootPanel);
         
