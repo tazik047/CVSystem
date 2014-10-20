@@ -1,17 +1,27 @@
-
+html{
+	height: 100%;
+}
 html>body {
     font-family: 'Times New Roman';
     font-size: 16px;
     margin: 0;
     min-width: 900px;
     background-color:rgb(250,250,250);
+    
+	height: 100%;
 }
 
 .wrapper {
-	width: 900px !important;
+	width: 900px;
 	margin: 0 auto;
 	border-top:  10px solid rgba(255,255,255,0);
 	background-color:white;
+	min-height: 100%;
+	height: auto !important;
+	height: 100%;
+	
+	background-color: #ffffff;
+	box-shadow:5px 5px 80px grey;
 }
 ul, li {
     color: #000000;
@@ -186,9 +196,8 @@ h3.assistive-text {
 	border-right: 2px solid rgb(241, 241, 241);
 	border-left: 2px solid rgb(241, 241, 241);
 	margin-top: 5 px;
+	padding: 0 0 100px;
 	position: relative;
-	background-color: #ffffff;
-	box-shadow:5px 5px 80px grey;
 }
 .middle:after {
 	display: table;
@@ -202,8 +211,10 @@ h3.assistive-text {
 }
 #content {
 	padding-right: 270px;
-	padding-left: 10px;
-	padding-top: 10px;
+	padding-left: 0px;
+	padding-top: 0px;
+	
+	padding-bottom: 0px;
 }
 
 
@@ -244,9 +255,11 @@ h3.assistive-text {
 #footer {
 	position: relative;
 	margin: -100px auto 0;
+	heigth: 100px;
 	border-top: 1px solid #2300ab;
 	width:900px;
 }
+
 #footer-left{
 	left: 10px; 
 	text-align: left;
@@ -289,7 +302,7 @@ h3.assistive-text {
 }
 
 .stylePanel1{
-	background-color:rgba(75, 132, 204, 0.5);
+	background-color: #CEE9F5;
 	margin:5px;
 	text-align:center;
 	position: relative;
@@ -306,7 +319,7 @@ h3.assistive-text {
 }
 
 .stylePanel2{
-	background-color:rgba(143, 204, 245, 0.5);
+	background-color:rgba(206,206,206,0.50);
 	margin:5px;
 	text-align:center;
 	position: relative;
@@ -333,6 +346,7 @@ h3.assistive-text {
 	height: 30px;
 	text-indent: -9999px;
 	background-size: cover !important;
+	border: 0px !important;
 	z-index: 1000000;
 }
 
