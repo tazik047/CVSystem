@@ -10,7 +10,7 @@
 </head>
     
 <body>
- <div id="wrapper">
+ <div class="wrapper">
   <div id="header">
   <div id="logo">
   <div id="social">
@@ -38,20 +38,25 @@
 
 		<div class="container">
 			<div id="content">
-			 <div id="slider-wrapper">
-        
-            <div id="slider" class="nivoSlider">
-                <img src="img/toystory.jpg" alt="" />
-                <a href="http://dev7studios.com"><img src="img/up.jpg" alt="" title="This is an example of a caption" /></a>
-                <img src="img/walle.jpg" alt="" />
-                <img src="img/nemo.jpg" alt="" title="#htmlcaption" />
+				<br> <table align="center">
+	<tr><td align="center"><h1>Добро пожаловать к нам на ресурс!
+</h1></td> </tr>
+	<tr><td id="slider-wrapper" align="center">
+        	           <div id="slider" class="nivoSlider">
+               
+                <img src="img/1.jpg"/>
+                <img src="img/2.jpg"/>
+                <img src="img/3.jpg"/>
+                <img src="img/4.jpg"/>
+                <img src="img/5.jpg"/>
+                
             </div>
-            <div id="htmlcaption" class="nivo-html-caption">
-                <strong>This</strong> is an example of a <em>HTML</em> caption with <a href="#">a link</a>.
-            </div>
-        
-        </div>
-						</div><!-- .content -->
+            </td></tr>
+            
+            
+        </table>
+       <br><br><br>
+		</div><!-- .content -->
 		</div><!-- .container-->
 
 		<div id="right-sidebar">
@@ -63,9 +68,11 @@
   	
   	</div><!-- .right-sidebar -->
 
-	</div><!-- .middle-->
-
-	<footer  class="footer">
+	</div>
+</div>
+	
+	
+<footer id="footer" style="margin-top:auto">
 		<div id="footer-left">
 	Центр-Карьера ХНУРЭ<br>61166, пр. Ленина,14  г. Харьков,<br>Тел/факс (8057) 7021646
 	
@@ -74,6 +81,12 @@
 	 Разработано:<br>Задорожний Станислав<br>Науменко Глеб<br>Потемкин Константин
 	</div>
 	</footer><!-- .footer -->
+   
+
+ 
+</body>
+
+	
     <!-- OPTIONAL: include this if you want history support -->
     <iframe src="javascript:''" id="__gwt_historyFrame" tabIndex='-1' style="position:absolute;width:0;height:0;border:0"></iframe>
     
@@ -83,7 +96,7 @@
         Your web browser must have JavaScript enabled
         in order for this application to display correctly.
       </div>
-    </noscript>
+      </noscript>
 <script type="text/javascript" src="js/jquery-1.4.3.min.js"></script>
     <script type="text/javascript" src="js/jquery.nivo.slider.pack.js"></script>
     <script type="text/javascript">
@@ -91,7 +104,4 @@
         $('#slider').nivoSlider();
     });
     </script>
-
-</div>
-</body>
 </html>
