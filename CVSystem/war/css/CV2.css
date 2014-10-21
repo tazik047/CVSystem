@@ -77,7 +77,7 @@ h3 {
     
 }
 #logo {
-	background: url("/img/header.png");
+	background: url("/img/header.gif");
 	color: #0fa3e7;
     height: 115px;
     position: relative;
@@ -242,12 +242,11 @@ h3.assistive-text {
 }
 #footer {
 	position: relative;
-	margin: -90px auto 0;
-	heigth: 90px;
+	margin: -70px auto 0;
+	height: 70px;
 	border-top: 1px solid #2300ab;
 	width:900px;
-	
-	background-color: rgba(76,114,192,0.30) !important;
+	background-color: #FEF3EE !important;
 }
 
 #footer-left{
