@@ -110,6 +110,8 @@ public class RegistrationSimplePanel extends SimplePanel {
     
     public TextItem AddresstextBox;
     
+    public TextItem PatronymictextBox;
+    
     public SelectItem goalComboBox;
     
     WorkExperienceSimplePanel expPanel; 
@@ -174,6 +176,16 @@ public class RegistrationSimplePanel extends SimplePanel {
 	    nameHint.setShowTitle(false);
 	    nameHint.setValue("Например, Иван");
 	    NametextBox.setRequired(true);
+	    
+        PatronymictextBox = new TextItem("patronymic", "Отчество");  
+        PatronymictextBox.setWidth(300);  
+        PatronymictextBox.setHint("Введите отчество");  
+        PatronymictextBox.setShowHintInField(true);
+        PatronymictextBox.setMask(">C<CCCCCCCCCCCCCCCCCCCC");
+	    StaticTextItem patronHint = new StaticTextItem();
+	    patronHint.setShowTitle(false);
+	    patronHint.setValue("Например, Иванович");
+	    PatronymictextBox.setRequired(false);
 
         /*
         dateItem = new DateItem();
@@ -187,9 +199,9 @@ public class RegistrationSimplePanel extends SimplePanel {
 		*/
 	    StaticTextItem dateHint = new StaticTextItem();
 	    dateHint.setShowTitle(false);
-	    dateHint.setValue("Например, 12/31/2014");
+	    dateHint.setValue("Например, 01.01.1970");
 	    
-	    dateItem = new DateItem("dob", "Date of Birth");
+	    dateItem = new DateItem("dob", "Дата рождения");
 	    dateItem.setWrapTitle(false);
 	    dateItem.setRequired(true);
 	    Date today = new java.util.Date();
@@ -210,7 +222,7 @@ public class RegistrationSimplePanel extends SimplePanel {
         
         Emailtextbox = new TextItem("email", "Email");  
         Emailtextbox.setWidth(300);  
-        Emailtextbox.setHint("Введите email. "); 
+        Emailtextbox.setHint("Введите email"); 
         Emailtextbox.setShowHintInField(true);
         Emailtextbox.setValidators(emailValidator);
 	    StaticTextItem emailHint = new StaticTextItem();
@@ -221,23 +233,36 @@ public class RegistrationSimplePanel extends SimplePanel {
         
         PhonetextBox = new TextItem("phone", "Контакнтый телефон");  
         PhonetextBox.setWidth(300);  
-        PhonetextBox.setHint(""); 
+        PhonetextBox.setShowHintInField(true);
+        PhonetextBox.setHint("Введите контактный телефон"); 
         PhonetextBox.setMask("+38(###) ###-####");
         PhonetextBox.setRequired(true);
+	    StaticTextItem phoneHint = new StaticTextItem();
+	    phoneHint.setShowTitle(false);
+	    phoneHint.setValue("Например, +38(050)1458872");
+
                 
         TextItem Skypetextbox = new TextItem("skype", "Skype");  
         Skypetextbox.setWidth(300);  
-        Skypetextbox.setHint(""); 
+        Skypetextbox.setHint("Введите skype"); 
         Skypetextbox.setShowHintInField(true);
         Skypetextbox.setRequired(false);
-        
+	    StaticTextItem skypeHint = new StaticTextItem();
+	    skypeHint.setShowTitle(false);
+	    skypeHint.setValue("Например, skypelogin");
+
       
-        goalComboBox = new SelectItem("Желаемая должность");
+        goalComboBox = new SelectItem("Goal");
+        goalComboBox.setTitle("Желаемая должность");
         goalComboBox.setHint("-Должности-");
         goalComboBox.setShowHintInField(true);
         goalComboBox.setWidth(300);
         goalComboBox.setHeight(22);
         goalComboBox.setRequired(true);
+	    StaticTextItem goalHint = new StaticTextItem();
+	    goalHint.setShowTitle(false);
+	    goalHint.setValue("Например, Junior Java developer");
+
         
         final LinkedHashMap<Long, String> phm = new LinkedHashMap<>();
 
@@ -287,7 +312,7 @@ public class RegistrationSimplePanel extends SimplePanel {
         // Знание языков программирования и технологий
                 
         final MultiComboBoxLayoutStyle initialLayoutStyle = MultiComboBoxLayoutStyle.FLOW;  
-        languages = new MultiComboBoxItem("languages", "Языки программирования");
+        languages = new MultiComboBoxItem("skills", "Проффесиональные навыки");
         
         final LinkedHashMap<String, String> lhm = new LinkedHashMap<>();
         
@@ -320,7 +345,7 @@ public class RegistrationSimplePanel extends SimplePanel {
           });
 
         languages.setLayoutStyle(initialLayoutStyle);
-
+        languages.setWidth(300);
         languages.setAddUnknownValues(false);
         languages.setColSpan(20);
 	        
@@ -360,11 +385,13 @@ public class RegistrationSimplePanel extends SimplePanel {
 
 		form.setNumCols(1);
 		
-	    TextAreaItem first = new TextAreaItem("Личные качества");
+	    TextAreaItem first = new TextAreaItem("Qualities");
 	    first.setCellStyle("fixTextArea");
+	    first.setTitle("Личные качества");
 
-	    TextAreaItem second = new TextAreaItem("Прочее");
+	    TextAreaItem second = new TextAreaItem("Others");
 	    second.setCellStyle("fixTextArea");
+	    second.setTitle("Прочее");
 	    
 	    CheckBox cb = new CheckBox();
 	    cb.setText("Я даю согласие Центру-Карьеры ХНУРЭ на электронную обработку моих персональных данных");
@@ -376,16 +403,18 @@ public class RegistrationSimplePanel extends SimplePanel {
 	    dateHint.setCellStyle("hint");
 	    addressHint.setCellStyle("hint");
 	    emailHint.setCellStyle("hint");
-	    Skypetextbox.setCellStyle("hint");
-	    PhonetextBox.setCellStyle("hint");
-	    goalComboBox.setCellStyle("hint");
+	    skypeHint.setCellStyle("hint");
+	    goalHint.setCellStyle("hint");
 	    languages.setCellStyle("hint");
+	    phoneHint.setCellStyle("hint");
+	    patronHint.setCellStyle("hint");
+
 	    
 	    
 	    mainForm.setCellPadding(5);
-	    mainForm.setFields(SurnametextBox,surnameHint, NametextBox, nameHint, dateItem, dateHint, 
-	    		AddresstextBox, addressHint, Emailtextbox, emailHint, PhonetextBox, Skypetextbox,
-	    		goalComboBox, languages);
+	    mainForm.setFields(SurnametextBox,surnameHint, NametextBox, nameHint,PatronymictextBox, patronHint, dateItem, dateHint, 
+	    		AddresstextBox, addressHint, Emailtextbox, emailHint, PhonetextBox, phoneHint, Skypetextbox, skypeHint,
+	    		goalComboBox,goalHint, languages);
         mainForm.setTitleOrientation(TitleOrientation.TOP);
 
 	    

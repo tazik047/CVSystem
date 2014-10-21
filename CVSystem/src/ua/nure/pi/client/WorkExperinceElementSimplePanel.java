@@ -39,24 +39,14 @@ public class WorkExperinceElementSimplePanel extends SimplePanel{
 	public Image imgDel; 
 	public WorkExperinceElementSimplePanel(){
 		rootPanel = new VerticalPanel();
-		HorizontalPanel upPanel = new HorizontalPanel();
-		HorizontalPanel downPanel = new HorizontalPanel();
-		VerticalPanel labelPanel = new VerticalPanel();
-		VerticalPanel textPanel = new VerticalPanel();
-		upPanel.setSpacing(5);
 		rootPanel.setSpacing(5);
-		downPanel.add(labelPanel);
-		downPanel.add(textPanel);
 		imgDel = new Image("img/close.png", 0, 0, 30, 30);
 		imgDel.setStyleName("imgDelStyle");
 		imgDel.setTitle("Удалить опыт работы");
 		rootPanel.add(imgDel);
 		
 		setWidth("343px");
-		labelPanel.setSpacing(5);
-		textPanel.setSpacing(5);
-		
-		upPanel.setSpacing(10);
+
 		
 		controls = new DynamicForm();
 		
@@ -99,11 +89,11 @@ public class WorkExperinceElementSimplePanel extends SimplePanel{
         nameOfInstitute.setRequired(true);
         nameOfInstitute.setTitleOrientation(TitleOrientation.LEFT);
 
-		controls.setStyleName("fixUpPanel");
+		//controls.setStyleName("fixUpPanel");
+        controls.setNumCols(1);        
 
         controls.setFields(yearField, durationField, durTypeField, role, nameOfInstitute);
 
-        
         rootPanel.add(controls);
         controls.draw();
         controls.markForRedraw();

@@ -91,7 +91,7 @@ public class EducationSimplePanel extends SimplePanel{
 						
 		}
 		final EducationElementSimplePanel exp = new EducationElementSimplePanel();
-		pixelCount+=137;
+		pixelCount+=130;
 		sectionStack.setHeight(String.valueOf(pixelCount)+"px");
 		countColor  = (++countColor)%2;
 		if(countColor == 0){
@@ -105,7 +105,7 @@ public class EducationSimplePanel extends SimplePanel{
 			public void onClick(ClickEvent event) {
 				vp.remove(exp);
 				educations.remove(exp);
-				pixelCount-=137;
+				pixelCount-=130;
 				sectionStack.setHeight(String.valueOf(pixelCount)+"px");
 				if(educations.size()==0){
 					sectionStack.removeFromParent();
