@@ -1,6 +1,11 @@
 package ua.nure.pi.entity;
 
-public class Education {
+import java.io.Serializable;
+
+import com.google.gwt.user.client.rpc.IsSerializable;
+
+public class Education implements Serializable, IsSerializable {
+	private static final long serialVersionUID = 1L;
 
 	private int startYear;
 	
