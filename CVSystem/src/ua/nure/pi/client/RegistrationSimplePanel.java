@@ -364,14 +364,7 @@ public class RegistrationSimplePanel extends SimplePanel {
         			if(b){
 	            	
 	            	st = getStudent();
-	            	try{
-	            		DialogBox show = new DialogBox();
-	            		show.add(new PrintSimplePanel(st));
-	            		show.center();
-	            	}
-	            	catch(Exception e){
-	            		Window.alert(e.getMessage());
-	            	}
+	            	new VerifyDialogBox(st);
 	            	registrationService.sendStudent(st, new AsyncCallback<Void>() {
 	                    public void onFailure(Throwable caught) {
 	                      Window.alert(caught.getLocalizedMessage());
