@@ -7,6 +7,7 @@ import java.util.LinkedHashMap;
 
 
 
+
 import ua.nure.pi.dao.mssql.MSSqlFacultyGroupDAO;
 import ua.nure.pi.dao.mssql.MSSqlProgramLanguageDAO;
 import ua.nure.pi.entity.CV;
@@ -30,6 +31,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.CheckBox;
+import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.DockPanel;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment.HorizontalAlignmentConstant;
@@ -362,6 +364,14 @@ public class RegistrationSimplePanel extends SimplePanel {
         			if(b){
 	            	
 	            	st = getStudent();
+	            	try{
+	            		DialogBox show = new DialogBox();
+	            		show.add(new PrintSimplePanel(st));
+	            		show.center();
+	            	}
+	            	catch(Exception e){
+	            		Window.alert(e.getMessage());
+	            	}
 	            	registrationService.sendStudent(st, new AsyncCallback<Void>() {
 	                    public void onFailure(Throwable caught) {
 	                      Window.alert(caught.getLocalizedMessage());
