@@ -30,7 +30,7 @@ public class MSSqlStudentDAO implements StudentDAO {
 	
 	private static final String SQL__SELECT_STUDENT = "SELECT * FROM Students WHERE StudentsId = ?";
 	private static final String SQL__SELECT_ALL_STUDENT = "SELECT * FROM Students";
-	private static final String SQL__INSERT_STUDENT = "INSERT INTO Students(Surname, Firstname, Lastname, "
+	private static final String SQL__INSERT_STUDENT = "INSERT INTO Students(Surname, Firstname, Patronymic, "
 			+ "GroupsId, CVsId, Adress) VALUES(?, ?, ?, ?, ?, ?)";
 	
 	private static final String SQL__DELETE_ANY_TAG = "DELETE Students WHERE StudentsId = ?";
