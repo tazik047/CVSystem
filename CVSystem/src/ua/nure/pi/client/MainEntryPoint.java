@@ -107,10 +107,11 @@ public class MainEntryPoint implements EntryPoint {
 		}
 	});
         
-    RootPanel addCV = RootPanel.get("AddCV");
     Button butAddCV = new Button("New button");
     butAddCV.setText("Добавить резюме");
-    butAddCV.addStyleName("addCV");
+    butAddCV.addStyleName("buttons");
+    butAddCV.setStyleName("buttons");
+    rootPanel.add(butAddCV);
     butAddCV.addClickHandler(new ClickHandler() {
 		
 		@Override
@@ -118,9 +119,6 @@ public class MainEntryPoint implements EntryPoint {
 			uiManager.setPanel(new RegistrationSimplePanel(mainService));
 		}
 	});
-    if(addCV!=null)
-    addCV.add(butAddCV);
-    
     
     // Create the popup dialog box
     final DialogBox dialogBox = new DialogBox();
