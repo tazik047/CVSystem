@@ -102,9 +102,8 @@ h3 {
 	font-size: 0px;
     height: 30px;
     overflow: hidden;
-    border-right: 2px solid rgb(241, 241, 241);
-	border-left: 2px solid rgb(241, 241, 241);
-	background-color:white;
+    background-color:white;
+	border-bottom: 1px solid rgba(76,114,191,0.72);
 }
 #menu-right{}
 
@@ -120,6 +119,7 @@ h3 {
 #menu-right ul {
     list-style: none outside none;
     margin-right: 40px;
+    margin-top: 5px;
 }
 
 #menu-left li {
@@ -204,28 +204,18 @@ h3.assistive-text {
 }
 .container {
 	width: 100%;
-	float: left;
+	align: center;
 	overflow: hidden;
 }
 #content {
-	padding-right: 270px;
-	padding-left: 0px;
-	padding-top: 0px;
+	align: center;
 	
-	padding-bottom: 0px;
+	width: 100% !important;
 }
 
 
 /* Right Sidebar
 -----------------------------------------------------------------------------*/
-#right-sidebar {
-	margin-top: 50px;
-	float: left;
-	width: 250 px;
-	margin-left: -250px;
-	position: relative;
-	text-align: center;
-}
 
 
 /* Footer
@@ -256,6 +246,8 @@ h3.assistive-text {
 	heigth: 90px;
 	border-top: 1px solid #2300ab;
 	width:900px;
+	
+	background-color: rgba(76,114,192,0.30) !important;
 }
 
 #footer-left{
@@ -270,7 +262,14 @@ h3.assistive-text {
 	text-align: right;
 	position: absolute;
 }
-
+#sponsors{
+	align: center;
+}
+#sponsors tbody tr td
+{
+	width: 150px !important;
+	heigth: 80px !important;
+}
 /* Registration
 ----------------------------------------------------------------------------*/
 .invalid {
