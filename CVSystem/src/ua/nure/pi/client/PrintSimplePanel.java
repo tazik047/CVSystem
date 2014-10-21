@@ -18,6 +18,7 @@ import com.smartgwt.client.widgets.layout.HLayout;
 import com.smartgwt.client.widgets.layout.VLayout;  
   
 import com.google.gwt.core.client.EntryPoint;  
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.SimplePanel;
   
 public class PrintSimplePanel extends SimplePanel {  
@@ -26,16 +27,22 @@ public class PrintSimplePanel extends SimplePanel {
 	public PrintSimplePanel(Student student)
 	{
 		this.student = student;
+		educations = student.getCv().getEducations();
+		languages = student.getCv().getLanguages();
+		programLanguage = student.getCv().getProgramLanguages();
+		sertificates = student.getCv().getSertificates();
+		workExps = student.getCv().getWorkExps();
+		onModuleLoad();
 	}
-	private Collection<Education> educations = student.getCv().getEducations();
+	private Collection<Education> educations;
 	
-	private Collection<Language> languages = student.getCv().getLanguages();
+	private Collection<Language> languages;
 	
-	private Collection<ProgramLanguage> programLanguage = student.getCv().getProgramLanguages();
+	private Collection<ProgramLanguage> programLanguage;
 	
-	private Collection<Sertificate> sertificates = student.getCv().getSertificates();
+	private Collection<Sertificate> sertificates;
 	
-	private Collection<WorkExp> workExps = student.getCv().getWorkExps();
+	private Collection<WorkExp> workExps;
 	
     public void onModuleLoad() {  
   
@@ -65,25 +72,27 @@ public class PrintSimplePanel extends SimplePanel {
         hLayout.addMember(new BlueBox("40%", null, ""));  
         hLayout.addMember(vLayout2);
         vLayout.addMember(new BlueBox(null, "30", "Опыт работы", true));
-
-        for(WorkExp I : workExps){
-        HLayout hLayout2 = new HLayout();  
-        vLayout.addMember(hLayout2);  
-        hLayout2.setHeight100();
-        hLayout2.addMember(new BlueBox("20%", null, ""));  
-        hLayout2.addMember(new BlueBox("20%", null, "С " + I.getStartYear() + "\nНа протяжении" + I.getDuration() + I.getTypeOfDuration()));
-        hLayout2.addMember(new BlueBox("*", null, I.getRole() + ":" + I.getNameOfInstitution()));
+        if(workExps != null){
+	        for(WorkExp I : workExps){
+	        HLayout hLayout2 = new HLayout();  
+	        vLayout.addMember(hLayout2);  
+	        hLayout2.setHeight100();
+	        hLayout2.addMember(new BlueBox("20%", null, ""));  
+	        hLayout2.addMember(new BlueBox("20%", null, "С " + I.getStartYear() + "\nНа протяжении" + I.getDuration() + I.getTypeOfDuration()));
+	        hLayout2.addMember(new BlueBox("*", null, I.getRole() + ":" + I.getNameOfInstitution()));
+	        }
         }
 
         vLayout.addMember(new BlueBox((String) null, "30", "Образование", true));  
-
-        for(Education I : educations){
-        HLayout hLayout3 = new HLayout();  
-       vLayout.addMember(hLayout3);  
-        hLayout3.setHeight100();
-        hLayout3.addMember(new BlueBox("20%", null, ""));  
-        hLayout3.addMember(new BlueBox("20%", null, I.getStartYear() + " - " + I.getEndYear()));
-        hLayout3.addMember(new BlueBox("*", null, I.getSpecialty() + ": " + I.getNameOfInstitution()));
+        if(educations!=null){
+	        for(Education I : educations){
+		        HLayout hLayout3 = new HLayout();  
+		       vLayout.addMember(hLayout3);  
+		        hLayout3.setHeight100();
+		        hLayout3.addMember(new BlueBox("20%", null, ""));  
+		        hLayout3.addMember(new BlueBox("20%", null, I.getStartYear() + " - " + I.getEndYear()));
+		        hLayout3.addMember(new BlueBox("*", null, I.getSpecialty() + ": " + I.getNameOfInstitution()));
+		        }
         }
         vLayout.addMember(new BlueBox((String) null, "30", "Профессиональные навыки", true));
         HLayout hLayout4 = new HLayout();  
@@ -92,8 +101,11 @@ public class PrintSimplePanel extends SimplePanel {
         hLayout4.addMember(new BlueBox("20%", null, ""));  
         hLayout4.addMember(new BlueBox("20%", null, "Языки программирования"));
         String lan = "";
-        for(ProgramLanguage I : programLanguage)
-        	lan = lan + " " + I.getTitle();
+        Window.alert("Start set pl");
+        if(programLanguage!=null)
+	        for(ProgramLanguage I : programLanguage)
+	        	lan = lan + " " + I.getTitle();
+        Window.alert("End set pl");
         hLayout4.addMember(new BlueBox("*", null, lan));
         /*
         HLayout hLayout5 = new HLayout();  
@@ -129,17 +141,20 @@ public class PrintSimplePanel extends SimplePanel {
         hLayout9.addMember(new BlueBox("*", null, "Photoshop"));
         */
         vLayout.addMember(new BlueBox((String) null, "30", "Сертификаты", true));
-        for(Sertificate I : sertificates){
-        HLayout hLayout10 = new HLayout();  
-        vLayout.addMember(hLayout10);  
-        hLayout10.setHeight100();
-        
-        hLayout10.addMember(new BlueBox("20%", null, ""));
-        hLayout10.addMember(new BlueBox("20%", null, ""+I.getSertificateYear()));
-        hLayout10.addMember(new BlueBox("*", null, I.getSertificateName()));
+        if(sertificates!=null){
+	        for(Sertificate I : sertificates){
+	        HLayout hLayout10 = new HLayout();  
+	        vLayout.addMember(hLayout10);  
+	        hLayout10.setHeight100();
+	        
+	        hLayout10.addMember(new BlueBox("20%", null, ""));
+	        hLayout10.addMember(new BlueBox("20%", null, ""+I.getSertificateYear()));
+	        hLayout10.addMember(new BlueBox("*", null, I.getSertificateName()));
+	        }
         }
-        
         vLayout.addMember(new BlueBox((String) null, "30", "Знания языков", true));
+        
+        if(languages!=null){
         for(Language I : languages){
             
         HLayout hLayout11 = new HLayout();  
@@ -148,6 +163,7 @@ public class PrintSimplePanel extends SimplePanel {
         hLayout11.addMember(new BlueBox("40%", null, ""));  
         hLayout11.addMember(new BlueBox("*", null, I.getTitle() + " - " + I.getLevel()));
         
+        }
         }
         vLayout.addMember(new BlueBox((String) null, "30", "Личные качества", true));
 
@@ -167,8 +183,8 @@ public class PrintSimplePanel extends SimplePanel {
         
         
               layout.addMember(vLayout);  
-        
-        layout.draw();  
+        layout.markForRedraw();
+        add(layout);  
     }  
   
     class BlueBox extends Label {  
