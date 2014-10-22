@@ -104,7 +104,7 @@ public class LanguageSimplePanel extends SimplePanel{
 			LanguageElementSimplePanel prev = languages.get(languages.size()-1);
 			prev.langBox.setEnabled(false);
 			for (Language l : langs){
-				if (l.getTitle() == prev.langBox.getValue(prev.langBox.getSelectedIndex()).toString()) {
+				if (l.getId() == prev.getLanguage().getId()) {
 					langs.remove(l);
 					break;
 				}
@@ -130,7 +130,8 @@ public class LanguageSimplePanel extends SimplePanel{
 			@Override
 			public void onClick(ClickEvent event) {
 				Language l = new Language();
-				l.setTitle(lang.langBox.getValue(lang.langBox.getSelectedIndex()));
+				l.setTitle(lang.langBox.getItemText(lang.langBox.getSelectedIndex()));
+				l.setId(Integer.parseInt(lang.langBox.getValue(lang.langBox.getSelectedIndex())));
 				langs.add(l);
 				vp.remove(lang);
 				languages.remove(lang);

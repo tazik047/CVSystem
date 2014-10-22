@@ -37,8 +37,8 @@ public class MSSqlDAOFactory extends DAOFactory {
 		try {
 			Class.forName(DRIVER);
 			con = DriverManager.getConnection(DB_URL);
-			con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
 			con.setAutoCommit(false);
+			con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
 		} catch (SQLException e) {
 			System.err.println("Can not get connection. # " + e.getMessage());
 		} catch (ClassNotFoundException e) {

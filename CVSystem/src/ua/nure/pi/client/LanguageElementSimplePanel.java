@@ -6,6 +6,7 @@ import java.util.LinkedHashMap;
 
 import ua.nure.pi.entity.Language;
 
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HasVerticalAlignment;
@@ -33,8 +34,10 @@ public class LanguageElementSimplePanel extends SimplePanel{
 	public Image imgDel;
 	private RadioGroupItem style;
 	public DynamicForm controls;
+	private Collection<Language> languages;
 	
 	public LanguageElementSimplePanel(Collection<Language> langs){
+		languages = langs;
 		rootPanel = new VerticalPanel();
 		HorizontalPanel upPanel = new HorizontalPanel();
 		VerticalPanel lang = new VerticalPanel();
@@ -48,7 +51,7 @@ public class LanguageElementSimplePanel extends SimplePanel{
 		
 		imgDel = new Image("img/close.png", 0, 0, 30, 30);
 		imgDel.setStyleName("imgDelStyle");
-		imgDel.setTitle("Удалить опыт работы");
+		imgDel.setTitle("Удалить язык");
 		rootPanel.add(imgDel);
 		
 		level.setWidth("200px");
@@ -65,7 +68,7 @@ public class LanguageElementSimplePanel extends SimplePanel{
 		
 		langBox = new ListBox();
 		for (Language lan : langs) {
-			langBox.addItem(lan.getTitle());
+			langBox.addItem(lan.getTitle(),String.valueOf(lan.getId()));
 		}
         lang.add(langBox);
         langBox.setSize("70px", "18px");
@@ -109,8 +112,8 @@ public class LanguageElementSimplePanel extends SimplePanel{
 	public Language getLanguage() throws IllegalArgumentException{
 		Language lang = new Language();
 		lang.setLevel(style.getValue().hashCode());
-		lang.setTitle(langBox.getValue(langBox.getSelectedIndex()));
-		
+		lang.setTitle(langBox.getItemText(langBox.getSelectedIndex()));
+		lang.setId(Integer.parseInt(langBox.getValue(langBox.getSelectedIndex())));
 		return lang;
 	}
 }

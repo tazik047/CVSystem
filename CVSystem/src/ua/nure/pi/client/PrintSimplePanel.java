@@ -66,7 +66,7 @@ public class PrintSimplePanel extends SimplePanel {
         HLayout hLayout = new HLayout();  
         vLayout.addMember(hLayout);  
         hLayout.setHeight(80);
-        BlueBox FIO = new BlueBox("30%", "90", "<h3>" +  student.getSurname() + student.getFirstname() + student.getPatronymic()+ "</h3>\n<a>"+ student.getGroup()+"</a>");
+        BlueBox FIO = new BlueBox("30%", "90", "<h3>" +  student.getSurname() +" "+ student.getFirstname() +" "+ student.getPatronymic()+ "</h3>\n<a>"+ student.getGroup()+"</a>");
         FIO.setStyleName("FIO");
         hLayout.addMember(FIO);  
         hLayout.addMember(new BlueBox("40%", null, ""));  

@@ -61,7 +61,7 @@ public class MSSqlEducationDAO implements EducationDAO {
 		try {
 			for (Education ed : eds) {
 				pstmt = con.prepareStatement(SQL__INSERT_EDUCATION);
-				mapEducationForInsert(ed, pstmt);
+				mapEducationForInsert(cVsId, ed, pstmt);
 				if(pstmt.executeUpdate()!=1)
 					return false;
 			}
@@ -139,13 +139,13 @@ public class MSSqlEducationDAO implements EducationDAO {
 		return ed;
 	}
 	
-	private void mapEducationForInsert(Education ed, PreparedStatement pstmt) 
+	private void mapEducationForInsert(long cVsId, Education ed, PreparedStatement pstmt) 
 			throws SQLException{
 		pstmt.setInt(1, ed.getStartYear());
 		pstmt.setInt(2, ed.getEndYear());
 		pstmt.setString(3, ed.getNameOfInstitution());
 		pstmt.setString(4, ed.getSpecialty());
-		pstmt.setLong(5, ed.getCVsId());
+		pstmt.setLong(5, cVsId);
 		
 	}
 }

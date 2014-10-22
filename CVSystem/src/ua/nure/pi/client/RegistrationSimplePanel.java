@@ -208,6 +208,7 @@ public class RegistrationSimplePanel extends SimplePanel {
 	    dateItem.setRequired(true);
 	    Date today = new java.util.Date();
 	    dateItem.setEndDate(today);
+	    dateItem.setStartDate(new Date(0));
 
         
         AddresstextBox = new TextItem("address", "Домашний адрес");  
@@ -536,10 +537,13 @@ public class RegistrationSimplePanel extends SimplePanel {
 		st = new Student();
 		st.setFirstname(NametextBox.getValueAsString());
 		st.setSurname(SurnametextBox.getValueAsString());
+		st.setPatronymic(PatronymictextBox.getValueAsString());
 		st.setDateOfBirth((Date)dateItem.getValue());
 		st.setEmail(Emailtextbox.getValueAsString());
 		st.setPhone(PhonetextBox.getValueAsString());
 		st.setAddress(AddresstextBox.getValueAsString());
+		//st.setGroup(group);
+		//st.setSkyp();
 		CV cv = new CV();
 		cv.setEducations(eduPanel.getEducation());
 		cv.setLanguages(lanPanel.getLanguages());
@@ -550,7 +554,15 @@ public class RegistrationSimplePanel extends SimplePanel {
 			if(i.getId()==Integer.parseInt(goalComboBox.getValueAsString()))
 				cv.setPurpose(i);
 		}
-		//cv.setProgramLanguages((Collection<ProgramLanguage>) languages.getValueAsRecordList());
+		Collection<ProgramLanguage> resPL = new ArrayList<ProgramLanguage>();
+		for(String pl : languages.getValues()){
+			for(ProgramLanguage p : programLanguages){
+				if(p.getTitle().equals(pl)){
+					resPL.add(new ProgramLanguage(pl, p.getId()));
+				}
+			}
+		}
+		cv.setProgramLanguages(resPL);
 		st.setCv(cv);
 		return st;
 	}
