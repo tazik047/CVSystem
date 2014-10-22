@@ -23,8 +23,8 @@ public class VerifyDialogBox extends DialogBox{
 			setAnimationEnabled(true);
 			VerticalPanel root = new VerticalPanel();
 			HorizontalPanel bts = new HorizontalPanel();
-			root.add(bts);
 			root.add(new PrintSimplePanel(st));
+			root.add(bts);
 			//final DialogBox db =new DialogBox();
 			Window.alert("end create cv");
 			Button close = new Button("Вернуться назад");
@@ -43,6 +43,7 @@ public class VerifyDialogBox extends DialogBox{
 				public void onClick(ClickEvent event) {
 					MyDialogBox db = new MyDialogBox();
 					db.center();
+					Window.alert("accept");
 					
 				}
 			});
@@ -51,6 +52,7 @@ public class VerifyDialogBox extends DialogBox{
 				
 				@Override
 				public void onClick(ClickEvent event) {
+					Window.alert("cancel");
 					hide();
 				}
 			});
@@ -65,6 +67,7 @@ public class VerifyDialogBox extends DialogBox{
 	
 	class MyDialogBox extends DialogBox{
 		public MyDialogBox() {
+			addStyleName("newPreViewDialogBox");
 			setAnimationEnabled(true);
 			setText("Подтеврждение сохранения сформированного резюме");
 			VerticalPanel root = new VerticalPanel();
@@ -102,6 +105,9 @@ public class VerifyDialogBox extends DialogBox{
 					}
 				}
 			});
+			hp.add(ok);
+			hp.add(cancel);
+			add(root);
 		}
 	}
 }

@@ -31,7 +31,7 @@ public class MSSqlStudentDAO implements StudentDAO {
 	private static final String SQL__SELECT_STUDENT = "SELECT * FROM Students WHERE StudentsId = ?";
 	private static final String SQL__SELECT_ALL_STUDENT = "SELECT * FROM Students";
 	private static final String SQL__INSERT_STUDENT = "INSERT INTO Students(Surname, Firstname, Patronymic, "
-			+ "GroupsId, CVsId, Adress) VALUES(?, ?, ?, ?, ?, ?)";
+			+ "GroupsId, CVsId, Address) VALUES(?, ?, ?, ?, ?, ?)";
 	
 	private static final String SQL__DELETE_ANY_TAG = "DELETE Students WHERE StudentsId = ?";
 	
@@ -187,13 +187,12 @@ public class MSSqlStudentDAO implements StudentDAO {
 	
 	private void mapStudentForInsert(Student st, PreparedStatement pstmt) 
 			throws SQLException{
-		pstmt.setLong(1, st.getStudentsId());
-		pstmt.setString(2, st.getSurname());
-		pstmt.setString(3, st.getFirstname());
-		pstmt.setString(4, st.getPatronymic());
-		pstmt.setLong(5, st.getGroup().getGroupId());
-		pstmt.setLong(6, st.getCv().getCvsId());
-		pstmt.setString(7, st.getAddress());
+		pstmt.setString(1, st.getSurname());
+		pstmt.setString(2, st.getFirstname());
+		pstmt.setString(3, st.getPatronymic());
+		pstmt.setLong(4, st.getGroup().getGroupId());
+		pstmt.setLong(5, st.getCv().getCvsId());
+		pstmt.setString(6, st.getAddress());
 	}
 	
 }
