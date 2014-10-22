@@ -611,6 +611,9 @@ public class RegistrationSimplePanel extends SimplePanel {
 		cv.setQualities(qualities.getValueAsString());
 		cv.setEducations(eduPanel.getEducation());
 		cv.setLanguages(lanPanel.getLanguages());
+		Purpose purp = new Purpose();
+		purp.setTitle(goalComboBox.getValue().toString());
+		cv.setPurpose(purp);
 		cv.setSertificates(ssp.getSerts());
 		cv.setWorkExps(expPanel.getExp());
 		newPL = new ArrayList<ProgramLanguage>();
