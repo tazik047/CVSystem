@@ -279,6 +279,8 @@ BEGIN
 CREATE TABLE [dbo].[Languages](
 	[LanguagesId] [bigint] IDENTITY(1,1) NOT NULL,
 	[Title] [nvarchar](max) NOT NULL,
+	[TitleEN] [nvarchar](max) NULL,
+	[TitleUA] [nvarchar](max) NULL,
  CONSTRAINT [PK_Languages] PRIMARY KEY CLUSTERED 
 (
 	[LanguagesId] ASC
@@ -350,6 +352,8 @@ BEGIN
 CREATE TABLE [dbo].[Purposes](
 	[PurposesId] [bigint] IDENTITY(1,1) NOT NULL,
 	[Title] [nvarchar](max) NOT NULL,
+	[TitleEN] [nvarchar](max) NULL,
+	[TitleUA] [nvarchar](max) NULL,
  CONSTRAINT [PK_PurposesId] PRIMARY KEY CLUSTERED 
 (
 	[PurposesId] ASC
@@ -454,15 +458,6 @@ CREATE TABLE [dbo].[WorkExps](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 END
-GO
-SET IDENTITY_INSERT [dbo].[Faculties] ON 
-
-GO
-INSERT [dbo].[Faculties] ([FacultiesId], [Title]) VALUES (4, N'Новый')
-GO
-INSERT [dbo].[Faculties] ([FacultiesId], [Title]) VALUES (5, N'Еще')
-GO
-SET IDENTITY_INSERT [dbo].[Faculties] OFF
 GO
 IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Companies_Users]') AND parent_object_id = OBJECT_ID(N'[dbo].[Companies]'))
 ALTER TABLE [dbo].[Companies]  WITH CHECK ADD  CONSTRAINT [FK_Companies_Users] FOREIGN KEY([UsersId])
