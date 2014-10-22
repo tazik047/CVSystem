@@ -1,6 +1,7 @@
 package ua.nure.pi.server;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.servlet.RequestDispatcher;
@@ -13,13 +14,16 @@ import ua.nure.pi.Path;
 import ua.nure.pi.client.GreetingService;
 import ua.nure.pi.client.RegistrationService;
 import ua.nure.pi.dao.FacultyGroupDAO;
+import ua.nure.pi.dao.PurposeDAO;
 import ua.nure.pi.dao.UserDAO;
 import ua.nure.pi.dao.mssql.MSSqlDAOFactory;
 import ua.nure.pi.dao.mssql.MSSqlUserDAO;
 import ua.nure.pi.entity.Faculty;
+import ua.nure.pi.entity.Purpose;
 import ua.nure.pi.parameter.AppConstants;
 import ua.nure.pi.shared.FieldVerifier;
 
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 /**
@@ -30,7 +34,7 @@ public class RegistrationServiceImpl extends RemoteServiceServlet implements
 	RegistrationService {
 	
 	private FacultyGroupDAO facultyGroupDAO;
-	
+		
 	@Override
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
@@ -59,4 +63,6 @@ public class RegistrationServiceImpl extends RemoteServiceServlet implements
 	  public Collection<Faculty> getFaculties() throws IllegalArgumentException {
 		    return facultyGroupDAO.getFaculties();
 		  }
+	  
+
 }

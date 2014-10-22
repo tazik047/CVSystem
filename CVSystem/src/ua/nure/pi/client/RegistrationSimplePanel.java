@@ -8,6 +8,7 @@ import java.util.LinkedHashMap;
 
 
 
+
 import ua.nure.pi.dao.mssql.MSSqlFacultyGroupDAO;
 import ua.nure.pi.dao.mssql.MSSqlProgramLanguageDAO;
 import ua.nure.pi.entity.CV;
@@ -99,6 +100,9 @@ public class RegistrationSimplePanel extends SimplePanel {
     
     ArrayList<Purpose> purposes;
 
+    public MultiComboBoxItem goalComboBox;
+    
+    public Boolean newPurp;
     
     public TextItem NametextBox;
     
@@ -114,13 +118,24 @@ public class RegistrationSimplePanel extends SimplePanel {
     
     public TextItem PatronymictextBox;
     
-    public SelectItem goalComboBox;
+    public Collection<ProgramLanguage> newPL;
+    
+    
+    public TextItem others;
+    
+    public TextItem qualities;
+    
+    public CV cv;
+    
+    // public SelectItem goalComboBox;
     
     public DynamicForm form;
     
     public TreeNode[] children;
     
     public PickTreeItem pickDepartment;
+    
+    public TextItem Skypetextbox;
     
     WorkExperienceSimplePanel expPanel; 
     EducationSimplePanel eduPanel;            
@@ -251,7 +266,7 @@ public class RegistrationSimplePanel extends SimplePanel {
 	    phoneHint.setValue("Например, +38(050)1458872");
 
                 
-        TextItem Skypetextbox = new TextItem("skype", "Skype");  
+        Skypetextbox = new TextItem("skype", "Skype");  
         Skypetextbox.setWidth(300);  
         Skypetextbox.setHint("Введите skype"); 
         Skypetextbox.setShowHintInField(true);
@@ -260,7 +275,7 @@ public class RegistrationSimplePanel extends SimplePanel {
 	    skypeHint.setShowTitle(false);
 	    skypeHint.setValue("Например, skypelogin");
 
-      
+        /*
         goalComboBox = new SelectItem("Goal");
         goalComboBox.setTitle("Желаемая должность");
         goalComboBox.setHint("-Должности-");
@@ -268,9 +283,20 @@ public class RegistrationSimplePanel extends SimplePanel {
         goalComboBox.setWidth(300);
         goalComboBox.setHeight(22);
         goalComboBox.setRequired(true);
+		*/
+	    
 	    StaticTextItem goalHint = new StaticTextItem();
 	    goalHint.setShowTitle(false);
 	    goalHint.setValue("Например, Junior Java developer");
+
+	    goalComboBox = new MultiComboBoxItem("goal", "Желаемая должность");
+	    goalComboBox.setLayoutStyle(MultiComboBoxLayoutStyle.FLOW);
+        goalComboBox.setHint("-Должность-");
+	    goalComboBox.setWidth(300);
+	    goalComboBox.setAddUnknownValues(true);
+	    goalComboBox.setColSpan(20);
+	    goalComboBox.setRequired(true);
+	    goalComboBox.setMultiple(false);
 
         
         final LinkedHashMap<Long, String> phm = new LinkedHashMap<>();
@@ -373,7 +399,7 @@ public class RegistrationSimplePanel extends SimplePanel {
 	            	
 	            	st = getStudent();
 	            	new VerifyDialogBox(st);
-	            	registrationService.sendStudent(st, new AsyncCallback<Void>() {
+	            	registrationService.sendStudent(st, newPurp, newPL, new AsyncCallback<Void>() {
 	                    public void onFailure(Throwable caught) {
 	                      Window.alert(caught.getLocalizedMessage());
 	                    }
@@ -396,13 +422,13 @@ public class RegistrationSimplePanel extends SimplePanel {
 
 		form.setNumCols(1);
 		
-	    TextAreaItem first = new TextAreaItem("Qualities");
-	    first.setCellStyle("fixTextArea");
-	    first.setTitle("Личные качества");
+	    TextAreaItem qualities = new TextAreaItem("Qualities");
+	    qualities.setCellStyle("fixTextArea");
+	    qualities.setTitle("Личные качества");
 
-	    TextAreaItem second = new TextAreaItem("Others");
-	    second.setCellStyle("fixTextArea");
-	    second.setTitle("Прочее");
+	    TextAreaItem others = new TextAreaItem("Others");
+	    others.setCellStyle("fixTextArea");
+	    others.setTitle("Прочее");
 	    
 	    CheckBox cb = new CheckBox();
 	    cb.setText("Я даю согласие Центру-Карьеры ХНУРЭ на электронную обработку моих персональных данных");
@@ -439,7 +465,7 @@ public class RegistrationSimplePanel extends SimplePanel {
 	    rootPanel.add(form);
 	    rootPanel.setSpacing(15);
 	    
-	    form.setFields(first,second);
+	    form.setFields(qualities,others);
 	    form.setTitleOrientation(TitleOrientation.TOP);
 	    form.markForRedraw();
 	    rootPanel.add(cb);
@@ -453,6 +479,8 @@ public class RegistrationSimplePanel extends SimplePanel {
 	    
 	    rootPanel.setCellHorizontalAlignment(cb, HasHorizontalAlignment.ALIGN_LEFT);
         setWidget(rootPanel);
+        
+
         
 	}  
 	
@@ -541,7 +569,21 @@ public class RegistrationSimplePanel extends SimplePanel {
 		return f;
 	}
 	
+	
+	
 	public Student getStudent(){
+		// 
+		
+		for(Purpose i : purposes){
+			if(i.getTitle()==goalComboBox.getValue().toString())
+				cv.setPurpose(i);
+		}
+		if (cv.getPurpose() == null) {
+			Purpose p = new Purpose();
+			p.setTitle(goalComboBox.getValue().toString());
+		}
+		newPurp = true;
+		
 		st = new Student();
 		st.setFirstname(NametextBox.getValueAsString());
 		st.setSurname(SurnametextBox.getValueAsString());
@@ -557,21 +599,32 @@ public class RegistrationSimplePanel extends SimplePanel {
 					st.setGroup(g);
 					break;
 				}
-		CV cv = new CV();
+		for (Purpose p : purposes)
+			if (p.getTitle() == goalComboBox.getValue().toString())
+			{
+				newPurp = false;
+				break;
+			}
+		st.setSkype(Skypetextbox.getValueAsString());
+		cv = new CV();
+		cv.setOthers(others.getValueAsString());
+		cv.setQualities(qualities.getValueAsString());
 		cv.setEducations(eduPanel.getEducation());
 		cv.setLanguages(lanPanel.getLanguages());
 		cv.setSertificates(ssp.getSerts());
 		cv.setWorkExps(expPanel.getExp());
+		newPL = new ArrayList<ProgramLanguage>();
 
-		for(Purpose i : purposes){
-			if(i.getId()==Integer.parseInt(goalComboBox.getValueAsString()))
-				cv.setPurpose(i);
-		}
 		Collection<ProgramLanguage> resPL = new ArrayList<ProgramLanguage>();
 		for(String pl : languages.getValues()){
 			for(ProgramLanguage p : programLanguages){
 				if(p.getTitle().equals(pl)){
 					resPL.add(new ProgramLanguage(pl, p.getId()));
+				}
+				else {
+					ProgramLanguage pnew = new ProgramLanguage();
+					pnew.setTitle(pl);
+					newPL.add(pnew);
 				}
 			}
 		}
