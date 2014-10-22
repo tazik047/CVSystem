@@ -116,6 +116,12 @@ public class RegistrationSimplePanel extends SimplePanel {
     
     public SelectItem goalComboBox;
     
+    public DynamicForm form;
+    
+    public TreeNode[] children;
+    
+    public PickTreeItem pickDepartment;
+    
     WorkExperienceSimplePanel expPanel; 
     EducationSimplePanel eduPanel;            
     LanguageSimplePanel lanPanel;
@@ -358,8 +364,9 @@ public class RegistrationSimplePanel extends SimplePanel {
 	            public void onClick(ClickEvent event) {
 	            	Boolean b = mainForm.validate();
 	            	//b = ValidateLanPanel(lanPanel) && b;
+	            	b = form.validate() && b;
 	            	b = ValidateSerPanel(ssp) && b;
-
+	            		
 	            	b = ValidateWorkPanel(expPanel) && b;
 	            	b = ValidateEduPanel(eduPanel) && b;
         			if(b){
@@ -453,7 +460,7 @@ public class RegistrationSimplePanel extends SimplePanel {
 	
 	public void FillTree(ArrayList<Faculty> faculties, SimplePanel facultiesPanel)
 	{
-		TreeNode[] children = new TreeNode[faculties.size()];
+		children = new TreeNode[faculties.size()];
 	    
 		for (int i = 0; i < faculties.size(); i++) {
 		    
@@ -464,6 +471,7 @@ public class RegistrationSimplePanel extends SimplePanel {
 		    for (Group g : current.getGroups()) {
 		    	try {
 		    	tn[j] = new TreeNode(g.getTitle());
+		    	tn[j].setAttribute("GroupId", Long.toString(g.getGroupId()));
 		    	}
 		    	catch (Exception e){
 		    		Window.alert(e.getLocalizedMessage());
@@ -481,8 +489,8 @@ public class RegistrationSimplePanel extends SimplePanel {
 	    tree.setModelType(TreeModelType.CHILDREN);
 	    tree.setRoot(rootNode);
 	    
-	    final DynamicForm form = new DynamicForm();
-	    PickTreeItem pickDepartment = new PickTreeItem();
+	    form = new DynamicForm();
+	    pickDepartment = new PickTreeItem();
 	    pickDepartment.setTitle("Группа");
 	    pickDepartment.setName("department");
 	    pickDepartment.setValueField("name");
@@ -542,8 +550,13 @@ public class RegistrationSimplePanel extends SimplePanel {
 		st.setEmail(Emailtextbox.getValueAsString());
 		st.setPhone(PhonetextBox.getValueAsString());
 		st.setAddress(AddresstextBox.getValueAsString());
-		//st.setGroup(group);
-		//st.setSkyp();
+		for (Faculty f : faculties)
+			for (Group g : f.getGroups())
+				if (pickDepartment.getValue().toString().equals(g.getTitle()))
+				{
+					st.setGroup(g);
+					break;
+				}
 		CV cv = new CV();
 		cv.setEducations(eduPanel.getEducation());
 		cv.setLanguages(lanPanel.getLanguages());
