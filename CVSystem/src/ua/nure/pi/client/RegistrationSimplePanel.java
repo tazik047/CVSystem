@@ -137,6 +137,8 @@ public class RegistrationSimplePanel extends SimplePanel {
     
     public TextItem Skypetextbox;
     
+    public CheckBox cb;
+    
     WorkExperienceSimplePanel expPanel; 
     EducationSimplePanel eduPanel;            
     LanguageSimplePanel lanPanel;
@@ -395,6 +397,12 @@ public class RegistrationSimplePanel extends SimplePanel {
 	            		
 	            	b = ValidateWorkPanel(expPanel) && b;
 	            	b = ValidateEduPanel(eduPanel) && b;
+	            	
+	            	if (!cb.getValue())
+	            	{
+	            		Window.alert("Подтвердите согласие на обработку данных");
+	            		b = false;
+	            	}
         			if(b){
 	            	
 	            	st = getStudent();
@@ -430,9 +438,10 @@ public class RegistrationSimplePanel extends SimplePanel {
 	    others.setCellStyle("fixTextArea");
 	    others.setTitle("Прочее");
 	    
-	    CheckBox cb = new CheckBox();
-	    cb.setText("Я даю согласие Центру-Карьеры ХНУРЭ на электронную обработку моих персональных данных");
+	    cb = new CheckBox();
+	    cb.setText("Я даю согласие отделу практики \"Центр-Карьера\" ХНУРЭ на электронную обработку моих персональных данных");
 	    cb.setSize("343px", "44px");
+	    
 	    
 	    
 	    surnameHint.setCellStyle("hint");
