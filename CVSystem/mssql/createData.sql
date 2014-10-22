@@ -107,3 +107,6 @@ INSERT [dbo].[Groups] ([GroupsId], [FacultiesId], [Title]) VALUES (10, 5, N'ЕК
 GO
 SET IDENTITY_INSERT [dbo].[Groups] OFF
 GO
+
+INSERT [dbo].[Pass] ([AccessPass]) VALUES (N',b,bpzrb')
+GO

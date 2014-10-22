@@ -39,6 +39,10 @@ GO
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Companies_Users]') AND parent_object_id = OBJECT_ID(N'[dbo].[Companies]'))
 ALTER TABLE [dbo].[Companies] DROP CONSTRAINT [FK_Companies_Users]
 GO
+/****** Object:  Table [dbo].[Pass]    Script Date: 22.10.2014 13:01:45 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Pass]') AND type in (N'U'))
+DROP TABLE [dbo].[Pass]
+GO
 /****** Object:  Table [dbo].[WorkExps]    Script Date: 19.10.2014 14:14:52 ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[WorkExps]') AND type in (N'U'))
 DROP TABLE [dbo].[WorkExps]
@@ -174,6 +178,18 @@ GO
 ALTER DATABASE [CVSystem] SET TARGET_RECOVERY_TIME = 0 SECONDS 
 GO
 USE [CVSystem]
+GO
+/****** Object:  Table [dbo].[Pass]    Script Date: 22.10.2014 13:01:45 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Pass]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [dbo].[Pass](
+	[AccessPass] [nvarchar](max) NOT NULL
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+END
 GO
 /****** Object:  Table [dbo].[Companies]    Script Date: 19.10.2014 14:14:53 ******/
 SET ANSI_NULLS ON
