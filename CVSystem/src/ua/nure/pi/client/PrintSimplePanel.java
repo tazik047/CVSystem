@@ -47,8 +47,8 @@ public class PrintSimplePanel extends SimplePanel {
     public void onModuleLoad() {  
   
         HLayout layout = new HLayout();
-        layout.setWidth100();  
-        layout.setHeight100();  
+        layout.setWidth(600);  
+        layout.setHeight(800);  
         VLayout vLayout2 = new VLayout();  
         vLayout2.setWidth("35%");  
         vLayout2.setHeight("80");  
