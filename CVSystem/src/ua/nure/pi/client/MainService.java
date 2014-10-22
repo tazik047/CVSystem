@@ -29,5 +29,7 @@ public interface MainService extends RemoteService {
 	Collection<Purpose> getPurposes();
 	
 	String getPage(String url);
+	
+	Boolean checkPass(String pass) throws IllegalArgumentException;
 
 }

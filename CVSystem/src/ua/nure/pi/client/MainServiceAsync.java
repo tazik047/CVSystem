@@ -26,5 +26,7 @@ public interface MainServiceAsync {
 	void getPurposes(AsyncCallback<Collection<Purpose>> asyncCallback);
 	
 	void getPage(String url, AsyncCallback<String> asyncCallback); 
+	
+	void checkPass(String pass, AsyncCallback<Boolean> asyncCallback) throws IllegalArgumentException;
 
 }

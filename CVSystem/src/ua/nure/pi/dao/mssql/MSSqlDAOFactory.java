@@ -96,6 +96,11 @@ public class MSSqlDAOFactory extends DAOFactory {
 	public CVDAO getCVDAO() {
 		return MSSqlCVDAO.getInstancce();
 	}
+
+	@Override
+	public PassDAO getPassDAO() {
+		return MSSqlPassDAO.getInstancce();
+	}
 	
 
 

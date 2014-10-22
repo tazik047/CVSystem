@@ -19,9 +19,11 @@ import javax.servlet.ServletContextListener;
 
 
 
+
 import ua.nure.pi.dao.DAOFactory;
 import ua.nure.pi.dao.FacultyGroupDAO;
 import ua.nure.pi.dao.LanguageDAO;
+import ua.nure.pi.dao.PassDAO;
 import ua.nure.pi.dao.ProgramLanguageDAO;
 import ua.nure.pi.dao.PurposeDAO;
 import ua.nure.pi.dao.StudentDAO;
@@ -50,6 +52,12 @@ public class ContextListener implements ServletContextListener {
 		setProgramLanguageAttribute(servletContext);
 		setPurposeAttribute(servletContext);
 		setStudentAttribute(servletContext);
+		setPassAttribute(servletContext);
+	}
+
+	private void setPassAttribute(ServletContext servletContext) {
+		PassDAO passDAO = DAOFactory.getDAOFactory(DAOFactory.MSSQL).getPassDAO();
+		servletContext.setAttribute(AppConstants.PASS_DAO, passDAO);
 	}
 
 	@Override

@@ -18,6 +18,7 @@ import ua.nure.pi.client.MainService;
 import ua.nure.pi.client.RegistrationService;
 import ua.nure.pi.dao.FacultyGroupDAO;
 import ua.nure.pi.dao.LanguageDAO;
+import ua.nure.pi.dao.PassDAO;
 import ua.nure.pi.dao.ProgramLanguageDAO;
 import ua.nure.pi.dao.PurposeDAO;
 import ua.nure.pi.dao.StudentDAO;
@@ -47,6 +48,7 @@ public class MainServiceImpl extends RemoteServiceServlet implements
 	
 	private PurposeDAO purposeDAO;
 
+	private PassDAO passDAO;
 	
 	@Override
 	protected void doGet(HttpServletRequest request,
@@ -70,25 +72,31 @@ public class MainServiceImpl extends RemoteServiceServlet implements
 		programLanguageDAO = (ProgramLanguageDAO) servletContext.getAttribute(AppConstants.PROGRAM_LANGUAGE_DAO);
 		languageDAO = (LanguageDAO) servletContext.getAttribute(AppConstants.LANGUAGE_DAO);
 		purposeDAO = (PurposeDAO) servletContext.getAttribute(AppConstants.PURPOSE_DAO);
+		passDAO = (PassDAO) servletContext.getAttribute(AppConstants.PASS_DAO);
 		
 		if (facultyGroupDAO == null) {
 			throw new IllegalStateException("FacultyGroupDAO attribute is not exists.");
 		}
 		
 		if (studentDAO == null) {
-			throw new IllegalStateException("FacultyGroupDAO attribute is not exists.");
+			throw new IllegalStateException("StudentDAO attribute is not exists.");
 		}
 		if (programLanguageDAO == null) {
-			throw new IllegalStateException("FacultyGroupDAO attribute is not exists.");
+			throw new IllegalStateException("ProgramLanguageDAO attribute is not exists.");
 		}
 		
 		if (languageDAO == null) {
-			throw new IllegalStateException("FacultyGroupDAO attribute is not exists.");
+			throw new IllegalStateException("LanguageDAO attribute is not exists.");
 		}
 		
 		if (purposeDAO == null) {
-			throw new IllegalStateException("FacultyGroupDAO attribute is not exists.");
+			throw new IllegalStateException("PurposeDAO attribute is not exists.");
 		}
+		
+		if (passDAO == null) {
+			throw new IllegalStateException("PassDAO attribute is not exists.");
+		}
+		
 	}
 	
 	  public Collection<Faculty> getFaculties() throws IllegalArgumentException {
@@ -127,6 +135,11 @@ public class MainServiceImpl extends RemoteServiceServlet implements
 			throw new IllegalArgumentException(e.getLocalizedMessage());
 		}
 		return res;
+	}
+
+	@Override
+	public Boolean checkPass(String pass) throws IllegalArgumentException {
+		return passDAO.checkPass(pass);
 	}
 
 }
