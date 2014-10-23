@@ -267,7 +267,7 @@ public class RegistrationSimplePanel extends SimplePanel {
         PhonetextBox.setRequired(true);
 	    StaticTextItem phoneHint = new StaticTextItem();
 	    phoneHint.setShowTitle(false);
-	    phoneHint.setValue("Например, +38(050)1458872");
+	    phoneHint.setValue("Например, +38(050)145-8872");
 
                 
         Skypetextbox = new TextItem("skype", "Skype");  
@@ -348,9 +348,10 @@ public class RegistrationSimplePanel extends SimplePanel {
         // Знание языков программирования и технологий
                 
         final MultiComboBoxLayoutStyle initialLayoutStyle = MultiComboBoxLayoutStyle.FLOW;  
-        languages = new MultiComboBoxItem("skills", "Проффесиональные навыки");
+        languages = new MultiComboBoxItem("skills", "Профессиональные навыки");
         ComboBoxItem child = new ComboBoxItem();
         child.setHint("-Технологии-");
+        child.setWidth(300);
         languages.setComboBoxProperties(child);
         
         final LinkedHashMap<String, String> lhm = new LinkedHashMap<>();
@@ -367,19 +368,6 @@ public class RegistrationSimplePanel extends SimplePanel {
 		        	lhm.put(prl.getTitle(), prl.getTitle());
 		        }
 		        languages.setValueMap(lhm);
-		        languages.addChangedHandler(new ChangedHandler() {
-					
-					@Override
-					public void onChanged(ChangedEvent event) {
-						if(!lhm.containsKey(languages.getValues()[0])){
-							Collection<String> col = new ArrayList<String>();
-							for(int i = 1; i < languages.getValues().length; i++)
-								col.add(languages.getValues()[i]);
-							languages.clearValue();
-							languages.setValues(col.toArray());
-						}
-					}
-				});
 			}
           });
 
@@ -586,15 +574,7 @@ public class RegistrationSimplePanel extends SimplePanel {
 	public Student getStudent(){
 		// 
 		Window.alert(goalComboBox.getDisplayValue());
-		for(Purpose i : purposes){
-			if(i.getTitle().equals(goalComboBox.getDisplayValue()));
-				cv.setPurpose(i);
-		}
-		if (cv.getPurpose() == null) {
-			Purpose p = new Purpose();
-			p.setTitle(goalComboBox.getDisplayValue().toString());
-			newPurp = true;
-		}
+		
 		
 		
 		
@@ -613,38 +593,43 @@ public class RegistrationSimplePanel extends SimplePanel {
 					st.setGroup(g);
 					break;
 				}
-		for (Purpose p : purposes)
-			if (p.getTitle() == goalComboBox.getValue().toString())
-			{
-				newPurp = false;
-				break;
-			}
 		st.setSkype(Skypetextbox.getValueAsString());
 		cv = new CV();
+		for(Purpose i : purposes){
+			if(i.getTitle().equals(goalComboBox.getDisplayValue()));
+				cv.setPurpose(i);
+		}
+		if (cv.getPurpose() == null) {
+			Purpose p = new Purpose();
+			p.setTitle(goalComboBox.getDisplayValue().toString());
+			newPurp = true;
+			cv.setPurpose(p);
+		}
 		cv.setOthers(others.getValueAsString());
 		cv.setQualities(qualities.getValueAsString());
 		cv.setEducations(eduPanel.getEducation());
 		cv.setLanguages(lanPanel.getLanguages());
-		Purpose purp = new Purpose();
-		purp.setTitle(goalComboBox.getValue().toString());
-		cv.setPurpose(purp);
 		cv.setSertificates(ssp.getSerts());
 		cv.setWorkExps(expPanel.getExp());
 		newPL = new ArrayList<ProgramLanguage>();
 
 		Collection<ProgramLanguage> resPL = new ArrayList<ProgramLanguage>();
 		for(String pl : languages.getValues()){
+			boolean n = true;
 			for(ProgramLanguage p : programLanguages){
 				if(p.getTitle().equals(pl)){
 					resPL.add(new ProgramLanguage(pl, p.getId()));
-				}
-				else {
-					ProgramLanguage pnew = new ProgramLanguage();
-					pnew.setTitle(pl);
-					newPL.add(pnew);
+					n=false;
+					break;
 				}
 			}
+			if(n) {
+				ProgramLanguage pnew = new ProgramLanguage();
+				pnew.setTitle(pl);
+				newPL.add(pnew);
+			}
 		}
+		resPL.addAll(newPL);
 		cv.setProgramLanguages(resPL);
 		st.setCv(cv);
 		return st;

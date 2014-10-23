@@ -71,7 +71,6 @@ public class SertificateElementSimplePanel extends SimplePanel{
         desc = new TextItem("desc", "Описание");  
         desc.setWidth(200);
         desc.setHeight(18);
-        desc.setKeyPressFilter("[0-9.]");
         desc.setTitleOrientation(TitleOrientation.LEFT);
         desc.setRequired(true);
 

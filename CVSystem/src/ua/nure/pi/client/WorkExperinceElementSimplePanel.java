@@ -77,7 +77,6 @@ public class WorkExperinceElementSimplePanel extends SimplePanel{
         TextItem role = new TextItem("role", "Должность");  
         role.setWidth(200);
         role.setHeight(18);
-        role.setKeyPressFilter("[0-9.]");
         role.setRequired(true);
         role.setTitleOrientation(TitleOrientation.LEFT);
 
@@ -85,7 +84,6 @@ public class WorkExperinceElementSimplePanel extends SimplePanel{
         TextItem nameOfInstitute = new TextItem("nameOfInstitute", "Место работы");  
         nameOfInstitute.setWidth(200);
         nameOfInstitute.setHeight(18);
-        nameOfInstitute.setKeyPressFilter("[0-9.]");;
         nameOfInstitute.setRequired(true);
         nameOfInstitute.setTitleOrientation(TitleOrientation.LEFT);
 
