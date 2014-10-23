@@ -64,7 +64,8 @@ public class MainEntryPoint implements EntryPoint {
 		
 		@Override
 		public void onClick(ClickEvent event) {
-			uiManager.setPanel(new MainStaticPanel(mainService));
+			//uiManager.setPanel(new MainStaticPanel(mainService));
+			Window.Location.reload();
 		}
 	});
     
