@@ -15,4 +15,6 @@ public interface PurposeDAO {
 	Boolean deletePurposes(Collection<Purpose> purposes);
 	
 	Boolean updatePurposes(Collection<Purpose> purposes);
+	
+	Boolean insertPurposeAndGenerateKey(Purpose purpose);
 }

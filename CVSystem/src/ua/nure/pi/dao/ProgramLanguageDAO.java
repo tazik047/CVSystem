@@ -12,6 +12,8 @@ public interface ProgramLanguageDAO {
 	
 	Boolean insertProgramLanguage(Collection<ProgramLanguage> programLanguages);
 	
+	Boolean insertProgramLanguageAndGenerateKey(Collection<ProgramLanguage> programLanguage);
+	
 	Boolean deleteProgramLanguage(Collection<ProgramLanguage> programLanguages);
 	
 	Boolean updateProgramLanguages(Collection<ProgramLanguage> programLanguages);

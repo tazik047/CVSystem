@@ -284,4 +284,52 @@ public class MSSqlPurposeDAO implements PurposeDAO {
 	private void mapPurposeForDelete(Purpose at, PreparedStatement pstmt) throws SQLException {
 		pstmt.setLong(1, at.getId());
 	}
+
+	@Override
+	public Boolean insertPurposeAndGenerateKey(Purpose purpose) {
+		Boolean result = false;
+		Connection con = null;
+		try {
+			con = MSSqlDAOFactory.getConnection();
+			result = insertPurposeAndGenerateKey(purpose, con);
+			if(result)
+				con.commit();
+		} catch (SQLException e) {
+			System.err.println("Can not insert purposes. " + e.getMessage());
+		} finally {
+			try {
+				if (con != null)
+					con.close();
+			} catch (SQLException e) {
+				System.err.println("Can not close connection. " + e.getMessage());
+			}
+		}
+		return result;
+	}
+
+	private Boolean insertPurposeAndGenerateKey(Purpose purpose, Connection con) 
+			throws SQLException {
+		boolean result = true;
+		PreparedStatement pstmt = null;
+		try {
+			pstmt = con.prepareStatement(SQL__INSERT_PURPOSE, Statement.RETURN_GENERATED_KEYS);
+			mapPurposeForInsert(purpose, pstmt);
+			result = 1==pstmt.executeUpdate();
+			ResultSet rs = pstmt.getGeneratedKeys();
+			if(rs.next()){
+				purpose.setId(rs.getLong(1));
+			}
+		} catch (SQLException e) {
+			throw e;
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					System.err.println("Can not close statement. " + e.getMessage());
+				}
+			}
+		}
+		return result;
+	}
 }

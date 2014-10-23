@@ -341,4 +341,56 @@ public class MSSqlProgramLanguageDAO implements ProgramLanguageDAO {
 	private void mapProgramLanguageForDelete(ProgramLanguage at, PreparedStatement pstmt) throws SQLException {
 		pstmt.setLong(1, at.getId());
 	}
+
+	@Override
+	public Boolean insertProgramLanguageAndGenerateKey(
+			Collection<ProgramLanguage> programLanguage) {
+		Boolean result = false;
+		Connection con = null;
+		try {
+			con = MSSqlDAOFactory.getConnection();
+			result = insertProgramLanguageAndGenerateKey(programLanguage, con);
+			if(result)
+				con.commit();
+		} catch (SQLException e) {
+			System.err.println("Can not insert programLanguages. " + e.getMessage());
+		} finally {
+			try {
+				if (con != null)
+					con.close();
+			} catch (SQLException e) {
+				System.err.println("Can not close connection. " + e.getMessage());
+			}
+		}
+		return result;
+	}
+
+	private Boolean insertProgramLanguageAndGenerateKey(
+			Collection<ProgramLanguage> programLanguage, Connection con) throws SQLException {
+		boolean result = true;
+		PreparedStatement pstmt = null;
+		try {
+			pstmt = con.prepareStatement(SQL__INSERT_PROGRAM_LANGUAGE,
+					Statement.RETURN_GENERATED_KEYS);
+			for(ProgramLanguage i : programLanguage){
+				mapProgramLanguageForInsert(i, pstmt);
+				result = pstmt.executeUpdate() == 1;
+				ResultSet rs = pstmt.getGeneratedKeys();
+				if(rs.next()){
+					i.setId(rs.getLong(1));
+				}
+			}
+		} catch (SQLException e) {
+			throw e;
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					System.err.println("Can not close statement. " + e.getMessage());
+				}
+			}
+		}
+		return result;
+	}
 }
