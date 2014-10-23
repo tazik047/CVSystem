@@ -9,6 +9,7 @@ import java.util.LinkedHashMap;
 
 
 
+
 import ua.nure.pi.dao.mssql.MSSqlFacultyGroupDAO;
 import ua.nure.pi.dao.mssql.MSSqlProgramLanguageDAO;
 import ua.nure.pi.entity.CV;
@@ -62,6 +63,7 @@ import com.smartgwt.client.widgets.events.DragStartEvent;
 import com.smartgwt.client.widgets.events.DragStartHandler;
 import com.smartgwt.client.widgets.form.DynamicForm;
 import com.smartgwt.client.widgets.form.fields.CheckboxItem;
+import com.smartgwt.client.widgets.form.fields.ComboBoxItem;
 import com.smartgwt.client.widgets.form.fields.DateItem;
 import com.smartgwt.client.widgets.form.fields.FormItem;
 import com.smartgwt.client.widgets.form.fields.IPickTreeItem;
@@ -100,7 +102,7 @@ public class RegistrationSimplePanel extends SimplePanel {
     
     ArrayList<Purpose> purposes;
 
-    public MultiComboBoxItem goalComboBox;
+    public ComboBoxItem goalComboBox;
     
     public Boolean newPurp;
     
@@ -291,14 +293,11 @@ public class RegistrationSimplePanel extends SimplePanel {
 	    goalHint.setShowTitle(false);
 	    goalHint.setValue("Например, Junior Java developer");
 
-	    goalComboBox = new MultiComboBoxItem("goal", "Желаемая должность");
-	    goalComboBox.setLayoutStyle(MultiComboBoxLayoutStyle.FLOW);
+	    goalComboBox = new ComboBoxItem("goal", "Желаемая должность");
         goalComboBox.setHint("-Должность-");
 	    goalComboBox.setWidth(300);
-	    goalComboBox.setAddUnknownValues(true);
-	    goalComboBox.setColSpan(20);
 	    goalComboBox.setRequired(true);
-	    goalComboBox.setMultiple(false);
+	    goalComboBox.setShowHintInField(true);
 
         
         final LinkedHashMap<Long, String> phm = new LinkedHashMap<>();
@@ -306,7 +305,7 @@ public class RegistrationSimplePanel extends SimplePanel {
         
 	    registrationService.getPurposes(new AsyncCallback<Collection<Purpose>>() {
             public void onFailure(Throwable caught) {
-              Window.alert("Не удалось получить языки программирования");
+              Window.alert("Не удалось получить должности");
             }
 
 			@Override
@@ -350,6 +349,9 @@ public class RegistrationSimplePanel extends SimplePanel {
                 
         final MultiComboBoxLayoutStyle initialLayoutStyle = MultiComboBoxLayoutStyle.FLOW;  
         languages = new MultiComboBoxItem("skills", "Проффесиональные навыки");
+        ComboBoxItem child = new ComboBoxItem();
+        child.setHint("-Технологии-");
+        languages.setComboBoxProperties(child);
         
         final LinkedHashMap<String, String> lhm = new LinkedHashMap<>();
         
@@ -385,6 +387,7 @@ public class RegistrationSimplePanel extends SimplePanel {
         languages.setWidth(300);
         languages.setAddUnknownValues(false);
         languages.setColSpan(20);
+        
 	        
 	        Button commit = new Button("Отправить анкету");
 	        commit.addClickHandler(new ClickHandler() {
@@ -582,16 +585,18 @@ public class RegistrationSimplePanel extends SimplePanel {
 	
 	public Student getStudent(){
 		// 
-		
+		Window.alert(goalComboBox.getDisplayValue());
 		for(Purpose i : purposes){
-			if(i.getTitle()==goalComboBox.getValue().toString())
+			if(i.getTitle().equals(goalComboBox.getDisplayValue()));
 				cv.setPurpose(i);
 		}
 		if (cv.getPurpose() == null) {
 			Purpose p = new Purpose();
-			p.setTitle(goalComboBox.getValue().toString());
+			p.setTitle(goalComboBox.getDisplayValue().toString());
+			newPurp = true;
 		}
-		newPurp = true;
+		
+		
 		
 		st = new Student();
 		st.setFirstname(NametextBox.getValueAsString());

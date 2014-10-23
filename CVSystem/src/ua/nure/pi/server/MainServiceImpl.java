@@ -102,10 +102,10 @@ public class MainServiceImpl extends RemoteServiceServlet implements
 	  public Collection<Faculty> getFaculties() throws IllegalArgumentException {
 		    return facultyGroupDAO.getFaculties();
 		  }
-	  
+	  /*
 	  public void sendStudent(Student st) {
 		  studentDAO.insertStudent(st);
-	  }
+	  }*/
 	  
 	  public Collection<ProgramLanguage> getProgramLanguages() throws IllegalArgumentException {
 		    return programLanguageDAO.getProgramLanguages();  
@@ -140,6 +140,18 @@ public class MainServiceImpl extends RemoteServiceServlet implements
 	@Override
 	public Boolean checkPass(String pass) throws IllegalArgumentException {
 		return passDAO.checkPass(pass);
+	}
+
+	@Override
+	public void sendStudent(Student st, Boolean newPurp,
+			Collection<ProgramLanguage> newPL) {
+		if(newPurp){
+			purposeDAO.insertPurposeAndGenerateKey(st.getCv().getPurpose());
+		}
+		if(newPL.size()!=1){
+			programLanguageDAO.insertProgramLanguageAndGenerateKey(newPL);
+		}
+		studentDAO.insertStudent(st);
 	}
 
 }
