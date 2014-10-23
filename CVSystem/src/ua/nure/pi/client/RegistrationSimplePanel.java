@@ -123,9 +123,9 @@ public class RegistrationSimplePanel extends SimplePanel {
     public Collection<ProgramLanguage> newPL;
     
     
-    public TextItem others;
+    public TextAreaItem others;
     
-    public TextItem qualities;
+    public TextAreaItem qualities;
     
     public CV cv;
     
@@ -421,11 +421,11 @@ public class RegistrationSimplePanel extends SimplePanel {
 
 		form.setNumCols(1);
 		
-	    TextAreaItem qualities = new TextAreaItem("Qualities");
+	    qualities = new TextAreaItem("Qualities");
 	    qualities.setCellStyle("fixTextArea");
 	    qualities.setTitle("Личные качества");
 
-	    TextAreaItem others = new TextAreaItem("Others");
+	    others = new TextAreaItem("Others");
 	    others.setCellStyle("fixTextArea");
 	    others.setTitle("Прочее");
 	    
@@ -573,11 +573,7 @@ public class RegistrationSimplePanel extends SimplePanel {
 	
 	public Student getStudent(){
 		// 
-		Window.alert(goalComboBox.getDisplayValue());
-		
-		
-		
-		
+
 		st = new Student();
 		st.setFirstname(NametextBox.getValueAsString());
 		st.setSurname(SurnametextBox.getValueAsString());
