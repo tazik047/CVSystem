@@ -423,9 +423,10 @@ CREATE TABLE [dbo].[Students](
 	[StudentsId] [bigint] IDENTITY(1,1) NOT NULL,
 	[Surname] [nvarchar](max) NOT NULL,
 	[Firstname] [nvarchar](max) NOT NULL,
-	[Patronymic] [nvarchar](max) NOT NULL,
+	[Patronymic] [nvarchar](max) NULL,
 	[GroupsId] [bigint] NOT NULL,
-	[Address] [nvarchar](max) NOT NULL,
+	[Address] [nvarchar](max) NULL,
+	[Skype] [nvarchar] (50) NULL,
 	[CVsId] [bigint] NOT NULL,
  CONSTRAINT [PK_Students] PRIMARY KEY CLUSTERED 
 (

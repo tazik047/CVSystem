@@ -32,6 +32,7 @@ public interface MapperParameters {
 	String STUDENT_GROUPSID = "GroupsId";
 	String STUDENT_CVSID = "CVsId";
 	String STUDENT_ADDRESS = "Address";
+	String STUDENT_SKYPE = "Skype";
 	
 	//Language
 	String LANGUAGE__ID = "LanguagesId";
