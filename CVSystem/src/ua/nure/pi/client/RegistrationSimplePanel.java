@@ -454,6 +454,16 @@ public class RegistrationSimplePanel extends SimplePanel {
 	    		goalComboBox,goalHint, languages);
         mainForm.setTitleOrientation(TitleOrientation.TOP);
 
+        SurnametextBox.setTabIndex(1);
+        NametextBox.setTabIndex(2);
+        PatronymictextBox.setTabIndex(3);
+        dateItem.setTabIndex(4);
+        AddresstextBox.setTabIndex(5);
+        Emailtextbox.setTabIndex(6);
+        PhonetextBox.setTabIndex(7);
+        Skypetextbox.setTabIndex(8);
+        goalComboBox.setTabIndex(9);
+        languages.setTabIndex(10);
 	    
 	    mainForm.markForRedraw();
 	    
