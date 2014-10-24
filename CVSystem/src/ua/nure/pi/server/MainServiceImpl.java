@@ -148,10 +148,12 @@ public class MainServiceImpl extends RemoteServiceServlet implements
 		if(newPurp){
 			purposeDAO.insertPurposeAndGenerateKey(st.getCv().getPurpose());
 		}
-		if(newPL.size()!=1){
+		if(newPL.size()!=0){
 			programLanguageDAO.insertProgramLanguageAndGenerateKey(newPL);
+			st.getCv().getProgramLanguages().addAll(newPL);
 		}
-		studentDAO.insertStudent(st);
+		if(!studentDAO.insertStudent(st))
+			throw new IllegalArgumentException("Произошла ошибка при сохранении резюме");
 	}
 
 }
