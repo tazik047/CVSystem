@@ -18,6 +18,7 @@ import com.smartgwt.client.widgets.layout.HLayout;
 import com.smartgwt.client.widgets.layout.VLayout;  
   
 import com.google.gwt.core.client.EntryPoint;  
+import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.SimplePanel;
   
@@ -66,7 +67,7 @@ public class PrintSimplePanel extends SimplePanel {
         HLayout hLayout = new HLayout();  
         vLayout.addMember(hLayout);  
         hLayout.setHeight(80);
-        BlueBox FIO = new BlueBox("30%", "90", "<h3>" +  student.getSurname() +" "+ student.getFirstname() +" "+ student.getPatronymic()+ "</h3>\n<a>"+ student.getGroup()+"</a>");
+        BlueBox FIO = new BlueBox("30%", "90", "<h3>" +  student.getSurname() +" "+ student.getFirstname() +" "+ student.getPatronymic()+ "</h3>\n<a>"+ student.getGroup().getTitle()+"</a>");
         FIO.setStyleName("FIO");
         hLayout.addMember(FIO);  
         hLayout.addMember(new BlueBox("40%", null, ""));  
@@ -176,8 +177,9 @@ public class PrintSimplePanel extends SimplePanel {
         HLayout hLayout15 = new HLayout();  
         vLayout.addMember(hLayout15);  
         hLayout15.setHeight100();
-        hLayout15.addMember(new BlueBox("40%", null, ""));  
-        hLayout15.addMember(new BlueBox("*", null, student.getDateOfBirth()+"\n"));
+        hLayout15.addMember(new BlueBox("40%", null, ""));
+        DateTimeFormat format = DateTimeFormat.getFormat("dd.MM.yyyy");
+        hLayout15.addMember(new BlueBox("*", null, format.format(student.getDateOfBirth())+"\n"));
         
  
         
