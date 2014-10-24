@@ -222,6 +222,7 @@ CREATE TABLE [dbo].[CVs](
 	[PurposesId] [bigint] NOT NULL,
 	[Qualities] [nvarchar](max) NULL,
 	[Others] [nvarchar](max) NULL,
+	[DateStamp]  AS (getdate()),
  CONSTRAINT [PK_CVs] PRIMARY KEY CLUSTERED 
 (
 	[CVsId] ASC
