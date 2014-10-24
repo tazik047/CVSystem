@@ -237,7 +237,7 @@ GO
 IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Educations]') AND type in (N'U'))
 BEGIN
 CREATE TABLE [dbo].[Educations](
-	[EducationsId] [bigint] NOT NULL,
+	[EducationsId] [bigint] IDENTITY(1,1) NOT NULL,
 	[StartYear] [int] NOT NULL,
 	[EndYear] [int] NOT NULL,
 	[NameOfInstitution] [nvarchar](max) NOT NULL,
