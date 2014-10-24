@@ -7,7 +7,10 @@ import ua.nure.pi.entity.Student;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.dom.client.KeyCodes;
+import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.Event.NativePreviewEvent;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DialogBox;
@@ -22,7 +25,9 @@ public class VerifyDialogBox extends DialogBox{
 	private Student student;
 	MainServiceAsync main;
 	Boolean newPurp;
+	Button accept;
 	Collection<ProgramLanguage> newPL;
+	
 	public VerifyDialogBox(Student st, MainServiceAsync registrationService, Boolean newPurp, Collection<ProgramLanguage> newPL) {
 		try{
 			student = st;
@@ -33,13 +38,14 @@ public class VerifyDialogBox extends DialogBox{
 			setAnimationEnabled(true);
 			VerticalPanel root = new VerticalPanel();
 			HorizontalPanel bts = new HorizontalPanel();
+			bts.setWidth("100%");
 			root.add(new PrintSimplePanel(st));
 			root.add(bts);
 			Button close = new Button("Вернуться назад");
 			setText("Предпросмотр составленного резюме");
 			addStyleName("preViewDialogBox");
 			setWidth("600px");
-			Button accept = new Button("Подтвердить");
+			accept = new Button("Подтвердить");
 			bts.add(accept);
 			bts.add(close);
 			bts.setCellHorizontalAlignment(accept, HasHorizontalAlignment.ALIGN_LEFT);
@@ -70,7 +76,25 @@ public class VerifyDialogBox extends DialogBox{
     	}
 	}
 	
+	@Override
+    protected void onPreviewNativeEvent(NativePreviewEvent event) {
+        super.onPreviewNativeEvent(event);
+        switch (event.getTypeInt()) {
+            case Event.ONKEYDOWN:
+                if (event.getNativeEvent().getKeyCode() == KeyCodes.KEY_ESCAPE) {
+                    hide();
+                }
+                else if(event.getNativeEvent().getKeyCode() == KeyCodes.KEY_ENTER 
+                		&& accept != null){
+                	accept.click();
+                }
+                break;
+        }
+    }
+	
 	class MyDialogBox extends DialogBox{
+		Button ok;
+		
 		public MyDialogBox() {
 			addStyleName("newPreViewDialogBox");
 			setAnimationEnabled(true);
@@ -78,17 +102,18 @@ public class VerifyDialogBox extends DialogBox{
 			VerticalPanel root = new VerticalPanel();
 			root.add(new HTML("После сохранения резюме будет невозможно его дальнейшее редактирование<br/>"
 					+ "Внимательно проверте все заполненые поля!<br/>"
-					+ "Для продолжения позовить преподавтеля, чтобы он ввел ключ подтверждения:"));
+					+ "Для продолжения позовите преподавтеля, чтобы он ввел ключ подтверждения:"));
 			final PasswordTextBox ptb = new PasswordTextBox();
 			root.add(ptb);
 			final Label err = new Label();
 			root.add(err);
+			err.addStyleName("error");
 			HorizontalPanel hp = new HorizontalPanel();
+			hp.setWidth("100%");
 			root.setCellHorizontalAlignment(ptb, HasHorizontalAlignment.ALIGN_CENTER);
 			root.add(hp);
-			Button ok = new Button("Отправить");
-			Button cancel = new Button("Отмена");
-			
+			ok = new Button("Отправить");
+			Button cancel = new Button("Отмена");			
 			cancel.addClickHandler(new ClickHandler() {
 				
 				@Override
@@ -138,7 +163,25 @@ public class VerifyDialogBox extends DialogBox{
 			});
 			hp.add(ok);
 			hp.add(cancel);
+			hp.setCellHorizontalAlignment(cancel, HasHorizontalAlignment.ALIGN_RIGHT);
+			hp.setCellHorizontalAlignment(ok, HasHorizontalAlignment.ALIGN_LEFT);
 			add(root);
 		}
+		
+		@Override
+	    protected void onPreviewNativeEvent(NativePreviewEvent event) {
+	        super.onPreviewNativeEvent(event);
+	        switch (event.getTypeInt()) {
+	            case Event.ONKEYDOWN:
+	                if (event.getNativeEvent().getKeyCode() == KeyCodes.KEY_ESCAPE) {
+	                    hide();
+	                }
+	                else if(event.getNativeEvent().getKeyCode() == KeyCodes.KEY_ENTER 
+	                		&& ok != null){
+	                	ok.click();
+	                }
+	                break;
+	        }
+	    }
 	}
 }

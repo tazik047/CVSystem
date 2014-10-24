@@ -28,9 +28,9 @@ import com.smartgwt.client.widgets.form.fields.TextItem;
 
 public class WorkExperinceElementSimplePanel extends SimplePanel{
 	
-	private TextItem yearText;
-	private TextItem durationText;
-	private ListBox durationType;
+	private TextItem yearField;
+	private TextItem durationField;
+	private SelectItem durTypeField;
 	private TextItem role;
 	private TextItem nameOfInstitute;
 	private VerticalPanel rootPanel;
@@ -51,14 +51,14 @@ public class WorkExperinceElementSimplePanel extends SimplePanel{
 		controls = new DynamicForm();
 		
   
-        TextItem yearField = new TextItem("year", "Год");  
+        yearField = new TextItem("year", "Год");  
         yearField.setWidth(70);
         yearField.setHeight(18);
         yearField.setMask("####");
         yearField.setKeyPressFilter("[0-9.]");
         yearField.setRequired(true);
         
-        TextItem durationField = new TextItem("duration", "Длительность");  
+        durationField = new TextItem("duration", "Длительность");  
         durationField.setWidth(70);
         durationField.setHeight(18);
         durationField.setRequired(true);
@@ -68,20 +68,21 @@ public class WorkExperinceElementSimplePanel extends SimplePanel{
         valueMap.put(typeOfDuration.WEEK, "недель");
         valueMap.put(typeOfDuration.MONTH, "месяцев");
         valueMap.put(typeOfDuration.YEAR, "лет");
-        SelectItem durTypeField = new SelectItem("type","Тип");
+        durTypeField = new SelectItem("type","Тип");
         durTypeField.setValueMap(valueMap);
         durTypeField.setWidth(100);
+        durTypeField.setDefaultValue(typeOfDuration.WEEK);
                 
         
 		  
-        TextItem role = new TextItem("role", "Должность");  
+        role = new TextItem("role", "Должность");  
         role.setWidth(200);
         role.setHeight(18);
         role.setRequired(true);
         role.setTitleOrientation(TitleOrientation.LEFT);
 
         
-        TextItem nameOfInstitute = new TextItem("nameOfInstitute", "Место работы");  
+        nameOfInstitute = new TextItem("nameOfInstitute", "Место работы");  
         nameOfInstitute.setWidth(200);
         nameOfInstitute.setHeight(18);
         nameOfInstitute.setRequired(true);
@@ -102,14 +103,15 @@ public class WorkExperinceElementSimplePanel extends SimplePanel{
 	
 	public WorkExp getWorkExp() throws IllegalArgumentException{
 		WorkExp we = new WorkExp();
-		int year = Integer.parseInt(yearText.getValueAsString());
-		int durat = Integer.parseInt(durationText.getValueAsString());
+		int year = Integer.parseInt(yearField.getValueAsString());
+		int durat = Integer.parseInt(durationField.getValueAsString());
 		
 		we.setStartYear(year);
 		we.setDuration(durat);
-		
+		we.setTypeOfDuration((typeOfDuration)durTypeField.getValue());
+		/*
 		typeOfDuration types = null;
-		switch(durationType.getSelectedIndex()){
+		switch(durTypeField.getSelectedIndex()){
 			case 0:
 				types = typeOfDuration.WEEK;
 				break;
@@ -121,7 +123,7 @@ public class WorkExperinceElementSimplePanel extends SimplePanel{
 				break;
 		}
 		we.setTypeOfDuration(types);
-		
+		*/
 		we.setNameOfInstitution(nameOfInstitute.getValueAsString());
 		we.setRole(role.getValueAsString());
 		return we;

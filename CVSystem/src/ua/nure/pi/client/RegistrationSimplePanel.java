@@ -351,7 +351,7 @@ public class RegistrationSimplePanel extends SimplePanel {
         languages = new MultiComboBoxItem("skills", "Профессиональные навыки");
         ComboBoxItem child = new ComboBoxItem();
         child.setHint("-Технологии-");
-        child.setWidth(300);
+        child.setWidth(290);
         languages.setComboBoxProperties(child);
         
         final LinkedHashMap<String, String> lhm = new LinkedHashMap<>();
@@ -372,7 +372,7 @@ public class RegistrationSimplePanel extends SimplePanel {
           });
 
         languages.setLayoutStyle(initialLayoutStyle);
-        languages.setWidth(300);
+        //languages.setWidth(290);
         languages.setAddUnknownValues(false);
         languages.setColSpan(20);
         
@@ -601,13 +601,18 @@ public class RegistrationSimplePanel extends SimplePanel {
 				}
 		st.setSkype(Skypetextbox.getValueAsString());
 		cv = new CV();
+		newPurp=false;
+		Window.alert(goalComboBox.getValueAsString() + " " + goalComboBox.getDisplayValue());
 		for(Purpose i : purposes){
-			if(i.getTitle().equals(goalComboBox.getDisplayValue()));
+			if(i.getTitle().equals(goalComboBox.getDisplayValue()) &&
+					String.valueOf(i.getId()).equals(goalComboBox.getValueAsString())){
 				cv.setPurpose(i);
+				Window.alert(String.valueOf(i.getId()) + " " + i.getTitle());
+					}
 		}
 		if (cv.getPurpose() == null) {
 			Purpose p = new Purpose();
-			p.setTitle(goalComboBox.getDisplayValue().toString());
+			p.setTitle(goalComboBox.getValueAsString());
 			newPurp = true;
 			cv.setPurpose(p);
 		}
