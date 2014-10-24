@@ -29,7 +29,7 @@ public class MSSqlPassDAO implements PassDAO {
 		return instance;
 	}
 	
-	private static final String SQL__SELECT_PASS = "SELECT count(*) FROM Pass where AcceptPass = ?";
+	private static final String SQL__SELECT_PASS = "SELECT count(*) FROM Pass where AccessPass = ?";
 
 	@Override
 	public Boolean checkPass(String pass) {
@@ -53,10 +53,11 @@ public class MSSqlPassDAO implements PassDAO {
 
 	private Boolean checkPass(String pass, Connection con) throws SQLException {
 		Boolean result = false;
-		Statement stmt = null;
+		PreparedStatement pstmt = null;
 		try {
-			stmt = con.createStatement();
-			ResultSet rs = stmt.executeQuery(SQL__SELECT_PASS);
+			pstmt = con.prepareStatement(SQL__SELECT_PASS);
+			pstmt.setString(1, pass);
+			ResultSet rs = pstmt.executeQuery();
 			if(rs.next()){
 				int c = rs.getInt(1);
 				if(c==1)
@@ -66,9 +67,9 @@ public class MSSqlPassDAO implements PassDAO {
 		} catch (SQLException e) {
 			throw e;
 		} finally {
-			if (stmt != null) {
+			if (pstmt != null) {
 				try {
-					stmt.close();
+					pstmt.close();
 				} catch (SQLException e) {
 					System.err.println("Can not close statement. " + e.getMessage());
 				}

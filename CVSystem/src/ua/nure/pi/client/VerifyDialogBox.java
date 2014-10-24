@@ -1,10 +1,14 @@
 package ua.nure.pi.client;
 
+import java.util.Collection;
+
+import ua.nure.pi.entity.ProgramLanguage;
 import ua.nure.pi.entity.Student;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.HTML;
@@ -16,22 +20,26 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 
 public class VerifyDialogBox extends DialogBox{
 	private Student student;
-	public VerifyDialogBox(Student st) {
+	MainServiceAsync main;
+	Boolean newPurp;
+	Collection<ProgramLanguage> newPL;
+	public VerifyDialogBox(Student st, MainServiceAsync registrationService, Boolean newPurp, Collection<ProgramLanguage> newPL) {
 		try{
 			student = st;
+			main = registrationService;
+			this.newPL=newPL;
+			this.newPurp=newPurp;
 			clear();
 			setAnimationEnabled(true);
 			VerticalPanel root = new VerticalPanel();
 			HorizontalPanel bts = new HorizontalPanel();
 			root.add(new PrintSimplePanel(st));
 			root.add(bts);
-			//final DialogBox db =new DialogBox();
-			Window.alert("end create cv");
 			Button close = new Button("Вернуться назад");
 			setText("Предпросмотр составленного резюме");
 			addStyleName("preViewDialogBox");
 			setWidth("600px");
-			Button accept = new Button("Подтевердить");
+			Button accept = new Button("Подтвердить");
 			bts.add(accept);
 			bts.add(close);
 			bts.setCellHorizontalAlignment(accept, HasHorizontalAlignment.ALIGN_LEFT);
@@ -43,7 +51,6 @@ public class VerifyDialogBox extends DialogBox{
 				public void onClick(ClickEvent event) {
 					MyDialogBox db = new MyDialogBox();
 					db.center();
-					Window.alert("accept");
 					
 				}
 			});
@@ -52,13 +59,11 @@ public class VerifyDialogBox extends DialogBox{
 				
 				@Override
 				public void onClick(ClickEvent event) {
-					Window.alert("cancel");
 					hide();
 				}
 			});
 			add(root);
     		center();
-    		Window.alert("the end");
     	}
     	catch(Exception e){
     		Window.alert(e.getMessage());
@@ -96,12 +101,38 @@ public class VerifyDialogBox extends DialogBox{
 				
 				@Override
 				public void onClick(ClickEvent event) {
-					if(ptb.getValue().equals("asd")){
-						Window.alert("can start send");
-						hide();
-					}
-					else{
-						err.setText("Неправильный ключ подтверждения");
+					if(ptb.getValue()!=null && ptb.getValue()!=""){
+						main.checkPass(ptb.getValue(), new AsyncCallback<Boolean>() {
+							
+							@Override
+							public void onSuccess(Boolean result) {
+								if(result){
+									main.sendStudent(student, newPurp, newPL, new AsyncCallback<Void>() {
+										
+										@Override
+										public void onSuccess(Void result) {
+											Window.alert("Резюме сохранено");
+											
+										}
+										
+										@Override
+										public void onFailure(Throwable caught) {
+											Window.alert(caught.getLocalizedMessage());
+										}
+									});
+								}
+								else{
+									err.setText("Неправильный ключ подтверждения");
+								}
+							}
+							
+							@Override
+							public void onFailure(Throwable caught) {
+								Window.alert(caught.getLocalizedMessage());
+								
+							}
+						});
+
 					}
 				}
 			});

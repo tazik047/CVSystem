@@ -387,3 +387,6 @@ h3.assistive-text {
 .preViewDialogBox{
 	z-index:10000000;
 }
+.newPreViewDialogBox{
+	z-index:10000000;
+}

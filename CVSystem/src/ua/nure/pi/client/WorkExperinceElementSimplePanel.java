@@ -28,11 +28,11 @@ import com.smartgwt.client.widgets.form.fields.TextItem;
 
 public class WorkExperinceElementSimplePanel extends SimplePanel{
 	
-	private TextBox yearText;
-	private TextBox durationText;
+	private TextItem yearText;
+	private TextItem durationText;
 	private ListBox durationType;
-	private TextBox role;
-	private TextBox nameOfInstitute;
+	private TextItem role;
+	private TextItem nameOfInstitute;
 	private VerticalPanel rootPanel;
 	public DynamicForm controls;
 	
@@ -102,8 +102,8 @@ public class WorkExperinceElementSimplePanel extends SimplePanel{
 	
 	public WorkExp getWorkExp() throws IllegalArgumentException{
 		WorkExp we = new WorkExp();
-		int year = Integer.parseInt(yearText.getText());
-		int durat = Integer.parseInt(durationText.getText());
+		int year = Integer.parseInt(yearText.getValueAsString());
+		int durat = Integer.parseInt(durationText.getValueAsString());
 		
 		we.setStartYear(year);
 		we.setDuration(durat);
@@ -122,8 +122,8 @@ public class WorkExperinceElementSimplePanel extends SimplePanel{
 		}
 		we.setTypeOfDuration(types);
 		
-		we.setNameOfInstitution(nameOfInstitute.getText());
-		we.setRole(role.getText());
+		we.setNameOfInstitution(nameOfInstitute.getValueAsString());
+		we.setRole(role.getValueAsString());
 		return we;
 	}
 	

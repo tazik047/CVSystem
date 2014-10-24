@@ -397,8 +397,8 @@ public class RegistrationSimplePanel extends SimplePanel {
         			if(b){
 	            	
 	            	st = getStudent();
-	            	new VerifyDialogBox(st);
-	            	registrationService.sendStudent(st, newPurp, newPL, new AsyncCallback<Void>() {
+	            	new VerifyDialogBox(st,registrationService, newPurp, newPL);
+	            	/*registrationService.sendStudent(st, newPurp, newPL, new AsyncCallback<Void>() {
 	                    public void onFailure(Throwable caught) {
 	                      Window.alert(caught.getLocalizedMessage());
 	                    }
@@ -408,7 +408,7 @@ public class RegistrationSimplePanel extends SimplePanel {
 		                      Window.alert("Анкета сохранена");
 							
 						}
-	                  });	              
+	                  });	*/              
 	            	}
             	}
 
