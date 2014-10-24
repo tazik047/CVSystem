@@ -640,7 +640,6 @@ public class RegistrationSimplePanel extends SimplePanel {
 				newPL.add(pnew);
 			}
 		}
-		resPL.addAll(newPL);
 		cv.setProgramLanguages(resPL);
 		st.setCv(cv);
 		return st;
