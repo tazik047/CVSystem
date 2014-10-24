@@ -39,7 +39,7 @@ public class VerifyDialogBox extends DialogBox{
 			VerticalPanel root = new VerticalPanel();
 			HorizontalPanel bts = new HorizontalPanel();
 			bts.setWidth("100%");
-			root.add(new PrintSimplePanel(st));
+			root.add(new PrintSimplePanel(st, newPL));
 			root.add(bts);
 			Button close = new Button("Вернуться назад");
 			setText("Предпросмотр составленного резюме");

@@ -18,7 +18,7 @@ html>body {
 	min-height: 100%;
 	height: auto !important;
 	height: 100%;
-	box-shadow: 5px 5px 80px grey;
+	box-shadow: 5px 5px 80px #grey ;
 	
 	background-color: #ffffff;
 }
@@ -125,22 +125,24 @@ h3 {
 
 #menu-left li {
     float: left;
+    
+    
     padding: 2px 5px 5px 9px;
 }
 #menu-right li {
     float: right;
     padding: 2px 5px 5px 9px;
+    
 }
 #menu-left li:first-child {
     padding: 2px 5px 5px 0;
 }
 
-#menu-right li:first-child {
-    padding: 2px 5px 5px 0;
-}
+
 #menu-left li a {
     color: rgba(76,114,191,0.72);
     font: 16px PT Serif,sans-serif;
+    
     text-decoration: none;
     text-shadow: 0 0 1px #706E63;
 }

@@ -49,7 +49,7 @@ public class MainEntryPoint implements EntryPoint {
     // Add the nameField and sendButton to the RootPanel
     // Use RootPanel.get() to get the entire body element
     RootPanel rootPanel = RootPanel.get("buttons");
-    rootPanel.setWidth("600px");
+    rootPanel.setWidth("650px");
     rootPanel.setStyleName("#menu-left");
     
     uiManager = new UIManager(RootPanel.get("content"));
@@ -70,35 +70,13 @@ public class MainEntryPoint implements EntryPoint {
 	});
     
     rootPanel.add(btnNewButton);
-    btnNewButton.setSize("70px", "23px");
-    
-    Button btnNewButton_1 = new Button("New button");
-    btnNewButton_1.setStyleName("buttons");
-    btnNewButton_1.setText("Вакансии");
-    btnNewButton_1.addStyleName("buttons");
-    rootPanel.add(btnNewButton_1);
-    btnNewButton_1.setSize("80px", "23px");
-    
-    Button btnNewButton_2 = new Button("New button");
-    btnNewButton_2.setStyleName("buttons");
-    btnNewButton_2.setText("Статистика");
-    btnNewButton_2.addStyleName("buttons");
-    rootPanel.add(btnNewButton_2);
-    btnNewButton_2.setSize("97px", "23px");
-    
-    Button btnNewButton_3 = new Button("New button");
-    btnNewButton_3.setStyleName("buttons");
-    btnNewButton_3.setText("Партнеры");
-    btnNewButton_3.addStyleName("buttons");
-    rootPanel.add(btnNewButton_3);
-    btnNewButton_3.setSize("82px", "23px");
-    
+   // btnNewButton.setSize("70px", "23px");
     Button btnNewButton_4 = new Button("New button");
     btnNewButton_4.setStyleName("buttons");
     btnNewButton_4.setText("О нас");
     btnNewButton_4.addStyleName("buttons");
     rootPanel.add(btnNewButton_4);
-    btnNewButton_4.setSize("70px", "23px");
+   // btnNewButton_4.setSize("70px", "23px");
     
     btnNewButton_4.addClickHandler(new ClickHandler() {
 		
@@ -108,6 +86,7 @@ public class MainEntryPoint implements EntryPoint {
 		}
 	});
         
+   
     Button butAddCV = new Button("New button");
     butAddCV.setText("Добавить резюме");
     butAddCV.addStyleName("buttons");
@@ -120,6 +99,31 @@ public class MainEntryPoint implements EntryPoint {
 			uiManager.setPanel(new RegistrationSimplePanel(mainService));
 		}
 	});
+
+    Button btnNewButton_3 = new Button("New button");
+    btnNewButton_3.setStyleName("buttons");
+    btnNewButton_3.setText("Партнеры");
+    btnNewButton_3.addStyleName("buttons");
+    rootPanel.add(btnNewButton_3);
+    
+    
+    Button btnNewButton_1 = new Button("New button");
+    btnNewButton_1.setStyleName("buttons");
+    btnNewButton_1.setText("Списки резюме");
+    btnNewButton_1.addStyleName("buttons");
+    rootPanel.add(btnNewButton_1);
+  //  btnNewButton_1.setSize("80px", "23px");
+    
+   // btnNewButton_2.setSize("97px", "23px");
+    
+   // btnNewButton_3.setSize("82px", "23px");
+    
+
+    Button btnNewButton_2 = new Button("New button");
+    btnNewButton_2.setStyleName("buttons");
+    btnNewButton_2.setText("Статистика");
+    btnNewButton_2.addStyleName("buttons");
+    rootPanel.add(btnNewButton_2);
     
     // Create the popup dialog box
     final DialogBox dialogBox = new DialogBox();
