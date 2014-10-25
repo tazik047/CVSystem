@@ -133,7 +133,7 @@ public class MSSqlCVDAO implements CVDAO {
 				result.setPurpose(MSSqlPurposeDAO.getInstancce()
 						.findPurposes(rs.getLong(MapperParameters.CV__PURPOSES_ID), con));
 				result.setQualities(rs.getString(MapperParameters.CV__QUALITIES));
-				result.setOthers(MapperParameters.CV__OTHERS);
+				result.setOthers(rs.getString(MapperParameters.CV__OTHERS));
 			}
 		} catch (SQLException e) {
 			throw e;
