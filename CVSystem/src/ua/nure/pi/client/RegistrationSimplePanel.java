@@ -602,12 +602,10 @@ public class RegistrationSimplePanel extends SimplePanel {
 		st.setSkype(Skypetextbox.getValueAsString());
 		cv = new CV();
 		newPurp=false;
-		Window.alert(goalComboBox.getValueAsString() + " " + goalComboBox.getDisplayValue());
 		for(Purpose i : purposes){
 			if(i.getTitle().equals(goalComboBox.getDisplayValue()) &&
 					String.valueOf(i.getId()).equals(goalComboBox.getValueAsString())){
 				cv.setPurpose(i);
-				Window.alert(String.valueOf(i.getId()) + " " + i.getTitle());
 					}
 		}
 		if (cv.getPurpose() == null) {

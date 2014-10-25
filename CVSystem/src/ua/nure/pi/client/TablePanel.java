@@ -37,7 +37,7 @@ public class TablePanel extends SimplePanel{
 		  	VerticalPanel root = new VerticalPanel();
 		  	final SimplePanel cv = new SimplePanel();
 	        final ListGrid CVGrid = new ListGrid(){
-	        	protected Canvas getRollOverCanvas(final ListGridRecord record, Integer colNum) {  
+	        	protected Canvas getRollOverCanvas(final ListGridRecord record, final Integer colNum) {  
 	        		String fieldName = this.getFieldName(colNum);
 	        		if (fieldName.equals("show")) {  
 	                    IButton button = new IButton();  

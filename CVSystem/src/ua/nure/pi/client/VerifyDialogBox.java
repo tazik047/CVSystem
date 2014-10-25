@@ -98,11 +98,11 @@ public class VerifyDialogBox extends DialogBox{
 		public MyDialogBox() {
 			addStyleName("newPreViewDialogBox");
 			setAnimationEnabled(true);
-			setText("Подтеврждение сохранения сформированного резюме");
+			setText("Подтверждение сохранения сформированного резюме");
 			VerticalPanel root = new VerticalPanel();
 			root.add(new HTML("После сохранения резюме будет невозможно его дальнейшее редактирование<br/>"
-					+ "Внимательно проверте все заполненые поля!<br/>"
-					+ "Для продолжения позовите преподавтеля, чтобы он ввел ключ подтверждения:"));
+					+ "Внимательно проверте все заполненные поля!<br/>"
+					+ "Для продолжения позовите преподавателя, чтобы он ввел ключ подтверждения:"));
 			final PasswordTextBox ptb = new PasswordTextBox();
 			root.add(ptb);
 			final Label err = new Label();

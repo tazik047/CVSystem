@@ -99,6 +99,7 @@ public class PrintSimplePanel extends SimplePanel {
         HLayout hLayout16 = new HLayout();  
         vLayout.addMember(hLayout16);  
         hLayout16.setHeight100();
+        hLayout16.addMember(new BlueBox("*", null, ""));  
         hLayout16.addMember(new BlueBox("40%", null, purpose));  
         if(workExps != null){
         vLayout.addMember(new BlueBox(null, "30", "Опыт работы", true));
@@ -118,18 +119,18 @@ public class PrintSimplePanel extends SimplePanel {
 	        	case "YEAR": duration = "лет";
         		break;
 	    	}
-	        if (I.getDuration()==1){
+	        if (I.getDuration()%10==1&&I.getDuration()!=11){
 	        	switch(duration)
 		    	{
 		        	case "недель": duration = "недели";
 		        		break;
-		        	case "месяцев": duration = "месяц";
+		        	case "месяцев": duration = "месяца";
 	        			break;
-		        	case "лет": duration = "год";
+		        	case "лет": duration = "года";
 	        			break;
 		    	}
 	        }
-	        hLayout2.addMember(new BlueBox("20%", null, "С " + I.getStartYear() + "\nНа протяжении" + I.getDuration() + " "+ duration));
+	        hLayout2.addMember(new BlueBox("20%", null, "С " + I.getStartYear() + "<br>На протяжении " + I.getDuration() + " "+ duration));
 	        hLayout2.addMember(new BlueBox("*", null, I.getRole() + ":" + I.getNameOfInstitution()));
 	        }
         }
@@ -152,7 +153,6 @@ public class PrintSimplePanel extends SimplePanel {
         hLayout4.addMember(new BlueBox("20%", null, ""));  
         hLayout4.addMember(new BlueBox("20%", null, "Языки программирования"));
         String lan = "";
-        Window.alert("Start set pl");
         if(programLanguage!=null)
 	        for(ProgramLanguage I : programLanguage)
 	        	lan = lan + " " + I.getTitle();
@@ -161,7 +161,6 @@ public class PrintSimplePanel extends SimplePanel {
         		for(ProgramLanguage I : newLanguage)
         			lan = lan + " " + I.getTitle();
         	}
-        Window.alert("End set pl");
         hLayout4.addMember(new BlueBox("*", null, lan));
         /*
         HLayout hLayout5 = new HLayout();  

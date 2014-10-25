@@ -463,7 +463,7 @@ GO
 IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[WorkExps]') AND type in (N'U'))
 BEGIN
 CREATE TABLE [dbo].[WorkExps](
-	[WorkExpsId] [bigint] NOT NULL,
+	[WorkExpsId] [bigint] IDENTITY(1,1) NOT NULL,
 	[StartDate] [int] NOT NULL,
 	[Duration] [int] NOT NULL,
 	[TypeDuration] [int] NOT NULL,
