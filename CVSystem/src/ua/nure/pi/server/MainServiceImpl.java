@@ -121,7 +121,7 @@ public class MainServiceImpl extends RemoteServiceServlet implements
 
 	@Override
 	public String getPage(String url) {
-		url = getServletContext().getRealPath("WEB-INF") + url;
+		url = getServletContext().getRealPath("") + url;
 		String res = "";
 		try{
 			BufferedReader br = new BufferedReader(new FileReader(new File(url)));

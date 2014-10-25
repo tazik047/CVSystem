@@ -72,7 +72,7 @@ public class PrintSimplePanel extends SimplePanel {
     	
         HLayout layout = new HLayout();
         layout.setWidth(600);  
-        layout.setHeight(800);  
+        layout.setHeight100();  
         VLayout vLayout2 = new VLayout();  
         vLayout2.setWidth("35%");  
         vLayout2.setHeight("80");  
@@ -91,7 +91,7 @@ public class PrintSimplePanel extends SimplePanel {
         vLayout.addMember(hLayout);  
         hLayout.setHeight(80);
         String patr= student.getPatronymic()==null?"":student.getPatronymic();
-        BlueBox FIO = new BlueBox("30%", "90", "<h3 align=\"center\">" +  student.getSurname() +" " + student.getFirstname() +" "+ patr + "</h3><br>"+ student.getGroup().getTitle());
+        BlueBox FIO = new BlueBox("30%", "90", "<h3 align=\"center\">" +  student.getSurname() +" " + student.getFirstname() +" "+ patr + "</h3>");
         FIO.setStyleName("FIO");
         hLayout.addMember(FIO);  
         hLayout.addMember(new BlueBox("40%", null, ""));  
@@ -162,10 +162,12 @@ public class PrintSimplePanel extends SimplePanel {
 	        for(ProgramLanguage I : programLanguage)
 	        	lan = lan + " " + I.getTitle();
         	if (newLanguage.size()!=0){
-        		lan += "/nТехнологии, отсутсвующие в БД";
+        		lan += "<p class=\"green\">Технологии, отсутсвующие в БД";
         		for(ProgramLanguage I : newLanguage)
         			lan = lan + " " + I.getTitle();
+        		lan+="</p>";
         	}
+        	
         hLayout4.addMember(new BlueBox("*", null, lan));
         /*
         HLayout hLayout5 = new HLayout();  

@@ -7,6 +7,7 @@ import java.util.Collection;
 
 
 
+
 import ua.nure.pi.entity.Faculty;
 import ua.nure.pi.entity.Language;
 import ua.nure.pi.entity.ProgramLanguage;
@@ -26,7 +27,7 @@ public interface MainService extends RemoteService {
 	
 	Collection<ProgramLanguage> getProgramLanguages();
 	
-	void sendStudent(Student st, Boolean newPurp, Collection<ProgramLanguage> newPL);
+	void sendStudent(Student st, Boolean newPurp, Collection<ProgramLanguage> newPL) throws IllegalArgumentException;
 	
 	Collection<Language> getLanguages();
 

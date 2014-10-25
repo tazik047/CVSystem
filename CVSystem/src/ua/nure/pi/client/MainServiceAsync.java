@@ -16,7 +16,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 public interface MainServiceAsync {
 	void getFaculties(AsyncCallback<Collection<Faculty>> callback);
 	
-	void sendStudent(Student st, Boolean newPurp, Collection<ProgramLanguage> newPL, AsyncCallback<Void> asyncCallback);
+	void sendStudent(Student st, Boolean newPurp, Collection<ProgramLanguage> newPL, AsyncCallback<Void> asyncCallback) throws IllegalArgumentException;
 
 	void getProgramLanguages(
 			AsyncCallback<Collection<ProgramLanguage>> asyncCallback);

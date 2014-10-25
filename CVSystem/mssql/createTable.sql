@@ -426,6 +426,8 @@ CREATE TABLE [dbo].[Students](
 	[Firstname] [nvarchar](max) NOT NULL,
 	[Patronymic] [nvarchar](max) NULL,
 	[Email] [nvarchar](max) NOT NULL,
+	[Phone] [nvarchar](max) NOT NULL,
+	[Birthday] [date] NOT NULL,
 	[GroupsId] [bigint] NOT NULL,
 	[Address] [nvarchar](max) NULL,
 	[Skype] [nvarchar] (50) NULL,
