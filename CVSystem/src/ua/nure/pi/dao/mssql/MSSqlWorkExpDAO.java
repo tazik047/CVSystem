@@ -29,8 +29,8 @@ public class MSSqlWorkExpDAO implements WorkExpDAO {
 	}
 	
 	
-	private static final String SQL__SELECT_WORKEXP = "SELECT * FROM WorkExp WHERE CVsId = ?";
-	private static final String SQL__INSERT_WORKEXP = "INSERT INTO WorkExp(StartDate, "+
+	private static final String SQL__SELECT_WORKEXP = "SELECT * FROM WorkExps WHERE CVsId = ?";
+	private static final String SQL__INSERT_WORKEXP = "INSERT INTO WorkExps(StartDate, "+
 	"Duration, TypeDuration, NameOfInstitution,	Role, CVsId) VALUES(?,?,?,?,?,?)";
 
 

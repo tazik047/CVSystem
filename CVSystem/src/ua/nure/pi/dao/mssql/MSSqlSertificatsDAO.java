@@ -27,8 +27,8 @@ public class MSSqlSertificatsDAO implements SertificatsDAO {
 		return instance;
 	}
 	
-	private static final String SQL__SELECT_SERTIFICATE = "SELECT * FROM Sertificate WHERE CVsId = ?";
-	private static final String SQL__INSERT_SERTIFICATE = "INSERT INTO Sertificate(Name, Year, "
+	private static final String SQL__SELECT_SERTIFICATE = "SELECT * FROM Sertificats WHERE CVsId = ?";
+	private static final String SQL__INSERT_SERTIFICATE = "INSERT INTO Sertificats(Name, Year, "
 			+ "CVsId) VALUES(?,?,?)";
 
 
@@ -61,7 +61,7 @@ public class MSSqlSertificatsDAO implements SertificatsDAO {
 		try {
 			for (Sertificate ed : eds) {
 				pstmt = con.prepareStatement(SQL__INSERT_SERTIFICATE);
-				mapSertificateForInsert(ed, pstmt);
+				mapSertificateForInsert(cVsId, ed, pstmt);
 				if(pstmt.executeUpdate()!=1)
 					return false;
 			}
@@ -137,11 +137,11 @@ public class MSSqlSertificatsDAO implements SertificatsDAO {
 		return ed;
 	}
 	
-	private void mapSertificateForInsert(Sertificate ed, PreparedStatement pstmt) 
+	private void mapSertificateForInsert(long cVsId, Sertificate ed, PreparedStatement pstmt) 
 			throws SQLException{
 		pstmt.setString(1, ed.getSertificateName());
 		pstmt.setInt(2, ed.getSertificateYear());
-		pstmt.setLong(3, ed.getCVsId());
+		pstmt.setLong(3, cVsId);
 		
 	}
 }

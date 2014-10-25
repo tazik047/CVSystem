@@ -64,7 +64,7 @@ public class AdminPanelEntryPoint implements EntryPoint {
         final RootPanel root = RootPanel.get("content");
         VerticalPanel vp = new VerticalPanel();
         root.add(vp);
-        PasswordTextBox ptb = new PasswordTextBox();
+        final PasswordTextBox ptb = new PasswordTextBox();
         Button bt = new Button("Получить");
         final SimplePanel cv = new SimplePanel();
         vp.add(ptb);
@@ -74,7 +74,7 @@ public class AdminPanelEntryPoint implements EntryPoint {
 			
 			@Override
 			public void onClick(com.google.gwt.event.dom.client.ClickEvent event) {
-				adminPanelService.getStudents("", new AsyncCallback<Collection<Student>>() {
+				adminPanelService.getStudents(ptb.getText(), new AsyncCallback<Collection<Student>>() {
 					
 					@Override
 					public void onSuccess(Collection<Student> result) {
