@@ -18,8 +18,7 @@ html>body {
 	min-height: 100%;
 	height: auto !important;
 	height: 100%;
-	box-shadow: 5px 5px 80px #grey ;
-	
+	box-shadow: 5px 5px 80px grey ;
 	background-color: #ffffff;
 }
 ul, li {
@@ -194,11 +193,11 @@ h3.assistive-text {
 /* Middle
 -----------------------------------------------------------------------------*/
 .middle {
-	border-right: 2px solid rgb(241, 241, 241);
-	border-left: 2px solid rgb(241, 241, 241);
 	margin-top: 5 px;
 	padding: 0 0 100px;
 	position: relative;
+	margin-left: 20px;
+	margin-right: 20px;
 }
 .middle:after {
 	display: table;

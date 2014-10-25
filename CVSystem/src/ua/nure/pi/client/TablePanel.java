@@ -37,7 +37,8 @@ public class TablePanel extends SimplePanel{
 		  	VerticalPanel root = new VerticalPanel();
 		  	final SimplePanel cv = new SimplePanel();
 	        final ListGrid CVGrid = new ListGrid(){
-	        	protected Canvas getRollOverCanvas(final ListGridRecord record, final Integer colNum) {  
+	        	@Override  
+	            protected Canvas createRecordComponent(final ListGridRecord record, final Integer colNum) {  
 	        		String fieldName = this.getFieldName(colNum);
 	        		if (fieldName.equals("show")) {  
 	                    IButton button = new IButton();  
@@ -74,17 +75,21 @@ public class TablePanel extends SimplePanel{
 	        ListGridField show = new ListGridField("show", "Просмотреть");  
 	        show.setAlign(Alignment.CENTER);  
 	        CVGrid.setFields(idField, SurnameField, show);  
-	        CVGrid.setCanResizeFields(true);  
+	        CVGrid.setCanResizeFields(true);
+	        ListGridRecord[] recs = new ListGridRecord[students.size()];
+	        int ind = 0;
 	        for(Student i : students){
 		    ListGridRecord rec = new ListGridRecord(); 
 	        rec.setAttribute("idField", i.getStudentsId());
 	        rec.setAttribute("surname", i.getSurname()+" " + i.getFirstname()+" "+i.getPatronymic());
 	        rec.setAttribute("show", "Просмотреть");
+	        recs[ind++]=rec;
 	        }
+	        CVGrid.setRecords(recs);
 	        CVGrid.markForRedraw(); 
 	        root.add(CVGrid);
 	        root.add(cv);
-	       
+	       add(root);
 	        
 	 }
 	 

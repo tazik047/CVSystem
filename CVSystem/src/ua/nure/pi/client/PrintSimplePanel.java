@@ -83,14 +83,15 @@ public class PrintSimplePanel extends SimplePanel {
         vLayout.setHeight("90");
         //vLayout2.addMember(new BlueBox((Integer) null, "50%", "")); по идее так будет работать 
         vLayout2.addMember(new BlueBox((Integer) null, "25%", student.getAddress()));
-        vLayout2.addMember(new BlueBox((Integer) null, "25%", student.getSkype()));  
+        vLayout2.addMember(new BlueBox((Integer) null, "25%", student.getSkype()==null?"":student.getSkype()));  
         vLayout2.addMember(new BlueBox((Integer) null, "25%", student.getPhone()));  
         vLayout2.addMember(new BlueBox((Integer) null, "25%", student.getEmail()));
         
         HLayout hLayout = new HLayout();  
         vLayout.addMember(hLayout);  
         hLayout.setHeight(80);
-        BlueBox FIO = new BlueBox("30%", "90", "<h3>" +  student.getSurname() +" "+ student.getFirstname() +" "+ student.getPatronymic()+ "</h3>\n<a>"+ student.getGroup().getTitle()+"</a>");
+        String patr= student.getPatronymic()==null?"":student.getPatronymic();
+        BlueBox FIO = new BlueBox("30%", "90", "<h3 align=\"center\">" +  student.getSurname() +" " + student.getFirstname() +" "+ patr + "</h3><br>"+ student.getGroup().getTitle());
         FIO.setStyleName("FIO");
         hLayout.addMember(FIO);  
         hLayout.addMember(new BlueBox("40%", null, ""));  
@@ -99,9 +100,10 @@ public class PrintSimplePanel extends SimplePanel {
         HLayout hLayout16 = new HLayout();  
         vLayout.addMember(hLayout16);  
         hLayout16.setHeight100();
-        hLayout16.addMember(new BlueBox("*", null, ""));  
-        hLayout16.addMember(new BlueBox("40%", null, purpose));  
-        if(workExps != null){
+        hLayout16.addMember(new BlueBox("40%", null, ""));  
+        hLayout16.addMember(new BlueBox("10px", null, "")); 
+        hLayout16.addMember(new BlueBox("*", null, purpose));  
+        if(workExps != null || workExps.size()!=0){
         vLayout.addMember(new BlueBox(null, "30", "Опыт работы", true));
         
 	        for(WorkExp I : workExps){
@@ -131,10 +133,11 @@ public class PrintSimplePanel extends SimplePanel {
 		    	}
 	        }
 	        hLayout2.addMember(new BlueBox("20%", null, "С " + I.getStartYear() + "<br>На протяжении " + I.getDuration() + " "+ duration));
+	        hLayout2.addMember(new BlueBox("10px", null, "")); 
 	        hLayout2.addMember(new BlueBox("*", null, I.getRole() + ":" + I.getNameOfInstitution()));
 	        }
         }
-        if(educations!=null){
+        if(educations!=null || educations.size()!=0){
         vLayout.addMember(new BlueBox((String) null, "30", "Образование", true));  
         
 	        for(Education I : educations){
@@ -143,6 +146,7 @@ public class PrintSimplePanel extends SimplePanel {
 		        hLayout3.setHeight100();
 		        hLayout3.addMember(new BlueBox("20%", null, ""));  
 		        hLayout3.addMember(new BlueBox("20%", null, I.getStartYear() + " - " + I.getEndYear()));
+		        hLayout3.addMember(new BlueBox("10px", null, "")); 
 		        hLayout3.addMember(new BlueBox("*", null, I.getSpecialty() + ": " + I.getNameOfInstitution()));
 		        }
         }
@@ -151,7 +155,8 @@ public class PrintSimplePanel extends SimplePanel {
         vLayout.addMember(hLayout4);  
         hLayout4.setHeight100();
         hLayout4.addMember(new BlueBox("20%", null, ""));  
-        hLayout4.addMember(new BlueBox("20%", null, "Языки программирования"));
+        hLayout4.addMember(new BlueBox("20%", null, "Технологии"));
+        hLayout4.addMember(new BlueBox("10px", null, "")); 
         String lan = "";
         if(programLanguage!=null)
 	        for(ProgramLanguage I : programLanguage)
@@ -195,7 +200,7 @@ public class PrintSimplePanel extends SimplePanel {
         hLayout9.addMember(new BlueBox("20%", null, "Графические программы"));
         hLayout9.addMember(new BlueBox("*", null, "Photoshop"));
         */
-        if(sertificates!=null){
+        if(sertificates!=null || sertificates.size()!=0){
         vLayout.addMember(new BlueBox((String) null, "30", "Сертификаты", true));
         
 	        for(Sertificate I : sertificates){
@@ -205,6 +210,8 @@ public class PrintSimplePanel extends SimplePanel {
 	        
 	        hLayout10.addMember(new BlueBox("20%", null, ""));
 	        hLayout10.addMember(new BlueBox("20%", null, ""+I.getSertificateYear()));
+	        hLayout10.addMember(new BlueBox("10px", null, "")); 
+	        
 	        hLayout10.addMember(new BlueBox("*", null, I.getSertificateName()));
 	        }
         }
@@ -216,17 +223,19 @@ public class PrintSimplePanel extends SimplePanel {
         	
         	switch(I.getLevel())
 	    	{
-	        	case 1: level = "начальный";
+	        	case 0: level = "начальный";
 	        		break;
-	        	case 2: level = "средний";
+	        	case 1: level = "средний";
         			break;
-	        	case 3: level = "продвинутый";
+	        	case 2: level = "продвинутый";
         			break;
 	    	}
         HLayout hLayout11 = new HLayout();  
         vLayout.addMember(hLayout11);  
         hLayout11.setHeight100();
         hLayout11.addMember(new BlueBox("40%", null, ""));  
+        hLayout11.addMember(new BlueBox("10px", null, "")); 
+        
         hLayout11.addMember(new BlueBox("*", null, I.getTitle() + " - " + level));
         
         }
@@ -235,15 +244,19 @@ public class PrintSimplePanel extends SimplePanel {
         HLayout hLayout14 = new HLayout();  
         vLayout.addMember(hLayout14);  
         hLayout14.setHeight100();
-        hLayout14.addMember(new BlueBox("40%", null, qualities));  
-        hLayout14.addMember(new BlueBox("*", null,""));
+        hLayout14.addMember(new BlueBox("40%", null, "")); 
+        hLayout14.addMember(new BlueBox("10px", null, "")); 
+        
+        hLayout14.addMember(new BlueBox("*", null,qualities));
         vLayout.addMember(new BlueBox((String) null, "30", "Прочее", true));
         HLayout hLayout15 = new HLayout();  
         vLayout.addMember(hLayout15);  
         hLayout15.setHeight100();
-        hLayout15.addMember(new BlueBox("40%", null, others));
+        hLayout15.addMember(new BlueBox("40%", null, ""));
+        hLayout15.addMember(new BlueBox("10px", null, "")); 
+        
         DateTimeFormat format = DateTimeFormat.getFormat("dd.MM.yyyy");
-        hLayout15.addMember(new BlueBox("*", null, format.format(student.getDateOfBirth())+"\n"));
+        hLayout15.addMember(new BlueBox("*", null, "Дата рождения " + format.format(student.getDateOfBirth())+"<br>"+ others));
         
  
         

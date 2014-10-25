@@ -50,12 +50,12 @@ public class VerifyDialogBox extends DialogBox{
 			bts.add(close);
 			bts.setCellHorizontalAlignment(accept, HasHorizontalAlignment.ALIGN_LEFT);
 			bts.setCellHorizontalAlignment(close, HasHorizontalAlignment.ALIGN_RIGHT);
-			
+			final DialogBox parent = this;
 			accept.addClickHandler(new ClickHandler() {
 				
 				@Override
 				public void onClick(ClickEvent event) {
-					MyDialogBox db = new MyDialogBox();
+					MyDialogBox db = new MyDialogBox(parent);
 					db.center();
 					
 				}
@@ -95,7 +95,7 @@ public class VerifyDialogBox extends DialogBox{
 	class MyDialogBox extends DialogBox{
 		Button ok;
 		
-		public MyDialogBox() {
+		public MyDialogBox(final DialogBox parent) {
 			addStyleName("newPreViewDialogBox");
 			setAnimationEnabled(true);
 			setText("Подтверждение сохранения сформированного резюме");
@@ -137,6 +137,9 @@ public class VerifyDialogBox extends DialogBox{
 										@Override
 										public void onSuccess(Void result) {
 											Window.alert("Резюме сохранено");
+											ptb.setText("");
+											hide();
+											parent.hide();
 											
 										}
 										

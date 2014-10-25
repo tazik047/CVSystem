@@ -25,6 +25,8 @@ public interface FacultyGroupDAO {
 	
 	Collection<Group> getGroups(Faculty faculty);
 	
+	Group getGroup(long id);
+	
 	Boolean insertGroups(long FacultiesId, Collection<Group> groups);
 	
 	Boolean insertGroup(Group group);

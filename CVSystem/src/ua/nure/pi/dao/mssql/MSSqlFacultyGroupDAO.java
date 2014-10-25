@@ -42,6 +42,7 @@ public class MSSqlFacultyGroupDAO implements FacultyGroupDAO {
 	private static final String SQL__UPDATE_GROUPS = "UPDATE Groups SET Title=?, FacultiesId=? WHERE GroupsId=?";
 	private static final String SQL__DELETE_GROUPS = "DELETE FROM Groups WHERE GroupsId = ?";
 	private static final String SQL__GROUPS_IS_EMPTY = "SELECT count(*) FROM Students where GroupsId=?";
+	private static final String SQL__SELECT_GROUP = "SELECT * FROM Groups WHERE GroupsId = ?";
 
 	@Override
 	public Collection<Faculty> getFaculties() {
@@ -541,5 +542,58 @@ public class MSSqlFacultyGroupDAO implements FacultyGroupDAO {
 		Collection<Group> groups = new ArrayList<Group>();
 		groups.add(group);
 		return deleteGroups(groups);
+	}
+
+	@Override
+	public Group getGroup(long id) {
+		Group result = null;
+		Connection con = null;
+		try {
+			con = MSSqlDAOFactory.getConnection();
+			result = getGroup(id, con);
+		} catch (SQLException e) {
+			System.err.println("Can not select groups. " + e.getMessage());
+		} finally {
+			try {
+				if (con != null)
+					con.close();
+			} catch (SQLException e) {
+				System.err.println("Can not close connection. " + e.getMessage());
+			}
+		}
+		return result;
+	}
+	
+	private Group getGroup(long id, Connection con) throws SQLException {
+		Group result = null;
+		PreparedStatement pstmt = null;
+		try {
+			
+			pstmt = con.prepareStatement(SQL__SELECT_GROUP);
+			pstmt.setLong(1, id);
+			ResultSet rs = pstmt.executeQuery();
+			if(rs.next()){
+				result = unMapGroupForStudent(rs);
+			}
+		} catch (SQLException e) {
+			throw e;
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					System.err.println("Can not close statement. " + e.getMessage());
+				}
+			}
+		}
+		return result;
+	}
+
+	private Group unMapGroupForStudent(ResultSet rs) throws SQLException {
+		Group gr = new Group();
+		gr.setGroupId(rs.getLong(MapperParameters.GROUP_ID));
+		gr.setTitle(rs.getString(MapperParameters.GROUP_TITLE));
+		gr.setFacultiesId(rs.getLong(MapperParameters.GROUP_FACULTIES_ID));
+		return gr;
 	}
 }

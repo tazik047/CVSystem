@@ -31,7 +31,7 @@ public class MSSqlStudentDAO implements StudentDAO {
 	private static final String SQL__SELECT_STUDENT = "SELECT * FROM Students WHERE StudentsId = ?";
 	private static final String SQL__SELECT_ALL_STUDENT = "SELECT * FROM Students";
 	private static final String SQL__INSERT_STUDENT = "INSERT INTO Students(Surname, Firstname, Patronymic, "
-			+ "GroupsId, CVsId, Address, Skype) VALUES(?, ?, ?, ?, ?, ?, ?)";
+			+ "GroupsId, CVsId, Address, Skype, Email, Phone, Birthday) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	
 	private static final String SQL__DELETE_ANY_TAG = "DELETE Students WHERE StudentsId = ?";
 	
@@ -160,6 +160,7 @@ public class MSSqlStudentDAO implements StudentDAO {
 			while(rs.next()){
 				Student st = unMapStudent(rs);
 				st.setCv(MSSqlCVDAO.getInstancce().getCv(rs.getLong(MapperParameters.STUDENT_CVSID),con));
+				st.setGroup(MSSqlFacultyGroupDAO.getInstancce().getGroup(rs.getLong(MapperParameters.STUDENT_GROUPSID)));
 				result.add(st);
 			}
 			
@@ -185,6 +186,9 @@ public class MSSqlStudentDAO implements StudentDAO {
 		st.setPatronymic(rs.getString(MapperParameters.STUDENT_PATRONYMIC));
 		st.setAddress(rs.getString(MapperParameters.STUDENT_ADDRESS));
 		st.setSkype(rs.getString(MapperParameters.STUDENT_SKYPE));
+		st.setEmail(rs.getString(MapperParameters.STUDENT_EMAIL));
+		st.setDateOfBirth(rs.getDate(MapperParameters.STUDENT_BIRTHDAY));
+		st.setPhone(rs.getString(MapperParameters.STUDENT_PHONE));
 		return st;
 	}
 	
@@ -197,6 +201,9 @@ public class MSSqlStudentDAO implements StudentDAO {
 		pstmt.setLong(5, st.getCv().getCvsId());
 		pstmt.setString(6, st.getAddress());
 		pstmt.setString(7, st.getSkype());
+		pstmt.setString(8, st.getEmail());
+		pstmt.setString(9, st.getPhone());
+		pstmt.setDate(10, new java.sql.Date(st.getDateOfBirth().getTime()));
 	}
 	
 }

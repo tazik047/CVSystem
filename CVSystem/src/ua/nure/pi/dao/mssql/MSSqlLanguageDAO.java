@@ -33,7 +33,7 @@ public class MSSqlLanguageDAO implements LanguageDAO {
 	private static final String SQL__UPDATE_LANGUAGE = "UPDATE Languages SET Title = ? WHERE LanguagesId = ?";
 	private static final String SQL__DELETE_LANGUAGE = "DELETE Languages WHERE LanguagesId = ?";
 	
-	private static final String SQL__SELECT_STUDENT_LANGUAGE = "select lc.LanguagesCVsId, l.Title, lc.Level from LanguagesCVs lc"
+	private static final String SQL__SELECT_STUDENT_LANGUAGE = "select lc.LanguagesId, lc.LanguagesCVsId, l.Title, lc.Level from LanguagesCVs lc"
 			+" join Languages l on lc.LanguagesId = l.LanguagesId where lc.CVsId=?";
 	private static final String SQL__INSERT_STUENT_LANGUAGE = "INSERT INTO LanguagesCVs(CVsId, LanguagesId, Level) VALUES(?,?,?)";
 
