@@ -158,7 +158,9 @@ public class MSSqlStudentDAO implements StudentDAO {
 			pstmt = con.prepareStatement(SQL__SELECT_ALL_STUDENT);
 			ResultSet rs = pstmt.executeQuery();
 			while(rs.next()){
-				result.add(unMapStudent(rs));
+				Student st = unMapStudent(rs);
+				st.setCv(MSSqlCVDAO.getInstancce().getCv(rs.getLong(MapperParameters.STUDENT_CVSID),con));
+				result.add(st);
 			}
 			
 		} catch (SQLException e) {

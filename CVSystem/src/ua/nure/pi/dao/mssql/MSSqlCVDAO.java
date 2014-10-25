@@ -114,7 +114,7 @@ public class MSSqlCVDAO implements CVDAO {
 		return result;
 	}
 
-	private CV getCv(long cVsId, Connection con) throws SQLException {
+	public CV getCv(long cVsId, Connection con) throws SQLException {
 		CV result = null;
 		PreparedStatement pstmt = null;
 		try {
