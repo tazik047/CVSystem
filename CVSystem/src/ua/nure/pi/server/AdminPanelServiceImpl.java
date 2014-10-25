@@ -27,8 +27,14 @@ import javax.servlet.http.HttpServletResponse;
 import ua.nure.pi.Path;
 import ua.nure.pi.client.AdminPanelService;
 import ua.nure.pi.dao.FacultyGroupDAO;
+import ua.nure.pi.dao.LanguageDAO;
+import ua.nure.pi.dao.PassDAO;
+import ua.nure.pi.dao.ProgramLanguageDAO;
+import ua.nure.pi.dao.PurposeDAO;
+import ua.nure.pi.dao.StudentDAO;
 import ua.nure.pi.entity.Faculty;
 import ua.nure.pi.entity.Group;
+import ua.nure.pi.entity.Student;
 import ua.nure.pi.parameter.AppConstants;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
@@ -37,16 +43,44 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 public class AdminPanelServiceImpl extends RemoteServiceServlet 
 	implements AdminPanelService {
 
-	FacultyGroupDAO facultyGroupDAO;
+	private FacultyGroupDAO facultyGroupDAO;
+	private StudentDAO studentDAO;
+	private ProgramLanguageDAO programLanguageDAO;
+	private LanguageDAO languageDAO;
+	private PurposeDAO purposeDAO;
+	private PassDAO passDAO;
 	
 	@Override
 	public void init() {
 		ServletContext servletContext = getServletContext();
 		facultyGroupDAO = (FacultyGroupDAO) servletContext.getAttribute(AppConstants.FACULTYGROUP_DAO);
+		studentDAO = (StudentDAO) servletContext.getAttribute(AppConstants.STUDENT_DAO);
+		programLanguageDAO = (ProgramLanguageDAO) servletContext.getAttribute(AppConstants.PROGRAM_LANGUAGE_DAO);
+		languageDAO = (LanguageDAO) servletContext.getAttribute(AppConstants.LANGUAGE_DAO);
+		purposeDAO = (PurposeDAO) servletContext.getAttribute(AppConstants.PURPOSE_DAO);
+		passDAO = (PassDAO) servletContext.getAttribute(AppConstants.PASS_DAO);
 		
 		if (facultyGroupDAO == null) {
-			//log.error("UserDAO attribute is not exists.");
 			throw new IllegalStateException("FacultyGroupDAO attribute is not exists.");
+		}
+		
+		if (studentDAO == null) {
+			throw new IllegalStateException("StudentDAO attribute is not exists.");
+		}
+		if (programLanguageDAO == null) {
+			throw new IllegalStateException("ProgramLanguageDAO attribute is not exists.");
+		}
+		
+		if (languageDAO == null) {
+			throw new IllegalStateException("LanguageDAO attribute is not exists.");
+		}
+		
+		if (purposeDAO == null) {
+			throw new IllegalStateException("PurposeDAO attribute is not exists.");
+		}
+		
+		if (passDAO == null) {
+			throw new IllegalStateException("PassDAO attribute is not exists.");
 		}
 	}
 	
@@ -83,5 +117,14 @@ public class AdminPanelServiceImpl extends RemoteServiceServlet
 	public void setGroup(Group group) throws IllegalArgumentException {
 		if(!facultyGroupDAO.insertGroup(group))
 			throw new IllegalArgumentException("Невозможно добавить эту групу");		
+	}
+
+	@Override
+	public Collection<Student> getStudents(String pass)
+			throws IllegalArgumentException {
+		if(passDAO.checkPass(pass)){
+			return studentDAO.getStudents();
+		}
+		throw new IllegalArgumentException("Неправильно введен ключ доступа");
 	}
 }

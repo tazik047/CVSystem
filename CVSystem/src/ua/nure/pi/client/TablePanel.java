@@ -1,6 +1,7 @@
 package ua.nure.pi.client;
 
 import com.google.gwt.user.client.ui.SimplePanel;
+import com.google.gwt.user.client.ui.VerticalPanel;
 import com.smartgwt.client.widgets.Canvas;
 import com.smartgwt.client.widgets.grid.ListGridRecord;
 import com.smartgwt.client.types.Alignment;  
@@ -20,6 +21,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import ua.nure.pi.dao.mssql.MSSqlStudentDAO;
+import ua.nure.pi.entity.ProgramLanguage;
 import ua.nure.pi.entity.Student;
 
 public class TablePanel extends SimplePanel{
@@ -27,11 +29,13 @@ public class TablePanel extends SimplePanel{
 	public TablePanel(Collection<Student> students)
 	{
 		this.students = students;
+		onModuleLoad();
 	}
 	
 	
 	 public void onModuleLoad() {  
-		  	
+		  	VerticalPanel root = new VerticalPanel();
+		  	final SimplePanel cv = new SimplePanel();
 	        final ListGrid CVGrid = new ListGrid(){
 	        	protected Canvas getRollOverCanvas(final ListGridRecord record, Integer colNum) {  
 	        		String fieldName = this.getFieldName(colNum);
@@ -42,7 +46,13 @@ public class TablePanel extends SimplePanel{
 	                    button.setTitle("Info");  
 	                    button.addClickHandler(new ClickHandler() {  
 	                        public void onClick(ClickEvent event) {  
-	                            SC.say(record.getAttribute("idField"));  
+	                            int id  = Integer.parseInt(record.getAttribute("idField"));
+	                            for(Student i :  students){
+	                            	if(i.getStudentsId()==id){
+	                            		cv.clear();
+	                            		cv.add(new PrintSimplePanel(i));
+	                            	}
+	                            }
 	                        }  
 	                    });  
 	                    return button;  
@@ -54,7 +64,7 @@ public class TablePanel extends SimplePanel{
 	        };
 	        CVGrid.setShowRecordComponents(true);          
 	        CVGrid.setShowRecordComponentsByCell(true);  
-	        CVGrid.setCanRemoveRecords(true);  
+	        CVGrid.setCanRemoveRecords(false);  
 	  
 	        CVGrid.setWidth(550);  
 	        CVGrid.setHeight(224);  
@@ -68,11 +78,12 @@ public class TablePanel extends SimplePanel{
 	        for(Student i : students){
 		    ListGridRecord rec = new ListGridRecord(); 
 	        rec.setAttribute("idField", i.getStudentsId());
-	        rec.setAttribute("surname", i.getSurname()+i.getFirstname()+i.getPatronymic());
+	        rec.setAttribute("surname", i.getSurname()+" " + i.getFirstname()+" "+i.getPatronymic());
 	        rec.setAttribute("show", "Просмотреть");
 	        }
-	        CVGrid.draw(); 
-	    
+	        CVGrid.markForRedraw(); 
+	        root.add(CVGrid);
+	        root.add(cv);
 	       
 	        
 	 }

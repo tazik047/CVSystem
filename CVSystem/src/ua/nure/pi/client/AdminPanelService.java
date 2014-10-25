@@ -18,6 +18,7 @@ import java.util.Collection;
 
 import ua.nure.pi.entity.Faculty;
 import ua.nure.pi.entity.Group;
+import ua.nure.pi.entity.Student;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.RemoteService;
@@ -43,4 +44,7 @@ public interface AdminPanelService extends RemoteService {
 	public void setFaculties(Faculty faculty) throws IllegalArgumentException;
 	
 	public void setGroup(Group group) throws IllegalArgumentException;
+	
+	public Collection<Student> getStudents(String pass) throws IllegalArgumentException;
+	
 }

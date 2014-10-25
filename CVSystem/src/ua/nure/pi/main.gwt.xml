@@ -8,6 +8,7 @@
 
 	<entry-point class='ua.nure.pi.client.MainEntryPoint'/>
 	<extend-property name="locale" values="ru"/>
+	<set-property-fallback name="locale" value="ru"/> 
 
 	<!-- Specify the paths for translatable code -->
 	<source path='client' />

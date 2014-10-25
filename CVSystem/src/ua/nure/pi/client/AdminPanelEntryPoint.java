@@ -14,8 +14,19 @@
  *******************************************************************************/
 package ua.nure.pi.client;
 
+import java.util.Collection;
+
+import ua.nure.pi.entity.Student;
+
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.PasswordTextBox;
+import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.SimplePanel;
+import com.google.gwt.user.client.ui.VerticalPanel;
 import com.smartgwt.client.types.Overflow;  
 import com.smartgwt.client.types.VisibilityMode;  
 import com.smartgwt.client.widgets.Canvas;  
@@ -50,7 +61,35 @@ public class AdminPanelEntryPoint implements EntryPoint {
   
         htmlFlow.setContents(contents);  
   
-        final SectionStack sectionStack = new SectionStack();  
+        final RootPanel root = RootPanel.get("content");
+        VerticalPanel vp = new VerticalPanel();
+        root.add(vp);
+        PasswordTextBox ptb = new PasswordTextBox();
+        Button bt = new Button("Получить");
+        final SimplePanel cv = new SimplePanel();
+        vp.add(ptb);
+        vp.add(bt);
+        vp.add(cv);
+        bt.addClickHandler(new com.google.gwt.event.dom.client.ClickHandler() {
+			
+			@Override
+			public void onClick(com.google.gwt.event.dom.client.ClickEvent event) {
+				adminPanelService.getStudents("", new AsyncCallback<Collection<Student>>() {
+					
+					@Override
+					public void onSuccess(Collection<Student> result) {
+						cv.add(new TablePanel(result));						
+					}
+					
+					@Override
+					public void onFailure(Throwable caught) {
+						cv.add(new Label(caught.getLocalizedMessage()));
+					}
+				});
+			}
+		});
+                
+        /*final SectionStack sectionStack = new SectionStack();  
         sectionStack.setVisibilityMode(VisibilityMode.MULTIPLE);  
         sectionStack.setWidth("90%");  
         sectionStack.setHeight(350);  
@@ -59,6 +98,6 @@ public class AdminPanelEntryPoint implements EntryPoint {
         section1.addItem(new AddFacultiesCanvas(adminPanelService));  
         sectionStack.addSection(section1); 
 
-        sectionStack.draw();
+        sectionStack.draw();*/
     }  
 }

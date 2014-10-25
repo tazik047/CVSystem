@@ -39,6 +39,10 @@ public class PrintSimplePanel extends SimplePanel {
 		purpose = student.getCv().getPurpose().getTitle();
 		onModuleLoad();
 	}
+	
+	public PrintSimplePanel(Student student){
+		this(student, new ArrayList<ProgramLanguage>());
+	}
 	private Collection<Education> educations;
 	
 	private Collection<Language> languages;
