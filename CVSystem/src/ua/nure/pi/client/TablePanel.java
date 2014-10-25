@@ -44,7 +44,7 @@ public class TablePanel extends SimplePanel{
 	                    IButton button = new IButton();  
 	                    button.setHeight(18);  
 	                    button.setWidth(65);                      
-	                    button.setTitle("Info");  
+	                    button.setTitle("Просмотреть");  
 	                    button.addClickHandler(new ClickHandler() {  
 	                        public void onClick(ClickEvent event) {  
 	                            int id  = Integer.parseInt(record.getAttribute("idField"));
@@ -72,7 +72,7 @@ public class TablePanel extends SimplePanel{
 	        CVGrid.setShowAllRecords(true);  
 	        ListGridField idField = new ListGridField("idField", "ID");  
 	        ListGridField SurnameField = new ListGridField("surname", "ФИО");  
-	        ListGridField show = new ListGridField("show", "Просмотреть");  
+	        ListGridField show = new ListGridField("show", "");  
 	        show.setAlign(Alignment.CENTER);  
 	        CVGrid.setFields(idField, SurnameField, show);  
 	        CVGrid.setCanResizeFields(true);
