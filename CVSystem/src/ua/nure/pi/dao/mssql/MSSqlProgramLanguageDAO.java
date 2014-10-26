@@ -33,7 +33,8 @@ public class MSSqlProgramLanguageDAO implements ProgramLanguageDAO {
 	private static final String SQL__UPDATE_PROGRAM_LANGUAGE = "UPDATE ProgramLanguages SET Title = ? WHERE ProgramLanguagesId = ?";
 	private static final String SQL__DELETE_PROGRAM_LANGUAGE = "DELETE ProgramLanguages WHERE ProgramLanguagesId = ?";
 	
-	private static final String SQL__SELECT_STUDENT_PROGRAM_LANGUAGE = "SELECT * FROM ProgramLanguages WHERE ProgramLanguagesId =?";
+	private static final String SQL__SELECT_STUDENT_PROGRAM_LANGUAGE = "SELECT p.Title, pc.ProgramLanguagesId"
+			+ " FROM ProgramLanguages p, ProgramLanguagesCVs pc WHERE p.ProgramLanguagesId=pc.ProgramLanguagesId and pc.CVsId =?";
 	private static final String SQL__INSERT_STUENT_PROGRAM_LANGUAGE = "INSERT INTO ProgramLanguagesCVs(CVsId, ProgramLanguagesId) VALUES(?,?)";
 
 	@Override
