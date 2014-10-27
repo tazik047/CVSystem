@@ -127,6 +127,8 @@ public class VerifyDialogBox extends DialogBox{
 				@Override
 				public void onClick(ClickEvent event) {
 					if(ptb.getValue()!=null && ptb.getValue()!=""){
+						ok.setText("Отправка...");
+						ok.setEnabled(false);
 						main.checkPass(ptb.getValue(), new AsyncCallback<Boolean>() {
 							
 							@Override
@@ -137,6 +139,8 @@ public class VerifyDialogBox extends DialogBox{
 										@Override
 										public void onSuccess(Void result) {
 											Window.alert("Резюме сохранено");
+											ok.setText("Отправить");
+											ok.setEnabled(true);
 											ptb.setText("");
 											hide();
 											parent.hide();
@@ -146,6 +150,8 @@ public class VerifyDialogBox extends DialogBox{
 										@Override
 										public void onFailure(Throwable caught) {
 											Window.alert(caught.getLocalizedMessage());
+											ok.setText("Отправить");
+											ok.setEnabled(true);
 										}
 									});
 								}
