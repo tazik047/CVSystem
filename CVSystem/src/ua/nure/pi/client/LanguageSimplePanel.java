@@ -44,6 +44,8 @@ public class LanguageSimplePanel extends SimplePanel{
 		root.setWidth("100%");
 		final AbsolutePanel absP = new AbsolutePanel();
 		
+		
+		
 		languages = new ArrayList<LanguageElementSimplePanel>();
 		DynamicForm form = new DynamicForm();
 		section1.addItem(form);

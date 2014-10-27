@@ -70,8 +70,10 @@ public class LanguageElementSimplePanel extends SimplePanel{
 		for (Language lan : langs) {
 			langBox.addItem(lan.getTitle(),String.valueOf(lan.getId()));
 		}
+		
+		
         lang.add(langBox);
-        langBox.setSize("70px", "18px");
+        langBox.setSize("120px", "18px");
         
         Label label_1 = new Label("Уровень знаний");
         label_1.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
