@@ -132,7 +132,8 @@ public class LanguageSimplePanel extends SimplePanel{
 				Language l = new Language();
 				l.setTitle(lang.langBox.getItemText(lang.langBox.getSelectedIndex()));
 				l.setId(Integer.parseInt(lang.langBox.getValue(lang.langBox.getSelectedIndex())));
-				langs.add(l);
+				if (!langs.contains(l))
+					langs.add(l);
 				vp.remove(lang);
 				languages.remove(lang);
 				pixelCount-=168;
