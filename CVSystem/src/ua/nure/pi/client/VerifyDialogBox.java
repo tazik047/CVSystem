@@ -110,7 +110,7 @@ public class VerifyDialogBox extends DialogBox{
 			err.addStyleName("error");
 			HorizontalPanel hp = new HorizontalPanel();
 			hp.setWidth("100%");
-			root.setCellHorizontalAlignment(ptb, HasHorizontalAlignment.ALIGN_CENTER);
+			root.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
 			root.add(hp);
 			ok = new Button("Отправить");
 			Button cancel = new Button("Отмена");			
