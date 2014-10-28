@@ -33,6 +33,7 @@ public class MSSqlPurposeDAO implements PurposeDAO {
 	private static final String SQL__UPDATE_PURPOSE = "UPDATE Purposes SET Title = ? WHERE PurposesId = ?";
 	private static final String SQL__DELETE_PURPOSE = "DELETE Purposes WHERE PurposesId = ?";	
 	private static final String SQL__FIND_PURPOSE = "SELECT * FROM Purposes where PurposesId = ?";
+	private static final String SQL__FIND_BY_TITLE = "SELECT PurposesId FROM Purposes where Title = ?";
 
 	@Override
 	public Collection<Purpose> getPurposes() {
@@ -311,7 +312,15 @@ public class MSSqlPurposeDAO implements PurposeDAO {
 			throws SQLException {
 		boolean result = true;
 		PreparedStatement pstmt = null;
+		PreparedStatement pstmt2 = null;
 		try {
+			pstmt2 = con.prepareStatement(SQL__FIND_BY_TITLE);
+			mapPurposeForInsert(purpose, pstmt2);
+			ResultSet merged = pstmt2.executeQuery();
+			if(merged.next()){
+				purpose.setId(merged.getLong(1));
+				return true;
+			}
 			pstmt = con.prepareStatement(SQL__INSERT_PURPOSE, Statement.RETURN_GENERATED_KEYS);
 			mapPurposeForInsert(purpose, pstmt);
 			result = 1==pstmt.executeUpdate();
@@ -327,6 +336,13 @@ public class MSSqlPurposeDAO implements PurposeDAO {
 					pstmt.close();
 				} catch (SQLException e) {
 					System.err.println("Can not close statement. " + e.getMessage());
+				}
+			}
+			if (pstmt2 != null) {
+				try {
+					pstmt2.close();
+				} catch (SQLException e) {
+					System.err.println("Can not close searched statement. " + e.getMessage());
 				}
 			}
 		}

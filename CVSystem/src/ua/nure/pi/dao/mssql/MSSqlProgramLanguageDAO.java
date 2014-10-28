@@ -36,6 +36,7 @@ public class MSSqlProgramLanguageDAO implements ProgramLanguageDAO {
 	private static final String SQL__SELECT_STUDENT_PROGRAM_LANGUAGE = "SELECT p.Title, pc.ProgramLanguagesId"
 			+ " FROM ProgramLanguages p, ProgramLanguagesCVs pc WHERE p.ProgramLanguagesId=pc.ProgramLanguagesId and pc.CVsId =?";
 	private static final String SQL__INSERT_STUENT_PROGRAM_LANGUAGE = "INSERT INTO ProgramLanguagesCVs(CVsId, ProgramLanguagesId) VALUES(?,?)";
+	private static final String SQL__FIND_BY_TITLE = "SELECT ProgramLanguagesId FROM ProgramLanguages where Title = ?";
 
 	@Override
 	public Collection<ProgramLanguage> getProgramLanguages() {
@@ -370,10 +371,18 @@ public class MSSqlProgramLanguageDAO implements ProgramLanguageDAO {
 			Collection<ProgramLanguage> programLanguage, Connection con) throws SQLException {
 		boolean result = true;
 		PreparedStatement pstmt = null;
+		PreparedStatement pstmt2 = null;
 		try {
+			pstmt2 = con.prepareStatement(SQL__FIND_BY_TITLE);
 			pstmt = con.prepareStatement(SQL__INSERT_PROGRAM_LANGUAGE,
 					Statement.RETURN_GENERATED_KEYS);
 			for(ProgramLanguage i : programLanguage){
+				mapProgramLanguageForInsert(i, pstmt2);
+				ResultSet merged = pstmt2.executeQuery();
+				if(merged.next()){
+					i.setId(merged.getLong(1));
+					continue;
+				}
 				mapProgramLanguageForInsert(i, pstmt);
 				result = pstmt.executeUpdate() == 1;
 				ResultSet rs = pstmt.getGeneratedKeys();
@@ -389,6 +398,13 @@ public class MSSqlProgramLanguageDAO implements ProgramLanguageDAO {
 					pstmt.close();
 				} catch (SQLException e) {
 					System.err.println("Can not close statement. " + e.getMessage());
+				}
+			}
+			if (pstmt2 != null) {
+				try {
+					pstmt2.close();
+				} catch (SQLException e) {
+					System.err.println("Can not close searched statement. " + e.getMessage());
 				}
 			}
 		}
