@@ -56,7 +56,7 @@ public class VerifyDialogBox extends DialogBox{
 				@Override
 				public void onClick(ClickEvent event) {
 					MyDialogBox db = new MyDialogBox(parent);
-					db.center();
+					//db.center();
 					
 				}
 			});
@@ -175,6 +175,8 @@ public class VerifyDialogBox extends DialogBox{
 			hp.setCellHorizontalAlignment(cancel, HasHorizontalAlignment.ALIGN_RIGHT);
 			hp.setCellHorizontalAlignment(ok, HasHorizontalAlignment.ALIGN_LEFT);
 			add(root);
+			center();
+			ptb.setFocus(true);
 		}
 		
 		@Override

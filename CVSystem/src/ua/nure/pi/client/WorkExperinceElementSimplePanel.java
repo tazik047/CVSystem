@@ -58,7 +58,7 @@ public class WorkExperinceElementSimplePanel extends SimplePanel{
         yearField.setKeyPressFilter("[0-9.]");
         yearField.setRequired(true);
         
-        durationField = new TextItem("duration", "Длительность");  
+        durationField = new TextItem("duration", "Продолжительность");  
         durationField.setWidth(70);
         durationField.setHeight(18);
         durationField.setRequired(true);
