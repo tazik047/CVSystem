@@ -91,7 +91,7 @@ public class PrintSimplePanel extends SimplePanel {
         vLayout.addMember(hLayout);  
         hLayout.setHeight(80);
         String patr= student.getPatronymic()==null?"":student.getPatronymic();
-        BlueBox FIO = new BlueBox("30%", "90", "<h3 align=\"center\">" +  student.getSurname() +" " + student.getFirstname() +" "+ patr + "</h3>");
+        BlueBox FIO = new BlueBox("30%", "90", "<h2 align=\"center\">" +  student.getSurname() +" " + student.getFirstname() +" "+ patr + "</h2>");
         FIO.setStyleName("FIO");
         hLayout.addMember(FIO);  
         hLayout.addMember(new BlueBox("40%", null, ""));  
@@ -112,6 +112,12 @@ public class PrintSimplePanel extends SimplePanel {
 	        hLayout2.setHeight100();
 	        hLayout2.addMember(new BlueBox("20%", null, "")); 
 	        String duration = "";
+	        if (I.getIsNow()){
+	        	duration = "по сей день";
+	        	hLayout2.addMember(new BlueBox("20%", null, "С " + I.getStartYear() + " "+ duration));
+		        
+	        }
+	        else{
 	        switch(I.getTypeOfDuration().toString())
 	    	{
 	        	case "WEEK": duration = "недель";
@@ -132,9 +138,11 @@ public class PrintSimplePanel extends SimplePanel {
 	        			break;
 		    	}
 	        }
+	        
 	        hLayout2.addMember(new BlueBox("20%", null, "С " + I.getStartYear() + "<br>На протяжении " + I.getDuration() + " "+ duration));
+	        }
 	        hLayout2.addMember(new BlueBox("10px", null, "")); 
-	        hLayout2.addMember(new BlueBox("*", null, I.getRole() + ":" + I.getNameOfInstitution()));
+	        hLayout2.addMember(new BlueBox("*", null, I.getRole() + " " + I.getNameOfInstitution()));
 	        }
         }
         if(educations!=null && educations.size()!=0){
@@ -147,9 +155,11 @@ public class PrintSimplePanel extends SimplePanel {
 		        hLayout3.addMember(new BlueBox("20%", null, ""));  
 		        hLayout3.addMember(new BlueBox("20%", null, I.getStartYear() + " - " + I.getEndYear()));
 		        hLayout3.addMember(new BlueBox("10px", null, "")); 
-		        hLayout3.addMember(new BlueBox("*", null, I.getSpecialty() + ": " + I.getNameOfInstitution()));
+		        hLayout3.addMember(new BlueBox("*", null, "Специальность " + I.getSpecialty() + "; " + I.getNameOfInstitution()));
 		        }
         }
+        if ((programLanguage!=null && programLanguage.size()!=0) || (newLanguage!=null && newLanguage.size()!=0))
+        {
         vLayout.addMember(new BlueBox((String) null, "30", "Профессиональные навыки", true));
         HLayout hLayout4 = new HLayout();  
         vLayout.addMember(hLayout4);  
@@ -172,8 +182,11 @@ public class PrintSimplePanel extends SimplePanel {
         				
         		lan+="</p>";
         	}
-        	
+
+    	lan = lan.substring(0, lan.length() - 1) + ".";	
+    	
         hLayout4.addMember(new BlueBox("*", null, lan));
+    }
         /*
         HLayout hLayout5 = new HLayout();  
         vLayout.addMember(hLayout5);  
