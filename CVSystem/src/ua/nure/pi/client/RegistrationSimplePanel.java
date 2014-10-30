@@ -298,7 +298,7 @@ public class RegistrationSimplePanel extends SimplePanel {
 	    goalComboBox.setWidth(300);
 	    goalComboBox.setRequired(true);
 	    goalComboBox.setShowHintInField(true);
-
+	    
         
         final LinkedHashMap<Long, String> phm = new LinkedHashMap<>();
 
@@ -428,6 +428,7 @@ public class RegistrationSimplePanel extends SimplePanel {
 	    others = new TextAreaItem("Others");
 	    others.setCellStyle("fixTextArea");
 	    others.setTitle("Прочее");
+	    
 	    
 	    cb = new CheckBox();
 	    cb.setText("Я даю согласие отделу практики \"Центр-Карьера\" ХНУРЭ на электронную обработку моих персональных данных");
@@ -614,8 +615,8 @@ public class RegistrationSimplePanel extends SimplePanel {
 			newPurp = true;
 			cv.setPurpose(p);
 		}
-		cv.setOthers(others.getValueAsString());
-		cv.setQualities(qualities.getValueAsString());
+		cv.setOthers(others.getDisplayValue());
+		cv.setQualities(qualities.getDisplayValue());
 		cv.setEducations(eduPanel.getEducation());
 		cv.setLanguages(lanPanel.getLanguages());
 		cv.setSertificates(ssp.getSerts());
