@@ -9,7 +9,10 @@ import ua.nure.pi.entity.typeOfDuration;
 
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.AbsolutePanel;
+import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HorizontalPanel;
@@ -18,10 +21,13 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.TextBox;
+import com.smartgwt.client.widgets.form.fields.events.ChangedEvent;  
+import com.smartgwt.client.widgets.form.fields.events.ChangedHandler;  
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.smartgwt.client.types.ReadOnlyDisplayAppearance;
 import com.smartgwt.client.types.TitleOrientation;
 import com.smartgwt.client.widgets.form.DynamicForm;
+import com.smartgwt.client.widgets.form.fields.CheckboxItem;
 import com.smartgwt.client.widgets.form.fields.ComboBoxItem;
 import com.smartgwt.client.widgets.form.fields.SelectItem;
 import com.smartgwt.client.widgets.form.fields.TextItem;
@@ -35,6 +41,7 @@ public class WorkExperinceElementSimplePanel extends SimplePanel{
 	private TextItem nameOfInstitute;
 	private VerticalPanel rootPanel;
 	public DynamicForm controls;
+	public CheckboxItem currentWork;
 	
 	public Image imgDel; 
 	public WorkExperinceElementSimplePanel(){
@@ -51,12 +58,16 @@ public class WorkExperinceElementSimplePanel extends SimplePanel{
 		controls = new DynamicForm();
 		
   
-        yearField = new TextItem("year", "Год");  
+        yearField = new TextItem("year", "Год начала");  
         yearField.setWidth(70);
         yearField.setHeight(18);
         yearField.setMask("####");
         yearField.setKeyPressFilter("[0-9.]");
         yearField.setRequired(true);
+        
+        currentWork = new CheckboxItem ();
+        currentWork.setName("isWorking");
+        currentWork.setTitle("Работаю по сей день");
         
         durationField = new TextItem("duration", "Продолжительность");  
         durationField.setWidth(70);
@@ -89,9 +100,22 @@ public class WorkExperinceElementSimplePanel extends SimplePanel{
         nameOfInstitute.setTitleOrientation(TitleOrientation.LEFT);
 
 		//controls.setStyleName("fixUpPanel");
-        controls.setNumCols(1);        
+        controls.setNumCols(1);
+        
+        currentWork.addChangedHandler(new ChangedHandler() {  
+            public void onChanged(ChangedEvent event) {  
+            	if (durationField.isDisabled()) {
+            		durationField.enable();
+            		durTypeField.enable();
+            	}
+            	else {
+            		durationField.disable();
+            		durTypeField.disable();
+            	}
+            }  
+        });  
 
-        controls.setFields(yearField, durationField, durTypeField, role, nameOfInstitute);
+        controls.setFields(yearField, currentWork, durationField, durTypeField, role, nameOfInstitute);
 
         rootPanel.add(controls);
         controls.draw();
@@ -100,6 +124,8 @@ public class WorkExperinceElementSimplePanel extends SimplePanel{
         setWidget(rootPanel);
         
 	}
+	
+	
 	
 	public WorkExp getWorkExp() throws IllegalArgumentException{
 		WorkExp we = new WorkExp();
@@ -128,6 +154,7 @@ public class WorkExperinceElementSimplePanel extends SimplePanel{
 		we.setRole(role.getValueAsString());
 		return we;
 	}
+	
 	
 	public void addSeparator(){
 		rootPanel.add(new HTML("<hr/>"));
