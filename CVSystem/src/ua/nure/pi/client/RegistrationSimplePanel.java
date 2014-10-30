@@ -615,8 +615,12 @@ public class RegistrationSimplePanel extends SimplePanel {
 			newPurp = true;
 			cv.setPurpose(p);
 		}
-		cv.setOthers(others.getDisplayValue());
-		cv.setQualities(qualities.getDisplayValue());
+		String oth = others.getDisplayValue();
+		oth.replaceAll("\n", "<br/>");
+		String qua = qualities.getDisplayValue();
+		qua.replaceAll("\n", "<br/>");
+		cv.setOthers(oth);
+		cv.setQualities(qua);
 		cv.setEducations(eduPanel.getEducation());
 		cv.setLanguages(lanPanel.getLanguages());
 		cv.setSertificates(ssp.getSerts());
