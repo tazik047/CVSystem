@@ -133,23 +133,14 @@ public class WorkExperinceElementSimplePanel extends SimplePanel{
 		int durat = Integer.parseInt(durationField.getValueAsString());
 		
 		we.setStartYear(year);
-		we.setDuration(durat);
-		we.setTypeOfDuration((typeOfDuration)durTypeField.getValue());
-		/*
-		typeOfDuration types = null;
-		switch(durTypeField.getSelectedIndex()){
-			case 0:
-				types = typeOfDuration.WEEK;
-				break;
-			case 1:
-				types = typeOfDuration.MONTH;
-				break;
-			case 2:
-				types = typeOfDuration.YEAR;
-				break;
+		if(!currentWork.getValueAsBoolean()){
+			we.setDuration(durat);
+			we.setTypeOfDuration((typeOfDuration)durTypeField.getValue());
+			we.setIsNow(false);
 		}
-		we.setTypeOfDuration(types);
-		*/
+		else{
+			we.setIsNow(true);
+		}
 		we.setNameOfInstitution(nameOfInstitute.getValueAsString());
 		we.setRole(role.getValueAsString());
 		return we;
