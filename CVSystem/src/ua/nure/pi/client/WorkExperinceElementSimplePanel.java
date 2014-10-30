@@ -74,7 +74,7 @@ public class WorkExperinceElementSimplePanel extends SimplePanel{
         durationField.setHeight(18);
         durationField.setRequired(true);
         durationField.setKeyPressFilter("[0-9.]");
-        
+                
         LinkedHashMap<typeOfDuration, String> valueMap = new LinkedHashMap<typeOfDuration, String>();
         valueMap.put(typeOfDuration.WEEK, "недель");
         valueMap.put(typeOfDuration.MONTH, "месяцев");
@@ -107,11 +107,12 @@ public class WorkExperinceElementSimplePanel extends SimplePanel{
             	if (durationField.isDisabled()) {
             		durationField.enable();
             		durTypeField.enable();
-            	}
+                }
             	else {
             		durationField.disable();
             		durTypeField.disable();
             	}
+            	durationField.setRequired(!currentWork.getValueAsBoolean());
             }  
         });  
 
