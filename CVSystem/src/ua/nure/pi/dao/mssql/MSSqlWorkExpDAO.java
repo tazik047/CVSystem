@@ -31,7 +31,7 @@ public class MSSqlWorkExpDAO implements WorkExpDAO {
 	
 	private static final String SQL__SELECT_WORKEXP = "SELECT * FROM WorkExps WHERE CVsId = ?";
 	private static final String SQL__INSERT_WORKEXP = "INSERT INTO WorkExps(StartDate, "+
-	"Duration, TypeDuration, NameOfInstitution,	Role, CVsId) VALUES(?,?,?,?,?,?)";
+	"Duration, TypeDuration, NameOfInstitution,	Role, CVsId, isNow) VALUES(?,?,?,?,?,?,?)";
 
 
 	
@@ -151,6 +151,7 @@ public class MSSqlWorkExpDAO implements WorkExpDAO {
 		we.setNameOfInstitution(rs.getString(MapperParameters.WORKEXP_NAMEOFINSTITUTION));
 		we.setRole(rs.getString(MapperParameters.WORKEXP_ROLE));
 		we.setCVsId(rs.getLong(MapperParameters.WORKEXP_CVsId));
+		we.setIsNow(rs.getBoolean(MapperParameters.WORKEXP_IS_NOW));
 		return we;
 	}
 	
@@ -172,6 +173,7 @@ public class MSSqlWorkExpDAO implements WorkExpDAO {
 		pstmt.setString(4, we.getNameOfInstitution());
 		pstmt.setString(5, we.getRole());
 		pstmt.setLong(6, id);
+		pstmt.setBoolean(7, we.getIsNow());
 	}
 
 }

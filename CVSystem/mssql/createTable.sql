@@ -468,11 +468,12 @@ BEGIN
 CREATE TABLE [dbo].[WorkExps](
 	[WorkExpsId] [bigint] IDENTITY(1,1) NOT NULL,
 	[StartDate] [int] NOT NULL,
-	[Duration] [int] NOT NULL,
-	[TypeDuration] [int] NOT NULL,
+	[Duration] [int] NULL,
+	[TypeDuration] [int] NULL,
 	[NameOfInstitution] [nvarchar](max) NOT NULL,
 	[Role] [nvarchar](max) NOT NULL,
 	[CVsId] [bigint] NOT NULL,
+	[IsNow] [tinyint] NULL,
  CONSTRAINT [PK_WorkExps] PRIMARY KEY CLUSTERED 
 (
 	[WorkExpsId] ASC
