@@ -20,6 +20,8 @@ public class WorkExp  implements Serializable, IsSerializable {
 	private long CVsId;
 	
 	private long WorkExpsId;
+	
+	private boolean isNow;
 
 	public int getStartYear() {
 		return startYear;
@@ -87,6 +89,14 @@ public class WorkExp  implements Serializable, IsSerializable {
 
 	public void setWorkExpsId(long workExpsId) {
 		WorkExpsId = workExpsId;
+	}
+	
+	public boolean getIsNow() {
+		return isNow;
+	}
+
+	public void setIsNow(boolean isNow) {
+		this.isNow = isNow;
 	}
 
 }

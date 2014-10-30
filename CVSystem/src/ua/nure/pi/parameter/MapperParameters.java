@@ -23,6 +23,7 @@ public interface MapperParameters {
 	String WORKEXP_NAMEOFINSTITUTION = "NameOfInstitution";
 	String WORKEXP_ROLE = "Role";
 	String WORKEXP_CVsId = "CVsId";
+	String WORKEXP_IS_NOW = "IsNow";
 
 	// Students
 	String STUDENT_ID = "StudentsId";
