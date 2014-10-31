@@ -4776,3 +4776,1372 @@ Compiling...
    Compilation completed in 0,14 seconds
 Removing invalidated units
 Finding entry point classes
+Public resources found in...
+Translatable source found in...
+Found 0 cached/archived units.  Used 0 / 2737 units from cache.
+Compiling...
+   0% complete (ETR: ?)
+   10% complete (ETR: 97 seconds)
+   20% complete (ETR: 63 seconds)
+   30% complete (ETR: 44 seconds)
+   40% complete (ETR: 35 seconds)
+   50% complete (ETR: 25 seconds)
+   60% complete (ETR: 18 seconds)
+   70% complete (ETR: 13 seconds)
+   80% complete (ETR: 9 seconds)
+   90% complete (ETR: 4 seconds)
+   100% complete (ETR: 0 seconds)
+   Compilation completed in 100,65 seconds
+Removing invalidated units
+Finding entry point classes
+Public resources found in...
+Translatable source found in...
+Found 2737 cached/archived units.  Used 2737 / 2737 units from cache.
+Compiling...
+   Compilation completed in 0,00 seconds
+Removing invalidated units
+Finding entry point classes
+Public resources found in...
+Translatable source found in...
+Found 2737 cached/archived units.  Used 2737 / 2737 units from cache.
+Compiling...
+   Compilation completed in 0,04 seconds
+Removing invalidated units
+Finding entry point classes
+Public resources found in...
+Translatable source found in...
+Found 0 cached/archived units.  Used 0 / 2737 units from cache.
+Compiling...
+   0% complete (ETR: ?)
+   10% complete (ETR: 82 seconds)
+   20% complete (ETR: 52 seconds)
+   30% complete (ETR: 39 seconds)
+   40% complete (ETR: 31 seconds)
+   50% complete (ETR: 22 seconds)
+   60% complete (ETR: 16 seconds)
+   70% complete (ETR: 11 seconds)
+   80% complete (ETR: 7 seconds)
+   90% complete (ETR: 3 seconds)
+   100% complete (ETR: 0 seconds)
+   Compilation completed in 63,48 seconds
+Removing invalidated units
+Finding entry point classes
+Public resources found in...
+Translatable source found in...
+Found 2737 cached/archived units.  Used 2737 / 2737 units from cache.
+Compiling...
+   Compilation completed in 0,00 seconds
+Removing invalidated units
+Finding entry point classes
+Public resources found in...
+Translatable source found in...
+Found 2737 cached/archived units.  Used 2737 / 2737 units from cache.
+Compiling...
+   Compilation completed in 0,06 seconds
+Removing invalidated units
+Finding entry point classes
+Public resources found in...
+Translatable source found in...
+Found 0 cached/archived units.  Used 0 / 2737 units from cache.
+Compiling...
+   0% complete (ETR: 77 seconds)
+   10% complete (ETR: 91 seconds)
+   20% complete (ETR: 51 seconds)
+   30% complete (ETR: 34 seconds)
+   40% complete (ETR: 25 seconds)
+   50% complete (ETR: 19 seconds)
+   60% complete (ETR: 14 seconds)
+   70% complete (ETR: 9 seconds)
+   80% complete (ETR: 6 seconds)
+   90% complete (ETR: 3 seconds)
+   100% complete (ETR: 0 seconds)
+   Compilation completed in 70,39 seconds
+Removing invalidated units
+Finding entry point classes
+Public resources found in...
+Translatable source found in...
+Found 2737 cached/archived units.  Used 2737 / 2737 units from cache.
+Compiling...
+   Compilation completed in 0,02 seconds
+Removing invalidated units
+Finding entry point classes
+Public resources found in...
+Translatable source found in...
+Found 2737 cached/archived units.  Used 2737 / 2737 units from cache.
+Compiling...
+   Compilation completed in 0,01 seconds
+Removing invalidated units
+Finding entry point classes
+Public resources found in...
+Translatable source found in...
+Found 0 cached/archived units.  Used 0 / 4703 units from cache.
+Compiling...
+   0% complete (ETR: ?)
+   10% complete (ETR: 526 seconds)
+   20% complete (ETR: 310 seconds)
+   30% complete (ETR: 217 seconds)
+   40% complete (ETR: 171 seconds)
+   50% complete (ETR: 130 seconds)
+   60% complete (ETR: 98 seconds)
+   70% complete (ETR: 71 seconds)
+   80% complete (ETR: 46 seconds)
+   90% complete (ETR: 23 seconds)
+   100% complete (ETR: 0 seconds)
+   Compilation completed in 297,12 seconds
+Removing invalidated units
+Finding entry point classes
+   [ERROR] Unable to find type 'ua.nure.pi.client.RegistrationEntryPoint'
+      [ERROR] Hint: Check that the type name 'ua.nure.pi.client.RegistrationEntryPoint' is really what you meant
+      [ERROR] Hint: Check that your classpath includes all required source roots
+Public resources found in...
+Translatable source found in...
+Found 4703 cached/archived units.  Used 4703 / 4703 units from cache.
+Compiling...
+   Compilation completed in 0,03 seconds
+Removing invalidated units
+Finding entry point classes
+   [ERROR] Unable to find type 'ua.nure.pi.client.RegistrationEntryPoint'
+      [ERROR] Hint: Check that the type name 'ua.nure.pi.client.RegistrationEntryPoint' is really what you meant
+      [ERROR] Hint: Check that your classpath includes all required source roots
+Public resources found in...
+Translatable source found in...
+Found 4703 cached/archived units.  Used 4703 / 4703 units from cache.
+Compiling...
+   Compilation completed in 0,00 seconds
+Removing invalidated units
+Finding entry point classes
+   [ERROR] Unable to find type 'ua.nure.pi.client.RegistrationEntryPoint'
+      [ERROR] Hint: Check that the type name 'ua.nure.pi.client.RegistrationEntryPoint' is really what you meant
+      [ERROR] Hint: Check that your classpath includes all required source roots
+Public resources found in...
+Translatable source found in...
+Found 2764 cached/archived units.  Used 2764 / 2764 units from cache.
+Compiling...
+   Compilation completed in 0,00 seconds
+Invalid Unit: ua.nure.pi.client.WorkExperinceElementSimplePanel
+Invalid Unit: ua.nure.pi.client.EducationSimplePanel
+Invalid Unit: ua.nure.pi.client.AdminPanelEntryPoint
+Invalid Unit: ua.nure.pi.client.EducationElementSimplePanel
+Invalid Unit: ua.nure.pi.client.RegistrationServiceAsync
+Invalid Unit: ua.nure.pi.client.WorkExperienceSimplePanel
+Invalid Unit: ua.nure.pi.client.ExprienceSimplePanel
+Invalid Unit: ua.nure.pi.client.RegistrationSimplePanel
+Invalid Unit: ua.nure.pi.client.AdminPanelService
+Invalid Unit: ua.nure.pi.client.MainService
+Invalid Unit: ua.nure.pi.client.MainServiceAsync
+Invalid Unit: ua.nure.pi.client.AdminPanelServiceAsync
+Invalid Unit: ua.nure.pi.client.LanguageElementSimplePanel
+Invalid Unit: ua.nure.pi.client.RegistrationService
+Invalid Unit: ua.nure.pi.client.SertificateElementSimplePanel
+Invalid Unit: ua.nure.pi.client.SertificateSimplePanel
+Invalid Unit: ua.nure.pi.client.AddFacultiesCanvas
+Invalid Unit: ua.nure.pi.client.LanguageSimplePanel
+Invalid units found: 18
+Compiling...
+   Compilation completed in 6,26 seconds
+Validating units:
+   Errors in 'file:/E:/JavaSource_EE/CVSystem/CVSystem/src/ua/nure/pi/client/AddFacultiesCanvas.java'
+      Line 25: No source code is available for type com.smartgwt.client.widgets.Canvas; did you forget to inherit a required module?
+      Line 28: No source code is available for type ua.nure.pi.entity.Faculty; did you forget to inherit a required module?
+      Line 29: No source code is available for type com.smartgwt.client.widgets.menu.MenuItem; did you forget to inherit a required module?
+      Line 33: No source code is available for type com.smartgwt.client.widgets.menu.Menu; did you forget to inherit a required module?
+      Line 37: No source code is available for type com.smartgwt.client.widgets.grid.ListGridField; did you forget to inherit a required module?
+      Line 50: No source code is available for type com.smartgwt.client.widgets.menu.events.ItemClickHandler; did you forget to inherit a required module?
+      Line 51: No source code is available for type com.smartgwt.client.widgets.menu.events.ItemClickEvent; did you forget to inherit a required module?
+      Line 56: No source code is available for type com.smartgwt.client.widgets.Dialog; did you forget to inherit a required module?
+      Line 59: No source code is available for type com.smartgwt.client.util.ValueCallback; did you forget to inherit a required module?
+      Line 69: No source code is available for type com.smartgwt.client.util.SC; did you forget to inherit a required module?
+      Line 89: No source code is available for type com.smartgwt.client.widgets.menu.MenuButton; did you forget to inherit a required module?
+      Line 91: No source code is available for type com.smartgwt.client.widgets.layout.HStack; did you forget to inherit a required module?
+      Line 110: No source code is available for type ua.nure.pi.entity.Group; did you forget to inherit a required module?
+   Errors in 'file:/E:/JavaSource_EE/CVSystem/CVSystem/src/ua/nure/pi/client/AdminPanelEntryPoint.java'
+      Line 40: No source code is available for type com.smartgwt.client.widgets.HTMLFlow; did you forget to inherit a required module?
+      Line 41: No source code is available for type com.smartgwt.client.types.Overflow; did you forget to inherit a required module?
+      Line 53: No source code is available for type com.smartgwt.client.widgets.layout.SectionStack; did you forget to inherit a required module?
+      Line 54: No source code is available for type com.smartgwt.client.types.VisibilityMode; did you forget to inherit a required module?
+      Line 58: No source code is available for type com.smartgwt.client.widgets.layout.SectionStackSection; did you forget to inherit a required module?
+   Errors in 'file:/E:/JavaSource_EE/CVSystem/CVSystem/src/ua/nure/pi/client/AdminPanelService.java'
+      Line 41: No source code is available for type ua.nure.pi.entity.Faculty; did you forget to inherit a required module?
+      Line 45: No source code is available for type ua.nure.pi.entity.Group; did you forget to inherit a required module?
+   Errors in 'file:/E:/JavaSource_EE/CVSystem/CVSystem/src/ua/nure/pi/client/AdminPanelServiceAsync.java'
+      Line 12: No source code is available for type ua.nure.pi.entity.Faculty; did you forget to inherit a required module?
+      Line 16: No source code is available for type ua.nure.pi.entity.Group; did you forget to inherit a required module?
+   Errors in 'file:/E:/JavaSource_EE/CVSystem/CVSystem/src/ua/nure/pi/client/EducationElementSimplePanel.java'
+      Line 97: No source code is available for type ua.nure.pi.entity.Education; did you forget to inherit a required module?
+   Errors in 'file:/E:/JavaSource_EE/CVSystem/CVSystem/src/ua/nure/pi/client/EducationSimplePanel.java'
+      Line 25: No source code is available for type com.smartgwt.client.widgets.layout.SectionStack; did you forget to inherit a required module?
+      Line 33: No source code is available for type com.smartgwt.client.types.VisibilityMode; did you forget to inherit a required module?
+      Line 37: No source code is available for type com.smartgwt.client.widgets.layout.SectionStackSection; did you forget to inherit a required module?
+      Line 45: No source code is available for type com.smartgwt.client.widgets.form.DynamicForm; did you forget to inherit a required module?
+      Line 65: No source code is available for type com.smartgwt.client.widgets.layout.events.SectionHeaderClickHandler; did you forget to inherit a required module?
+      Line 68: No source code is available for type com.smartgwt.client.widgets.layout.events.SectionHeaderClickEvent; did you forget to inherit a required module?
+      Line 124: No source code is available for type ua.nure.pi.entity.Education; did you forget to inherit a required module?
+   Errors in 'file:/E:/JavaSource_EE/CVSystem/CVSystem/src/ua/nure/pi/client/ExprienceSimplePanel.java'
+      Line 38: No source code is available for type com.smartgwt.client.widgets.layout.VLayout; did you forget to inherit a required module?
+      Line 40: No source code is available for type com.smartgwt.client.widgets.Label; did you forget to inherit a required module?
+      Line 47: No source code is available for type com.smartgwt.client.widgets.form.DynamicForm; did you forget to inherit a required module?
+      Line 53: No source code is available for type com.smartgwt.client.widgets.grid.ListGrid; did you forget to inherit a required module?
+      Line 57: No source code is available for type com.smartgwt.client.widgets.grid.events.RecordClickHandler; did you forget to inherit a required module?
+      Line 58: No source code is available for type com.smartgwt.client.widgets.grid.events.RecordClickEvent; did you forget to inherit a required module?
+      Line 67: No source code is available for type com.smartgwt.client.widgets.IButton; did you forget to inherit a required module?
+      Line 68: No source code is available for type com.smartgwt.client.widgets.events.ClickHandler; did you forget to inherit a required module?
+      Line 69: No source code is available for type com.smartgwt.client.widgets.events.ClickEvent; did you forget to inherit a required module?
+   Errors in 'file:/E:/JavaSource_EE/CVSystem/CVSystem/src/ua/nure/pi/client/LanguageElementSimplePanel.java'
+      Line 34: No source code is available for type com.smartgwt.client.widgets.form.fields.RadioGroupItem; did you forget to inherit a required module?
+      Line 86: No source code is available for type com.smartgwt.client.widgets.form.fields.events.ChangedHandler; did you forget to inherit a required module?
+      Line 87: No source code is available for type com.smartgwt.client.widgets.form.fields.events.ChangedEvent; did you forget to inherit a required module?
+      Line 93: No source code is available for type com.smartgwt.client.widgets.form.DynamicForm; did you forget to inherit a required module?
+      Line 104: No source code is available for type ua.nure.pi.entity.Language; did you forget to inherit a required module?
+   Errors in 'file:/E:/JavaSource_EE/CVSystem/CVSystem/src/ua/nure/pi/client/LanguageSimplePanel.java'
+      Line 25: No source code is available for type com.smartgwt.client.widgets.layout.SectionStack; did you forget to inherit a required module?
+      Line 33: No source code is available for type com.smartgwt.client.types.VisibilityMode; did you forget to inherit a required module?
+      Line 37: No source code is available for type com.smartgwt.client.widgets.layout.SectionStackSection; did you forget to inherit a required module?
+      Line 45: No source code is available for type com.smartgwt.client.widgets.form.DynamicForm; did you forget to inherit a required module?
+      Line 65: No source code is available for type com.smartgwt.client.widgets.layout.events.SectionHeaderClickHandler; did you forget to inherit a required module?
+      Line 68: No source code is available for type com.smartgwt.client.widgets.layout.events.SectionHeaderClickEvent; did you forget to inherit a required module?
+      Line 123: No source code is available for type ua.nure.pi.entity.Language; did you forget to inherit a required module?
+   Errors in 'file:/E:/JavaSource_EE/CVSystem/CVSystem/src/ua/nure/pi/client/MainService.java'
+      Line 15: No source code is available for type ua.nure.pi.entity.Faculty; did you forget to inherit a required module?
+   Errors in 'file:/E:/JavaSource_EE/CVSystem/CVSystem/src/ua/nure/pi/client/MainServiceAsync.java'
+      Line 13: No source code is available for type ua.nure.pi.entity.Faculty; did you forget to inherit a required module?
+   Errors in 'file:/E:/JavaSource_EE/CVSystem/CVSystem/src/ua/nure/pi/client/RegistrationService.java'
+      Line 17: No source code is available for type ua.nure.pi.entity.Faculty; did you forget to inherit a required module?
+   Errors in 'file:/E:/JavaSource_EE/CVSystem/CVSystem/src/ua/nure/pi/client/RegistrationServiceAsync.java'
+      Line 16: No source code is available for type ua.nure.pi.entity.Faculty; did you forget to inherit a required module?
+   Errors in 'file:/E:/JavaSource_EE/CVSystem/CVSystem/src/ua/nure/pi/client/RegistrationSimplePanel.java'
+      Line 83: No source code is available for type ua.nure.pi.entity.Faculty; did you forget to inherit a required module?
+      Line 85: No source code is available for type com.smartgwt.client.widgets.form.fields.TextItem; did you forget to inherit a required module?
+      Line 89: No source code is available for type com.smartgwt.client.widgets.form.fields.DateItem; did you forget to inherit a required module?
+      Line 103: No source code is available for type com.smartgwt.client.widgets.form.DynamicForm; did you forget to inherit a required module?
+      Line 157: No source code is available for type com.smartgwt.client.widgets.form.validator.RegExpValidator; did you forget to inherit a required module?
+      Line 173: No source code is available for type com.smartgwt.client.widgets.form.fields.SelectItem; did you forget to inherit a required module?
+      Line 192: No source code is available for type com.smartgwt.client.types.MultiComboBoxLayoutStyle; did you forget to inherit a required module?
+      Line 193: No source code is available for type com.smartgwt.client.widgets.form.fields.MultiComboBoxItem; did you forget to inherit a required module?
+      Line 211: No source code is available for type com.smartgwt.client.widgets.form.fields.events.ChangedHandler; did you forget to inherit a required module?
+      Line 214: No source code is available for type com.smartgwt.client.widgets.form.fields.events.ChangedEvent; did you forget to inherit a required module?
+      Line 228: No source code is available for type com.smartgwt.client.widgets.form.fields.TextAreaItem; did you forget to inherit a required module?
+      Line 240: No source code is available for type com.smartgwt.client.widgets.form.fields.StaticTextItem; did you forget to inherit a required module?
+      Line 245: No source code is available for type com.smartgwt.client.types.TitleOrientation; did you forget to inherit a required module?
+      Line 279: No source code is available for type com.smartgwt.client.widgets.tree.TreeNode; did you forget to inherit a required module?
+      Line 287: No source code is available for type ua.nure.pi.entity.Group; did you forget to inherit a required module?
+      Line 303: No source code is available for type com.smartgwt.client.widgets.tree.Tree; did you forget to inherit a required module?
+      Line 304: No source code is available for type com.smartgwt.client.types.TreeModelType; did you forget to inherit a required module?
+      Line 308: No source code is available for type com.smartgwt.client.widgets.form.fields.PickTreeItem; did you forget to inherit a required module?
+      Line 322: No source code is available for type ua.nure.pi.entity.Student; did you forget to inherit a required module?
+   Errors in 'file:/E:/JavaSource_EE/CVSystem/CVSystem/src/ua/nure/pi/client/SertificateElementSimplePanel.java'
+      Line 38: No source code is available for type com.smartgwt.client.widgets.form.fields.TextItem; did you forget to inherit a required module?
+      Line 64: No source code is available for type com.smartgwt.client.widgets.form.DynamicForm; did you forget to inherit a required module?
+      Line 75: No source code is available for type com.smartgwt.client.types.TitleOrientation; did you forget to inherit a required module?
+      Line 94: No source code is available for type ua.nure.pi.entity.Sertificate; did you forget to inherit a required module?
+   Errors in 'file:/E:/JavaSource_EE/CVSystem/CVSystem/src/ua/nure/pi/client/SertificateSimplePanel.java'
+      Line 25: No source code is available for type com.smartgwt.client.widgets.layout.SectionStack; did you forget to inherit a required module?
+      Line 33: No source code is available for type com.smartgwt.client.types.VisibilityMode; did you forget to inherit a required module?
+      Line 37: No source code is available for type com.smartgwt.client.widgets.layout.SectionStackSection; did you forget to inherit a required module?
+      Line 45: No source code is available for type com.smartgwt.client.widgets.form.DynamicForm; did you forget to inherit a required module?
+      Line 65: No source code is available for type com.smartgwt.client.widgets.layout.events.SectionHeaderClickHandler; did you forget to inherit a required module?
+      Line 68: No source code is available for type com.smartgwt.client.widgets.layout.events.SectionHeaderClickEvent; did you forget to inherit a required module?
+      Line 124: No source code is available for type ua.nure.pi.entity.Sertificate; did you forget to inherit a required module?
+   Errors in 'file:/E:/JavaSource_EE/CVSystem/CVSystem/src/ua/nure/pi/client/WorkExperienceSimplePanel.java'
+      Line 25: No source code is available for type com.smartgwt.client.widgets.layout.SectionStack; did you forget to inherit a required module?
+      Line 33: No source code is available for type com.smartgwt.client.types.VisibilityMode; did you forget to inherit a required module?
+      Line 37: No source code is available for type com.smartgwt.client.widgets.layout.SectionStackSection; did you forget to inherit a required module?
+      Line 45: No source code is available for type com.smartgwt.client.widgets.form.DynamicForm; did you forget to inherit a required module?
+      Line 65: No source code is available for type com.smartgwt.client.widgets.layout.events.SectionHeaderClickHandler; did you forget to inherit a required module?
+      Line 68: No source code is available for type com.smartgwt.client.widgets.layout.events.SectionHeaderClickEvent; did you forget to inherit a required module?
+      Line 124: No source code is available for type ua.nure.pi.entity.WorkExp; did you forget to inherit a required module?
+   Errors in 'file:/E:/JavaSource_EE/CVSystem/CVSystem/src/ua/nure/pi/client/WorkExperinceElementSimplePanel.java'
+      Line 62: No source code is available for type com.smartgwt.client.widgets.form.DynamicForm; did you forget to inherit a required module?
+      Line 66: No source code is available for type com.smartgwt.client.widgets.form.fields.TextItem; did you forget to inherit a required module?
+      Line 76: No source code is available for type ua.nure.pi.entity.typeOfDuration; did you forget to inherit a required module?
+      Line 80: No source code is available for type com.smartgwt.client.widgets.form.fields.SelectItem; did you forget to inherit a required module?
+      Line 86: No source code is available for type com.smartgwt.client.types.TitleOrientation; did you forget to inherit a required module?
+      Line 114: No source code is available for type ua.nure.pi.entity.WorkExp; did you forget to inherit a required module?
+Removing invalidated units
+Finding entry point classes
+Rebinding com.google.gwt.i18n.client.impl.LocaleInfoImpl
+   Invoking generator com.google.gwt.i18n.rebind.LocaleInfoGenerator
+      Processing interface com.google.gwt.i18n.client.constants.NumberConstantsImpl
+         Generating method body for notANumber()
+         Generating method body for currencyPattern()
+         Generating method body for decimalPattern()
+         Generating method body for decimalSeparator()
+         Generating method body for defCurrencyCode()
+         Generating method body for exponentialSymbol()
+         Generating method body for globalCurrencyPattern()
+         Generating method body for groupingSeparator()
+         Generating method body for infinity()
+         Generating method body for minusSign()
+         Generating method body for monetaryGroupingSeparator()
+         Generating method body for monetarySeparator()
+         Generating method body for percent()
+         Generating method body for percentPattern()
+         Generating method body for perMill()
+         Generating method body for plusSign()
+         Generating method body for scientificPattern()
+         Generating method body for simpleCurrencyPattern()
+         Generating method body for zeroDigit()
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,23 seconds
+      Removing invalidated units
+[ERROR] Errors in 'file:/E:/JavaSource_EE/CVSystem/CVSystem/src/ua/nure/pi/client/RegistrationSimplePanel.java'
+   [ERROR] Line 83: No source code is available for type ua.nure.pi.entity.Faculty; did you forget to inherit a required module?
+   [ERROR] Line 85: No source code is available for type com.smartgwt.client.widgets.form.fields.TextItem; did you forget to inherit a required module?
+   [ERROR] Line 89: No source code is available for type com.smartgwt.client.widgets.form.fields.DateItem; did you forget to inherit a required module?
+   [ERROR] Line 103: No source code is available for type com.smartgwt.client.widgets.form.DynamicForm; did you forget to inherit a required module?
+   [ERROR] Line 157: No source code is available for type com.smartgwt.client.widgets.form.validator.RegExpValidator; did you forget to inherit a required module?
+   [ERROR] Line 173: No source code is available for type com.smartgwt.client.widgets.form.fields.SelectItem; did you forget to inherit a required module?
+   [ERROR] Line 192: No source code is available for type com.smartgwt.client.types.MultiComboBoxLayoutStyle; did you forget to inherit a required module?
+   [ERROR] Line 193: No source code is available for type com.smartgwt.client.widgets.form.fields.MultiComboBoxItem; did you forget to inherit a required module?
+   [ERROR] Line 211: No source code is available for type com.smartgwt.client.widgets.form.fields.events.ChangedHandler; did you forget to inherit a required module?
+   [ERROR] Line 214: No source code is available for type com.smartgwt.client.widgets.form.fields.events.ChangedEvent; did you forget to inherit a required module?
+   [ERROR] Line 228: No source code is available for type com.smartgwt.client.widgets.form.fields.TextAreaItem; did you forget to inherit a required module?
+   [ERROR] Line 240: No source code is available for type com.smartgwt.client.widgets.form.fields.StaticTextItem; did you forget to inherit a required module?
+   [ERROR] Line 245: No source code is available for type com.smartgwt.client.types.TitleOrientation; did you forget to inherit a required module?
+   [ERROR] Line 279: No source code is available for type com.smartgwt.client.widgets.tree.TreeNode; did you forget to inherit a required module?
+   [ERROR] Line 287: No source code is available for type ua.nure.pi.entity.Group; did you forget to inherit a required module?
+   [ERROR] Line 303: No source code is available for type com.smartgwt.client.widgets.tree.Tree; did you forget to inherit a required module?
+   [ERROR] Line 304: No source code is available for type com.smartgwt.client.types.TreeModelType; did you forget to inherit a required module?
+   [ERROR] Line 308: No source code is available for type com.smartgwt.client.widgets.form.fields.PickTreeItem; did you forget to inherit a required module?
+   [ERROR] Line 322: No source code is available for type ua.nure.pi.entity.Student; did you forget to inherit a required module?
+[ERROR] Errors in 'file:/E:/JavaSource_EE/CVSystem/CVSystem/src/ua/nure/pi/client/RegistrationSimplePanel.java'
+   [ERROR] Line 83: No source code is available for type ua.nure.pi.entity.Faculty; did you forget to inherit a required module?
+   [ERROR] Line 85: No source code is available for type com.smartgwt.client.widgets.form.fields.TextItem; did you forget to inherit a required module?
+   [ERROR] Line 89: No source code is available for type com.smartgwt.client.widgets.form.fields.DateItem; did you forget to inherit a required module?
+   [ERROR] Line 103: No source code is available for type com.smartgwt.client.widgets.form.DynamicForm; did you forget to inherit a required module?
+   [ERROR] Line 157: No source code is available for type com.smartgwt.client.widgets.form.validator.RegExpValidator; did you forget to inherit a required module?
+   [ERROR] Line 173: No source code is available for type com.smartgwt.client.widgets.form.fields.SelectItem; did you forget to inherit a required module?
+   [ERROR] Line 192: No source code is available for type com.smartgwt.client.types.MultiComboBoxLayoutStyle; did you forget to inherit a required module?
+   [ERROR] Line 193: No source code is available for type com.smartgwt.client.widgets.form.fields.MultiComboBoxItem; did you forget to inherit a required module?
+   [ERROR] Line 211: No source code is available for type com.smartgwt.client.widgets.form.fields.events.ChangedHandler; did you forget to inherit a required module?
+   [ERROR] Line 214: No source code is available for type com.smartgwt.client.widgets.form.fields.events.ChangedEvent; did you forget to inherit a required module?
+   [ERROR] Line 228: No source code is available for type com.smartgwt.client.widgets.form.fields.TextAreaItem; did you forget to inherit a required module?
+   [ERROR] Line 240: No source code is available for type com.smartgwt.client.widgets.form.fields.StaticTextItem; did you forget to inherit a required module?
+   [ERROR] Line 245: No source code is available for type com.smartgwt.client.types.TitleOrientation; did you forget to inherit a required module?
+   [ERROR] Line 279: No source code is available for type com.smartgwt.client.widgets.tree.TreeNode; did you forget to inherit a required module?
+   [ERROR] Line 287: No source code is available for type ua.nure.pi.entity.Group; did you forget to inherit a required module?
+   [ERROR] Line 303: No source code is available for type com.smartgwt.client.widgets.tree.Tree; did you forget to inherit a required module?
+   [ERROR] Line 304: No source code is available for type com.smartgwt.client.types.TreeModelType; did you forget to inherit a required module?
+   [ERROR] Line 308: No source code is available for type com.smartgwt.client.widgets.form.fields.PickTreeItem; did you forget to inherit a required module?
+   [ERROR] Line 322: No source code is available for type ua.nure.pi.entity.Student; did you forget to inherit a required module?
+[ERROR] Errors in 'file:/E:/JavaSource_EE/CVSystem/CVSystem/src/ua/nure/pi/client/WorkExperienceSimplePanel.java'
+   [ERROR] Line 25: No source code is available for type com.smartgwt.client.widgets.layout.SectionStack; did you forget to inherit a required module?
+   [ERROR] Line 33: No source code is available for type com.smartgwt.client.types.VisibilityMode; did you forget to inherit a required module?
+   [ERROR] Line 37: No source code is available for type com.smartgwt.client.widgets.layout.SectionStackSection; did you forget to inherit a required module?
+   [ERROR] Line 45: No source code is available for type com.smartgwt.client.widgets.form.DynamicForm; did you forget to inherit a required module?
+   [ERROR] Line 65: No source code is available for type com.smartgwt.client.widgets.layout.events.SectionHeaderClickHandler; did you forget to inherit a required module?
+   [ERROR] Line 68: No source code is available for type com.smartgwt.client.widgets.layout.events.SectionHeaderClickEvent; did you forget to inherit a required module?
+   [ERROR] Line 124: No source code is available for type ua.nure.pi.entity.WorkExp; did you forget to inherit a required module?
+Public resources found in...
+Translatable source found in...
+Found 2764 cached/archived units.  Used 2764 / 2764 units from cache.
+Compiling...
+   Compilation completed in 0,00 seconds
+Validating units:
+   Errors in 'file:/E:/JavaSource_EE/CVSystem/CVSystem/src/ua/nure/pi/client/AddFacultiesCanvas.java'
+      Line 25: No source code is available for type com.smartgwt.client.widgets.Canvas; did you forget to inherit a required module?
+      Line 28: No source code is available for type ua.nure.pi.entity.Faculty; did you forget to inherit a required module?
+      Line 29: No source code is available for type com.smartgwt.client.widgets.menu.MenuItem; did you forget to inherit a required module?
+      Line 33: No source code is available for type com.smartgwt.client.widgets.menu.Menu; did you forget to inherit a required module?
+      Line 37: No source code is available for type com.smartgwt.client.widgets.grid.ListGridField; did you forget to inherit a required module?
+      Line 50: No source code is available for type com.smartgwt.client.widgets.menu.events.ItemClickHandler; did you forget to inherit a required module?
+      Line 51: No source code is available for type com.smartgwt.client.widgets.menu.events.ItemClickEvent; did you forget to inherit a required module?
+      Line 56: No source code is available for type com.smartgwt.client.widgets.Dialog; did you forget to inherit a required module?
+      Line 59: No source code is available for type com.smartgwt.client.util.ValueCallback; did you forget to inherit a required module?
+      Line 69: No source code is available for type com.smartgwt.client.util.SC; did you forget to inherit a required module?
+      Line 89: No source code is available for type com.smartgwt.client.widgets.menu.MenuButton; did you forget to inherit a required module?
+      Line 91: No source code is available for type com.smartgwt.client.widgets.layout.HStack; did you forget to inherit a required module?
+      Line 110: No source code is available for type ua.nure.pi.entity.Group; did you forget to inherit a required module?
+   Errors in 'file:/E:/JavaSource_EE/CVSystem/CVSystem/src/ua/nure/pi/client/AdminPanelEntryPoint.java'
+      Line 40: No source code is available for type com.smartgwt.client.widgets.HTMLFlow; did you forget to inherit a required module?
+      Line 41: No source code is available for type com.smartgwt.client.types.Overflow; did you forget to inherit a required module?
+      Line 53: No source code is available for type com.smartgwt.client.widgets.layout.SectionStack; did you forget to inherit a required module?
+      Line 54: No source code is available for type com.smartgwt.client.types.VisibilityMode; did you forget to inherit a required module?
+      Line 58: No source code is available for type com.smartgwt.client.widgets.layout.SectionStackSection; did you forget to inherit a required module?
+   Errors in 'file:/E:/JavaSource_EE/CVSystem/CVSystem/src/ua/nure/pi/client/AdminPanelService.java'
+      Line 41: No source code is available for type ua.nure.pi.entity.Faculty; did you forget to inherit a required module?
+      Line 45: No source code is available for type ua.nure.pi.entity.Group; did you forget to inherit a required module?
+   Errors in 'file:/E:/JavaSource_EE/CVSystem/CVSystem/src/ua/nure/pi/client/AdminPanelServiceAsync.java'
+      Line 12: No source code is available for type ua.nure.pi.entity.Faculty; did you forget to inherit a required module?
+      Line 16: No source code is available for type ua.nure.pi.entity.Group; did you forget to inherit a required module?
+   Errors in 'file:/E:/JavaSource_EE/CVSystem/CVSystem/src/ua/nure/pi/client/EducationElementSimplePanel.java'
+      Line 97: No source code is available for type ua.nure.pi.entity.Education; did you forget to inherit a required module?
+   Errors in 'file:/E:/JavaSource_EE/CVSystem/CVSystem/src/ua/nure/pi/client/EducationSimplePanel.java'
+      Line 25: No source code is available for type com.smartgwt.client.widgets.layout.SectionStack; did you forget to inherit a required module?
+      Line 33: No source code is available for type com.smartgwt.client.types.VisibilityMode; did you forget to inherit a required module?
+      Line 37: No source code is available for type com.smartgwt.client.widgets.layout.SectionStackSection; did you forget to inherit a required module?
+      Line 45: No source code is available for type com.smartgwt.client.widgets.form.DynamicForm; did you forget to inherit a required module?
+      Line 65: No source code is available for type com.smartgwt.client.widgets.layout.events.SectionHeaderClickHandler; did you forget to inherit a required module?
+      Line 68: No source code is available for type com.smartgwt.client.widgets.layout.events.SectionHeaderClickEvent; did you forget to inherit a required module?
+      Line 124: No source code is available for type ua.nure.pi.entity.Education; did you forget to inherit a required module?
+   Errors in 'file:/E:/JavaSource_EE/CVSystem/CVSystem/src/ua/nure/pi/client/ExprienceSimplePanel.java'
+      Line 38: No source code is available for type com.smartgwt.client.widgets.layout.VLayout; did you forget to inherit a required module?
+      Line 40: No source code is available for type com.smartgwt.client.widgets.Label; did you forget to inherit a required module?
+      Line 47: No source code is available for type com.smartgwt.client.widgets.form.DynamicForm; did you forget to inherit a required module?
+      Line 53: No source code is available for type com.smartgwt.client.widgets.grid.ListGrid; did you forget to inherit a required module?
+      Line 57: No source code is available for type com.smartgwt.client.widgets.grid.events.RecordClickHandler; did you forget to inherit a required module?
+      Line 58: No source code is available for type com.smartgwt.client.widgets.grid.events.RecordClickEvent; did you forget to inherit a required module?
+      Line 67: No source code is available for type com.smartgwt.client.widgets.IButton; did you forget to inherit a required module?
+      Line 68: No source code is available for type com.smartgwt.client.widgets.events.ClickHandler; did you forget to inherit a required module?
+      Line 69: No source code is available for type com.smartgwt.client.widgets.events.ClickEvent; did you forget to inherit a required module?
+   Errors in 'file:/E:/JavaSource_EE/CVSystem/CVSystem/src/ua/nure/pi/client/LanguageElementSimplePanel.java'
+      Line 34: No source code is available for type com.smartgwt.client.widgets.form.fields.RadioGroupItem; did you forget to inherit a required module?
+      Line 86: No source code is available for type com.smartgwt.client.widgets.form.fields.events.ChangedHandler; did you forget to inherit a required module?
+      Line 87: No source code is available for type com.smartgwt.client.widgets.form.fields.events.ChangedEvent; did you forget to inherit a required module?
+      Line 93: No source code is available for type com.smartgwt.client.widgets.form.DynamicForm; did you forget to inherit a required module?
+      Line 104: No source code is available for type ua.nure.pi.entity.Language; did you forget to inherit a required module?
+   Errors in 'file:/E:/JavaSource_EE/CVSystem/CVSystem/src/ua/nure/pi/client/LanguageSimplePanel.java'
+      Line 25: No source code is available for type com.smartgwt.client.widgets.layout.SectionStack; did you forget to inherit a required module?
+      Line 33: No source code is available for type com.smartgwt.client.types.VisibilityMode; did you forget to inherit a required module?
+      Line 37: No source code is available for type com.smartgwt.client.widgets.layout.SectionStackSection; did you forget to inherit a required module?
+      Line 45: No source code is available for type com.smartgwt.client.widgets.form.DynamicForm; did you forget to inherit a required module?
+      Line 65: No source code is available for type com.smartgwt.client.widgets.layout.events.SectionHeaderClickHandler; did you forget to inherit a required module?
+      Line 68: No source code is available for type com.smartgwt.client.widgets.layout.events.SectionHeaderClickEvent; did you forget to inherit a required module?
+      Line 123: No source code is available for type ua.nure.pi.entity.Language; did you forget to inherit a required module?
+   Errors in 'file:/E:/JavaSource_EE/CVSystem/CVSystem/src/ua/nure/pi/client/MainService.java'
+      Line 15: No source code is available for type ua.nure.pi.entity.Faculty; did you forget to inherit a required module?
+   Errors in 'file:/E:/JavaSource_EE/CVSystem/CVSystem/src/ua/nure/pi/client/MainServiceAsync.java'
+      Line 13: No source code is available for type ua.nure.pi.entity.Faculty; did you forget to inherit a required module?
+   Errors in 'file:/E:/JavaSource_EE/CVSystem/CVSystem/src/ua/nure/pi/client/RegistrationService.java'
+      Line 17: No source code is available for type ua.nure.pi.entity.Faculty; did you forget to inherit a required module?
+   Errors in 'file:/E:/JavaSource_EE/CVSystem/CVSystem/src/ua/nure/pi/client/RegistrationServiceAsync.java'
+      Line 16: No source code is available for type ua.nure.pi.entity.Faculty; did you forget to inherit a required module?
+   Errors in 'file:/E:/JavaSource_EE/CVSystem/CVSystem/src/ua/nure/pi/client/RegistrationSimplePanel.java'
+      Line 83: No source code is available for type ua.nure.pi.entity.Faculty; did you forget to inherit a required module?
+      Line 85: No source code is available for type com.smartgwt.client.widgets.form.fields.TextItem; did you forget to inherit a required module?
+      Line 89: No source code is available for type com.smartgwt.client.widgets.form.fields.DateItem; did you forget to inherit a required module?
+      Line 103: No source code is available for type com.smartgwt.client.widgets.form.DynamicForm; did you forget to inherit a required module?
+      Line 157: No source code is available for type com.smartgwt.client.widgets.form.validator.RegExpValidator; did you forget to inherit a required module?
+      Line 173: No source code is available for type com.smartgwt.client.widgets.form.fields.SelectItem; did you forget to inherit a required module?
+      Line 192: No source code is available for type com.smartgwt.client.types.MultiComboBoxLayoutStyle; did you forget to inherit a required module?
+      Line 193: No source code is available for type com.smartgwt.client.widgets.form.fields.MultiComboBoxItem; did you forget to inherit a required module?
+      Line 211: No source code is available for type com.smartgwt.client.widgets.form.fields.events.ChangedHandler; did you forget to inherit a required module?
+      Line 214: No source code is available for type com.smartgwt.client.widgets.form.fields.events.ChangedEvent; did you forget to inherit a required module?
+      Line 228: No source code is available for type com.smartgwt.client.widgets.form.fields.TextAreaItem; did you forget to inherit a required module?
+      Line 240: No source code is available for type com.smartgwt.client.widgets.form.fields.StaticTextItem; did you forget to inherit a required module?
+      Line 245: No source code is available for type com.smartgwt.client.types.TitleOrientation; did you forget to inherit a required module?
+      Line 279: No source code is available for type com.smartgwt.client.widgets.tree.TreeNode; did you forget to inherit a required module?
+      Line 287: No source code is available for type ua.nure.pi.entity.Group; did you forget to inherit a required module?
+      Line 303: No source code is available for type com.smartgwt.client.widgets.tree.Tree; did you forget to inherit a required module?
+      Line 304: No source code is available for type com.smartgwt.client.types.TreeModelType; did you forget to inherit a required module?
+      Line 308: No source code is available for type com.smartgwt.client.widgets.form.fields.PickTreeItem; did you forget to inherit a required module?
+      Line 322: No source code is available for type ua.nure.pi.entity.Student; did you forget to inherit a required module?
+   Errors in 'file:/E:/JavaSource_EE/CVSystem/CVSystem/src/ua/nure/pi/client/SertificateElementSimplePanel.java'
+      Line 38: No source code is available for type com.smartgwt.client.widgets.form.fields.TextItem; did you forget to inherit a required module?
+      Line 64: No source code is available for type com.smartgwt.client.widgets.form.DynamicForm; did you forget to inherit a required module?
+      Line 75: No source code is available for type com.smartgwt.client.types.TitleOrientation; did you forget to inherit a required module?
+      Line 94: No source code is available for type ua.nure.pi.entity.Sertificate; did you forget to inherit a required module?
+   Errors in 'file:/E:/JavaSource_EE/CVSystem/CVSystem/src/ua/nure/pi/client/SertificateSimplePanel.java'
+      Line 25: No source code is available for type com.smartgwt.client.widgets.layout.SectionStack; did you forget to inherit a required module?
+      Line 33: No source code is available for type com.smartgwt.client.types.VisibilityMode; did you forget to inherit a required module?
+      Line 37: No source code is available for type com.smartgwt.client.widgets.layout.SectionStackSection; did you forget to inherit a required module?
+      Line 45: No source code is available for type com.smartgwt.client.widgets.form.DynamicForm; did you forget to inherit a required module?
+      Line 65: No source code is available for type com.smartgwt.client.widgets.layout.events.SectionHeaderClickHandler; did you forget to inherit a required module?
+      Line 68: No source code is available for type com.smartgwt.client.widgets.layout.events.SectionHeaderClickEvent; did you forget to inherit a required module?
+      Line 124: No source code is available for type ua.nure.pi.entity.Sertificate; did you forget to inherit a required module?
+   Errors in 'file:/E:/JavaSource_EE/CVSystem/CVSystem/src/ua/nure/pi/client/WorkExperienceSimplePanel.java'
+      Line 25: No source code is available for type com.smartgwt.client.widgets.layout.SectionStack; did you forget to inherit a required module?
+      Line 33: No source code is available for type com.smartgwt.client.types.VisibilityMode; did you forget to inherit a required module?
+      Line 37: No source code is available for type com.smartgwt.client.widgets.layout.SectionStackSection; did you forget to inherit a required module?
+      Line 45: No source code is available for type com.smartgwt.client.widgets.form.DynamicForm; did you forget to inherit a required module?
+      Line 65: No source code is available for type com.smartgwt.client.widgets.layout.events.SectionHeaderClickHandler; did you forget to inherit a required module?
+      Line 68: No source code is available for type com.smartgwt.client.widgets.layout.events.SectionHeaderClickEvent; did you forget to inherit a required module?
+      Line 124: No source code is available for type ua.nure.pi.entity.WorkExp; did you forget to inherit a required module?
+   Errors in 'file:/E:/JavaSource_EE/CVSystem/CVSystem/src/ua/nure/pi/client/WorkExperinceElementSimplePanel.java'
+      Line 62: No source code is available for type com.smartgwt.client.widgets.form.DynamicForm; did you forget to inherit a required module?
+      Line 66: No source code is available for type com.smartgwt.client.widgets.form.fields.TextItem; did you forget to inherit a required module?
+      Line 76: No source code is available for type ua.nure.pi.entity.typeOfDuration; did you forget to inherit a required module?
+      Line 80: No source code is available for type com.smartgwt.client.widgets.form.fields.SelectItem; did you forget to inherit a required module?
+      Line 86: No source code is available for type com.smartgwt.client.types.TitleOrientation; did you forget to inherit a required module?
+      Line 114: No source code is available for type ua.nure.pi.entity.WorkExp; did you forget to inherit a required module?
+Removing invalidated units
+Finding entry point classes
+Rebinding com.google.gwt.i18n.client.impl.LocaleInfoImpl
+   Invoking generator com.google.gwt.i18n.rebind.LocaleInfoGenerator
+      Processing interface com.google.gwt.i18n.client.constants.NumberConstantsImpl
+         Generating method body for notANumber()
+         Generating method body for currencyPattern()
+         Generating method body for decimalPattern()
+         Generating method body for decimalSeparator()
+         Generating method body for defCurrencyCode()
+         Generating method body for exponentialSymbol()
+         Generating method body for globalCurrencyPattern()
+         Generating method body for groupingSeparator()
+         Generating method body for infinity()
+         Generating method body for minusSign()
+         Generating method body for monetaryGroupingSeparator()
+         Generating method body for monetarySeparator()
+         Generating method body for percent()
+         Generating method body for percentPattern()
+         Generating method body for perMill()
+         Generating method body for plusSign()
+         Generating method body for scientificPattern()
+         Generating method body for simpleCurrencyPattern()
+         Generating method body for zeroDigit()
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding com.google.gwt.user.client.ui.impl.ClippedImageImpl.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface com.google.gwt.user.client.ui.impl.ClippedImageImpl.Template
+         Generating method body for image()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,07 seconds
+      Removing invalidated units
+Public resources found in...
+Translatable source found in...
+Found 0 cached/archived units.  Used 0 / 2737 units from cache.
+Compiling...
+   0% complete (ETR: 91 seconds)
+   10% complete (ETR: 98 seconds)
+   20% complete (ETR: 62 seconds)
+   30% complete (ETR: 45 seconds)
+   40% complete (ETR: 32 seconds)
+   50% complete (ETR: 26 seconds)
+   60% complete (ETR: 19 seconds)
+   70% complete (ETR: 13 seconds)
+   80% complete (ETR: 8 seconds)
+   90% complete (ETR: 4 seconds)
+   100% complete (ETR: 0 seconds)
+   Compilation completed in 72,56 seconds
+Removing invalidated units
+Finding entry point classes
+Public resources found in...
+Translatable source found in...
+Found 2737 cached/archived units.  Used 2737 / 2737 units from cache.
+Compiling...
+   Compilation completed in 0,01 seconds
+Removing invalidated units
+Finding entry point classes
+Public resources found in...
+Translatable source found in...
+Found 2737 cached/archived units.  Used 2737 / 2737 units from cache.
+Compiling...
+   Compilation completed in 0,15 seconds
+Removing invalidated units
+Finding entry point classes
+Public resources found in...
+Translatable source found in...
+Found 2737 cached/archived units.  Used 2737 / 2764 units from cache.
+Compiling...
+   20% complete (ETR: 12 seconds)
+   30% complete (ETR: 10 seconds)
+   30% complete (ETR: 12 seconds)
+   40% complete (ETR: 10 seconds)
+   40% complete (ETR: 9 seconds)
+   50% complete (ETR: 7 seconds)
+   60% complete (ETR: 4 seconds)
+   70% complete (ETR: 3 seconds)
+   80% complete (ETR: 2 seconds)
+   90% complete (ETR: 1 seconds)
+   100% complete (ETR: 0 seconds)
+   Compilation completed in 9,22 seconds
+Validating units:
+   Errors in 'file:/E:/JavaSource_EE/CVSystem/CVSystem/src/ua/nure/pi/client/AddFacultiesCanvas.java'
+      Line 25: No source code is available for type com.smartgwt.client.widgets.Canvas; did you forget to inherit a required module?
+      Line 28: No source code is available for type ua.nure.pi.entity.Faculty; did you forget to inherit a required module?
+      Line 29: No source code is available for type com.smartgwt.client.widgets.menu.MenuItem; did you forget to inherit a required module?
+      Line 33: No source code is available for type com.smartgwt.client.widgets.menu.Menu; did you forget to inherit a required module?
+      Line 37: No source code is available for type com.smartgwt.client.widgets.grid.ListGridField; did you forget to inherit a required module?
+      Line 50: No source code is available for type com.smartgwt.client.widgets.menu.events.ItemClickHandler; did you forget to inherit a required module?
+      Line 51: No source code is available for type com.smartgwt.client.widgets.menu.events.ItemClickEvent; did you forget to inherit a required module?
+      Line 56: No source code is available for type com.smartgwt.client.widgets.Dialog; did you forget to inherit a required module?
+      Line 59: No source code is available for type com.smartgwt.client.util.ValueCallback; did you forget to inherit a required module?
+      Line 69: No source code is available for type com.smartgwt.client.util.SC; did you forget to inherit a required module?
+      Line 89: No source code is available for type com.smartgwt.client.widgets.menu.MenuButton; did you forget to inherit a required module?
+      Line 91: No source code is available for type com.smartgwt.client.widgets.layout.HStack; did you forget to inherit a required module?
+      Line 110: No source code is available for type ua.nure.pi.entity.Group; did you forget to inherit a required module?
+   Errors in 'file:/E:/JavaSource_EE/CVSystem/CVSystem/src/ua/nure/pi/client/AdminPanelEntryPoint.java'
+      Line 40: No source code is available for type com.smartgwt.client.widgets.HTMLFlow; did you forget to inherit a required module?
+      Line 41: No source code is available for type com.smartgwt.client.types.Overflow; did you forget to inherit a required module?
+      Line 53: No source code is available for type com.smartgwt.client.widgets.layout.SectionStack; did you forget to inherit a required module?
+      Line 54: No source code is available for type com.smartgwt.client.types.VisibilityMode; did you forget to inherit a required module?
+      Line 58: No source code is available for type com.smartgwt.client.widgets.layout.SectionStackSection; did you forget to inherit a required module?
+   Errors in 'file:/E:/JavaSource_EE/CVSystem/CVSystem/src/ua/nure/pi/client/AdminPanelService.java'
+      Line 41: No source code is available for type ua.nure.pi.entity.Faculty; did you forget to inherit a required module?
+      Line 45: No source code is available for type ua.nure.pi.entity.Group; did you forget to inherit a required module?
+   Errors in 'file:/E:/JavaSource_EE/CVSystem/CVSystem/src/ua/nure/pi/client/AdminPanelServiceAsync.java'
+      Line 12: No source code is available for type ua.nure.pi.entity.Faculty; did you forget to inherit a required module?
+      Line 16: No source code is available for type ua.nure.pi.entity.Group; did you forget to inherit a required module?
+   Errors in 'file:/E:/JavaSource_EE/CVSystem/CVSystem/src/ua/nure/pi/client/EducationElementSimplePanel.java'
+      Line 97: No source code is available for type ua.nure.pi.entity.Education; did you forget to inherit a required module?
+   Errors in 'file:/E:/JavaSource_EE/CVSystem/CVSystem/src/ua/nure/pi/client/EducationSimplePanel.java'
+      Line 25: No source code is available for type com.smartgwt.client.widgets.layout.SectionStack; did you forget to inherit a required module?
+      Line 33: No source code is available for type com.smartgwt.client.types.VisibilityMode; did you forget to inherit a required module?
+      Line 37: No source code is available for type com.smartgwt.client.widgets.layout.SectionStackSection; did you forget to inherit a required module?
+      Line 45: No source code is available for type com.smartgwt.client.widgets.form.DynamicForm; did you forget to inherit a required module?
+      Line 65: No source code is available for type com.smartgwt.client.widgets.layout.events.SectionHeaderClickHandler; did you forget to inherit a required module?
+      Line 68: No source code is available for type com.smartgwt.client.widgets.layout.events.SectionHeaderClickEvent; did you forget to inherit a required module?
+      Line 124: No source code is available for type ua.nure.pi.entity.Education; did you forget to inherit a required module?
+   Errors in 'file:/E:/JavaSource_EE/CVSystem/CVSystem/src/ua/nure/pi/client/ExprienceSimplePanel.java'
+      Line 38: No source code is available for type com.smartgwt.client.widgets.layout.VLayout; did you forget to inherit a required module?
+      Line 40: No source code is available for type com.smartgwt.client.widgets.Label; did you forget to inherit a required module?
+      Line 47: No source code is available for type com.smartgwt.client.widgets.form.DynamicForm; did you forget to inherit a required module?
+      Line 53: No source code is available for type com.smartgwt.client.widgets.grid.ListGrid; did you forget to inherit a required module?
+      Line 57: No source code is available for type com.smartgwt.client.widgets.grid.events.RecordClickHandler; did you forget to inherit a required module?
+      Line 58: No source code is available for type com.smartgwt.client.widgets.grid.events.RecordClickEvent; did you forget to inherit a required module?
+      Line 67: No source code is available for type com.smartgwt.client.widgets.IButton; did you forget to inherit a required module?
+      Line 68: No source code is available for type com.smartgwt.client.widgets.events.ClickHandler; did you forget to inherit a required module?
+      Line 69: No source code is available for type com.smartgwt.client.widgets.events.ClickEvent; did you forget to inherit a required module?
+   Errors in 'file:/E:/JavaSource_EE/CVSystem/CVSystem/src/ua/nure/pi/client/LanguageElementSimplePanel.java'
+      Line 34: No source code is available for type com.smartgwt.client.widgets.form.fields.RadioGroupItem; did you forget to inherit a required module?
+      Line 86: No source code is available for type com.smartgwt.client.widgets.form.fields.events.ChangedHandler; did you forget to inherit a required module?
+      Line 87: No source code is available for type com.smartgwt.client.widgets.form.fields.events.ChangedEvent; did you forget to inherit a required module?
+      Line 93: No source code is available for type com.smartgwt.client.widgets.form.DynamicForm; did you forget to inherit a required module?
+      Line 104: No source code is available for type ua.nure.pi.entity.Language; did you forget to inherit a required module?
+   Errors in 'file:/E:/JavaSource_EE/CVSystem/CVSystem/src/ua/nure/pi/client/LanguageSimplePanel.java'
+      Line 25: No source code is available for type com.smartgwt.client.widgets.layout.SectionStack; did you forget to inherit a required module?
+      Line 33: No source code is available for type com.smartgwt.client.types.VisibilityMode; did you forget to inherit a required module?
+      Line 37: No source code is available for type com.smartgwt.client.widgets.layout.SectionStackSection; did you forget to inherit a required module?
+      Line 45: No source code is available for type com.smartgwt.client.widgets.form.DynamicForm; did you forget to inherit a required module?
+      Line 65: No source code is available for type com.smartgwt.client.widgets.layout.events.SectionHeaderClickHandler; did you forget to inherit a required module?
+      Line 68: No source code is available for type com.smartgwt.client.widgets.layout.events.SectionHeaderClickEvent; did you forget to inherit a required module?
+      Line 123: No source code is available for type ua.nure.pi.entity.Language; did you forget to inherit a required module?
+   Errors in 'file:/E:/JavaSource_EE/CVSystem/CVSystem/src/ua/nure/pi/client/MainService.java'
+      Line 15: No source code is available for type ua.nure.pi.entity.Faculty; did you forget to inherit a required module?
+   Errors in 'file:/E:/JavaSource_EE/CVSystem/CVSystem/src/ua/nure/pi/client/MainServiceAsync.java'
+      Line 13: No source code is available for type ua.nure.pi.entity.Faculty; did you forget to inherit a required module?
+   Errors in 'file:/E:/JavaSource_EE/CVSystem/CVSystem/src/ua/nure/pi/client/RegistrationService.java'
+      Line 17: No source code is available for type ua.nure.pi.entity.Faculty; did you forget to inherit a required module?
+   Errors in 'file:/E:/JavaSource_EE/CVSystem/CVSystem/src/ua/nure/pi/client/RegistrationServiceAsync.java'
+      Line 16: No source code is available for type ua.nure.pi.entity.Faculty; did you forget to inherit a required module?
+   Errors in 'file:/E:/JavaSource_EE/CVSystem/CVSystem/src/ua/nure/pi/client/RegistrationSimplePanel.java'
+      Line 83: No source code is available for type ua.nure.pi.entity.Faculty; did you forget to inherit a required module?
+      Line 85: No source code is available for type com.smartgwt.client.widgets.form.fields.TextItem; did you forget to inherit a required module?
+      Line 89: No source code is available for type com.smartgwt.client.widgets.form.fields.DateItem; did you forget to inherit a required module?
+      Line 103: No source code is available for type com.smartgwt.client.widgets.form.DynamicForm; did you forget to inherit a required module?
+      Line 157: No source code is available for type com.smartgwt.client.widgets.form.validator.RegExpValidator; did you forget to inherit a required module?
+      Line 173: No source code is available for type com.smartgwt.client.widgets.form.fields.SelectItem; did you forget to inherit a required module?
+      Line 192: No source code is available for type com.smartgwt.client.types.MultiComboBoxLayoutStyle; did you forget to inherit a required module?
+      Line 193: No source code is available for type com.smartgwt.client.widgets.form.fields.MultiComboBoxItem; did you forget to inherit a required module?
+      Line 211: No source code is available for type com.smartgwt.client.widgets.form.fields.events.ChangedHandler; did you forget to inherit a required module?
+      Line 214: No source code is available for type com.smartgwt.client.widgets.form.fields.events.ChangedEvent; did you forget to inherit a required module?
+      Line 228: No source code is available for type com.smartgwt.client.widgets.form.fields.TextAreaItem; did you forget to inherit a required module?
+      Line 240: No source code is available for type com.smartgwt.client.widgets.form.fields.StaticTextItem; did you forget to inherit a required module?
+      Line 245: No source code is available for type com.smartgwt.client.types.TitleOrientation; did you forget to inherit a required module?
+      Line 279: No source code is available for type com.smartgwt.client.widgets.tree.TreeNode; did you forget to inherit a required module?
+      Line 287: No source code is available for type ua.nure.pi.entity.Group; did you forget to inherit a required module?
+      Line 303: No source code is available for type com.smartgwt.client.widgets.tree.Tree; did you forget to inherit a required module?
+      Line 304: No source code is available for type com.smartgwt.client.types.TreeModelType; did you forget to inherit a required module?
+      Line 308: No source code is available for type com.smartgwt.client.widgets.form.fields.PickTreeItem; did you forget to inherit a required module?
+      Line 322: No source code is available for type ua.nure.pi.entity.Student; did you forget to inherit a required module?
+   Errors in 'file:/E:/JavaSource_EE/CVSystem/CVSystem/src/ua/nure/pi/client/SertificateElementSimplePanel.java'
+      Line 38: No source code is available for type com.smartgwt.client.widgets.form.fields.TextItem; did you forget to inherit a required module?
+      Line 64: No source code is available for type com.smartgwt.client.widgets.form.DynamicForm; did you forget to inherit a required module?
+      Line 75: No source code is available for type com.smartgwt.client.types.TitleOrientation; did you forget to inherit a required module?
+      Line 94: No source code is available for type ua.nure.pi.entity.Sertificate; did you forget to inherit a required module?
+   Errors in 'file:/E:/JavaSource_EE/CVSystem/CVSystem/src/ua/nure/pi/client/SertificateSimplePanel.java'
+      Line 25: No source code is available for type com.smartgwt.client.widgets.layout.SectionStack; did you forget to inherit a required module?
+      Line 33: No source code is available for type com.smartgwt.client.types.VisibilityMode; did you forget to inherit a required module?
+      Line 37: No source code is available for type com.smartgwt.client.widgets.layout.SectionStackSection; did you forget to inherit a required module?
+      Line 45: No source code is available for type com.smartgwt.client.widgets.form.DynamicForm; did you forget to inherit a required module?
+      Line 65: No source code is available for type com.smartgwt.client.widgets.layout.events.SectionHeaderClickHandler; did you forget to inherit a required module?
+      Line 68: No source code is available for type com.smartgwt.client.widgets.layout.events.SectionHeaderClickEvent; did you forget to inherit a required module?
+      Line 124: No source code is available for type ua.nure.pi.entity.Sertificate; did you forget to inherit a required module?
+   Errors in 'file:/E:/JavaSource_EE/CVSystem/CVSystem/src/ua/nure/pi/client/WorkExperienceSimplePanel.java'
+      Line 25: No source code is available for type com.smartgwt.client.widgets.layout.SectionStack; did you forget to inherit a required module?
+      Line 33: No source code is available for type com.smartgwt.client.types.VisibilityMode; did you forget to inherit a required module?
+      Line 37: No source code is available for type com.smartgwt.client.widgets.layout.SectionStackSection; did you forget to inherit a required module?
+      Line 45: No source code is available for type com.smartgwt.client.widgets.form.DynamicForm; did you forget to inherit a required module?
+      Line 65: No source code is available for type com.smartgwt.client.widgets.layout.events.SectionHeaderClickHandler; did you forget to inherit a required module?
+      Line 68: No source code is available for type com.smartgwt.client.widgets.layout.events.SectionHeaderClickEvent; did you forget to inherit a required module?
+      Line 124: No source code is available for type ua.nure.pi.entity.WorkExp; did you forget to inherit a required module?
+   Errors in 'file:/E:/JavaSource_EE/CVSystem/CVSystem/src/ua/nure/pi/client/WorkExperinceElementSimplePanel.java'
+      Line 62: No source code is available for type com.smartgwt.client.widgets.form.DynamicForm; did you forget to inherit a required module?
+      Line 66: No source code is available for type com.smartgwt.client.widgets.form.fields.TextItem; did you forget to inherit a required module?
+      Line 76: No source code is available for type ua.nure.pi.entity.typeOfDuration; did you forget to inherit a required module?
+      Line 80: No source code is available for type com.smartgwt.client.widgets.form.fields.SelectItem; did you forget to inherit a required module?
+      Line 86: No source code is available for type com.smartgwt.client.types.TitleOrientation; did you forget to inherit a required module?
+      Line 114: No source code is available for type ua.nure.pi.entity.WorkExp; did you forget to inherit a required module?
+Removing invalidated units
+Finding entry point classes
+Rebinding com.google.gwt.i18n.client.impl.LocaleInfoImpl
+   Invoking generator com.google.gwt.i18n.rebind.LocaleInfoGenerator
+      Processing interface com.google.gwt.i18n.client.constants.NumberConstantsImpl
+         Generating method body for notANumber()
+         Generating method body for currencyPattern()
+         Generating method body for decimalPattern()
+         Generating method body for decimalSeparator()
+         Generating method body for defCurrencyCode()
+         Generating method body for exponentialSymbol()
+         Generating method body for globalCurrencyPattern()
+         Generating method body for groupingSeparator()
+         Generating method body for infinity()
+         Generating method body for minusSign()
+         Generating method body for monetaryGroupingSeparator()
+         Generating method body for monetarySeparator()
+         Generating method body for percent()
+         Generating method body for percentPattern()
+         Generating method body for perMill()
+         Generating method body for plusSign()
+         Generating method body for scientificPattern()
+         Generating method body for simpleCurrencyPattern()
+         Generating method body for zeroDigit()
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,18 seconds
+      Removing invalidated units
+[ERROR] Errors in 'file:/E:/JavaSource_EE/CVSystem/CVSystem/src/ua/nure/pi/client/EducationSimplePanel.java'
+   [ERROR] Line 25: No source code is available for type com.smartgwt.client.widgets.layout.SectionStack; did you forget to inherit a required module?
+   [ERROR] Line 33: No source code is available for type com.smartgwt.client.types.VisibilityMode; did you forget to inherit a required module?
+   [ERROR] Line 37: No source code is available for type com.smartgwt.client.widgets.layout.SectionStackSection; did you forget to inherit a required module?
+   [ERROR] Line 45: No source code is available for type com.smartgwt.client.widgets.form.DynamicForm; did you forget to inherit a required module?
+   [ERROR] Line 65: No source code is available for type com.smartgwt.client.widgets.layout.events.SectionHeaderClickHandler; did you forget to inherit a required module?
+   [ERROR] Line 68: No source code is available for type com.smartgwt.client.widgets.layout.events.SectionHeaderClickEvent; did you forget to inherit a required module?
+   [ERROR] Line 124: No source code is available for type ua.nure.pi.entity.Education; did you forget to inherit a required module?
+[ERROR] Errors in 'file:/E:/JavaSource_EE/CVSystem/CVSystem/src/ua/nure/pi/client/EducationSimplePanel.java'
+   [ERROR] Line 25: No source code is available for type com.smartgwt.client.widgets.layout.SectionStack; did you forget to inherit a required module?
+   [ERROR] Line 33: No source code is available for type com.smartgwt.client.types.VisibilityMode; did you forget to inherit a required module?
+   [ERROR] Line 37: No source code is available for type com.smartgwt.client.widgets.layout.SectionStackSection; did you forget to inherit a required module?
+   [ERROR] Line 45: No source code is available for type com.smartgwt.client.widgets.form.DynamicForm; did you forget to inherit a required module?
+   [ERROR] Line 65: No source code is available for type com.smartgwt.client.widgets.layout.events.SectionHeaderClickHandler; did you forget to inherit a required module?
+   [ERROR] Line 68: No source code is available for type com.smartgwt.client.widgets.layout.events.SectionHeaderClickEvent; did you forget to inherit a required module?
+   [ERROR] Line 124: No source code is available for type ua.nure.pi.entity.Education; did you forget to inherit a required module?
+[ERROR] Errors in 'file:/E:/JavaSource_EE/CVSystem/CVSystem/src/ua/nure/pi/client/EducationSimplePanel.java'
+   [ERROR] Line 25: No source code is available for type com.smartgwt.client.widgets.layout.SectionStack; did you forget to inherit a required module?
+   [ERROR] Line 33: No source code is available for type com.smartgwt.client.types.VisibilityMode; did you forget to inherit a required module?
+   [ERROR] Line 37: No source code is available for type com.smartgwt.client.widgets.layout.SectionStackSection; did you forget to inherit a required module?
+   [ERROR] Line 45: No source code is available for type com.smartgwt.client.widgets.form.DynamicForm; did you forget to inherit a required module?
+   [ERROR] Line 65: No source code is available for type com.smartgwt.client.widgets.layout.events.SectionHeaderClickHandler; did you forget to inherit a required module?
+   [ERROR] Line 68: No source code is available for type com.smartgwt.client.widgets.layout.events.SectionHeaderClickEvent; did you forget to inherit a required module?
+   [ERROR] Line 124: No source code is available for type ua.nure.pi.entity.Education; did you forget to inherit a required module?
+[ERROR] Errors in 'file:/E:/JavaSource_EE/CVSystem/CVSystem/src/ua/nure/pi/client/EducationSimplePanel.java'
+   [ERROR] Line 25: No source code is available for type com.smartgwt.client.widgets.layout.SectionStack; did you forget to inherit a required module?
+   [ERROR] Line 33: No source code is available for type com.smartgwt.client.types.VisibilityMode; did you forget to inherit a required module?
+   [ERROR] Line 37: No source code is available for type com.smartgwt.client.widgets.layout.SectionStackSection; did you forget to inherit a required module?
+   [ERROR] Line 45: No source code is available for type com.smartgwt.client.widgets.form.DynamicForm; did you forget to inherit a required module?
+   [ERROR] Line 65: No source code is available for type com.smartgwt.client.widgets.layout.events.SectionHeaderClickHandler; did you forget to inherit a required module?
+   [ERROR] Line 68: No source code is available for type com.smartgwt.client.widgets.layout.events.SectionHeaderClickEvent; did you forget to inherit a required module?
+   [ERROR] Line 124: No source code is available for type ua.nure.pi.entity.Education; did you forget to inherit a required module?
+Public resources found in...
+Translatable source found in...
+Found 0 cached/archived units.  Used 0 / 2737 units from cache.
+Compiling...
+   0% complete (ETR: 94 seconds)
+   10% complete (ETR: 73 seconds)
+   20% complete (ETR: 45 seconds)
+   30% complete (ETR: 31 seconds)
+   40% complete (ETR: 23 seconds)
+   50% complete (ETR: 19 seconds)
+   60% complete (ETR: 14 seconds)
+   70% complete (ETR: 9 seconds)
+   80% complete (ETR: 6 seconds)
+   90% complete (ETR: 3 seconds)
+   100% complete (ETR: 0 seconds)
+   Compilation completed in 94,62 seconds
+Removing invalidated units
+Finding entry point classes
+Public resources found in...
+Translatable source found in...
+Found 2737 cached/archived units.  Used 2737 / 2737 units from cache.
+Compiling...
+   Compilation completed in 0,00 seconds
+Removing invalidated units
+Finding entry point classes
+Public resources found in...
+Translatable source found in...
+Found 2737 cached/archived units.  Used 2737 / 2737 units from cache.
+Compiling...
+   Compilation completed in 0,02 seconds
+Removing invalidated units
+Finding entry point classes
+Public resources found in...
+Translatable source found in...
+Found 0 cached/archived units.  Used 0 / 2737 units from cache.
+Compiling...
+   0% complete (ETR: ?)
+   10% complete (ETR: 164 seconds)
+   20% complete (ETR: 87 seconds)
+   30% complete (ETR: 71 seconds)
+   40% complete (ETR: 60 seconds)
+   50% complete (ETR: 43 seconds)
+   60% complete (ETR: 30 seconds)
+   70% complete (ETR: 20 seconds)
+   80% complete (ETR: 13 seconds)
+   90% complete (ETR: 6 seconds)
+   100% complete (ETR: 0 seconds)
+   Compilation completed in 116,27 seconds
+Removing invalidated units
+Finding entry point classes
+Public resources found in...
+Translatable source found in...
+Found 2737 cached/archived units.  Used 2737 / 2737 units from cache.
+Compiling...
+   Compilation completed in 0,00 seconds
+Removing invalidated units
+Finding entry point classes
+Public resources found in...
+Translatable source found in...
+Found 2737 cached/archived units.  Used 2737 / 2737 units from cache.
+Compiling...
+   Compilation completed in 0,00 seconds
+Removing invalidated units
+Finding entry point classes
+Public resources found in...
+Translatable source found in...
+Found 0 cached/archived units.  Used 0 / 2737 units from cache.
+Compiling...
+   0% complete (ETR: ?)
+   10% complete (ETR: 103 seconds)
+   20% complete (ETR: 76 seconds)
+   30% complete (ETR: 53 seconds)
+   40% complete (ETR: 38 seconds)
+   50% complete (ETR: 30 seconds)
+   60% complete (ETR: 21 seconds)
+   70% complete (ETR: 14 seconds)
+   80% complete (ETR: 9 seconds)
+   90% complete (ETR: 4 seconds)
+   100% complete (ETR: 0 seconds)
+   Compilation completed in 116,27 seconds
+Removing invalidated units
+Finding entry point classes
+Public resources found in...
+Translatable source found in...
+Found 2737 cached/archived units.  Used 2737 / 2737 units from cache.
+Compiling...
+   Compilation completed in 0,06 seconds
+Removing invalidated units
+Finding entry point classes
+Public resources found in...
+Translatable source found in...
+Found 2737 cached/archived units.  Used 2737 / 2737 units from cache.
+Compiling...
+   Compilation completed in 0,01 seconds
+Removing invalidated units
+Finding entry point classes
+Public resources found in...
+Translatable source found in...
+Found 0 cached/archived units.  Used 0 / 2737 units from cache.
+Compiling...
+   0% complete (ETR: ?)
+   10% complete (ETR: 95 seconds)
+   20% complete (ETR: 61 seconds)
+   30% complete (ETR: 45 seconds)
+   40% complete (ETR: 32 seconds)
+   50% complete (ETR: 25 seconds)
+   60% complete (ETR: 18 seconds)
+   70% complete (ETR: 12 seconds)
+   80% complete (ETR: 7 seconds)
+   90% complete (ETR: 4 seconds)
+   100% complete (ETR: 0 seconds)
+   Compilation completed in 93,32 seconds
+Removing invalidated units
+Finding entry point classes
+Public resources found in...
+Translatable source found in...
+Found 2737 cached/archived units.  Used 2737 / 2737 units from cache.
+Compiling...
+   Compilation completed in 0,01 seconds
+Removing invalidated units
+Finding entry point classes
+Public resources found in...
+Translatable source found in...
+Found 2737 cached/archived units.  Used 2737 / 2737 units from cache.
+Compiling...
+   Compilation completed in 0,31 seconds
+Removing invalidated units
+Finding entry point classes
+Public resources found in...
+Translatable source found in...
+Found 0 cached/archived units.  Used 0 / 2737 units from cache.
+Compiling...
+   0% complete (ETR: 60 seconds)
+   10% complete (ETR: 59 seconds)
+   20% complete (ETR: 36 seconds)
+   30% complete (ETR: 28 seconds)
+   40% complete (ETR: 26 seconds)
+   50% complete (ETR: 19 seconds)
+   60% complete (ETR: 13 seconds)
+   70% complete (ETR: 9 seconds)
+   80% complete (ETR: 6 seconds)
+   90% complete (ETR: 3 seconds)
+   100% complete (ETR: 0 seconds)
+   Compilation completed in 76,10 seconds
+Removing invalidated units
+Finding entry point classes
+Public resources found in...
+Translatable source found in...
+Found 2737 cached/archived units.  Used 2737 / 2737 units from cache.
+Compiling...
+   Compilation completed in 0,00 seconds
+Removing invalidated units
+Finding entry point classes
+Public resources found in...
+Translatable source found in...
+Found 2737 cached/archived units.  Used 2737 / 2737 units from cache.
+Compiling...
+   Compilation completed in 0,00 seconds
+Removing invalidated units
+Finding entry point classes
+Public resources found in...
+Translatable source found in...
+Found 0 cached/archived units.  Used 0 / 2737 units from cache.
+Compiling...
+   0% complete (ETR: ?)
+   10% complete (ETR: 91 seconds)
+   20% complete (ETR: 50 seconds)
+   30% complete (ETR: 35 seconds)
+   40% complete (ETR: 24 seconds)
+   50% complete (ETR: 18 seconds)
+   60% complete (ETR: 13 seconds)
+   70% complete (ETR: 9 seconds)
+   80% complete (ETR: 6 seconds)
+   90% complete (ETR: 3 seconds)
+   100% complete (ETR: 0 seconds)
+   Compilation completed in 79,15 seconds
+Removing invalidated units
+Finding entry point classes
+Public resources found in...
+Translatable source found in...
+Found 2737 cached/archived units.  Used 2737 / 2737 units from cache.
+Compiling...
+   Compilation completed in 0,00 seconds
+Removing invalidated units
+Finding entry point classes
+Public resources found in...
+Translatable source found in...
+Found 2737 cached/archived units.  Used 2737 / 2737 units from cache.
+Compiling...
+   Compilation completed in 0,00 seconds
+Removing invalidated units
+Finding entry point classes
+Public resources found in...
+Translatable source found in...
+Found 0 cached/archived units.  Used 0 / 2737 units from cache.
+Compiling...
+   0% complete (ETR: ?)
+   10% complete (ETR: 86 seconds)
+   20% complete (ETR: 56 seconds)
+   30% complete (ETR: 40 seconds)
+   40% complete (ETR: 30 seconds)
+   50% complete (ETR: 24 seconds)
+   60% complete (ETR: 17 seconds)
+   70% complete (ETR: 12 seconds)
+   80% complete (ETR: 7 seconds)
+   90% complete (ETR: 4 seconds)
+   100% complete (ETR: 0 seconds)
+   Compilation completed in 59,11 seconds
+Removing invalidated units
+Finding entry point classes
+Public resources found in...
+Translatable source found in...
+Found 2737 cached/archived units.  Used 2737 / 2737 units from cache.
+Compiling...
+   Compilation completed in 0,00 seconds
+Removing invalidated units
+Finding entry point classes
+Public resources found in...
+Translatable source found in...
+Found 2737 cached/archived units.  Used 2737 / 2737 units from cache.
+Compiling...
+   Compilation completed in 0,00 seconds
+Removing invalidated units
+Finding entry point classes
+Public resources found in...
+Translatable source found in...
+Found 0 cached/archived units.  Used 0 / 2737 units from cache.
+Compiling...
+   0% complete (ETR: ?)
+   10% complete (ETR: 76 seconds)
+   20% complete (ETR: 43 seconds)
+   30% complete (ETR: 29 seconds)
+   40% complete (ETR: 23 seconds)
+   50% complete (ETR: 17 seconds)
+   60% complete (ETR: 12 seconds)
+   70% complete (ETR: 8 seconds)
+   80% complete (ETR: 6 seconds)
+   90% complete (ETR: 3 seconds)
+   100% complete (ETR: 0 seconds)
+   Compilation completed in 86,23 seconds
+Removing invalidated units
+Finding entry point classes
+Public resources found in...
+Translatable source found in...
+Found 2737 cached/archived units.  Used 2737 / 2737 units from cache.
+Compiling...
+   Compilation completed in 0,00 seconds
+Removing invalidated units
+Finding entry point classes
+Public resources found in...
+Translatable source found in...
+Found 2737 cached/archived units.  Used 2737 / 2737 units from cache.
+Compiling...
+   Compilation completed in 0,07 seconds
+Removing invalidated units
+Finding entry point classes
+Public resources found in...
+Translatable source found in...
+Found 0 cached/archived units.  Used 0 / 2737 units from cache.
+Compiling...
+   0% complete (ETR: 76 seconds)
+   10% complete (ETR: 61 seconds)
+   20% complete (ETR: 39 seconds)
+   30% complete (ETR: 27 seconds)
+   40% complete (ETR: 22 seconds)
+   50% complete (ETR: 16 seconds)
+   60% complete (ETR: 11 seconds)
+   70% complete (ETR: 7 seconds)
+   80% complete (ETR: 5 seconds)
+   90% complete (ETR: 2 seconds)
+   100% complete (ETR: 0 seconds)
+   Compilation completed in 54,35 seconds
+Removing invalidated units
+Finding entry point classes
+Public resources found in...
+Translatable source found in...
+Found 2737 cached/archived units.  Used 2737 / 2737 units from cache.
+Compiling...
+   Compilation completed in 0,00 seconds
+Removing invalidated units
+Finding entry point classes
+Public resources found in...
+Translatable source found in...
+Found 2737 cached/archived units.  Used 2737 / 2737 units from cache.
+Compiling...
+   Compilation completed in 0,10 seconds
+Removing invalidated units
+Finding entry point classes
+Public resources found in...
+Translatable source found in...
+Found 0 cached/archived units.  Used 0 / 2737 units from cache.
+Compiling...
+   0% complete (ETR: ?)
+   10% complete (ETR: 76 seconds)
+   20% complete (ETR: 51 seconds)
+   30% complete (ETR: 44 seconds)
+   40% complete (ETR: 34 seconds)
+   50% complete (ETR: 24 seconds)
+   60% complete (ETR: 18 seconds)
+   70% complete (ETR: 12 seconds)
+   80% complete (ETR: 8 seconds)
+   90% complete (ETR: 4 seconds)
+   100% complete (ETR: 0 seconds)
+   Compilation completed in 105,21 seconds
+Removing invalidated units
+Finding entry point classes
+Public resources found in...
+Translatable source found in...
+Found 2737 cached/archived units.  Used 2737 / 2737 units from cache.
+Compiling...
+   Compilation completed in 0,07 seconds
+Removing invalidated units
+Finding entry point classes
+Public resources found in...
+Translatable source found in...
+Found 2737 cached/archived units.  Used 2737 / 2737 units from cache.
+Compiling...
+   Compilation completed in 0,07 seconds
+Removing invalidated units
+Finding entry point classes
+Public resources found in...
+Translatable source found in...
+Found 0 cached/archived units.  Used 0 / 2737 units from cache.
+Compiling...
+   0% complete (ETR: 61 seconds)
+   10% complete (ETR: 53 seconds)
+   20% complete (ETR: 42 seconds)
+   30% complete (ETR: 29 seconds)
+   40% complete (ETR: 21 seconds)
+   50% complete (ETR: 17 seconds)
+   60% complete (ETR: 14 seconds)
+   70% complete (ETR: 9 seconds)
+   80% complete (ETR: 6 seconds)
+   90% complete (ETR: 3 seconds)
+   100% complete (ETR: 0 seconds)
+   Compilation completed in 58,26 seconds
+Removing invalidated units
+Finding entry point classes
+Public resources found in...
+Translatable source found in...
+Found 2737 cached/archived units.  Used 2737 / 2737 units from cache.
+Compiling...
+   Compilation completed in 0,00 seconds
+Removing invalidated units
+Finding entry point classes
+Public resources found in...
+Translatable source found in...
+Found 2737 cached/archived units.  Used 2737 / 2737 units from cache.
+Compiling...
+   Compilation completed in 0,00 seconds
+Removing invalidated units
+Finding entry point classes
+Public resources found in...
+Translatable source found in...
+Found 0 cached/archived units.  Used 0 / 2737 units from cache.
+Compiling...
+   0% complete (ETR: ?)
+   10% complete (ETR: 87 seconds)
+   20% complete (ETR: 62 seconds)
+   30% complete (ETR: 41 seconds)
+   40% complete (ETR: 29 seconds)
+   50% complete (ETR: 23 seconds)
+   60% complete (ETR: 16 seconds)
+   70% complete (ETR: 11 seconds)
+   80% complete (ETR: 7 seconds)
+   90% complete (ETR: 3 seconds)
+   100% complete (ETR: 0 seconds)
+   Compilation completed in 99,71 seconds
+Removing invalidated units
+Finding entry point classes
+Public resources found in...
+Translatable source found in...
+Found 2737 cached/archived units.  Used 2737 / 2737 units from cache.
+Compiling...
+   Compilation completed in 0,12 seconds
+Removing invalidated units
+Finding entry point classes
+Public resources found in...
+Translatable source found in...
+Found 2737 cached/archived units.  Used 2737 / 2737 units from cache.
+Compiling...
+   Compilation completed in 0,00 seconds
+Removing invalidated units
+Finding entry point classes
+Public resources found in...
+Translatable source found in...
+Found 0 cached/archived units.  Used 0 / 2737 units from cache.
+Compiling...
+   0% complete (ETR: 64 seconds)
+   10% complete (ETR: 63 seconds)
+   20% complete (ETR: 40 seconds)
+   30% complete (ETR: 33 seconds)
+   40% complete (ETR: 24 seconds)
+   50% complete (ETR: 18 seconds)
+   60% complete (ETR: 14 seconds)
+   70% complete (ETR: 9 seconds)
+   80% complete (ETR: 6 seconds)
+   90% complete (ETR: 3 seconds)
+   100% complete (ETR: 0 seconds)
+   Compilation completed in 85,49 seconds
+Removing invalidated units
+Finding entry point classes
+Public resources found in...
+Translatable source found in...
+Found 2737 cached/archived units.  Used 2737 / 2737 units from cache.
+Compiling...
+   Compilation completed in 0,00 seconds
+Removing invalidated units
+Finding entry point classes
+Public resources found in...
+Translatable source found in...
+Found 2737 cached/archived units.  Used 2737 / 2737 units from cache.
+Compiling...
+   Compilation completed in 0,03 seconds
+Removing invalidated units
+Finding entry point classes
+Public resources found in...
+Translatable source found in...
+Found 0 cached/archived units.  Used 0 / 2737 units from cache.
+Compiling...
+   0% complete (ETR: ?)
+   10% complete (ETR: 84 seconds)
+   20% complete (ETR: 45 seconds)
+   30% complete (ETR: 32 seconds)
+   40% complete (ETR: 26 seconds)
+   50% complete (ETR: 19 seconds)
+   60% complete (ETR: 13 seconds)
+   70% complete (ETR: 9 seconds)
+   80% complete (ETR: 6 seconds)
+   90% complete (ETR: 3 seconds)
+   100% complete (ETR: 0 seconds)
+   Compilation completed in 74,03 seconds
+Removing invalidated units
+Finding entry point classes
+Public resources found in...
+Translatable source found in...
+Found 2737 cached/archived units.  Used 2737 / 2737 units from cache.
+Compiling...
+   Compilation completed in 0,01 seconds
+Removing invalidated units
+Finding entry point classes
+Public resources found in...
+Translatable source found in...
+Found 2737 cached/archived units.  Used 2737 / 2737 units from cache.
+Compiling...
+   Compilation completed in 0,03 seconds
+Removing invalidated units
+Finding entry point classes
+Public resources found in...
+Translatable source found in...
+Found 0 cached/archived units.  Used 0 / 2737 units from cache.
+Compiling...
+   0% complete (ETR: 53 seconds)
+   10% complete (ETR: 50 seconds)
+   20% complete (ETR: 38 seconds)
+   30% complete (ETR: 29 seconds)
+   40% complete (ETR: 20 seconds)
+   50% complete (ETR: 17 seconds)
+   60% complete (ETR: 12 seconds)
+   70% complete (ETR: 8 seconds)
+   80% complete (ETR: 5 seconds)
+   90% complete (ETR: 3 seconds)
+   100% complete (ETR: 0 seconds)
+   Compilation completed in 99,00 seconds
+Removing invalidated units
+Finding entry point classes
+Public resources found in...
+Translatable source found in...
+Found 2737 cached/archived units.  Used 2737 / 2737 units from cache.
+Compiling...
+   Compilation completed in 0,00 seconds
+Removing invalidated units
+Finding entry point classes
+Public resources found in...
+Translatable source found in...
+Found 2737 cached/archived units.  Used 2737 / 2737 units from cache.
+Compiling...
+   Compilation completed in 0,03 seconds
+Removing invalidated units
+Finding entry point classes
+Public resources found in...
+Translatable source found in...
+Found 0 cached/archived units.  Used 0 / 2737 units from cache.
+Compiling...
+   0% complete (ETR: ?)
+   10% complete (ETR: 176 seconds)
+   20% complete (ETR: 216 seconds)
+   30% complete (ETR: 320 seconds)
+Public resources found in...
+Translatable source found in...
+Found 0 cached/archived units.  Used 0 / 2737 units from cache.
+Compiling...
+   0% complete (ETR: ?)
+   10% complete (ETR: 158 seconds)
+   20% complete (ETR: 108 seconds)
+   30% complete (ETR: 220 seconds)
+   40% complete (ETR: 179 seconds)
+   50% complete (ETR: 121 seconds)
+   60% complete (ETR: 248 seconds)
+   70% complete (ETR: 190 seconds)
+   80% complete (ETR: 130 seconds)
+   90% complete (ETR: 71 seconds)
+Public resources found in...
+Translatable source found in...
+Found 0 cached/archived units.  Used 0 / 2737 units from cache.
+Compiling...
+   0% complete (ETR: ?)
+   10% complete (ETR: 86 seconds)
+   20% complete (ETR: 49 seconds)
+   30% complete (ETR: 35 seconds)
+   40% complete (ETR: 30 seconds)
+   50% complete (ETR: 22 seconds)
+   60% complete (ETR: 16 seconds)
+   70% complete (ETR: 11 seconds)
+   80% complete (ETR: 7 seconds)
+   90% complete (ETR: 3 seconds)
+   100% complete (ETR: 0 seconds)
+   Compilation completed in 97,88 seconds
+Removing invalidated units
+Finding entry point classes
+Public resources found in...
+Translatable source found in...
+Found 2737 cached/archived units.  Used 2737 / 2737 units from cache.
+Compiling...
+   Compilation completed in 0,02 seconds
+Removing invalidated units
+Finding entry point classes
+Public resources found in...
+Translatable source found in...
+Found 2737 cached/archived units.  Used 2737 / 2737 units from cache.
+Compiling...
+   Compilation completed in 0,06 seconds
+Removing invalidated units
+Finding entry point classes
+Public resources found in...
+Translatable source found in...
+Found 0 cached/archived units.  Used 0 / 2737 units from cache.
+Compiling...
+   10% complete (ETR: 39 seconds)
+   10% complete (ETR: 41 seconds)
+   20% complete (ETR: 32 seconds)
+   30% complete (ETR: 25 seconds)
+   40% complete (ETR: 19 seconds)
+   50% complete (ETR: 14 seconds)
+   60% complete (ETR: 10 seconds)
+   70% complete (ETR: 8 seconds)
+   80% complete (ETR: 5 seconds)
+   90% complete (ETR: 2 seconds)
+   100% complete (ETR: 0 seconds)
+   Compilation completed in 32,49 seconds
+Removing invalidated units
+Finding entry point classes
+Public resources found in...
+Translatable source found in...
+Found 2737 cached/archived units.  Used 2737 / 2737 units from cache.
+Compiling...
+   Compilation completed in 0,00 seconds
+Removing invalidated units
+Finding entry point classes
+Public resources found in...
+Translatable source found in...
+Found 2737 cached/archived units.  Used 2737 / 2737 units from cache.
+Compiling...
+   Compilation completed in 0,00 seconds
+Removing invalidated units
+Finding entry point classes
+Public resources found in...
+Translatable source found in...
+Found 0 cached/archived units.  Used 0 / 2737 units from cache.
+Compiling...
+   0% complete (ETR: 59 seconds)
+   10% complete (ETR: 76 seconds)
+   20% complete (ETR: 62 seconds)
+   30% complete (ETR: 44 seconds)
+   40% complete (ETR: 33 seconds)
+   50% complete (ETR: 23 seconds)
+   60% complete (ETR: 17 seconds)
+   70% complete (ETR: 12 seconds)
+   80% complete (ETR: 7 seconds)
+   90% complete (ETR: 4 seconds)
+   100% complete (ETR: 0 seconds)
+   Compilation completed in 219,23 seconds
+Removing invalidated units
+Finding entry point classes
+Public resources found in...
+Translatable source found in...
+Found 2737 cached/archived units.  Used 2737 / 2737 units from cache.
+Compiling...
+   Compilation completed in 0,00 seconds
+Removing invalidated units
+Finding entry point classes
+Public resources found in...
+Translatable source found in...
+Found 2737 cached/archived units.  Used 2737 / 2737 units from cache.
+Compiling...
+   Compilation completed in 0,01 seconds
+Removing invalidated units
+Finding entry point classes
+Public resources found in...
+Translatable source found in...
+Found 0 cached/archived units.  Used 0 / 2737 units from cache.
+Compiling...
+   0% complete (ETR: ?)
+   10% complete (ETR: 167 seconds)
+   20% complete (ETR: 93 seconds)
+   30% complete (ETR: 98 seconds)
+   40% complete (ETR: 69 seconds)
+   50% complete (ETR: 51 seconds)
+   60% complete (ETR: 35 seconds)
+   70% complete (ETR: 23 seconds)
+   80% complete (ETR: 15 seconds)
+   90% complete (ETR: 7 seconds)
+   100% complete (ETR: 0 seconds)
+   Compilation completed in 425,81 seconds
+Removing invalidated units
+Finding entry point classes
+Public resources found in...
+Translatable source found in...
+Found 2737 cached/archived units.  Used 2737 / 2737 units from cache.
+Compiling...
+   Compilation completed in 0,05 seconds
+Removing invalidated units
+Finding entry point classes
+Public resources found in...
+Translatable source found in...
+Found 2737 cached/archived units.  Used 2737 / 2737 units from cache.
+Compiling...
+   Compilation completed in 0,03 seconds
+Removing invalidated units
+Finding entry point classes
