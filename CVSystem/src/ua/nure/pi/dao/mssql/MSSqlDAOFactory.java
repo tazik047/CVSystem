@@ -4,13 +4,26 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import jfork.nproperty.Cfg;
+import jfork.nproperty.ConfigParser;
 import ua.nure.pi.dao.*;
 
+@Cfg(prefix = "db.")
 public class MSSqlDAOFactory extends DAOFactory {
 
 	private static volatile MSSqlDAOFactory instance;
 	
+	@Cfg(parametrize = true)
+	private static String sqlLink;
+	
+	
 	private MSSqlDAOFactory() {
+		try {
+			ClassLoader loader = this.getClass().getClassLoader();
+			ConfigParser.parse(MSSqlDAOFactory.class, loader.getResource("properties.ini").getPath());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public static MSSqlDAOFactory getInstancce(){
@@ -23,8 +36,7 @@ public class MSSqlDAOFactory extends DAOFactory {
 	}
 	
 	private static final String DRIVER = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
-	private static final String DB_URL = "jdbc:sqlserver://localhost:1433; instanceName=SQLSERVER; database=CVSystem; user=sa; password=master;";
-
+	
 	/**
 	 * method to create MSSQL connections
 	 * 
@@ -36,7 +48,7 @@ public class MSSqlDAOFactory extends DAOFactory {
 		Connection con = null;
 		try {
 			Class.forName(DRIVER);
-			con = DriverManager.getConnection(DB_URL);
+			con = DriverManager.getConnection(sqlLink);
 			con.setAutoCommit(false);
 			con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
 		} catch (SQLException e) {
