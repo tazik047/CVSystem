@@ -350,10 +350,6 @@ h3.assistive-text {
 	z-index: 1000000;
 }
 
-.dateChooserBorder{
-	left:550px !important;
-}
-
 .hint>div,
 .hintFocused>div{
 	margin-bottom:20px;
@@ -393,4 +389,8 @@ h3.assistive-text {
 }
 .newPreViewDialogBox{
 	z-index:10000001;
+}
+
+.loading{
+	text-align:center;
 }
