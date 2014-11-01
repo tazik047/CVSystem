@@ -26,7 +26,7 @@ public class MSSqlCVDAO implements CVDAO {
 		return instance;
 	}
 	
-	private static final String SQL__INSERT_CV = "INSERT INTO CVs(PurposesId, Qualities, Others) VALUES(?, ?, ?)";
+	private static final String SQL__INSERT_CV = "INSERT INTO CVs(PurposesId, Qualities, Others, DateStamp) VALUES(?, ?, ?, getdate())";
 	private static final String SQL__SELECT_CV = "SELECT * FROM CVs WHERE CVsId=?";
 
 	@Override

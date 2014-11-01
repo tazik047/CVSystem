@@ -313,13 +313,10 @@ public class RegistrationSimplePanel extends LoadingSimplePanel {
 	    goalComboBox.setWidth(300);
 	    goalComboBox.setRequired(true);
 	    goalComboBox.setShowHintInField(true);
-	    
         
-        final LinkedHashMap<Long, String> phm = new LinkedHashMap<>();
-
         registrationService.getLanguages(new AsyncCallback<Collection<Language>>() {
             public void onFailure(Throwable caught) {
-              Window.alert("Не удалось получить языки программирования");
+              Window.alert("Не удалось получить языки");
               loadingElement++;
               if(loadingElement==4){
           		isReady=true;
@@ -358,10 +355,14 @@ public class RegistrationSimplePanel extends LoadingSimplePanel {
 			@Override
 			public void onSuccess(Collection<Purpose> result) {
 				purposes = new ArrayList<Purpose>(result);
+				String[] strings = new String[purposes.size()];
+				int i=0;
 				for (Purpose prp : purposes) {
-		        	phm.put(prp.getId(), prp.getTitle());
+		        	//phm.put(prp.getId(), prp.getTitle());
+					strings[i++]=prp.getTitle();
 		        }
-				goalComboBox.setValueMap(phm);
+				goalComboBox.setValueMap(strings);
+				//goalComboBox.setValueMap(phm);
 				loadingElement++;
 				if(loadingElement==4){
             		isReady=true;
@@ -459,7 +460,7 @@ public class RegistrationSimplePanel extends LoadingSimplePanel {
 		                      Window.alert("Анкета сохранена");
 							
 						}
-	                  });	*/              
+	                  });	*/
 	            	}
             	}
 
@@ -655,8 +656,7 @@ public class RegistrationSimplePanel extends LoadingSimplePanel {
 		cv = new CV();
 		newPurp=false;
 		for(Purpose i : purposes){
-			if(i.getTitle().equals(goalComboBox.getDisplayValue()) &&
-					String.valueOf(i.getId()).equals(goalComboBox.getValueAsString())){
+			if(i.getTitle().equals(goalComboBox.getDisplayValue())){
 				cv.setPurpose(i);
 					}
 		}

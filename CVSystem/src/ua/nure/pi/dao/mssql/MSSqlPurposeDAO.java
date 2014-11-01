@@ -28,7 +28,7 @@ public class MSSqlPurposeDAO implements PurposeDAO {
 		return instance;
 	}
 	
-	private static final String SQL__SELECT_PURPOSE = "SELECT * FROM Purposes";
+	private static final String SQL__SELECT_PURPOSE = "SELECT * FROM Purposes order by Title";
 	private static final String SQL__INSERT_PURPOSE= "INSERT INTO Purposes(Title) VALUES(?)";
 	private static final String SQL__UPDATE_PURPOSE = "UPDATE Purposes SET Title = ? WHERE PurposesId = ?";
 	private static final String SQL__DELETE_PURPOSE = "DELETE Purposes WHERE PurposesId = ?";	
