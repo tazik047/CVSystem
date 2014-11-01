@@ -389,7 +389,7 @@ public class RegistrationSimplePanel extends LoadingSimplePanel {
         
         // Знание языков программирования и технологий
                 
-        final MultiComboBoxLayoutStyle initialLayoutStyle = MultiComboBoxLayoutStyle.FLOW;  
+        final MultiComboBoxLayoutStyle initialLayoutStyle = MultiComboBoxLayoutStyle.VERTICAL;
         languages = new MultiComboBoxItem("skills", "Профессиональные навыки");
         ComboBoxItem child = new ComboBoxItem();
         child.setHint("-Технологии-");
@@ -425,8 +425,7 @@ public class RegistrationSimplePanel extends LoadingSimplePanel {
 
         languages.setLayoutStyle(initialLayoutStyle);
         //languages.setWidth(290);
-        languages.setAddUnknownValues(false);
-        languages.setColSpan(20);
+        //languages.setColSpan(20);
         
 	        
 	        Button commit = new Button("Отправить анкету");
