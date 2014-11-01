@@ -39,7 +39,7 @@ public class MainEntryPoint implements EntryPoint {
     
     uiManager = new UIManager(RootPanel.get("content"));
     
-    Button btnNewButton = new Button("New button");
+    final Button btnNewButton = new Button("New button");
     btnNewButton.setStyleName("buttons");
     btnNewButton.setFocus(true);
    
@@ -49,6 +49,7 @@ public class MainEntryPoint implements EntryPoint {
 		
 		@Override
 		public void onClick(ClickEvent event) {
+			btnNewButton.setFocus(false);
 			if(mainStaticPanel==null)
 				mainStaticPanel = new MainStaticPanel(mainService);
 			uiManager.setPanel(mainStaticPanel);
@@ -58,7 +59,7 @@ public class MainEntryPoint implements EntryPoint {
     
     rootPanel.add(btnNewButton);
    // btnNewButton.setSize("70px", "23px");
-    Button btnNewButton_4 = new Button("New button");
+    final Button btnNewButton_4 = new Button("New button");
     btnNewButton_4.setStyleName("buttons");
     btnNewButton_4.setText("О нас");
     btnNewButton_4.addStyleName("buttons");
@@ -69,6 +70,7 @@ public class MainEntryPoint implements EntryPoint {
 		
 		@Override
 		public void onClick(ClickEvent event) {
+			btnNewButton_4.setFocus(false);
 			if(aboutUsStaticPanel==null)
 				aboutUsStaticPanel = new AboutUsStaticPanel(mainService);
 			uiManager.setPanel(aboutUsStaticPanel);
@@ -76,7 +78,7 @@ public class MainEntryPoint implements EntryPoint {
 	});
         
    
-    Button butAddCV = new Button("New button");
+    final Button butAddCV = new Button("New button");
     butAddCV.setText("Добавить резюме");
     butAddCV.addStyleName("buttons");
     butAddCV.setStyleName("buttons");
@@ -85,9 +87,11 @@ public class MainEntryPoint implements EntryPoint {
 		
 		@Override
 		public void onClick(ClickEvent event) {
+			butAddCV.setFocus(false);
 			if(registrationSimplePanel==null)
 				registrationSimplePanel = new RegistrationSimplePanel(mainService);
 			uiManager.setPanel(registrationSimplePanel);
+			
 		}
 	});
 

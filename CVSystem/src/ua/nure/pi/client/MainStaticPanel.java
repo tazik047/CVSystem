@@ -9,7 +9,7 @@ public class MainStaticPanel extends LoadingSimplePanel {
 	public MainStaticPanel(MainServiceAsync main) {
 		isReady=false;
 		final LoadingSimplePanel p = this;
-		main.getPage(PathClient.STATIC_PAGE_MAIN,new AsyncCallback<String>() {
+		main.getPage(PathClient.STATIC_PAGE_MAIN, new AsyncCallback<String>() {
 			
 			@Override
 			public void onSuccess(String result) {
@@ -26,6 +26,11 @@ public class MainStaticPanel extends LoadingSimplePanel {
 				fireLoadEvent(p);
 			}
 		});
+	}
+	
+	@Override
+	public void reDraw(){
+		startSlider();
 	}
 	
 	public static native void startSlider() /*-{
