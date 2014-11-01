@@ -2,8 +2,10 @@ package ua.nure.pi.server;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Collection;
 
 import javax.servlet.RequestDispatcher;
@@ -124,12 +126,15 @@ public class MainServiceImpl extends RemoteServiceServlet implements
 		url = getServletContext().getRealPath("") + url;
 		String res = "";
 		try{
-			BufferedReader br = new BufferedReader(new FileReader(new File(url)));
+		    BufferedReader br = new BufferedReader(
+		       new InputStreamReader(
+		                  new FileInputStream(new File(url)), "UTF8"));
 	        String str = null;
 	        
 	        while ((str = br.readLine()) != null) {
 	            res+=str;
 	        }
+	        br.close();
 		}
 		catch(Exception e){
 			throw new IllegalArgumentException(e.getLocalizedMessage());

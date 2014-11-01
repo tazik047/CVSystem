@@ -12,6 +12,7 @@ public class MainStaticPanel extends StaticPanel {
 			@Override
 			public void onSuccess(String result) {
 				setText(result);
+				startSlider();
 			}
 			
 			@Override
@@ -20,5 +21,9 @@ public class MainStaticPanel extends StaticPanel {
 			}
 		});
 	}
+	
+	public static native void startSlider() /*-{
+	 $wnd.$('#slider').nivoSlider();
+	}-*/;
 
 }
