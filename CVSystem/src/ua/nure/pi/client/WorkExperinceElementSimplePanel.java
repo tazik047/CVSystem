@@ -62,7 +62,6 @@ public class WorkExperinceElementSimplePanel extends SimplePanel{
         yearField.setWidth(70);
         yearField.setHeight(18);
         yearField.setMask("####");
-        yearField.setKeyPressFilter("[0-9.]");
         yearField.setRequired(true);
         
         currentWork = new CheckboxItem ();
@@ -119,7 +118,6 @@ public class WorkExperinceElementSimplePanel extends SimplePanel{
         controls.setFields(yearField, currentWork, durationField, durTypeField, role, nameOfInstitute);
 
         rootPanel.add(controls);
-        controls.draw();
         controls.markForRedraw();
 
         setWidget(rootPanel);
@@ -131,10 +129,10 @@ public class WorkExperinceElementSimplePanel extends SimplePanel{
 	public WorkExp getWorkExp() throws IllegalArgumentException{
 		WorkExp we = new WorkExp();
 		int year = Integer.parseInt(yearField.getValueAsString());
-		int durat = Integer.parseInt(durationField.getValueAsString());
 		
 		we.setStartYear(year);
 		if(!currentWork.getValueAsBoolean()){
+			int durat = Integer.parseInt(durationField.getValueAsString());
 			we.setDuration(durat);
 			we.setTypeOfDuration((typeOfDuration)durTypeField.getValue());
 			we.setIsNow(false);

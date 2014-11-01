@@ -159,17 +159,22 @@ public class MSSqlWorkExpDAO implements WorkExpDAO {
 			throws SQLException{
 		pstmt.setInt(1, we.getStartYear());
 		pstmt.setInt(2, we.getDuration());
-		switch (we.getTypeOfDuration()) {
-		case WEEK : 
+		if(we.getTypeOfDuration()==null){
 			pstmt.setInt(3, 0);
-			break;
-		case MONTH :
-			pstmt.setInt(3, 1);
-			break;
-		case YEAR :
-			pstmt.setInt(3, 2);
-			break;
-		}			
+		}
+		else{
+			switch (we.getTypeOfDuration()) {
+			case WEEK : 
+				pstmt.setInt(3, 0);
+				break;
+			case MONTH :
+				pstmt.setInt(3, 1);
+				break;
+			case YEAR :
+				pstmt.setInt(3, 2);
+				break;
+			}	
+		}
 		pstmt.setString(4, we.getNameOfInstitution());
 		pstmt.setString(5, we.getRole());
 		pstmt.setLong(6, id);
