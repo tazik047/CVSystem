@@ -90,7 +90,9 @@ import com.smartgwt.client.widgets.tree.TreeNode;
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
  */
-public class RegistrationSimplePanel extends SimplePanel {
+public class RegistrationSimplePanel extends LoadingSimplePanel {
+	
+	int loadingElement;
 	
 	private MainServiceAsync registrationService;
 
@@ -157,6 +159,9 @@ public class RegistrationSimplePanel extends SimplePanel {
     
 	public void onModuleLoad() {
 
+		isReady = false;
+		final LoadingSimplePanel thisPanel = this;
+		loadingElement = 0;
 	    VerticalPanel rootPanel = new VerticalPanel();
 	    final DynamicForm mainForm = new DynamicForm();
 	    mainForm.setNumCols(1);
@@ -169,13 +174,23 @@ public class RegistrationSimplePanel extends SimplePanel {
 	    
 	    registrationService.getFaculties(new AsyncCallback<Collection<Faculty>>() {
             public void onFailure(Throwable caught) {
-              Window.alert("Не удалось получить список факультетов");
+            	loadingElement++;
+            	if(loadingElement==4){
+            		isReady=true;
+            		fireLoadEvent(thisPanel);
+            	}
+            	Window.alert("Не удалось получить список факультетов");
             }
 
 			@Override
 			public void onSuccess(Collection<Faculty> result) {
 				faculties = new ArrayList<Faculty>(result);		
 				FillTree(faculties, facultiesPanel);
+				loadingElement++;
+				if(loadingElement==4){
+            		isReady=true;
+            		fireLoadEvent(thisPanel);
+            	}
 			}
           });
         
@@ -302,10 +317,42 @@ public class RegistrationSimplePanel extends SimplePanel {
         
         final LinkedHashMap<Long, String> phm = new LinkedHashMap<>();
 
+        registrationService.getLanguages(new AsyncCallback<Collection<Language>>() {
+            public void onFailure(Throwable caught) {
+              Window.alert("Не удалось получить языки программирования");
+              loadingElement++;
+              if(loadingElement==4){
+          		isReady=true;
+          		fireLoadEvent(thisPanel);
+          	}
+            }
+
+			@Override
+			public void onSuccess(Collection<Language> result) {
+				try{
+					langs = new ArrayList<Language>(result);
+					lanPanel.FillLangs(langs);
+					mainForm.markForRedraw();
+					loadingElement++;
+					if(loadingElement==4){
+	            		isReady=true;
+	            		fireLoadEvent(thisPanel);
+	            	}
+				}
+				catch(Exception e){
+					Window.alert(e.getMessage());
+				}
+			}
+          });
         
 	    registrationService.getPurposes(new AsyncCallback<Collection<Purpose>>() {
             public void onFailure(Throwable caught) {
-              Window.alert("Не удалось получить должности");
+            	loadingElement++;
+            	if(loadingElement==4){
+            		isReady=true;
+            		fireLoadEvent(thisPanel);
+            	}
+            	Window.alert("Не удалось получить должности");
             }
 
 			@Override
@@ -315,6 +362,11 @@ public class RegistrationSimplePanel extends SimplePanel {
 		        	phm.put(prp.getId(), prp.getTitle());
 		        }
 				goalComboBox.setValueMap(phm);
+				loadingElement++;
+				if(loadingElement==4){
+            		isReady=true;
+            		fireLoadEvent(thisPanel);
+            	}
 			}
           });
         // Заполнение возможных целей из базы
@@ -330,17 +382,7 @@ public class RegistrationSimplePanel extends SimplePanel {
         lanPanel = new LanguageSimplePanel();
 
         
-	    registrationService.getLanguages(new AsyncCallback<Collection<Language>>() {
-            public void onFailure(Throwable caught) {
-              Window.alert("Не удалось получить языки программирования");
-            }
-
-			@Override
-			public void onSuccess(Collection<Language> result) {
-				langs = new ArrayList<Language>(result);
-				lanPanel.FillLangs(langs);
-			}
-          });
+	    
 
 
         ssp = new SertificateSimplePanel();
@@ -358,7 +400,12 @@ public class RegistrationSimplePanel extends SimplePanel {
         
 	    registrationService.getProgramLanguages(new AsyncCallback<Collection<ProgramLanguage>>() {
             public void onFailure(Throwable caught) {
-              Window.alert("Не удалось получить языки программирования");
+            	Window.alert("Не удалось получить языки программирования");
+              	loadingElement++;
+              	if(loadingElement==4){
+            		isReady=true;
+            		fireLoadEvent(thisPanel);
+            	}
             }
 
 			@Override
@@ -368,6 +415,11 @@ public class RegistrationSimplePanel extends SimplePanel {
 		        	lhm.put(prl.getTitle(), prl.getTitle());
 		        }
 		        languages.setValueMap(lhm);
+		        loadingElement++;
+		        if(loadingElement==4){
+            		isReady=true;
+            		fireLoadEvent(thisPanel);
+            	}
 			}
           });
 
@@ -616,9 +668,9 @@ public class RegistrationSimplePanel extends SimplePanel {
 			cv.setPurpose(p);
 		}
 		String oth = others.getDisplayValue();
-		oth.replaceAll("\n", "<br/>");
+		oth = oth.replaceAll("\n", "<br/>");
 		String qua = qualities.getDisplayValue();
-		qua.replaceAll("\n", "<br/>");
+		qua = qua.replaceAll("\n", "<br/>");
 		cv.setOthers(oth);
 		cv.setQualities(qua);
 		cv.setEducations(eduPanel.getEducation());
@@ -646,5 +698,11 @@ public class RegistrationSimplePanel extends SimplePanel {
 		cv.setProgramLanguages(resPL);
 		st.setCv(cv);
 		return st;
+	}
+	
+	@Override
+	public void reDraw(){
+		if(form!=null)
+		form.markForRedraw();
 	}
 }

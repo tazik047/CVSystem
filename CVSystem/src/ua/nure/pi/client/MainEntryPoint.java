@@ -15,15 +15,12 @@ import com.google.gwt.user.client.ui.RootPanel;
  * Entry point classes define <code>onModuleLoad()</code>.
  */
 public class MainEntryPoint implements EntryPoint {
-	/**
-	 * The message displayed to the user when the server cannot be reached or
-	 * returns an error.
-	 */
-
 	
-	/**
-	 * Create a remote service proxy to talk to the server-side Greeting service.
-	 */
+	MainStaticPanel mainStaticPanel;
+	AboutUsStaticPanel aboutUsStaticPanel;
+	RegistrationSimplePanel registrationSimplePanel;
+	
+	
 	private final MainServiceAsync mainService = (MainServiceAsync) GWT
 			.create(MainService.class);
 
@@ -52,7 +49,9 @@ public class MainEntryPoint implements EntryPoint {
 		
 		@Override
 		public void onClick(ClickEvent event) {
-			uiManager.setPanel(new MainStaticPanel(mainService));
+			if(mainStaticPanel==null)
+				mainStaticPanel = new MainStaticPanel(mainService);
+			uiManager.setPanel(mainStaticPanel);
 			//Window.Location.reload();
 		}
 	});
@@ -70,7 +69,9 @@ public class MainEntryPoint implements EntryPoint {
 		
 		@Override
 		public void onClick(ClickEvent event) {
-			uiManager.setPanel(new AboutUsStaticPanel(mainService));
+			if(aboutUsStaticPanel==null)
+				aboutUsStaticPanel = new AboutUsStaticPanel(mainService);
+			uiManager.setPanel(aboutUsStaticPanel);
 		}
 	});
         
@@ -84,7 +85,9 @@ public class MainEntryPoint implements EntryPoint {
 		
 		@Override
 		public void onClick(ClickEvent event) {
-			uiManager.setPanel(new RegistrationSimplePanel(mainService));
+			if(registrationSimplePanel==null)
+				registrationSimplePanel = new RegistrationSimplePanel(mainService);
+			uiManager.setPanel(registrationSimplePanel);
 		}
 	});
 
@@ -100,11 +103,6 @@ public class MainEntryPoint implements EntryPoint {
     btnNewButton_1.setText("Списки резюме");
     btnNewButton_1.addStyleName("buttons");
     rootPanel.add(btnNewButton_1);
-  //  btnNewButton_1.setSize("80px", "23px");
-    
-   // btnNewButton_2.setSize("97px", "23px");
-    
-   // btnNewButton_3.setSize("82px", "23px");
     
 
     Button btnNewButton_2 = new Button("New button");
@@ -112,8 +110,9 @@ public class MainEntryPoint implements EntryPoint {
     btnNewButton_2.setText("Статистика");
     btnNewButton_2.addStyleName("buttons");
     rootPanel.add(btnNewButton_2);
-
     
-    uiManager.setPanel(new MainStaticPanel(mainService));
+    if(mainStaticPanel==null)
+		mainStaticPanel = new MainStaticPanel(mainService);
+	uiManager.setPanel(mainStaticPanel);
   }
 }
