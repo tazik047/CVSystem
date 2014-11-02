@@ -19,6 +19,8 @@ public class Education implements Serializable, IsSerializable {
 	
 	private long CVsId;
 	
+	private String faculty;
+	
 	public int getStartYear() {
 		return startYear;
 	}
@@ -76,6 +78,14 @@ public class Education implements Serializable, IsSerializable {
 
 	public void setCVsId(long cVsId) {
 		CVsId = cVsId;
+	}
+
+	public String getFaculty() {
+		return faculty;
+	}
+
+	public void setFaculty(String faculty) {
+		this.faculty = faculty;
 	}
 
 }
