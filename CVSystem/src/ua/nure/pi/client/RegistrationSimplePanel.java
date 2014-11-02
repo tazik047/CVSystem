@@ -2,6 +2,7 @@ package ua.nure.pi.client;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 import java.util.LinkedHashMap;
 
@@ -9,6 +10,9 @@ import java.util.LinkedHashMap;
 
 
 
+
+
+import java.util.List;
 
 import ua.nure.pi.dao.mssql.MSSqlFacultyGroupDAO;
 import ua.nure.pi.dao.mssql.MSSqlProgramLanguageDAO;
@@ -678,7 +682,7 @@ public class RegistrationSimplePanel extends LoadingSimplePanel {
 		cv.setWorkExps(expPanel.getExp());
 		newPL = new ArrayList<ProgramLanguage>();
 
-		Collection<ProgramLanguage> resPL = new ArrayList<ProgramLanguage>();
+		ArrayList<ProgramLanguage> resPL = new ArrayList<ProgramLanguage>();
 		for(String pl : languages.getValues()){
 			boolean n = true;
 			for(ProgramLanguage p : programLanguages){
@@ -694,6 +698,8 @@ public class RegistrationSimplePanel extends LoadingSimplePanel {
 				newPL.add(pnew);
 			}
 		}
+		
+		Collections.reverse(resPL);
 		cv.setProgramLanguages(resPL);
 		st.setCv(cv);
 		return st;
