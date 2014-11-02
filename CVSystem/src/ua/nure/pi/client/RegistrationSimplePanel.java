@@ -182,6 +182,7 @@ public class RegistrationSimplePanel extends LoadingSimplePanel {
             	if(loadingElement==4){
             		isReady=true;
             		fireLoadEvent(thisPanel);
+            		mainForm.markForRedraw();
             	}
             	Window.alert("Не удалось получить список факультетов");
             }
@@ -194,6 +195,7 @@ public class RegistrationSimplePanel extends LoadingSimplePanel {
 				if(loadingElement==4){
             		isReady=true;
             		fireLoadEvent(thisPanel);
+            		mainForm.markForRedraw();
             	}
 			}
           });
@@ -325,6 +327,7 @@ public class RegistrationSimplePanel extends LoadingSimplePanel {
               if(loadingElement==4){
           		isReady=true;
           		fireLoadEvent(thisPanel);
+          		mainForm.markForRedraw();
           	}
             }
 
@@ -338,6 +341,7 @@ public class RegistrationSimplePanel extends LoadingSimplePanel {
 					if(loadingElement==4){
 	            		isReady=true;
 	            		fireLoadEvent(thisPanel);
+	            		mainForm.markForRedraw();
 	            	}
 				}
 				catch(Exception e){
@@ -352,6 +356,7 @@ public class RegistrationSimplePanel extends LoadingSimplePanel {
             	if(loadingElement==4){
             		isReady=true;
             		fireLoadEvent(thisPanel);
+            		mainForm.markForRedraw();
             	}
             	Window.alert("Не удалось получить должности");
             }
@@ -371,6 +376,7 @@ public class RegistrationSimplePanel extends LoadingSimplePanel {
 				if(loadingElement==4){
             		isReady=true;
             		fireLoadEvent(thisPanel);
+            		mainForm.markForRedraw();
             	}
 			}
           });
@@ -410,6 +416,7 @@ public class RegistrationSimplePanel extends LoadingSimplePanel {
               	if(loadingElement==4){
             		isReady=true;
             		fireLoadEvent(thisPanel);
+            		mainForm.markForRedraw();
             	}
             }
 
@@ -424,6 +431,7 @@ public class RegistrationSimplePanel extends LoadingSimplePanel {
 		        if(loadingElement==4){
             		isReady=true;
             		fireLoadEvent(thisPanel);
+            		mainForm.markForRedraw();
             	}
 			}
           });
