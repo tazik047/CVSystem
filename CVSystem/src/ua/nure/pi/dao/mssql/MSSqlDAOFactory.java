@@ -20,9 +20,10 @@ public class MSSqlDAOFactory extends DAOFactory {
 	private MSSqlDAOFactory() {
 		try {
 			ClassLoader loader = this.getClass().getClassLoader();
-			ConfigParser.parse(MSSqlDAOFactory.class, loader.getResource("properties.ini").getPath());
+			ConfigParser.parse(MSSqlDAOFactory.class, 
+					loader.getResource("properties.ini").getPath().replaceAll("%20", " "));
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.err.println(e.getMessage());
 		}
 	}
 	
