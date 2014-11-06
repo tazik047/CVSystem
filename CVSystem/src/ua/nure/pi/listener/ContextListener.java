@@ -1,24 +1,8 @@
 package ua.nure.pi.listener;
 
-import java.util.Date;
-import java.util.Iterator;
-import java.util.Set;
-import java.util.TreeSet;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
-
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
-
-//import org.apache.log4j.Logger;
-
-
-
-
-
-
 
 import ua.nure.pi.dao.DAOFactory;
 import ua.nure.pi.dao.FacultyGroupDAO;
@@ -31,12 +15,6 @@ import ua.nure.pi.dao.UserDAO;
 import ua.nure.pi.parameter.AppConstants;
 
 
-/**
- * Context listener.
- * 
- * @author Volodymyr_Semerkov
- * 
- */
 public class ContextListener implements ServletContextListener {
 	//private static final Logger log = Logger.getLogger(ContextListener.class);
 

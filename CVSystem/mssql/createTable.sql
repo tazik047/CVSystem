@@ -450,9 +450,9 @@ IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Us
 BEGIN
 CREATE TABLE [dbo].[Users](
 	[UsersId] [bigint] IDENTITY(1,1) NOT NULL,
-	[Role] [int] NOT NULL,
-	[login] [nvarchar](max) NOT NULL,
-	[password] [nvarchar](max) NOT NULL,
+	[Role] [tinyint] NOT NULL,
+	[Login] [nvarchar](max) NOT NULL,
+	[Password] [nvarchar](max) NOT NULL,
  CONSTRAINT [PK_Users] PRIMARY KEY CLUSTERED 
 (
 	[UsersId] ASC

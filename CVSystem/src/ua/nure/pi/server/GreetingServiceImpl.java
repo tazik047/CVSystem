@@ -67,11 +67,11 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements
     // Escape data from the client to avoid cross-site script vulnerabilities.
     input = escapeHtml(input);
     userAgent = escapeHtml(userAgent);
-    String con = userDAO.test();
+    //String con = userDAO.test();
 
     return "Hello, " + input + "!<br><br>I am running " + serverInfo
         + ".<br><br>It looks like you are using:<br>" + userAgent
-        + "<br> connection: " + con;
+        + "<br> connection: ";
   }
 
   /**

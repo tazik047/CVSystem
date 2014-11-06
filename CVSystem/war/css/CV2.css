@@ -394,3 +394,8 @@ h3.assistive-text {
 .loading{
 	text-align:center;
 }
+
+.error{
+	color:red;
+	font-style: italic;
+}

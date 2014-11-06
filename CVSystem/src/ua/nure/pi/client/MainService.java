@@ -2,19 +2,13 @@ package ua.nure.pi.client;
 
 import java.util.Collection;
 
-
-
-
-
-
-
 import ua.nure.pi.entity.Faculty;
 import ua.nure.pi.entity.Language;
 import ua.nure.pi.entity.ProgramLanguage;
 import ua.nure.pi.entity.Purpose;
 import ua.nure.pi.entity.Student;
+import ua.nure.pi.entity.User;
 
-import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
@@ -37,4 +31,7 @@ public interface MainService extends RemoteService {
 	
 	Boolean checkPass(String pass) throws IllegalArgumentException;
 
+	Boolean login(String login, String password) throws IllegalArgumentException;
+	
+	User checkLogined() throws IllegalArgumentException;
 }

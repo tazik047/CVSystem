@@ -7,6 +7,7 @@ import ua.nure.pi.entity.Purpose;
 import ua.nure.pi.entity.Language;
 import ua.nure.pi.entity.ProgramLanguage;
 import ua.nure.pi.entity.Student;
+import ua.nure.pi.entity.User;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
@@ -28,5 +29,9 @@ public interface MainServiceAsync {
 	void getPage(String url, AsyncCallback<String> asyncCallback); 
 	
 	void checkPass(String pass, AsyncCallback<Boolean> asyncCallback) throws IllegalArgumentException;
+	
+	void login(String login, String password, AsyncCallback<Boolean> asyncCallback) throws IllegalArgumentException;
+	
+	void checkLogined(AsyncCallback<User> asyncCallback) throws IllegalArgumentException;
 
 }

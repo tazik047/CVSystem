@@ -1,12 +1,16 @@
 package ua.nure.pi.client;
 
 
+import ua.nure.pi.entity.User;
+
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 
 
@@ -21,6 +25,8 @@ public class MainEntryPoint implements EntryPoint {
 
 	private UIManager uiManager;
 	
+	private static Button main;
+	
 	/**
 	 * This is the entry point method.
 	 */
@@ -34,23 +40,23 @@ public class MainEntryPoint implements EntryPoint {
     
     uiManager = new UIManager(RootPanel.get("content"));
     
-    final Button btnNewButton = new Button("New button");
-    btnNewButton.setStyleName("buttons");
-    btnNewButton.setFocus(true);
+    main = new Button("New button");
+    main.setStyleName("buttons");
+    main.setFocus(true);
    
-    btnNewButton.setText("Главная");
-    btnNewButton.addStyleName("buttons");
-    btnNewButton.addClickHandler(new ClickHandler() {
+    main.setText("Главная");
+    main.addStyleName("buttons");
+    main.addClickHandler(new ClickHandler() {
 		
 		@Override
 		public void onClick(ClickEvent event) {
-			btnNewButton.setFocus(false);
+			main.setFocus(false);
 			if(!uiManager.isSetted(MainStaticPanel.class.getName()))
 				uiManager.setPanel(new MainStaticPanel(mainService));
 		}
 	});
     
-    rootPanel.add(btnNewButton);
+    rootPanel.add(main);
    // btnNewButton.setSize("70px", "23px");
     final Button btnNewButton_4 = new Button("New button");
     btnNewButton_4.setStyleName("buttons");
@@ -81,7 +87,7 @@ public class MainEntryPoint implements EntryPoint {
 		public void onClick(ClickEvent event) {
 			butAddCV.setFocus(false);
 			if(!uiManager.isSetted(RegistrationSimplePanel.class.getName()))
-				uiManager.setPanel(new RegistrationSimplePanel(mainService, btnNewButton));
+				uiManager.setPanel(new RegistrationSimplePanel(mainService, main));
 			
 		}
 	});
@@ -106,21 +112,8 @@ public class MainEntryPoint implements EntryPoint {
     btnNewButton_2.addStyleName("buttons");
     rootPanel.add(btnNewButton_2);
     
-    RootPanel loginPan = RootPanel.get("login");
-    final Button loginBtn = new Button("Войти");
-    loginBtn.setStyleName("buttons");
-    loginPan.add(loginBtn);
-    loginBtn.addClickHandler(new ClickHandler() {
-		
-		@Override
-		public void onClick(ClickEvent event) {
-			loginBtn.setFocus(false);
-			RootPanel admPan = RootPanel.get("lifjhil");
-			admPan.addStyleName("adminPanel");
-		}
-	});
+    AdminManager.start(uiManager, mainService, main);
     
-    
-	btnNewButton.click();
+    main.click();
   }
 }

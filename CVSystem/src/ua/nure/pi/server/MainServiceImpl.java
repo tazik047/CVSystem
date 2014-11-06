@@ -13,6 +13,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import ua.nure.pi.Path;
 import ua.nure.pi.client.GreetingService;
@@ -24,12 +25,15 @@ import ua.nure.pi.dao.PassDAO;
 import ua.nure.pi.dao.ProgramLanguageDAO;
 import ua.nure.pi.dao.PurposeDAO;
 import ua.nure.pi.dao.StudentDAO;
+import ua.nure.pi.dao.UserDAO;
 import ua.nure.pi.entity.Faculty;
 import ua.nure.pi.entity.Language;
 import ua.nure.pi.entity.ProgramLanguage;
 import ua.nure.pi.entity.Purpose;
 import ua.nure.pi.entity.Student;
+import ua.nure.pi.entity.User;
 import ua.nure.pi.parameter.AppConstants;
+import ua.nure.pi.security.Hashing;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
@@ -51,6 +55,8 @@ public class MainServiceImpl extends RemoteServiceServlet implements
 	private PurposeDAO purposeDAO;
 
 	private PassDAO passDAO;
+	
+	private UserDAO userDAO;
 	
 	@Override
 	protected void doGet(HttpServletRequest request,
@@ -75,6 +81,7 @@ public class MainServiceImpl extends RemoteServiceServlet implements
 		languageDAO = (LanguageDAO) servletContext.getAttribute(AppConstants.LANGUAGE_DAO);
 		purposeDAO = (PurposeDAO) servletContext.getAttribute(AppConstants.PURPOSE_DAO);
 		passDAO = (PassDAO) servletContext.getAttribute(AppConstants.PASS_DAO);
+		userDAO = (UserDAO) servletContext.getAttribute(AppConstants.USER_DAO);
 		
 		if (facultyGroupDAO == null) {
 			throw new IllegalStateException("FacultyGroupDAO attribute is not exists.");
@@ -99,15 +106,15 @@ public class MainServiceImpl extends RemoteServiceServlet implements
 			throw new IllegalStateException("PassDAO attribute is not exists.");
 		}
 		
+		if (userDAO == null) {
+			throw new IllegalStateException("UserDAO attribute is not exists.");
+		}
+		
 	}
 	
 	  public Collection<Faculty> getFaculties() throws IllegalArgumentException {
 		    return facultyGroupDAO.getFaculties();
 		  }
-	  /*
-	  public void sendStudent(Student st) {
-		  studentDAO.insertStudent(st);
-	  }*/
 	  
 	  public Collection<ProgramLanguage> getProgramLanguages() throws IllegalArgumentException {
 		    return programLanguageDAO.getProgramLanguages();  
@@ -161,4 +168,41 @@ public class MainServiceImpl extends RemoteServiceServlet implements
 			throw new IllegalArgumentException("Произошла ошибка при сохранении резюме");
 	}
 
+	@Override
+	public Boolean login(String login, String password)
+			throws IllegalArgumentException {
+		if(checkLogined()!=null)
+			throw new IllegalArgumentException("Вы уже вошли  в систему");
+		User user = userDAO.getUser(login);
+		if(user!=null &&
+				Hashing.salt(password, login).equals(user.getPassword())){
+			HttpServletRequest request = getThreadLocalRequest();
+			HttpSession session = request.getSession();
+			session.setAttribute(AppConstants.USER, user);
+			return true;
+		}
+		return false;
+	}
+	
+	/**
+	 * 
+	 * @return true if user admin, false if company or visitor
+	 */
+	private boolean checkAdminRole(){
+		HttpServletRequest request = getThreadLocalRequest();
+		HttpSession session = request.getSession();
+		User user = (User) session.getAttribute(AppConstants.USER);
+		return user.isAdmin();
+	}
+
+	/**
+	 * 
+	 * @return true if user logined
+	 */
+	@Override
+	public User checkLogined(){
+		HttpServletRequest request = getThreadLocalRequest();
+		HttpSession session = request.getSession();
+		return (User) session.getAttribute(AppConstants.USER);
+	}
 }

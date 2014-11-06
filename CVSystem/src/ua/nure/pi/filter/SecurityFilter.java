@@ -18,7 +18,6 @@ import javax.xml.stream.XMLStreamException;
 
 import ua.nure.pi.Path;
 import ua.nure.pi.entity.Right;
-import ua.nure.pi.entity.Role;
 import ua.nure.pi.entity.User;
 import ua.nure.pi.security.path.SecurityManager;
 import ua.nure.pi.security.path.StAXParser;
@@ -61,32 +60,8 @@ public class SecurityFilter implements Filter {
 			FilterChain chain) throws IOException, ServletException {
 		HttpServletRequest httpRequest = (HttpServletRequest) request;
 		HttpServletResponse httpResponse = (HttpServletResponse) response;
-		User user = (User) httpRequest.getSession().getAttribute(
-				AppConstants.USER);
-		List<Role> roles = user != null ? user.getRoles() : null;
-		List<Right> rights = new ArrayList<Right>();
-		if (roles != null) {
-			for (Role role : roles) {
-				rights.add(role.getRight());
-			}
-		} else {
-			rights.add(Right.VISITOR);
-		}
-		String pagePath = httpRequest.getServletPath();
-		if (securityManager.accept(pagePath, rights)) {
-			chain.doFilter(httpRequest, httpResponse);
-			return;
-		} else {
-			if (rights.contains(Right.VISITOR)) {
-				RequestDispatcher requestDispatcher = httpRequest
-						.getRequestDispatcher(Path.PAGE__LOGIN);
-				requestDispatcher.forward(httpRequest, httpResponse);
-				return;
-			} else {
-				httpResponse.sendError(403);
-				return;
-			}
-		}
+		chain.doFilter(httpRequest, httpResponse);
+
 	}
 
 	@Override
