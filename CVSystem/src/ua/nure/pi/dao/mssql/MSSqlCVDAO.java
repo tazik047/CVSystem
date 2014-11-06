@@ -26,7 +26,7 @@ public class MSSqlCVDAO implements CVDAO {
 		return instance;
 	}
 	
-	private static final String SQL__INSERT_CV = "INSERT INTO CVs(PurposesId, Qualities, Others, DateStamp) VALUES(?, ?, ?, getdate())";
+	private static final String SQL__INSERT_CV = "INSERT INTO CVs(PurposesId, Qualities, Others, DateStamp, CVsId) VALUES(?, ?, ?, getdate(), ?)";
 	private static final String SQL__SELECT_CV = "SELECT * FROM CVs WHERE CVsId=?";
 
 	@Override
@@ -55,25 +55,20 @@ public class MSSqlCVDAO implements CVDAO {
 		boolean result = false;
 		PreparedStatement pstmt = null;
 		try {
-			pstmt = con.prepareStatement(SQL__INSERT_CV, Statement.RETURN_GENERATED_KEYS);
+			pstmt = con.prepareStatement(SQL__INSERT_CV);
 			mapCV(cv, pstmt);
 			if(pstmt.executeUpdate()!=1)
 				return false;
-			ResultSet rs = pstmt.getGeneratedKeys();
-			if(rs.next()){
-				long id = rs.getLong(1);
-				cv.setCvsId(id);
-				result = MSSqlEducationDAO.getInstancce()
-							.insertEducations(id, cv.getEducations(), con) &&
-						MSSqlLanguageDAO.getInstancce()
-							.addLanguage(id, cv.getLanguages(), con) &&
-						MSSqlProgramLanguageDAO.getInstancce()
-							.addProgramLanguage(id, cv.getProgramLanguages(), con) &&
-						MSSqlSertificatsDAO.getInstancce()
-							.insertSertificats(id, cv.getSertificates(), con) &&
-						MSSqlWorkExpDAO.getInstancce()
-							.insertWorkExps(id, cv.getWorkExps(), con);
-			}
+			result = MSSqlEducationDAO.getInstancce()
+						.insertEducations(cv.getCvsId(), cv.getEducations(), con) &&
+					MSSqlLanguageDAO.getInstancce()
+						.addLanguage(cv.getCvsId(), cv.getLanguages(), con) &&
+					MSSqlProgramLanguageDAO.getInstancce()
+						.addProgramLanguage(cv.getCvsId(), cv.getProgramLanguages(), con) &&
+					MSSqlSertificatsDAO.getInstancce()
+						.insertSertificats(cv.getCvsId(), cv.getSertificates(), con) &&
+					MSSqlWorkExpDAO.getInstancce()
+						.insertWorkExps(cv.getCvsId(), cv.getWorkExps(), con);
 		} catch (SQLException e) {
 			throw e;
 		} finally {
@@ -92,6 +87,7 @@ public class MSSqlCVDAO implements CVDAO {
 		pstmt.setLong(1, cv.getPurpose().getId());
 		pstmt.setString(2, cv.getQualities());
 		pstmt.setString(3, cv.getOthers());
+		pstmt.setLong(4, cv.getCvsId());
 	}
 
 	@Override

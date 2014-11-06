@@ -29,7 +29,7 @@ public class MSSqlEducationDAO implements EducationDAO {
 	
 	private static final String SQL__SELECT_EDUCATION = "SELECT * FROM Educations WHERE CVsId = ?";
 	private static final String SQL__INSERT_EDUCATION = "INSERT INTO Educations(StartYear, EndYear, "
-			+ "NameOfInstitution, Specialty, CVsId) VALUES(?,?,?,?,?)";
+			+ "NameOfInstitution, Specialty, CVsId, Faculty) VALUES(?,?,?,?,?,?)";
 
 
 	@Override
@@ -146,6 +146,7 @@ public class MSSqlEducationDAO implements EducationDAO {
 		pstmt.setString(3, ed.getNameOfInstitution());
 		pstmt.setString(4, ed.getSpecialty());
 		pstmt.setLong(5, cVsId);
+		pstmt.setString(6, ed.getFaculty());
 		
 	}
 }

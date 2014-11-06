@@ -31,7 +31,7 @@ public class MSSqlStudentDAO implements StudentDAO {
 	private static final String SQL__SELECT_STUDENT = "SELECT * FROM Students WHERE StudentsId = ?";
 	private static final String SQL__SELECT_ALL_STUDENT = "SELECT * FROM Students";
 	private static final String SQL__INSERT_STUDENT = "INSERT INTO Students(Surname, Firstname, Patronymic, "
-			+ "GroupsId, CVsId, Address, Skype, Email, Phone, Birthday) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			+ "GroupsId, Address, Skype, Email, Phone, Birthday) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	
 	private static final String SQL__DELETE_ANY_TAG = "DELETE Students WHERE StudentsId = ?";
 	
@@ -102,15 +102,21 @@ public class MSSqlStudentDAO implements StudentDAO {
 
 	private Boolean insertStudent(Student student, Connection con) 
 			throws SQLException {
-		boolean result = true;
+		boolean result = false;
 		PreparedStatement pstmt = null;
 		try {
-			if(!MSSqlCVDAO.getInstancce().insertCV(student.getCv(), con))
-				return false;			
-			pstmt = con.prepareStatement(SQL__INSERT_STUDENT);
+					
+			pstmt = con.prepareStatement(SQL__INSERT_STUDENT, Statement.RETURN_GENERATED_KEYS);
 			mapStudentForInsert(student, pstmt);
 			if(pstmt.executeUpdate()!=1)
 				return false;
+			ResultSet rs = pstmt.getGeneratedKeys();
+			if(rs.next()){
+				student.getCv().setCvsId(rs.getLong(1));
+				if(!MSSqlCVDAO.getInstancce().insertCV(student.getCv(), con))
+					return false;	
+				result = true;
+			}
 		} catch (SQLException e) {
 			throw e;
 		} finally {
@@ -159,7 +165,7 @@ public class MSSqlStudentDAO implements StudentDAO {
 			ResultSet rs = pstmt.executeQuery();
 			while(rs.next()){
 				Student st = unMapStudent(rs);
-				st.setCv(MSSqlCVDAO.getInstancce().getCv(rs.getLong(MapperParameters.STUDENT_CVSID),con));
+				st.setCv(MSSqlCVDAO.getInstancce().getCv(st.getStudentsId(),con));
 				st.setGroup(MSSqlFacultyGroupDAO.getInstancce().getGroup(rs.getLong(MapperParameters.STUDENT_GROUPSID)));
 				result.add(st);
 			}
@@ -198,12 +204,11 @@ public class MSSqlStudentDAO implements StudentDAO {
 		pstmt.setString(2, st.getFirstname());
 		pstmt.setString(3, st.getPatronymic());
 		pstmt.setLong(4, st.getGroup().getGroupId());
-		pstmt.setLong(5, st.getCv().getCvsId());
-		pstmt.setString(6, st.getAddress());
-		pstmt.setString(7, st.getSkype());
-		pstmt.setString(8, st.getEmail());
-		pstmt.setString(9, st.getPhone());
-		pstmt.setDate(10, new java.sql.Date(st.getDateOfBirth().getTime()));
+		pstmt.setString(5, st.getAddress());
+		pstmt.setString(6, st.getSkype());
+		pstmt.setString(7, st.getEmail());
+		pstmt.setString(8, st.getPhone());
+		pstmt.setDate(9, new java.sql.Date(st.getDateOfBirth().getTime()));
 	}
 	
 }
