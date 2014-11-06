@@ -64,6 +64,8 @@ public class AdminManager {
 	}
 
 	public static void aftorizedAdmin() {
+		RootPanel head = RootPanel.get("header");
+		head.addStyleName("forAdminFix");
 		adminPanel.setStyleName("adminPanel");
 		loginPanel.clear();
 		loginPanel.add(new Label("Здравствуйте, администратор"));

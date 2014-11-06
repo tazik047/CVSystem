@@ -40,12 +40,8 @@ public class MainEntryPoint implements EntryPoint {
     
     uiManager = new UIManager(RootPanel.get("content"));
     
-    main = new Button("New button");
+    main = new Button("Главная");
     main.setStyleName("buttons");
-    main.setFocus(true);
-   
-    main.setText("Главная");
-    main.addStyleName("buttons");
     main.addClickHandler(new ClickHandler() {
 		
 		@Override
@@ -57,13 +53,10 @@ public class MainEntryPoint implements EntryPoint {
 	});
     
     rootPanel.add(main);
-   // btnNewButton.setSize("70px", "23px");
-    final Button btnNewButton_4 = new Button("New button");
+    
+    final Button btnNewButton_4 = new Button("О нас");
     btnNewButton_4.setStyleName("buttons");
-    btnNewButton_4.setText("О нас");
-    btnNewButton_4.addStyleName("buttons");
     rootPanel.add(btnNewButton_4);
-   // btnNewButton_4.setSize("70px", "23px");
     
     btnNewButton_4.addClickHandler(new ClickHandler() {
 		
@@ -76,9 +69,7 @@ public class MainEntryPoint implements EntryPoint {
 	});
         
    
-    final Button butAddCV = new Button("New button");
-    butAddCV.setText("Добавить резюме");
-    butAddCV.addStyleName("buttons");
+    final Button butAddCV = new Button("Добавить резюме");
     butAddCV.setStyleName("buttons");
     rootPanel.add(butAddCV);
     butAddCV.addClickHandler(new ClickHandler() {
@@ -92,24 +83,18 @@ public class MainEntryPoint implements EntryPoint {
 		}
 	});
 
-    Button btnNewButton_3 = new Button("New button");
+    Button btnNewButton_3 = new Button("Партнеры");
     btnNewButton_3.setStyleName("buttons");
-    btnNewButton_3.setText("Партнеры");
-    btnNewButton_3.addStyleName("buttons");
     rootPanel.add(btnNewButton_3);
     
     
-    Button btnNewButton_1 = new Button("New button");
+    Button btnNewButton_1 = new Button("Списки резюме");
     btnNewButton_1.setStyleName("buttons");
-    btnNewButton_1.setText("Списки резюме");
-    btnNewButton_1.addStyleName("buttons");
     rootPanel.add(btnNewButton_1);
     
 
-    Button btnNewButton_2 = new Button("New button");
+    Button btnNewButton_2 = new Button("Статистика");
     btnNewButton_2.setStyleName("buttons");
-    btnNewButton_2.setText("Статистика");
-    btnNewButton_2.addStyleName("buttons");
     rootPanel.add(btnNewButton_2);
     
     AdminManager.start(uiManager, mainService, main);
