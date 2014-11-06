@@ -65,6 +65,7 @@ public class LoginPanel extends LoadingSimplePanel {
 					public void onSuccess(Boolean result) {
 						if(result){
 							AdminManager.aftorizedAdmin();
+							mainTab.click();
 						}
 						else{
 							err.setText("Неправильно введен логин или пароль.");
