@@ -28,7 +28,8 @@ public class VerifyDialogBox extends DialogBox{
 	Button accept;
 	Collection<ProgramLanguage> newPL;
 	
-	public VerifyDialogBox(Student st, MainServiceAsync registrationService, Boolean newPurp, Collection<ProgramLanguage> newPL) {
+	public VerifyDialogBox(Student st, MainServiceAsync registrationService, Boolean newPurp,
+			Collection<ProgramLanguage> newPL, final Button btnNewButton) {
 		try{
 			student = st;
 			main = registrationService;
@@ -55,7 +56,7 @@ public class VerifyDialogBox extends DialogBox{
 				
 				@Override
 				public void onClick(ClickEvent event) {
-					MyDialogBox db = new MyDialogBox(parent);
+					MyDialogBox db = new MyDialogBox(parent, btnNewButton);
 					//db.center();
 					
 				}
@@ -95,7 +96,7 @@ public class VerifyDialogBox extends DialogBox{
 	class MyDialogBox extends DialogBox{
 		Button ok;
 		
-		public MyDialogBox(final DialogBox parent) {
+		public MyDialogBox(final DialogBox parent, final Button btnNewButton) {
 			addStyleName("newPreViewDialogBox");
 			setAnimationEnabled(true);
 			setText("Подтверждение сохранения сформированного резюме");
@@ -144,7 +145,7 @@ public class VerifyDialogBox extends DialogBox{
 											ptb.setText("");
 											hide();
 											parent.hide();
-											
+											btnNewButton.click();
 										}
 										
 										@Override

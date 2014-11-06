@@ -28,7 +28,6 @@ public class UIManager {
 		loadImg.removeFromParent();
 		rootPanel.removeStyleName("loading");
 		rootPanel.add(panel);
-		panel.reDraw();
 		current=panel;
 	}
 
@@ -54,7 +53,7 @@ public class UIManager {
 			current=simp;
 			return true;
 		}
-		else if(simp.getClass().toString().equals(current.getClass().toString())){
+		else if(isSetted(simp)){
 			return false;
 		}
 		else{
@@ -77,7 +76,7 @@ public class UIManager {
 			//waitLoading(simp);
 			return true;
 		}
-		else if(simp.getClass().toString().equals(current.getClass().toString())){
+		else if(isSetted(simp)){
 			return false;
 		}
 		else{
@@ -99,5 +98,16 @@ public class UIManager {
 		
 		while(!l.isReady());
 		
+	}
+	
+	public boolean isSetted(Object panel){
+		return isSetted(panel.getClass().getName());
+	}
+	
+	public boolean isSetted(String panel){
+		if(current!=null){
+			return current.getClass().getName().equals(panel);
+		}
+		return false;
 	}
 }

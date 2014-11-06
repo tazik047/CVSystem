@@ -156,12 +156,12 @@ public class RegistrationSimplePanel extends LoadingSimplePanel {
     
     Student st;
 
-    public RegistrationSimplePanel(MainServiceAsync reg){
+    public RegistrationSimplePanel(MainServiceAsync reg, final Button btnNewButton){
     	registrationService = reg;
-    	onModuleLoad();
+    	onModuleLoad(btnNewButton);
     }
     
-	public void onModuleLoad() {
+	public void onModuleLoad(final Button btnNewButton) {
 
 		isReady = false;
 		final LoadingSimplePanel thisPanel = this;
@@ -461,18 +461,7 @@ public class RegistrationSimplePanel extends LoadingSimplePanel {
         			if(b){
 	            	
 	            	st = getStudent();
-	            	new VerifyDialogBox(st,registrationService, newPurp, newPL);
-	            	/*registrationService.sendStudent(st, newPurp, newPL, new AsyncCallback<Void>() {
-	                    public void onFailure(Throwable caught) {
-	                      Window.alert(caught.getLocalizedMessage());
-	                    }
-
-						@Override
-						public void onSuccess(Void result) {
-		                      Window.alert("Анкета сохранена");
-							
-						}
-	                  });	*/
+	            	new VerifyDialogBox(st,registrationService, newPurp, newPL, btnNewButton);
 	            	}
             	}
 
@@ -711,11 +700,5 @@ public class RegistrationSimplePanel extends LoadingSimplePanel {
 		cv.setProgramLanguages(resPL);
 		st.setCv(cv);
 		return st;
-	}
-	
-	@Override
-	public void reDraw(){
-		if(form!=null)
-		form.markForRedraw();
 	}
 }

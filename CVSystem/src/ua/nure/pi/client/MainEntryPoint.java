@@ -16,10 +16,6 @@ import com.google.gwt.user.client.ui.RootPanel;
  */
 public class MainEntryPoint implements EntryPoint {
 	
-	MainStaticPanel mainStaticPanel;
-	AboutUsStaticPanel aboutUsStaticPanel;
-	RegistrationSimplePanel registrationSimplePanel;
-	
 	
 	private final MainServiceAsync mainService = (MainServiceAsync) GWT
 			.create(MainService.class);
@@ -50,10 +46,8 @@ public class MainEntryPoint implements EntryPoint {
 		@Override
 		public void onClick(ClickEvent event) {
 			btnNewButton.setFocus(false);
-			if(mainStaticPanel==null)
-				mainStaticPanel = new MainStaticPanel(mainService);
-			uiManager.setPanel(mainStaticPanel);
-			//Window.Location.reload();
+			if(!uiManager.isSetted(MainStaticPanel.class.getName()))
+				uiManager.setPanel(new MainStaticPanel(mainService));
 		}
 	});
     
@@ -71,9 +65,8 @@ public class MainEntryPoint implements EntryPoint {
 		@Override
 		public void onClick(ClickEvent event) {
 			btnNewButton_4.setFocus(false);
-			if(aboutUsStaticPanel==null)
-				aboutUsStaticPanel = new AboutUsStaticPanel(mainService);
-			uiManager.setPanel(aboutUsStaticPanel);
+			if(!uiManager.isSetted(AboutUsStaticPanel.class.getName()))
+				uiManager.setPanel(new AboutUsStaticPanel(mainService));
 		}
 	});
         
@@ -88,9 +81,8 @@ public class MainEntryPoint implements EntryPoint {
 		@Override
 		public void onClick(ClickEvent event) {
 			butAddCV.setFocus(false);
-			if(registrationSimplePanel==null)
-				registrationSimplePanel = new RegistrationSimplePanel(mainService);
-			uiManager.setPanel(registrationSimplePanel);
+			if(!uiManager.isSetted(RegistrationSimplePanel.class.getName()))
+				uiManager.setPanel(new RegistrationSimplePanel(mainService, btnNewButton));
 			
 		}
 	});
@@ -115,8 +107,6 @@ public class MainEntryPoint implements EntryPoint {
     btnNewButton_2.addStyleName("buttons");
     rootPanel.add(btnNewButton_2);
     
-    if(mainStaticPanel==null)
-		mainStaticPanel = new MainStaticPanel(mainService);
-	uiManager.setPanel(mainStaticPanel);
+	btnNewButton.click();
   }
 }

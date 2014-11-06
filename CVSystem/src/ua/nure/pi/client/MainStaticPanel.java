@@ -28,11 +28,6 @@ public class MainStaticPanel extends LoadingSimplePanel {
 		});
 	}
 	
-	@Override
-	public void reDraw(){
-		startSlider();
-	}
-	
 	public static native void startSlider() /*-{
 	 $wnd.$('#slider').nivoSlider();
 	}-*/;

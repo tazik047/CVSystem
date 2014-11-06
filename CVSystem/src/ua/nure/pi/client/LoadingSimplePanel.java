@@ -7,8 +7,5 @@ public class LoadingSimplePanel extends StaticPanel {
 	public boolean isReady() {
 		return isReady;
 	}
-	
-	public void reDraw(){}
-
 
 }
