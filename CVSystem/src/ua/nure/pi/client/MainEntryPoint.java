@@ -5,9 +5,8 @@ import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
-
 import com.google.gwt.user.client.ui.RootPanel;
 
 
@@ -106,6 +105,21 @@ public class MainEntryPoint implements EntryPoint {
     btnNewButton_2.setText("Статистика");
     btnNewButton_2.addStyleName("buttons");
     rootPanel.add(btnNewButton_2);
+    
+    RootPanel loginPan = RootPanel.get("login");
+    final Button loginBtn = new Button("Войти");
+    loginBtn.setStyleName("buttons");
+    loginPan.add(loginBtn);
+    loginBtn.addClickHandler(new ClickHandler() {
+		
+		@Override
+		public void onClick(ClickEvent event) {
+			loginBtn.setFocus(false);
+			RootPanel admPan = RootPanel.get("lifjhil");
+			admPan.addStyleName("adminPanel");
+		}
+	});
+    
     
 	btnNewButton.click();
   }
