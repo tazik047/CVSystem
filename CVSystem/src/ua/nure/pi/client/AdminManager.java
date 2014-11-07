@@ -123,7 +123,7 @@ public class AdminManager {
 		Button edit = new Button("Редактировать профиль");
 		Button exit = new Button("Выйти");
 		profilePanel.add(pan);
-		pan.add(new HTML("<div class=\"triangle\"</div>"));
+		pan.add(new HTML("<div class=\"triangle\"></div><div class=\"triangle1\"></div>"));
 		pan.add(edit);
 		pan.add(exit);
 		pan.setStyleName("profilePanel");

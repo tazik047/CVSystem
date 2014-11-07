@@ -93,7 +93,6 @@ public class EducationElementSimplePanel extends SimplePanel{
         controls.setFields(startYearText, endYearText, nameOfInstitute, faculty, specialty);
         
         rootPanel.add(controls);
-        controls.draw();
         controls.markForRedraw();
 	    
         setWidget(rootPanel);

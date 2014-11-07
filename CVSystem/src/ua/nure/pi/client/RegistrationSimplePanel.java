@@ -589,7 +589,6 @@ public class RegistrationSimplePanel extends LoadingSimplePanel {
 	    pickDepartment.setValueTree(tree);
 	    pickDepartment.setRequired(true);
 	    form.setItems(pickDepartment);
-	    form.draw(); 
 	    
 	    facultiesPanel.add(form);
 	    

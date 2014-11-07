@@ -65,7 +65,7 @@ public class SertificateElementSimplePanel extends SimplePanel{
         yearField.setWidth(70);
         yearField.setHeight(18);
         yearField.setMask("####");
-        yearField.setKeyPressFilter("[0-9.]");
+        //yearField.setKeyPressFilter("[0-9.]");
         yearField.setTitleOrientation(TitleOrientation.LEFT);
         yearField.setRequired(true);
         
@@ -78,7 +78,6 @@ public class SertificateElementSimplePanel extends SimplePanel{
         controls.setNumCols(1);        
         controls.setFields(yearField, desc);
 		rootPanel.add(controls);
-        controls.draw(); 
         controls.markForRedraw();
 
 
