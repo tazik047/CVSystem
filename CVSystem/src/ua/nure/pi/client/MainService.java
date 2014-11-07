@@ -34,4 +34,6 @@ public interface MainService extends RemoteService {
 	Boolean login(String login, String password) throws IllegalArgumentException;
 	
 	User checkLogined() throws IllegalArgumentException;
+	
+	void logout() throws IllegalArgumentException;
 }

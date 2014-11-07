@@ -18,3 +18,34 @@
 .forAdminFix{
 	margin-top:30px;
 }
+
+.triangle{
+	border-color: transparent;
+	border-bottom-color: #fff;
+	border-style: dashed dashed solid;
+	border-width: 0 8.5px 8.5px;
+	position: absolute;
+	right: 0px;
+	top: -8.5px;
+	z-index: 1;
+	height: 0;
+	width: 0;
+	-webkit-animation: gb__a .2s;
+}
+
+.profilePanel{
+	background-color: white;
+	width: 300px;
+	height: 50px;
+	/* text-align: center;
+	vertical-align: middle; */
+	position: absolute;
+	bottom: -75px;
+	right: 0px;
+	z-index: 10000000;
+	border: 2px solid black;
+}
+
+div#login>div{
+	overflow: visible !important;
+}

@@ -64,7 +64,7 @@ public class LoginPanel extends LoadingSimplePanel {
 					@Override
 					public void onSuccess(Boolean result) {
 						if(result){
-							AdminManager.aftorizedAdmin();
+							AdminManager.createProfilePanel(true);
 							mainTab.click();
 						}
 						else{

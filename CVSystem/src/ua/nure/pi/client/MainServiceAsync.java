@@ -33,5 +33,7 @@ public interface MainServiceAsync {
 	void login(String login, String password, AsyncCallback<Boolean> asyncCallback) throws IllegalArgumentException;
 	
 	void checkLogined(AsyncCallback<User> asyncCallback) throws IllegalArgumentException;
+	
+	void logout(AsyncCallback<Void> asyncCallback) throws IllegalArgumentException;
 
 }

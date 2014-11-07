@@ -205,4 +205,15 @@ public class MainServiceImpl extends RemoteServiceServlet implements
 		HttpSession session = request.getSession();
 		return (User) session.getAttribute(AppConstants.USER);
 	}
+
+	@Override
+	public void logout() throws IllegalArgumentException {
+		if(checkLogined()!=null){
+			HttpServletRequest request = getThreadLocalRequest();
+			HttpSession session = request.getSession();
+			session.removeAttribute(AppConstants.USER);
+			return;
+		}
+		throw new IllegalArgumentException("Вы не авторизированы!");
+	}
 }
