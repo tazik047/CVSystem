@@ -27,7 +27,7 @@ public class WorkExperienceSimplePanel extends SimplePanel{
 	private int pixelCount = 26;
 	private VerticalPanel root;
 	private boolean expend = true;
-	
+	private Button btAdd;
 	public WorkExperienceSimplePanel() {
 		sectionStack = new SectionStack();  
         sectionStack.setVisibilityMode(VisibilityMode.MULTIPLE);
@@ -47,7 +47,7 @@ public class WorkExperienceSimplePanel extends SimplePanel{
         form.setNumCols(4);
         final VerticalPanel vp = new VerticalPanel();
         form.addChild(vp);
-        final Button btAdd = new Button("Добавить опыт работы");
+        btAdd = new Button("Добавить опыт работы");
         btAdd.addStyleName("panel-startAddButton");
         btAdd.setTitle("Добавить опыт работы");
         root.add(absP);
@@ -120,7 +120,23 @@ public class WorkExperienceSimplePanel extends SimplePanel{
 		vp.add(exp);
 		works.add(exp);
 	}
+	public Boolean ValidateForm() {
+		Boolean b = true;
+		for (WorkExperinceElementSimplePanel wesp : works) {
+			b = wesp.controls.validate() && b;
+		}
+		if (!b);
+		{
+            sectionStack.expandSection(0);
+			sectionStack.setHeight(String.valueOf(pixelCount)+"px");
+			expend = true;
+			btAdd.setVisible(!expend);
+			sectionStack.markForRedraw();
+		}			
+		return b;
+	}
 
+	
 	public Collection<WorkExp> getExp() throws IllegalArgumentException{
 		Collection<WorkExp> studentWorks = new ArrayList<WorkExp>();
 		for(WorkExperinceElementSimplePanel we : works)

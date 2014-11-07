@@ -27,8 +27,11 @@ public class EducationElementSimplePanel extends SimplePanel{
 	private TextItem endYearText;
 	private TextItem specialty;
 	private TextItem nameOfInstitute;
+	private TextItem faculty;
 	private VerticalPanel rootPanel;
 	public Image imgDel;
+	
+
 	public DynamicForm controls;
 	
 	public EducationElementSimplePanel(){
@@ -74,13 +77,20 @@ public class EducationElementSimplePanel extends SimplePanel{
 	    specialty.setShowHintInField(true);
 	    specialty.setRequired(true);
 
-	    nameOfInstitute = new TextItem("nameOfInstitute", "Место учёбы");  
+	    faculty = new TextItem("faculty", "Факультет");  
+	    faculty.setWidth(200);  
+	    faculty.setHint("");  
+	    faculty.setShowHintInField(true);
+	    faculty.setRequired(true);
+
+	    
+	    nameOfInstitute = new TextItem("nameOfInstitute", "ВУЗ");  
 	    nameOfInstitute.setWidth(200);  
 	    nameOfInstitute.setHint("");  
 	    nameOfInstitute.setShowHintInField(true);
 	    nameOfInstitute.setRequired(true);
         controls = new DynamicForm();
-        controls.setFields(startYearText, endYearText, specialty, nameOfInstitute);
+        controls.setFields(startYearText, endYearText, nameOfInstitute, faculty, specialty);
         
         rootPanel.add(controls);
         controls.draw();
@@ -93,13 +103,14 @@ public class EducationElementSimplePanel extends SimplePanel{
 		Education ed = new Education();
 		int startYear = Integer.parseInt(startYearText.getValueAsString());
 		int endYear = Integer.parseInt(endYearText.getValueAsString());
-		
+		ed.setFaculty(faculty.getValueAsString());
 		ed.setStartYear(startYear);
 		ed.setEndYear(endYear);		
 		ed.setNameOfInstitution(nameOfInstitute.getValueAsString());
 		ed.setSpecialty(specialty.getValueAsString());
 		return ed;
 	}
+
 	
 	public void addSeparator(){
 		rootPanel.add(new HTML("<hr/>"));

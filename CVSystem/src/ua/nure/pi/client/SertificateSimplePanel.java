@@ -27,6 +27,7 @@ public class SertificateSimplePanel extends SimplePanel{
 	private int pixelCount = 26;
 	private VerticalPanel root;
 	private boolean expend = true;
+	private Button btAdd;
 	
 	public SertificateSimplePanel() {
 		sectionStack = new SectionStack();  
@@ -47,7 +48,7 @@ public class SertificateSimplePanel extends SimplePanel{
         form.setNumCols(4);
         final VerticalPanel vp = new VerticalPanel();
         form.addChild(vp);
-        final Button btAdd = new Button("Добавить сертификат");
+        btAdd = new Button("Добавить сертификат");
         btAdd.addStyleName("panel-startAddButton");
         btAdd.setTitle("Добавить сертификат");
         root.add(absP);
@@ -119,6 +120,21 @@ public class SertificateSimplePanel extends SimplePanel{
 		});
 		vp.add(exp);
 		sertificates.add(exp);
+	}
+	public Boolean ValidateForm() {
+		Boolean b = true;
+		for (SertificateElementSimplePanel sesp : sertificates) {
+			b = sesp.controls.validate() && b;
+		}
+		if (!b);
+		{
+            sectionStack.expandSection(0);
+			sectionStack.setHeight(String.valueOf(pixelCount)+"px");
+			expend = true;
+			btAdd.setVisible(!expend);
+			sectionStack.markForRedraw();
+		}			
+		return b;
 	}
 
 	public Collection<Sertificate> getSerts() throws IllegalArgumentException{

@@ -26,7 +26,9 @@ public class EducationSimplePanel extends SimplePanel{
 	private int countColor = -1;
 	private int pixelCount = 26;
 	private VerticalPanel root;
-	private boolean expend = true;
+	private boolean expend = false;
+	private DynamicForm form;
+	private Button btAdd;
 	
 	public EducationSimplePanel() {
 		sectionStack = new SectionStack();  
@@ -42,7 +44,7 @@ public class EducationSimplePanel extends SimplePanel{
 		final AbsolutePanel absP = new AbsolutePanel();
 		
 		educations = new ArrayList<EducationElementSimplePanel>();
-		DynamicForm form = new DynamicForm();
+		form = new DynamicForm();
 		section1.addItem(form);
         form.setNumCols(4);
         final VerticalPanel vp = new VerticalPanel();
@@ -91,7 +93,7 @@ public class EducationSimplePanel extends SimplePanel{
 						
 		}
 		final EducationElementSimplePanel exp = new EducationElementSimplePanel();
-		pixelCount+=130;
+		pixelCount+=160;
 		sectionStack.setHeight(String.valueOf(pixelCount)+"px");
 		countColor  = (++countColor)%2;
 		if(countColor == 0){
@@ -105,7 +107,7 @@ public class EducationSimplePanel extends SimplePanel{
 			public void onClick(ClickEvent event) {
 				vp.remove(exp);
 				educations.remove(exp);
-				pixelCount-=130;
+				pixelCount-=160;
 				sectionStack.setHeight(String.valueOf(pixelCount)+"px");
 				if(educations.size()==0){
 					sectionStack.removeFromParent();
@@ -119,6 +121,23 @@ public class EducationSimplePanel extends SimplePanel{
 		});
 		vp.add(exp);
 		educations.add(exp);
+	}
+	
+	public Boolean ValidateForm() {
+		Boolean b = true;
+		for (EducationElementSimplePanel eesp : educations) {
+			b = eesp.controls.validate() && b;
+		}
+		if (!b && pixelCount != 26);
+		{
+            sectionStack.expandSection(0);
+			sectionStack.setHeight(String.valueOf(pixelCount+"px"));
+			
+			expend = true;
+			//btAdd.setVisible(true);
+			sectionStack.markForRedraw();
+		}			
+		return b;
 	}
 
 	public Collection<Education> getEducation() throws IllegalArgumentException{

@@ -30,7 +30,7 @@ public class LanguageSimplePanel extends SimplePanel{
 	private int pixelCount = 26;
 	private VerticalPanel root;
 	private boolean expend = true;
-	
+	private Button btAdd;
 	public LanguageSimplePanel() {
 		sectionStack = new SectionStack();  
         sectionStack.setVisibilityMode(VisibilityMode.MULTIPLE);
@@ -52,7 +52,7 @@ public class LanguageSimplePanel extends SimplePanel{
         form.setNumCols(4);
         final VerticalPanel vp = new VerticalPanel();
         form.addChild(vp);
-        final Button btAdd = new Button("Добавить язык");
+        btAdd = new Button("Добавить язык");
         btAdd.addStyleName("panel-startAddButton");
         btAdd.setTitle("Добавить язык");
         root.add(absP);
@@ -152,6 +152,21 @@ public class LanguageSimplePanel extends SimplePanel{
 		});
 		vp.add(lang);
 		languages.add(lang);
+	}
+	public Boolean ValidateForm() {
+		Boolean b = true;
+		for (LanguageElementSimplePanel lesp : languages) {
+			b = lesp.controls.validate() && b;
+		}
+		if (!b);
+		{
+            sectionStack.expandSection(0);
+			sectionStack.setHeight(String.valueOf(pixelCount)+"px");
+			expend = true;
+			btAdd.setVisible(!expend);
+			sectionStack.markForRedraw();
+		}			
+		return b;
 	}
 
 	public Collection<Language> getLanguages() throws IllegalArgumentException{
