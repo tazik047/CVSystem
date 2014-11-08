@@ -74,6 +74,7 @@ public class AdminManager {
 		head.addStyleName("forAdminFix");
 		adminPanel.setStyleName("adminPanel");
 		Label text = new Label("Здравствуйте, администратор");
+		
 		loginPanel.add(text);
 		setAdminFunc();
 	}

@@ -164,7 +164,7 @@ public class VerifyDialogBox extends DialogBox{
 							@Override
 							public void onFailure(Throwable caught) {
 								Window.alert(caught.getLocalizedMessage());
-								
+								ok.setEnabled(true);
 							}
 						});
 
