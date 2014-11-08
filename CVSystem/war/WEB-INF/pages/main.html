@@ -81,5 +81,20 @@
     $(window).load(function() {
         $('#slider').nivoSlider();
     });
+    $('div#login').click(function(e) { //button click class name is myDiv
+    	  e.stopPropagation();
+    	  var t = $('.profilePanel'); 
+    	  if(t.is(':visible')){
+    	  	  t.hide(); 
+    	  }
+    	  else{
+    		  t.show();
+    	  }
+   	});
+
+    $(document).click(function(){
+    	  $('.profilePanel').hide(); //hide the button
+   	});
+    
     </script>
 </html>

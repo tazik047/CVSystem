@@ -75,14 +75,16 @@ public class AdminManager {
 		adminPanel.setStyleName("adminPanel");
 		Label text = new Label("Здравствуйте, администратор");
 		loginPanel.add(text);
-		text.addClickHandler(new ClickHandler() {
+		/*text.addClickHandler(new ClickHandler() {
 			
 			@Override
 			public void onClick(ClickEvent event) {
-				if(profilePanel!=null)
-				profilePanel.setVisible(!profilePanel.isVisible());
+				if(isShow())
+					hideProfilePanel();
+				else
+					showProfilePanel();
 			}
-		});
+		});*/
 	}
 	
 	public static void exitFromAdmin() {
@@ -155,7 +157,7 @@ public class AdminManager {
 			}
 		});
 		
-		profilePanel.setVisible(false);
+		hideProfilePanel();
 		
 		if(admin){
 			aftorizedAdmin();
@@ -166,4 +168,15 @@ public class AdminManager {
 		HorizontalPanel root = new HorizontalPanel();
 		
 	}
+	public static native void hideProfilePanel() /*-{
+	 $wnd.$('.profilePanel').hide();
+	}-*/;
+	
+	public static native void showProfilePanel() /*-{
+	 $wnd.$('.profilePanel').show();
+	}-*/;
+	
+	public static native boolean isShow()/*-{
+		return $wnd.$('.profilePanel').is(':visible');
+	}-*/;
 }
