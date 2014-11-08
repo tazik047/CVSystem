@@ -597,39 +597,43 @@ public class RegistrationSimplePanel extends LoadingSimplePanel {
 	}
 	
 	public Boolean ValidateLanPanel(LanguageSimplePanel lsp){
-		Boolean f = true;
+		/*Boolean f = true;
 		for (LanguageElementSimplePanel lesp : lsp.languages){
 			f = lesp.controls.validate()&& f;
 			lesp.controls.markForRedraw();
 		}
-		return f;
+		return f;*/
+		return lsp.ValidateForm();
 	}
 	
 	public Boolean ValidateEduPanel(EducationSimplePanel esp){
-		Boolean f = true;
+		/*Boolean f = true;
 		for (EducationElementSimplePanel eesp : esp.educations){
 			f = eesp.controls.validate() && f;
 			eesp.controls.markForRedraw();
 		}
-		return f;
+		return f;*/
+		return esp.ValidateForm();
 	}
 	
 	public Boolean ValidateSerPanel(SertificateSimplePanel ssp){
-		Boolean f = true;
+		/*Boolean f = true;
 		for (SertificateElementSimplePanel sesp : ssp.sertificates){
 			f = sesp.controls.validate()&& f;
 			sesp.controls.markForRedraw();
 		}
-		return f;
+		return f;*/
+		return ssp.ValidateForm();
 	}
 	
 	public Boolean ValidateWorkPanel(WorkExperienceSimplePanel wsp){
-		Boolean f = true;
+		/*Boolean f = true;
 		for (WorkExperinceElementSimplePanel wesp : wsp.works){
 			f = wesp.controls.validate()&& f;
 			wesp.controls.markForRedraw();
 		}
-		return f;
+		return f;*/
+		return wsp.ValidateForm();
 	}
 	
 	

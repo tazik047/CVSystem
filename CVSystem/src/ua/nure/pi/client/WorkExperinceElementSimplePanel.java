@@ -86,14 +86,14 @@ public class WorkExperinceElementSimplePanel extends SimplePanel{
         
 		  
         role = new TextItem("role", "Должность");  
-        role.setWidth(200);
+        role.setWidth(183);
         role.setHeight(18);
         role.setRequired(true);
         role.setTitleOrientation(TitleOrientation.LEFT);
 
         
         nameOfInstitute = new TextItem("nameOfInstitute", "Место работы");  
-        nameOfInstitute.setWidth(200);
+        nameOfInstitute.setWidth(183);
         nameOfInstitute.setHeight(18);
         nameOfInstitute.setRequired(true);
         nameOfInstitute.setTitleOrientation(TitleOrientation.LEFT);

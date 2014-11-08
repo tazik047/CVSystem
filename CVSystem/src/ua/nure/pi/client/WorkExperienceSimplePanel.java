@@ -91,7 +91,7 @@ public class WorkExperienceSimplePanel extends SimplePanel{
 						
 		}
 		final WorkExperinceElementSimplePanel exp = new WorkExperinceElementSimplePanel();
-		pixelCount+=164;
+		pixelCount+=163;
 		sectionStack.setHeight(String.valueOf(pixelCount)+"px");
 		countColor = (++countColor)%2;
 		if(countColor == 0){
@@ -105,7 +105,7 @@ public class WorkExperienceSimplePanel extends SimplePanel{
 			public void onClick(ClickEvent event) {
 				vp.remove(exp);
 				works.remove(exp);
-				pixelCount-=164;
+				pixelCount-=163;
 				sectionStack.setHeight(String.valueOf(pixelCount)+"px");
 				if(works.size()==0){
 					sectionStack.removeFromParent();
@@ -125,12 +125,13 @@ public class WorkExperienceSimplePanel extends SimplePanel{
 		for (WorkExperinceElementSimplePanel wesp : works) {
 			b = wesp.controls.validate() && b;
 		}
-		if (!b);
+		if (!b && pixelCount != 26);
 		{
             sectionStack.expandSection(0);
-			sectionStack.setHeight(String.valueOf(pixelCount)+"px");
+			sectionStack.setHeight(String.valueOf(pixelCount+"px"));
+			
 			expend = true;
-			btAdd.setVisible(!expend);
+			btAdd.setVisible(true);
 			sectionStack.markForRedraw();
 		}			
 		return b;

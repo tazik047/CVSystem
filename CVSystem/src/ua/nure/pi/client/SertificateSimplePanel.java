@@ -126,14 +126,15 @@ public class SertificateSimplePanel extends SimplePanel{
 		for (SertificateElementSimplePanel sesp : sertificates) {
 			b = sesp.controls.validate() && b;
 		}
-		if (!b);
+		if (!b && pixelCount != 26);
 		{
             sectionStack.expandSection(0);
-			sectionStack.setHeight(String.valueOf(pixelCount)+"px");
+			sectionStack.setHeight(String.valueOf(pixelCount+"px"));
+			
 			expend = true;
-			btAdd.setVisible(!expend);
+			btAdd.setVisible(true);
 			sectionStack.markForRedraw();
-		}			
+		}		
 		return b;
 	}
 

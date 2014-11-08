@@ -49,4 +49,14 @@ public class Language implements Serializable, IsSerializable {
 		this.level = level;
 	}
 	
+	@Override
+	public boolean equals(Object o){
+		if(o==null)
+			return false;
+		Language l = (Language)o;
+		if(l==null)
+			return false;
+		return l.id==id;
+	}
+	
 }

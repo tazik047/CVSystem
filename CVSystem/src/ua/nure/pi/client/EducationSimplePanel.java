@@ -26,7 +26,7 @@ public class EducationSimplePanel extends SimplePanel{
 	private int countColor = -1;
 	private int pixelCount = 26;
 	private VerticalPanel root;
-	private boolean expend = false;
+	private boolean expend = true;
 	private DynamicForm form;
 	private Button btAdd;
 	
@@ -49,7 +49,7 @@ public class EducationSimplePanel extends SimplePanel{
         form.setNumCols(4);
         final VerticalPanel vp = new VerticalPanel();
         form.addChild(vp);
-        final Button btAdd = new Button("Добавить образование");
+        btAdd = new Button("Добавить образование");
         btAdd.addStyleName("panel-startAddButton");
         btAdd.setTitle("Добавить образование");
         root.add(absP);
@@ -93,7 +93,7 @@ public class EducationSimplePanel extends SimplePanel{
 						
 		}
 		final EducationElementSimplePanel exp = new EducationElementSimplePanel();
-		pixelCount+=160;
+		pixelCount+=155;
 		sectionStack.setHeight(String.valueOf(pixelCount)+"px");
 		countColor  = (++countColor)%2;
 		if(countColor == 0){
@@ -107,7 +107,7 @@ public class EducationSimplePanel extends SimplePanel{
 			public void onClick(ClickEvent event) {
 				vp.remove(exp);
 				educations.remove(exp);
-				pixelCount-=160;
+				pixelCount-=155;
 				sectionStack.setHeight(String.valueOf(pixelCount)+"px");
 				if(educations.size()==0){
 					sectionStack.removeFromParent();
@@ -134,7 +134,7 @@ public class EducationSimplePanel extends SimplePanel{
 			sectionStack.setHeight(String.valueOf(pixelCount+"px"));
 			
 			expend = true;
-			//btAdd.setVisible(true);
+			btAdd.setVisible(true);
 			sectionStack.markForRedraw();
 		}			
 		return b;
