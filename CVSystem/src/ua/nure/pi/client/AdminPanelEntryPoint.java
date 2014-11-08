@@ -78,7 +78,7 @@ public class AdminPanelEntryPoint implements EntryPoint {
 					
 					@Override
 					public void onSuccess(Collection<Student> result) {
-						cv.add(new TablePanel(result));						
+						//cv.add(new TablePanel(result));						
 					}
 					
 					@Override

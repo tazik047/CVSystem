@@ -184,6 +184,15 @@ public class MainServiceImpl extends RemoteServiceServlet implements
 		return false;
 	}
 	
+	@Override
+	public Collection<Student> getStudents()
+			throws IllegalArgumentException {
+		if(checkAdminRole()){
+			return studentDAO.getStudents();
+		}
+		throw new IllegalArgumentException("У вас недостаточно прав для просмотра этой информации.");
+	}
+	
 	/**
 	 * 
 	 * @return true if user admin, false if company or visitor

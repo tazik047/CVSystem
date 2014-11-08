@@ -35,5 +35,7 @@ public interface MainServiceAsync {
 	void checkLogined(AsyncCallback<User> asyncCallback) throws IllegalArgumentException;
 	
 	void logout(AsyncCallback<Void> asyncCallback) throws IllegalArgumentException;
+	
+	void getStudents(AsyncCallback<Collection<Student>> callback) throws IllegalArgumentException;
 
 }

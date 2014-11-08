@@ -75,16 +75,7 @@ public class AdminManager {
 		adminPanel.setStyleName("adminPanel");
 		Label text = new Label("Здравствуйте, администратор");
 		loginPanel.add(text);
-		/*text.addClickHandler(new ClickHandler() {
-			
-			@Override
-			public void onClick(ClickEvent event) {
-				if(isShow())
-					hideProfilePanel();
-				else
-					showProfilePanel();
-			}
-		});*/
+		setAdminFunc();
 	}
 	
 	public static void exitFromAdmin() {
@@ -166,8 +157,25 @@ public class AdminManager {
 	
 	private static void setAdminFunc(){
 		HorizontalPanel root = new HorizontalPanel();
+		final Button getCVs = new Button("Получить списки резюме");
+		getCVs.setStyleName("Buttons");
+		root.add(getCVs);
+		getCVs.addClickHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				getCVs.setFocus(false);
+				if(!uiManager.isSetted(TablePanel.class.getName()))
+					uiManager.setPanel(new TablePanel(mainService));
+			}
+		});
 		
+		adminPanel.add(root);
 	}
+	
+	
+	
+	//////////////////// Осторожно, JavaScript code /////////////////////////
 	public static native void hideProfilePanel() /*-{
 	 $wnd.$('.profilePanel').hide();
 	}-*/;
@@ -179,4 +187,6 @@ public class AdminManager {
 	public static native boolean isShow()/*-{
 		return $wnd.$('.profilePanel').is(':visible');
 	}-*/;
+	
+	////////////////////////////////////////////////////////////////////////
 }

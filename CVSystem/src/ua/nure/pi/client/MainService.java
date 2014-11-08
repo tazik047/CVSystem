@@ -36,4 +36,6 @@ public interface MainService extends RemoteService {
 	User checkLogined() throws IllegalArgumentException;
 	
 	void logout() throws IllegalArgumentException;
+	
+	Collection<Student> getStudents() throws IllegalArgumentException;
 }

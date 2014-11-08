@@ -1,5 +1,9 @@
 package ua.nure.pi.client;
 
+import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.HasHorizontalAlignment;
+import com.google.gwt.user.client.ui.HasVerticalAlignment;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.smartgwt.client.widgets.Canvas;
@@ -24,8 +28,9 @@ import ua.nure.pi.dao.mssql.MSSqlStudentDAO;
 import ua.nure.pi.entity.ProgramLanguage;
 import ua.nure.pi.entity.Student;
 
-public class TablePanel extends SimplePanel{
+public class TablePanel extends LoadingSimplePanel{
 	private Collection<Student> students;
+	
 	public TablePanel(Collection<Student> students)
 	{
 		this.students = students;
@@ -33,7 +38,27 @@ public class TablePanel extends SimplePanel{
 	}
 	
 	
-	 public void onModuleLoad() {  
+	 public TablePanel(MainServiceAsync mainService) {
+		final TablePanel tab = this;
+		mainService.getStudents(new AsyncCallback<Collection<Student>>() {
+			
+			@Override
+			public void onSuccess(Collection<Student> result) {
+				students=result;
+				onModuleLoad();
+				fireLoadEvent(tab);
+			}
+			
+			@Override
+			public void onFailure(Throwable caught) {
+				Window.alert(caught.getLocalizedMessage());
+			}
+		});
+	}
+
+
+	public void onModuleLoad() {
+			clear();
 		  	VerticalPanel root = new VerticalPanel();
 		  	final SimplePanel cv = new SimplePanel();
 	        final ListGrid CVGrid = new ListGrid(){
@@ -72,7 +97,7 @@ public class TablePanel extends SimplePanel{
 	        CVGrid.setShowAllRecords(true);  
 	        ListGridField idField = new ListGridField("idField", "ID");  
 	        ListGridField SurnameField = new ListGridField("surname", "ФИО");  
-	        ListGridField show = new ListGridField("show", "");  
+	        ListGridField show = new ListGridField("show", "Показать резюме");  
 	        show.setAlign(Alignment.CENTER);  
 	        CVGrid.setFields(idField, SurnameField, show);  
 	        CVGrid.setCanResizeFields(true);
@@ -82,7 +107,7 @@ public class TablePanel extends SimplePanel{
 		    ListGridRecord rec = new ListGridRecord(); 
 	        rec.setAttribute("idField", i.getStudentsId());
 	        rec.setAttribute("surname", i.getSurname()+" " + i.getFirstname()+" "+i.getPatronymic());
-	        rec.setAttribute("show", "Просмотреть");
+	        rec.setAttribute("show", "");
 	        recs[ind++]=rec;
 	        }
 	        CVGrid.setRecords(recs);
@@ -90,6 +115,11 @@ public class TablePanel extends SimplePanel{
 	        root.add(CVGrid);
 	        root.add(cv);
 	       add(root);
+	       setWidth("100%");
+	       root.setCellHorizontalAlignment(CVGrid,HasHorizontalAlignment.ALIGN_CENTER);
+	       root.setCellHorizontalAlignment(cv,HasHorizontalAlignment.ALIGN_CENTER);
+	       root.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
+	       root.setWidth("100%");
 	        
 	 }
 	 
