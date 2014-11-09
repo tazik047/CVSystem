@@ -159,7 +159,15 @@ public class RegistrationSimplePanel extends LoadingSimplePanel {
     Student st;
     
     StaticTextItem nameHint;
-
+    StaticTextItem surnameHint;
+    StaticTextItem patronHint;
+    StaticTextItem dateHint;
+    StaticTextItem addressHint;
+    StaticTextItem emailHint;
+    StaticTextItem phoneHint;
+    StaticTextItem skypeHint;
+    StaticTextItem goalHint;
+    
     public RegistrationSimplePanel(MainServiceAsync reg, final Button btnNewButton){
     	registrationService = reg;
     	onModuleLoad(btnNewButton);
@@ -213,7 +221,7 @@ public class RegistrationSimplePanel extends LoadingSimplePanel {
         SurnametextBox.setHint("Введите фамилию");  
         SurnametextBox.setShowHintInField(true);
         SurnametextBox.setMask(">C<CCCCCCCCCCCCCCCCCCCC");
-	    StaticTextItem surnameHint = new StaticTextItem();
+	    surnameHint = new StaticTextItem();
 	    surnameHint.setShowTitle(false);
 	    surnameHint.setValue("Например, Иванов");
 	    SurnametextBox.setRequired(true);
@@ -224,7 +232,7 @@ public class RegistrationSimplePanel extends LoadingSimplePanel {
         NametextBox.setHint("Введите имя");  
         NametextBox.setShowHintInField(true);
         NametextBox.setMask(">C<CCCCCCCCCCCCCCCCCCCC");
-	    StaticTextItem nameHint = new StaticTextItem();
+	    nameHint = new StaticTextItem();
 	    nameHint.setShowTitle(false);
 	    nameHint.setValue("Например, Иван");
 	    NametextBox.setRequired(true);
@@ -234,7 +242,7 @@ public class RegistrationSimplePanel extends LoadingSimplePanel {
         PatronymictextBox.setHint("Введите отчество");  
         PatronymictextBox.setShowHintInField(true);
         PatronymictextBox.setMask(">C<CCCCCCCCCCCCCCCCCCCC");
-	    StaticTextItem patronHint = new StaticTextItem();
+	    patronHint = new StaticTextItem();
 	    patronHint.setShowTitle(false);
 	    patronHint.setValue("Например, Иванович");
 	    PatronymictextBox.setRequired(false);
@@ -249,7 +257,7 @@ public class RegistrationSimplePanel extends LoadingSimplePanel {
 		dateItem.setEndDate(new Date());
 	    dateItem.setRequired(true);
 		*/
-	    StaticTextItem dateHint = new StaticTextItem();
+	    dateHint = new StaticTextItem();
 	    dateHint.setShowTitle(false);
 	    dateHint.setValue("Например, 01.01.1970");
 	    
@@ -266,7 +274,7 @@ public class RegistrationSimplePanel extends LoadingSimplePanel {
         AddresstextBox.setHint("Введите домашний адрес");  
         AddresstextBox.setShowHintInField(true);
         AddresstextBox.setMask("");
-	    StaticTextItem addressHint = new StaticTextItem();
+        addressHint = new StaticTextItem();
 	    addressHint.setShowTitle(false);
 	    addressHint.setValue("Например, г. Харьков, пр.Ленина, 9, кв.3");
 
@@ -278,7 +286,7 @@ public class RegistrationSimplePanel extends LoadingSimplePanel {
         Emailtextbox.setHint("Введите email"); 
         Emailtextbox.setShowHintInField(true);
         Emailtextbox.setValidators(emailValidator);
-	    StaticTextItem emailHint = new StaticTextItem();
+	    emailHint = new StaticTextItem();
 	    emailHint.setShowTitle(false);
 	    emailHint.setValue("Например, example@gmail.com");
 	    Emailtextbox.setRequired(true);
@@ -290,7 +298,7 @@ public class RegistrationSimplePanel extends LoadingSimplePanel {
         PhonetextBox.setHint("Введите контактный телефон"); 
         PhonetextBox.setMask("+38(###) ###-####");
         PhonetextBox.setRequired(true);
-	    StaticTextItem phoneHint = new StaticTextItem();
+	    phoneHint = new StaticTextItem();
 	    phoneHint.setShowTitle(false);
 	    phoneHint.setValue("Например, +38(050)145-8872");
 
@@ -300,7 +308,7 @@ public class RegistrationSimplePanel extends LoadingSimplePanel {
         Skypetextbox.setHint("Введите skype"); 
         Skypetextbox.setShowHintInField(true);
         Skypetextbox.setRequired(false);
-	    StaticTextItem skypeHint = new StaticTextItem();
+	    skypeHint = new StaticTextItem();
 	    skypeHint.setShowTitle(false);
 	    skypeHint.setValue("Например, skypelogin");
 
@@ -314,7 +322,7 @@ public class RegistrationSimplePanel extends LoadingSimplePanel {
         goalComboBox.setRequired(true);
 		*/
 	    
-	    StaticTextItem goalHint = new StaticTextItem();
+	    goalHint = new StaticTextItem();
 	    goalHint.setShowTitle(false);
 	    goalHint.setValue("Например, Junior Java developer");
 
