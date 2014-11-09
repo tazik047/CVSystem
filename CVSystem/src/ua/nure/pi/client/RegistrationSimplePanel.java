@@ -139,6 +139,8 @@ public class RegistrationSimplePanel extends LoadingSimplePanel {
     
     public DynamicForm form;
     
+    public DynamicForm mainForm;
+    
     public TreeNode[] children;
     
     public PickTreeItem pickDepartment;
@@ -167,7 +169,7 @@ public class RegistrationSimplePanel extends LoadingSimplePanel {
 		final LoadingSimplePanel thisPanel = this;
 		loadingElement = 0;
 	    VerticalPanel rootPanel = new VerticalPanel();
-	    final DynamicForm mainForm = new DynamicForm();
+	    mainForm = new DynamicForm();
 	    mainForm.setNumCols(1);
 	    rootPanel.setWidth("100%");
 	    final SimplePanel facultiesPanel = new SimplePanel();
@@ -706,5 +708,10 @@ public class RegistrationSimplePanel extends LoadingSimplePanel {
 		cv.setProgramLanguages(resPL);
 		st.setCv(cv);
 		return st;
+	}
+	
+	@Override
+	public void refresh(){
+		mainForm.markForRedraw();
 	}
 }

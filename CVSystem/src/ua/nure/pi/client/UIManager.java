@@ -29,6 +29,7 @@ public class UIManager {
 		rootPanel.removeStyleName("loading");
 		rootPanel.add(panel);
 		current=panel;
+		panel.refresh();
 	}
 
 	public UIManager(RootPanel root, SimplePanel simple){

@@ -8,4 +8,8 @@ public class LoadingSimplePanel extends StaticPanel {
 		return isReady;
 	}
 
+	public void refresh() {
+		
+	}
+
 }
