@@ -113,7 +113,7 @@ public class RegistrationSimplePanel extends LoadingSimplePanel {
     public Boolean newPurp;
     
     public TextItem NametextBox;
-    
+        
     public TextItem SurnametextBox;
     
     public DateItem dateItem;
@@ -157,6 +157,8 @@ public class RegistrationSimplePanel extends LoadingSimplePanel {
     MultiComboBoxItem languages;
     
     Student st;
+    
+    StaticTextItem nameHint;
 
     public RegistrationSimplePanel(MainServiceAsync reg, final Button btnNewButton){
     	registrationService = reg;
@@ -410,6 +412,7 @@ public class RegistrationSimplePanel extends LoadingSimplePanel {
         child.setHint("-Технологии-");
         child.setWidth(290);
         languages.setComboBoxProperties(child);
+        languages.setAddUnknownValues(true);
         languages.setLayoutStyle(initialLayoutStyle);
         
         final LinkedHashMap<String, String> lhm = new LinkedHashMap<>();
@@ -508,21 +511,10 @@ public class RegistrationSimplePanel extends LoadingSimplePanel {
 	    
 	    
 	    mainForm.setCellPadding(5);
-	    mainForm.setFields(SurnametextBox,surnameHint, NametextBox, nameHint,PatronymictextBox, patronHint, dateItem, dateHint, 
-	    		AddresstextBox, addressHint, Emailtextbox, emailHint, PhonetextBox, phoneHint, Skypetextbox, skypeHint,
-	    		goalComboBox,goalHint, languages);
+	    
         mainForm.setTitleOrientation(TitleOrientation.TOP);
 
-        SurnametextBox.setTabIndex(1);
-        NametextBox.setTabIndex(2);
-        PatronymictextBox.setTabIndex(3);
-        dateItem.setTabIndex(4);
-        AddresstextBox.setTabIndex(5);
-        Emailtextbox.setTabIndex(6);
-        PhonetextBox.setTabIndex(7);
-        Skypetextbox.setTabIndex(8);
-        goalComboBox.setTabIndex(9);
-        languages.setTabIndex(10);
+        
 	    
 	    mainForm.markForRedraw();
 	    
@@ -712,6 +704,20 @@ public class RegistrationSimplePanel extends LoadingSimplePanel {
 	
 	@Override
 	public void refresh(){
+		mainForm.setFields(SurnametextBox,surnameHint, NametextBox, nameHint,PatronymictextBox, patronHint, dateItem, dateHint, 
+	    		AddresstextBox, addressHint, Emailtextbox, emailHint, PhonetextBox, phoneHint, Skypetextbox, skypeHint,
+	    		goalComboBox,goalHint, languages);
+		languages.redraw();
 		mainForm.markForRedraw();
+		SurnametextBox.setTabIndex(1);
+        NametextBox.setTabIndex(2);
+        PatronymictextBox.setTabIndex(3);
+        dateItem.setTabIndex(4);
+        AddresstextBox.setTabIndex(5);
+        Emailtextbox.setTabIndex(6);
+        PhonetextBox.setTabIndex(7);
+        Skypetextbox.setTabIndex(8);
+        goalComboBox.setTabIndex(9);
+        languages.setTabIndex(10);
 	}
 }
