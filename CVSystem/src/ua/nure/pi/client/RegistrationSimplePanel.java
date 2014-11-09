@@ -319,6 +319,21 @@ public class RegistrationSimplePanel extends LoadingSimplePanel {
 	    goalComboBox.setWidth(300);
 	    goalComboBox.setRequired(true);
 	    goalComboBox.setShowHintInField(true);
+	    
+	    expPanel = new WorkExperienceSimplePanel();
+        
+        eduPanel = new EducationSimplePanel();
+        
+        langs = new ArrayList<Language>();
+        
+        lanPanel = new LanguageSimplePanel();
+
+        
+	    
+
+
+        ssp = new SertificateSimplePanel();
+        
         
         registrationService.getLanguages(new AsyncCallback<Collection<Language>>() {
             public void onFailure(Throwable caught) {
@@ -384,19 +399,6 @@ public class RegistrationSimplePanel extends LoadingSimplePanel {
                 
         // Опыт работы и образование
         
-        expPanel = new WorkExperienceSimplePanel();
-                
-        eduPanel = new EducationSimplePanel();
-        
-        langs = new ArrayList<Language>();
-        
-        lanPanel = new LanguageSimplePanel();
-
-        
-	    
-
-
-        ssp = new SertificateSimplePanel();
         
         // Знание языков программирования и технологий
                 
@@ -406,6 +408,7 @@ public class RegistrationSimplePanel extends LoadingSimplePanel {
         child.setHint("-Технологии-");
         child.setWidth(290);
         languages.setComboBoxProperties(child);
+        languages.setLayoutStyle(initialLayoutStyle);
         
         final LinkedHashMap<String, String> lhm = new LinkedHashMap<>();
         
@@ -436,7 +439,7 @@ public class RegistrationSimplePanel extends LoadingSimplePanel {
 			}
           });
 
-        languages.setLayoutStyle(initialLayoutStyle);
+        
         //languages.setWidth(290);
         //languages.setColSpan(20);
         
