@@ -77,10 +77,18 @@ import com.smartgwt.client.widgets.form.fields.SelectItem;
 import com.smartgwt.client.widgets.form.fields.StaticTextItem;
 import com.smartgwt.client.widgets.form.fields.TextAreaItem;
 import com.smartgwt.client.widgets.form.fields.TextItem;
+import com.smartgwt.client.widgets.form.fields.events.ChangeEvent;
+import com.smartgwt.client.widgets.form.fields.events.ChangeHandler;
 import com.smartgwt.client.widgets.form.fields.events.ChangedEvent;
 import com.smartgwt.client.widgets.form.fields.events.ChangedHandler;
+import com.smartgwt.client.widgets.form.fields.events.EditorEnterEvent;
+import com.smartgwt.client.widgets.form.fields.events.EditorEnterHandler;
 import com.smartgwt.client.widgets.form.fields.events.EditorExitEvent;
 import com.smartgwt.client.widgets.form.fields.events.EditorExitHandler;
+import com.smartgwt.client.widgets.form.fields.events.FocusEvent;
+import com.smartgwt.client.widgets.form.fields.events.FocusHandler;
+import com.smartgwt.client.widgets.form.fields.events.ShowValueEvent;
+import com.smartgwt.client.widgets.form.fields.events.ShowValueHandler;
 import com.smartgwt.client.widgets.form.fields.events.ValueHoverEvent;
 import com.smartgwt.client.widgets.form.fields.events.ValueHoverHandler;
 import com.smartgwt.client.widgets.form.validator.CustomValidator;
@@ -414,7 +422,7 @@ public class RegistrationSimplePanel extends LoadingSimplePanel {
         
         // Знание языков программирования и технологий
                 
-        final MultiComboBoxLayoutStyle initialLayoutStyle = MultiComboBoxLayoutStyle.VERTICAL;
+        final MultiComboBoxLayoutStyle initialLayoutStyle = MultiComboBoxLayoutStyle.FLOW;
         languages = new MultiComboBoxItem("skills", "Профессиональные навыки");
         ComboBoxItem child = new ComboBoxItem();
         child.setHint("-Технологии-");
@@ -422,6 +430,24 @@ public class RegistrationSimplePanel extends LoadingSimplePanel {
         languages.setComboBoxProperties(child);
         languages.setAddUnknownValues(true);
         languages.setLayoutStyle(initialLayoutStyle);
+        
+        languages.addChangeHandler(new ChangeHandler() {
+			
+			@Override
+			public void onChange(ChangeEvent event) {
+				//Window.alert(String.valueOf(getScrollPos()));
+			}
+		});
+        
+        languages.addChangedHandler(new ChangedHandler() {
+			
+			@Override
+			public void onChanged(ChangedEvent event) {
+				//Window.alert(String.valueOf(getScrollPos()));
+				mainForm.scrollToBottom();
+				form.scrollToTop();
+			}
+		});
         
         final LinkedHashMap<String, String> lhm = new LinkedHashMap<>();
         
@@ -728,4 +754,9 @@ public class RegistrationSimplePanel extends LoadingSimplePanel {
         goalComboBox.setTabIndex(9);
         languages.setTabIndex(10);
 	}
+	
+	public static native int getScrollPos() /*-{
+		var scrollTop = $wnd.window.pageYOffset ? $wnd.window.pageYOffset : ($wnd.document.documentElement.scrollTop ? $wnd.document.documentElement.scrollTop : $wnd.document.body.scrollTop);
+		return scrollTop;
+	}-*/;
 }
