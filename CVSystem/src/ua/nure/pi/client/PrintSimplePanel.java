@@ -155,7 +155,7 @@ public class PrintSimplePanel extends SimplePanel {
 		        hLayout3.addMember(new BlueBox("20%", null, ""));  
 		        hLayout3.addMember(new BlueBox("20%", null, I.getStartYear() + " - " + I.getEndYear()));
 		        hLayout3.addMember(new BlueBox("10px", null, "")); 
-		        hLayout3.addMember(new BlueBox("*", null, "Специальность " + I.getSpecialty() + ", Факультет" + I.getFaculty() + "; "+ I.getNameOfInstitution()));
+		        hLayout3.addMember(new BlueBox("*", null, "Специальность " + I.getSpecialty() + ", Факультет " + I.getFaculty() + "; "+ I.getNameOfInstitution()));
 		        }
         }
         if ((programLanguage!=null && programLanguage.size()!=0) || (newLanguage!=null && newLanguage.size()!=0))
