@@ -93,9 +93,11 @@ public class AdminManager {
 		adminPanel.removeStyleName("adminPanel");
 		adminPanel.clear(true);
 		loginPanel.clear(true);
+		HorizontalPanel hp = new HorizontalPanel();
+		hp.setSpacing(5);
+		loginPanel.add(hp);
 		final Button loginBtn = new Button("Войти");
 	    loginBtn.setStyleName("buttons");
-	    loginPanel.add(loginBtn);
 	    loginBtn.addClickHandler(new ClickHandler() {
 			
 			@Override
@@ -105,6 +107,19 @@ public class AdminManager {
 					uiManager.setPanel(new LoginPanel(mainService, main));
 			}
 		});
+	    final Button reg = new Button("Зарегистрироваться");
+	    reg.setStyleName("buttons");
+	    reg.addClickHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				reg.setFocus(false);
+				if(!uiManager.isSetted(RegistrationCompanySimplePanel.class.getName()))
+					uiManager.setPanel(new RegistrationCompanySimplePanel(mainService, main));
+			}
+		});
+	    hp.add(loginBtn);
+	    hp.add(reg);
 	}
 
 	public static void createProfilePanel(boolean admin){
