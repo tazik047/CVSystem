@@ -201,7 +201,7 @@ public class MainServiceImpl extends RemoteServiceServlet implements
 		HttpServletRequest request = getThreadLocalRequest();
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute(AppConstants.USER);
-		return user.isAdmin();
+		return user==null?false:user.isAdmin();
 	}
 
 	/**

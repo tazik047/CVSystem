@@ -110,3 +110,4 @@ GO
 
 INSERT [dbo].[Pass] ([AccessPass]) VALUES (N',b,bpzrb')
 GO
+INSERT [dbo].[Users] ([UsersId], [Role], [login], [password]) VALUES (1, 1, N'login', N'331a9bb5c45938afac5f09c0f7544db4')

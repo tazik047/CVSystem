@@ -73,4 +73,5 @@ public interface MapperParameters {
 	String USER__LOGIN = "login";
 	String USER__PASSWORD = "password";
 	String USER__ROLES = "Role";
+	String EDUCATION__FACULTY = "Faculty";
 }

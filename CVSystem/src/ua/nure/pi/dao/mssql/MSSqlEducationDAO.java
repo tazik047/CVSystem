@@ -136,6 +136,7 @@ public class MSSqlEducationDAO implements EducationDAO {
 		ed.setNameOfInstitution(rs.getString(MapperParameters.EDUCATION__NAMEOFINSTITUTION));
 		ed.setSpecialty(rs.getString(MapperParameters.EDUCATION__SPECIALTY));
 		ed.setCVsId(rs.getLong(MapperParameters.EDUCATION__CVsId));
+		ed.setFaculty(rs.getString(MapperParameters.EDUCATION__FACULTY));
 		return ed;
 	}
 	
