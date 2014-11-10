@@ -1,0 +1,28 @@
+.fixUpPanel{
+	height:50px !important;
+}
+
+.fixForm{
+	height:105px !important;
+}
+.fixRadio{
+	width: 150px !important;
+}
+.fixTextArea>textarea,
+.fixTextAreaFocused>textarea{
+	resize:none;
+	width: 344px !important;
+}
+.fixTextArea,
+.fixTextAreaFocused{
+	padding-left: 0px;
+}
+
+.Fiix{
+	width: 100%;
+}
+
+.formTitle>b>span,
+.formTitle>span{
+	visibility: hidden;
+}
