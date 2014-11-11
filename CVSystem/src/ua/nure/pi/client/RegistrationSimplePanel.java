@@ -149,6 +149,8 @@ public class RegistrationSimplePanel extends LoadingSimplePanel {
     
     public DynamicForm mainForm;
     
+    public DynamicForm otherForm;
+    
     public TreeNode[] children;
     
     public PickTreeItem pickDepartment;
@@ -189,6 +191,9 @@ public class RegistrationSimplePanel extends LoadingSimplePanel {
 	    VerticalPanel rootPanel = new VerticalPanel();
 	    mainForm = new DynamicForm();
 	    mainForm.setNumCols(1);
+	    mainForm.setTitleSuffix("");
+	    mainForm.setRequiredTitleSuffix("");
+	    mainForm.setRequiredRightTitleSuffix("");
 	    rootPanel.setWidth("100%");
 	    final SimplePanel facultiesPanel = new SimplePanel();
 	    rootPanel.add(facultiesPanel);
@@ -511,11 +516,11 @@ public class RegistrationSimplePanel extends LoadingSimplePanel {
 	        
                 
       		
-		DynamicForm form = new DynamicForm();
-		form.setCellPadding(15);
+		otherForm = new DynamicForm();
+		otherForm.setCellPadding(15);
 
-		form.setNumCols(1);
-		
+		otherForm.setNumCols(1);
+		otherForm.setTitleSuffix("");
 	    qualities = new TextAreaItem("Qualities");
 	    qualities.setCellStyle("fixTextArea");
 	    qualities.setTitle("Личные качества");
@@ -557,12 +562,11 @@ public class RegistrationSimplePanel extends LoadingSimplePanel {
 	    rootPanel.add(expPanel);
 	    rootPanel.add(ssp);
 	    
-	    rootPanel.add(form);
+	    rootPanel.add(otherForm);
 	    rootPanel.setSpacing(15);
 	    
-	    form.setFields(qualities,others);
-	    form.setTitleOrientation(TitleOrientation.TOP);
-	    form.markForRedraw();
+	    otherForm.setTitleOrientation(TitleOrientation.TOP);
+	    otherForm.markForRedraw();
 	    rootPanel.add(cb);
 	    
 	    rootPanel.setCellHorizontalAlignment(commit, HasHorizontalAlignment.ALIGN_RIGHT);
@@ -613,6 +617,7 @@ public class RegistrationSimplePanel extends LoadingSimplePanel {
 	    tree.setRoot(rootNode);
 	    
 	    form = new DynamicForm();
+	    form.setRequiredTitleSuffix("");
 	    pickDepartment = new PickTreeItem();
 	    pickDepartment.setTitle("Группа");
 	    pickDepartment.setName("department");
@@ -741,6 +746,8 @@ public class RegistrationSimplePanel extends LoadingSimplePanel {
 		mainForm.setFields(SurnametextBox,surnameHint, NametextBox, nameHint,PatronymictextBox, patronHint, dateItem, dateHint, 
 	    		AddresstextBox, addressHint, Emailtextbox, emailHint, PhonetextBox, phoneHint, Skypetextbox, skypeHint,
 	    		goalComboBox,goalHint, languages);
+		otherForm.setFields(qualities,others);
+		otherForm.markForRedraw();
 		languages.redraw();
 		mainForm.markForRedraw();
 		SurnametextBox.setTabIndex(1);

@@ -49,6 +49,7 @@ public class EducationSimplePanel extends SimplePanel{
         form.setNumCols(4);
         final VerticalPanel vp = new VerticalPanel();
         form.addChild(vp);
+        form.setStyleName("fixFormFox");
         btAdd = new Button("Добавить образование");
         btAdd.addStyleName("panel-startAddButton");
         btAdd.setTitle("Добавить образование");

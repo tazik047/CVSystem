@@ -43,6 +43,7 @@ public class WorkExperienceSimplePanel extends SimplePanel{
 		
 		works = new ArrayList<WorkExperinceElementSimplePanel>();
 		DynamicForm form = new DynamicForm();  
+		form.setStyleName("fixFormFox");
 		section1.addItem(form);
         form.setNumCols(4);
         final VerticalPanel vp = new VerticalPanel();

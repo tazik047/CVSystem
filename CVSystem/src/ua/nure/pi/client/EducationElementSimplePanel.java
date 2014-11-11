@@ -91,7 +91,7 @@ public class EducationElementSimplePanel extends SimplePanel{
 	    nameOfInstitute.setRequired(true);
         controls = new DynamicForm();
         controls.setFields(startYearText, endYearText, nameOfInstitute, faculty, specialty);
-        
+        controls.setRequiredTitleSuffix("");
         rootPanel.add(controls);
         controls.markForRedraw();
 	    

@@ -76,6 +76,7 @@ public class SertificateElementSimplePanel extends SimplePanel{
 
         controls.setNumCols(1);        
         controls.setFields(yearField, desc);
+        controls.setRequiredTitleSuffix("");
 		rootPanel.add(controls);
         controls.markForRedraw();
 

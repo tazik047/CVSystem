@@ -73,7 +73,7 @@ public class LanguageElementSimplePanel extends SimplePanel{
 		
 		
         lang.add(langBox);
-        langBox.setSize("120px", "18px");
+        langBox.setSize("120px", "22px");
         
         Label label_1 = new Label("Уровень знаний");
         label_1.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);

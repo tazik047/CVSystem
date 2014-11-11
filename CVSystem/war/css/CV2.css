@@ -217,6 +217,7 @@ h3.assistive-text {
 	position: relative;
 	background-color: transparent;
 	border: 0;
+	cursor: pointer;
 }
 .addCV {
 

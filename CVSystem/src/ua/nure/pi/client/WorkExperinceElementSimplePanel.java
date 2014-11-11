@@ -116,7 +116,8 @@ public class WorkExperinceElementSimplePanel extends SimplePanel{
         });  
 
         controls.setFields(yearField, currentWork, durationField, durTypeField, role, nameOfInstitute);
-
+        controls.setRequiredTitleSuffix("");
+        controls.setTitleSuffix("");
         rootPanel.add(controls);
         controls.markForRedraw();
 

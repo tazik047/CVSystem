@@ -48,6 +48,7 @@ public class LanguageSimplePanel extends SimplePanel{
 		
 		languages = new ArrayList<LanguageElementSimplePanel>();
 		DynamicForm form = new DynamicForm();
+		form.setStyleName("fixFormFox");
 		section1.addItem(form);
         form.setNumCols(4);
         final VerticalPanel vp = new VerticalPanel();

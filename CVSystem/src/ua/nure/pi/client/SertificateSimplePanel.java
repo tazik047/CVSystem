@@ -44,6 +44,7 @@ public class SertificateSimplePanel extends SimplePanel{
 		
 		sertificates = new ArrayList<SertificateElementSimplePanel>();
 		DynamicForm form = new DynamicForm();
+		form.setStyleName("fixFormFox");
 		section1.addItem(form);
         form.setNumCols(4);
         final VerticalPanel vp = new VerticalPanel();
