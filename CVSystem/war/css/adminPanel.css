@@ -60,6 +60,7 @@
 	border: 1px solid #ccc;
 	box-shadow: 5px 5px 5px grey;
 	border-radius: 5px;
+	cursor: default;
 }
 
 div#login>div{
