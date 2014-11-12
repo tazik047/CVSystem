@@ -81,6 +81,9 @@ public class UIManager {
 			return false;
 		}
 		else{
+			if(current.getClass().getSimpleName().equals("MainStaticPanel")){
+				((MainStaticPanel)current).stop();
+			}
 			simp.setLoading(event);
 			removePanel();
 			rootPanel.add(loadImg);

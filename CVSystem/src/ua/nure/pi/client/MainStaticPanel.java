@@ -28,8 +28,16 @@ public class MainStaticPanel extends LoadingSimplePanel {
 		});
 	}
 	
+	public void stop(){
+		stopSlider();
+	}
+	
 	public static native void startSlider() /*-{
 	 $wnd.$('#slider').nivoSlider();
+	}-*/;
+	
+	public static native void stopSlider() /*-{
+		$wnd.$('#slider').data('nivoslider').stop();
 	}-*/;
 
 }
