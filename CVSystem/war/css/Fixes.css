@@ -26,3 +26,7 @@
 	width: auto !important;
 	height: auto !important;
 }
+
+.fixMultiComboBox{
+	padding-left:5px;
+}

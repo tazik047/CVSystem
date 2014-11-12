@@ -164,7 +164,7 @@ public class RegistrationSimplePanel extends LoadingSimplePanel {
     LanguageSimplePanel lanPanel;
     SertificateSimplePanel ssp;
     
-    MultiComboBoxItem languages;
+    MultiComboBox languages;
     
     Student st;
     
@@ -194,10 +194,12 @@ public class RegistrationSimplePanel extends LoadingSimplePanel {
 	    mainForm.setTitleSuffix("");
 	    mainForm.setRequiredTitleSuffix("");
 	    mainForm.setRequiredRightTitleSuffix("");
+	    mainForm.setZIndex(10);
 	    rootPanel.setWidth("100%");
 	    final SimplePanel facultiesPanel = new SimplePanel();
 	    rootPanel.add(facultiesPanel);
 	    rootPanel.add(mainForm);
+	    
 
 	    // Факультеты и группы
 	    
@@ -427,34 +429,11 @@ public class RegistrationSimplePanel extends LoadingSimplePanel {
         
         // Знание языков программирования и технологий
                 
-        final MultiComboBoxLayoutStyle initialLayoutStyle = MultiComboBoxLayoutStyle.FLOW;
-        languages = new MultiComboBoxItem("skills", "Профессиональные навыки");
-        ComboBoxItem child = new ComboBoxItem();
-        child.setHint("-Технологии-");
-        child.setWidth(290);
-        languages.setComboBoxProperties(child);
-        languages.setAddUnknownValues(true);
-        languages.setLayoutStyle(initialLayoutStyle);
+        languages = new MultiComboBox();
         
-        languages.addChangeHandler(new ChangeHandler() {
-			
-			@Override
-			public void onChange(ChangeEvent event) {
-				//Window.alert(String.valueOf(getScrollPos()));
-			}
-		});
+        rootPanel.add(languages);
         
-        languages.addChangedHandler(new ChangedHandler() {
-			
-			@Override
-			public void onChanged(ChangedEvent event) {
-				//Window.alert(String.valueOf(getScrollPos()));
-				mainForm.scrollToBottom();
-				form.scrollToTop();
-			}
-		});
-        
-        final LinkedHashMap<String, String> lhm = new LinkedHashMap<>();
+        final Collection<String> lhm = new ArrayList<String>();
         
 	    registrationService.getProgramLanguages(new AsyncCallback<Collection<ProgramLanguage>>() {
             public void onFailure(Throwable caught) {
@@ -471,9 +450,9 @@ public class RegistrationSimplePanel extends LoadingSimplePanel {
 			public void onSuccess(Collection<ProgramLanguage> result) {
 				programLanguages = new ArrayList<ProgramLanguage>(result);
 				for (ProgramLanguage prl : programLanguages) {
-		        	lhm.put(prl.getTitle(), prl.getTitle());
+		        	lhm.add(prl.getTitle());
 		        }
-		        languages.setValueMap(lhm);
+		        languages.addValues(lhm);
 		        loadingElement++;
 		        if(loadingElement==4){
             		isReady=true;
@@ -543,7 +522,6 @@ public class RegistrationSimplePanel extends LoadingSimplePanel {
 	    emailHint.setCellStyle("hint");
 	    skypeHint.setCellStyle("hint");
 	    goalHint.setCellStyle("hint");
-	    languages.setCellStyle("hint");
 	    phoneHint.setCellStyle("hint");
 	    patronHint.setCellStyle("hint");
 
@@ -745,10 +723,10 @@ public class RegistrationSimplePanel extends LoadingSimplePanel {
 	public void refresh(){
 		mainForm.setFields(SurnametextBox,surnameHint, NametextBox, nameHint,PatronymictextBox, patronHint, dateItem, dateHint, 
 	    		AddresstextBox, addressHint, Emailtextbox, emailHint, PhonetextBox, phoneHint, Skypetextbox, skypeHint,
-	    		goalComboBox,goalHint, languages);
+	    		goalComboBox,goalHint);
 		otherForm.setFields(qualities,others);
 		otherForm.markForRedraw();
-		languages.redraw();
+		languages.draw();
 		mainForm.markForRedraw();
 		SurnametextBox.setTabIndex(1);
         NametextBox.setTabIndex(2);
@@ -759,7 +737,6 @@ public class RegistrationSimplePanel extends LoadingSimplePanel {
         PhonetextBox.setTabIndex(7);
         Skypetextbox.setTabIndex(8);
         goalComboBox.setTabIndex(9);
-        languages.setTabIndex(10);
 	}
 	
 	public static native int getScrollPos() /*-{
