@@ -9,9 +9,19 @@ import com.google.gwt.user.client.ui.SimplePanel;
 
 public class MultiComboBox extends SimplePanel {
 	private Collection<String> values;
+	private String title;
+	private String h;
 	
-	public MultiComboBox(Collection<String> val) {
-		String h = "<div class='formTitle'>Профессиональные навыки"
+	public String getTitle(){
+		return title;
+	}
+	
+	public void setTitle(String value) {
+		title = value;
+	}
+	
+	public MultiComboBox(Collection<String> val, String title) {
+		h = "<div class='formTitle'> ".concat(title)
 				+ "</div><div class='MultiComboBox'></div>";
 		values = val;
 		HTML html = new HTML(h);
@@ -20,8 +30,13 @@ public class MultiComboBox extends SimplePanel {
 	}
 	
 	public MultiComboBox() {
-		this(new ArrayList<String>());
+		this(new ArrayList<String>(), "");
 	}
+	
+	public MultiComboBox(String s) {
+		this(new ArrayList<String>(), s);
+	}
+
 	
 	public void addValues(Collection<String> val){
 		values.addAll(val);

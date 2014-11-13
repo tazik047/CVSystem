@@ -136,6 +136,7 @@ public class RegistrationSimplePanel extends LoadingSimplePanel {
     
     public Collection<ProgramLanguage> newPL;
     
+    public ArrayList<ProgramLanguage> resPL;
     
     public TextAreaItem others;
     
@@ -164,7 +165,11 @@ public class RegistrationSimplePanel extends LoadingSimplePanel {
     LanguageSimplePanel lanPanel;
     SertificateSimplePanel ssp;
     
-    MultiComboBox languages;
+    MultiComboBox lowLevelTech;
+    
+    MultiComboBox midLevelTech;
+    
+    MultiComboBox highLevelTech;
     
     Student st;
     
@@ -429,10 +434,15 @@ public class RegistrationSimplePanel extends LoadingSimplePanel {
         
         // Знание языков программирования и технологий
                 
-        languages = new MultiComboBox();
+        lowLevelTech = new MultiComboBox("Владение технологиями на уровне начинающего");
+        midLevelTech = new MultiComboBox("Владение технологиями на среднем уровне");
+        highLevelTech = new MultiComboBox("Владение технологиями на продвинутом уровне");
+
+        rootPanel.add(lowLevelTech);
         
-        rootPanel.add(languages);
-        
+        rootPanel.add(midLevelTech);
+        rootPanel.add(highLevelTech);
+
         final Collection<String> lhm = new ArrayList<String>();
         
 	    registrationService.getProgramLanguages(new AsyncCallback<Collection<ProgramLanguage>>() {
@@ -452,7 +462,10 @@ public class RegistrationSimplePanel extends LoadingSimplePanel {
 				for (ProgramLanguage prl : programLanguages) {
 		        	lhm.add(prl.getTitle());
 		        }
-		        languages.addValues(lhm);
+		        lowLevelTech.addValues(lhm);
+		        midLevelTech.addValues(lhm);
+		        highLevelTech.addValues(lhm);
+
 		        loadingElement++;
 		        if(loadingElement==4){
             		isReady=true;
@@ -610,6 +623,31 @@ public class RegistrationSimplePanel extends LoadingSimplePanel {
 
 	}
 	
+	public void CollectLanguages(MultiComboBox m) {
+		int level = -1;
+		if (m.getTitle().contains("начинающего"))
+			level = 0;
+		if (m.getTitle().contains("среднем"))
+			level = 1;
+		if (m.getTitle().contains("продвинутом"))
+			level = 2;
+		for(String pl : m.getValues()){
+			boolean n = true;
+			for(ProgramLanguage p : programLanguages){
+				if(p.getTitle().equals(pl)){
+					resPL.add(new ProgramLanguage(pl, p.getId(),level));
+					n=false;
+					break;
+				}
+			}
+			if(n) {
+				ProgramLanguage pnew = new ProgramLanguage();
+				pnew.setTitle(pl);
+				newPL.add(pnew);
+			}
+		}		
+	}
+	
 	public Boolean ValidateLanPanel(LanguageSimplePanel lsp){
 		/*Boolean f = true;
 		for (LanguageElementSimplePanel lesp : lsp.languages){
@@ -696,23 +734,10 @@ public class RegistrationSimplePanel extends LoadingSimplePanel {
 		cv.setWorkExps(expPanel.getExp());
 		newPL = new ArrayList<ProgramLanguage>();
 
-		ArrayList<ProgramLanguage> resPL = new ArrayList<ProgramLanguage>();
-		for(String pl : languages.getValues()){
-			boolean n = true;
-			for(ProgramLanguage p : programLanguages){
-				if(p.getTitle().equals(pl)){
-					resPL.add(new ProgramLanguage(pl, p.getId()));
-					n=false;
-					break;
-				}
-			}
-			if(n) {
-				ProgramLanguage pnew = new ProgramLanguage();
-				pnew.setTitle(pl);
-				newPL.add(pnew);
-			}
-		}
-		
+		resPL = new ArrayList<ProgramLanguage>();
+		CollectLanguages(lowLevelTech);
+		CollectLanguages(midLevelTech);
+		CollectLanguages(highLevelTech);
 		Collections.reverse(resPL);
 		cv.setProgramLanguages(resPL);
 		st.setCv(cv);
@@ -726,7 +751,9 @@ public class RegistrationSimplePanel extends LoadingSimplePanel {
 	    		goalComboBox,goalHint);
 		otherForm.setFields(qualities,others);
 		otherForm.markForRedraw();
-		languages.draw();
+		lowLevelTech.draw();
+		midLevelTech.draw();
+		highLevelTech.draw();
 		mainForm.markForRedraw();
 		SurnametextBox.setTabIndex(1);
         NametextBox.setTabIndex(2);
