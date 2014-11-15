@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 
 
@@ -492,6 +493,11 @@ public class RegistrationSimplePanel extends LoadingSimplePanel {
 	            	b = ValidateWorkPanel(expPanel) && b;
 	            	b = ValidateEduPanel(eduPanel) && b;
 	            	
+	            	if(b && !ValidateProgLanguages()){
+	            		Window.alert("Нельзя выбирать одинаковые технологии с разными уровнями знаний");
+	            		b=false;
+	            	}
+	            	
 	            	if (!cb.getValue())
 	            	{
 	            		Window.alert("Подтвердите согласие на обработку данных");
@@ -649,45 +655,33 @@ public class RegistrationSimplePanel extends LoadingSimplePanel {
 	}
 	
 	public Boolean ValidateLanPanel(LanguageSimplePanel lsp){
-		/*Boolean f = true;
-		for (LanguageElementSimplePanel lesp : lsp.languages){
-			f = lesp.controls.validate()&& f;
-			lesp.controls.markForRedraw();
-		}
-		return f;*/
 		return lsp.ValidateForm();
 	}
 	
 	public Boolean ValidateEduPanel(EducationSimplePanel esp){
-		/*Boolean f = true;
-		for (EducationElementSimplePanel eesp : esp.educations){
-			f = eesp.controls.validate() && f;
-			eesp.controls.markForRedraw();
-		}
-		return f;*/
 		return esp.ValidateForm();
 	}
 	
 	public Boolean ValidateSerPanel(SertificateSimplePanel ssp){
-		/*Boolean f = true;
-		for (SertificateElementSimplePanel sesp : ssp.sertificates){
-			f = sesp.controls.validate()&& f;
-			sesp.controls.markForRedraw();
-		}
-		return f;*/
 		return ssp.ValidateForm();
 	}
 	
 	public Boolean ValidateWorkPanel(WorkExperienceSimplePanel wsp){
-		/*Boolean f = true;
-		for (WorkExperinceElementSimplePanel wesp : wsp.works){
-			f = wesp.controls.validate()&& f;
-			wesp.controls.markForRedraw();
-		}
-		return f;*/
 		return wsp.ValidateForm();
 	}
 	
+	public Boolean ValidateProgLanguages(){
+		Collection<String> col = lowLevelTech.getValues();
+		col.addAll(midLevelTech.getValues()); 
+		col.addAll(highLevelTech.getValues()); 
+		
+		HashSet<String> set = new HashSet<String>();
+		set.addAll(lowLevelTech.getValues()); 
+		set.addAll(midLevelTech.getValues());
+		set.addAll(highLevelTech.getValues());
+		
+		return col.size() == set.size();
+	}
 	
 	
 	public Student getStudent(){
@@ -735,6 +729,7 @@ public class RegistrationSimplePanel extends LoadingSimplePanel {
 		newPL = new ArrayList<ProgramLanguage>();
 
 		resPL = new ArrayList<ProgramLanguage>();
+		
 		CollectLanguages(lowLevelTech);
 		CollectLanguages(midLevelTech);
 		CollectLanguages(highLevelTech);

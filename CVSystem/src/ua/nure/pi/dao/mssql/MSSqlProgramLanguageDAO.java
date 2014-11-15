@@ -33,9 +33,9 @@ public class MSSqlProgramLanguageDAO implements ProgramLanguageDAO {
 	private static final String SQL__UPDATE_PROGRAM_LANGUAGE = "UPDATE ProgramLanguages SET Title = ? WHERE ProgramLanguagesId = ?";
 	private static final String SQL__DELETE_PROGRAM_LANGUAGE = "DELETE ProgramLanguages WHERE ProgramLanguagesId = ?";
 	
-	private static final String SQL__SELECT_STUDENT_PROGRAM_LANGUAGE = "SELECT p.Title, pc.ProgramLanguagesId"
+	private static final String SQL__SELECT_STUDENT_PROGRAM_LANGUAGE = "SELECT p.Title, pc.ProgramLanguagesId, pc.Level"
 			+ " FROM ProgramLanguages p, ProgramLanguagesCVs pc WHERE p.ProgramLanguagesId=pc.ProgramLanguagesId and pc.CVsId =?";
-	private static final String SQL__INSERT_STUENT_PROGRAM_LANGUAGE = "INSERT INTO ProgramLanguagesCVs(CVsId, ProgramLanguagesId) VALUES(?,?)";
+	private static final String SQL__INSERT_STUENT_PROGRAM_LANGUAGE = "INSERT INTO ProgramLanguagesCVs(CVsId, ProgramLanguagesId, Level) VALUES(?,?,?)";
 	private static final String SQL__FIND_BY_TITLE = "SELECT ProgramLanguagesId FROM ProgramLanguages where Title = ?";
 
 	@Override
@@ -300,7 +300,7 @@ public class MSSqlProgramLanguageDAO implements ProgramLanguageDAO {
 			ResultSet rs = pstmt.executeQuery();
 			result = new ArrayList<ProgramLanguage>();
 			while(rs.next()){
-				ProgramLanguage fc = unMapProgramLanguage(rs);
+				ProgramLanguage fc = unMapProgramLanguageWithLevel(rs);
 				result.add(fc);
 			}
 			
@@ -325,6 +325,12 @@ public class MSSqlProgramLanguageDAO implements ProgramLanguageDAO {
 		return at;
 	}
 	
+	private ProgramLanguage unMapProgramLanguageWithLevel(ResultSet rs) throws SQLException{
+		ProgramLanguage at = unMapProgramLanguage(rs);
+		at.setLevel(rs.getInt(MapperParameters.PROGRAM_LANGUAGE__LEVEL));
+		return at;
+	}
+	
 	private void mapProgramLanguageForInsert(ProgramLanguage at, PreparedStatement pstmt) 
 			throws SQLException{
 		pstmt.setString(1, at.getTitle());
@@ -333,6 +339,7 @@ public class MSSqlProgramLanguageDAO implements ProgramLanguageDAO {
 	private void mapProgramLanguageForStudent(ProgramLanguage at, long id, PreparedStatement pstmt) throws SQLException{
 		pstmt.setLong(1, id);
 		pstmt.setLong(2, at.getId());
+		pstmt.setInt(3, at.getLevel());
 	}
 	
 	private void mapProgramLanguageForUpdate(ProgramLanguage at, PreparedStatement pstmt) throws SQLException{

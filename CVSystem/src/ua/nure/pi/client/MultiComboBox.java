@@ -4,13 +4,16 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import com.google.gwt.core.client.JsArrayString;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.SimplePanel;
+import com.google.gwt.user.client.ui.VerticalPanel;
 
 public class MultiComboBox extends SimplePanel {
 	private Collection<String> values;
 	private String title;
 	private String h;
+	private String id;
 	
 	public String getTitle(){
 		return title;
@@ -21,9 +24,11 @@ public class MultiComboBox extends SimplePanel {
 	}
 	
 	public MultiComboBox(Collection<String> val, String title) {
+		id = "MultiComboBox" +  String.valueOf(this.hashCode());
 		h = "<div class='formTitle'> ".concat(title)
-				+ "</div><div class='MultiComboBox'></div>";
+				+ "</div><div id='" + id + "'></div>";
 		values = val;
+		setTitle(title);
 		HTML html = new HTML(h);
 		html.setStyleName("fixMultiComboBox");
 		add(html);
@@ -43,11 +48,11 @@ public class MultiComboBox extends SimplePanel {
 	}
 	
 	public void draw(){
-		runChoose(toJsArray(values));
+		runChoose(toJsArray(values), id);
 	}
 	
 	public Collection<String> getValues(){
-		return toJCollection(getJSValues());
+		return toJCollection(getJSValues(id));
 	}
 	
 	private Collection<String> toJCollection(JsArrayString jsValues) {
@@ -65,12 +70,12 @@ public class MultiComboBox extends SimplePanel {
 		return arr;
 	}
 	
-	private native void runChoose(JsArrayString value)/*-{
+	private native void runChoose(JsArrayString value, String id)/*-{
 		var val = []
 		for(var i = 0; i<value.length; i++){
 			val[i] = {id:value[i], text:value[i]};
 		}
-		$wnd.$('.MultiComboBox').select2({
+		$wnd.$("#"+id).select2({
 			width:'290px',
 		    createSearchChoice:function(term, data) { if ($wnd.$(data).filter(function() { return this.text.localeCompare(term)===0; }).length===0) {return {id:term, text:term};} },
 		    multiple: true,
@@ -79,8 +84,8 @@ public class MultiComboBox extends SimplePanel {
 		});
 	}-*/;
 	
-	private static native JsArrayString getJSValues()/*-{
-	var s = $wnd.$('.MultiComboBox').select2('data');
+	private static native JsArrayString getJSValues(String id)/*-{
+	var s = $wnd.$("#"+id).select2('data');
 	var res = [];
 	for(var i = 0; i < s.length; i++)
 		res[i]=s[i].text;

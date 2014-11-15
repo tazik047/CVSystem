@@ -41,6 +41,7 @@ public interface MapperParameters {
 	
 	//Program Language
 	String PROGRAM_LANGUAGE__ID = "ProgramLanguagesId";
+	String PROGRAM_LANGUAGE__LEVEL = "Level";
 	
 	//Education
 	String EDUCATION__ID = "EducationsId";
@@ -74,4 +75,4 @@ public interface MapperParameters {
 	String USER__PASSWORD = "password";
 	String USER__ROLES = "Role";
 	String EDUCATION__FACULTY = "Faculty";
-}
+	}
