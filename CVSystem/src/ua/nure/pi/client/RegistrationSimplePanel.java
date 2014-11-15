@@ -133,8 +133,7 @@ public class RegistrationSimplePanel extends LoadingSimplePanel {
     
     public TextItem AddresstextBox;
     
-    public TextItem PatronymictextBox;
-    
+
     public Collection<ProgramLanguage> newPL;
     
     public ArrayList<ProgramLanguage> resPL;
@@ -176,7 +175,7 @@ public class RegistrationSimplePanel extends LoadingSimplePanel {
     
     StaticTextItem nameHint;
     StaticTextItem surnameHint;
-    StaticTextItem patronHint;
+
     StaticTextItem dateHint;
     StaticTextItem addressHint;
     StaticTextItem emailHint;
@@ -257,16 +256,7 @@ public class RegistrationSimplePanel extends LoadingSimplePanel {
 	    nameHint.setShowTitle(false);
 	    nameHint.setValue("Например, Иван");
 	    NametextBox.setRequired(true);
-	    
-        PatronymictextBox = new TextItem("patronymic", "Отчество");  
-        PatronymictextBox.setWidth(300);  
-        PatronymictextBox.setHint("Введите отчество");  
-        PatronymictextBox.setShowHintInField(true);
-        PatronymictextBox.setMask(">C<CCCCCCCCCCCCCCCCCCCC");
-	    patronHint = new StaticTextItem();
-	    patronHint.setShowTitle(false);
-	    patronHint.setValue("Например, Иванович");
-	    PatronymictextBox.setRequired(false);
+
 
         /*
         dateItem = new DateItem();
@@ -542,7 +532,6 @@ public class RegistrationSimplePanel extends LoadingSimplePanel {
 	    skypeHint.setCellStyle("hint");
 	    goalHint.setCellStyle("hint");
 	    phoneHint.setCellStyle("hint");
-	    patronHint.setCellStyle("hint");
 
 	    
 	    
@@ -690,7 +679,7 @@ public class RegistrationSimplePanel extends LoadingSimplePanel {
 		st = new Student();
 		st.setFirstname(NametextBox.getValueAsString());
 		st.setSurname(SurnametextBox.getValueAsString());
-		st.setPatronymic(PatronymictextBox.getValueAsString());
+
 		st.setDateOfBirth((Date)dateItem.getValue());
 		st.setEmail(Emailtextbox.getValueAsString());
 		st.setPhone(PhonetextBox.getValueAsString());
@@ -741,7 +730,7 @@ public class RegistrationSimplePanel extends LoadingSimplePanel {
 	
 	@Override
 	public void refresh(){
-		mainForm.setFields(SurnametextBox,surnameHint, NametextBox, nameHint,PatronymictextBox, patronHint, dateItem, dateHint, 
+		mainForm.setFields(SurnametextBox,surnameHint, NametextBox, nameHint, dateItem, dateHint, 
 	    		AddresstextBox, addressHint, Emailtextbox, emailHint, PhonetextBox, phoneHint, Skypetextbox, skypeHint,
 	    		goalComboBox,goalHint);
 		otherForm.setFields(qualities,others);
@@ -752,7 +741,7 @@ public class RegistrationSimplePanel extends LoadingSimplePanel {
 		mainForm.markForRedraw();
 		SurnametextBox.setTabIndex(1);
         NametextBox.setTabIndex(2);
-        PatronymictextBox.setTabIndex(3);
+
         dateItem.setTabIndex(4);
         AddresstextBox.setTabIndex(5);
         Emailtextbox.setTabIndex(6);
