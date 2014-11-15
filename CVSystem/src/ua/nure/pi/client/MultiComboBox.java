@@ -4,34 +4,37 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import com.google.gwt.core.client.JsArrayString;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 public class MultiComboBox extends SimplePanel {
 	private Collection<String> values;
-	private String title;
+	private Label title;
 	private String h;
 	private String id;
 	
 	public String getTitle(){
-		return title;
+		return title.getText();
 	}
 	
 	public void setTitle(String value) {
-		title = value;
+		title.setText(value);
 	}
 	
 	public MultiComboBox(Collection<String> val, String title) {
+		VerticalPanel root = new VerticalPanel();
+		this.title = new Label(title);
+		this.title.setStyleName("formTitle");
+		root.add(this.title);
 		id = "MultiComboBox" +  String.valueOf(this.hashCode());
-		h = "<div class='formTitle'> ".concat(title)
-				+ "</div><div id='" + id + "'></div>";
+		h = "<div id='" + id + "'></div>";
 		values = val;
-		setTitle(title);
 		HTML html = new HTML(h);
-		html.setStyleName("fixMultiComboBox");
-		add(html);
+		root.setStyleName("fixMultiComboBox");
+		root.add(html);
+		add(root);
 	}
 	
 	public MultiComboBox() {
