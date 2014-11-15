@@ -171,8 +171,8 @@ public class PrintSimplePanel extends SimplePanel {
         if(programLanguage!=null)
 	        for(ProgramLanguage I : programLanguage)
 	        	lan = lan + " " + I.getTitle() + ",";
-
-			lan = lan.substring(0, lan.length() - 1) + ";";
+        	if(lan!="")
+        		lan = lan.substring(0, lan.length() - 1) + ";";
         	if (newLanguage.size()!=0){
         		lan += "<p class=\"green\">Технологии, отсутсвующие в БД: ";
         		for(ProgramLanguage I : newLanguage)

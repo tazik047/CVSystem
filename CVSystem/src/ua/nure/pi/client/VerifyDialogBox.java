@@ -111,8 +111,9 @@ public class VerifyDialogBox extends DialogBox{
 			err.addStyleName("error");
 			HorizontalPanel hp = new HorizontalPanel();
 			hp.setWidth("100%");
-			root.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
 			root.add(hp);
+			root.setCellHorizontalAlignment(ptb, HasHorizontalAlignment.ALIGN_CENTER);
+			
 			ok = new Button("Отправить");
 			Button cancel = new Button("Отмена");			
 			cancel.addClickHandler(new ClickHandler() {
@@ -158,12 +159,15 @@ public class VerifyDialogBox extends DialogBox{
 								}
 								else{
 									err.setText("Неправильный ключ подтверждения");
+									ok.setText("Отправить");
+									ok.setEnabled(true);
 								}
 							}
 							
 							@Override
 							public void onFailure(Throwable caught) {
 								Window.alert(caught.getLocalizedMessage());
+								ok.setText("Отправить");
 								ok.setEnabled(true);
 							}
 						});
