@@ -18,9 +18,11 @@ public class RegistrationCompanySimplePanel extends LoadingSimplePanel {
 		isReady = true;
 		mainService = main;
 		toMainPage = main2;
+		clear();
+		onModuleLoad();
 	}
 	
-	public void onModuleLoad(final Button btnNewButton) {
+	public void onModuleLoad() {
 
 	    VerticalPanel rootPanel = new VerticalPanel();
 	    mainForm = new DynamicForm();
