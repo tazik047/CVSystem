@@ -72,7 +72,7 @@ public class PrintSimplePanel extends SimplePanel {
     	
         HLayout layout = new HLayout();
         layout.setWidth(600);  
-        layout.setHeight100();  
+       // layout.setHeight("*");  
         VLayout vLayout2 = new VLayout();  
         vLayout2.setWidth("35%");  
         vLayout2.setHeight("80");  
@@ -168,22 +168,38 @@ public class PrintSimplePanel extends SimplePanel {
         hLayout4.addMember(new BlueBox("20%", null, "Технологии"));
         hLayout4.addMember(new BlueBox("10px", null, "")); 
         String lan = "";
+        String level1 = "Владение технологиями на продвинутом уровне<br>";
+        String level2 = "Владение технологиями на среднем уровне<br>";
+        String level3 = "Владение технологиями на уровне начинающего<br>";
+        
         if(programLanguage!=null)
 	        for(ProgramLanguage I : programLanguage)
-	        	lan = lan + " " + I.getTitle() + ",";
-        	if(lan!="")
-        		lan = lan.substring(0, lan.length() - 1) + ";";
-        	if (newLanguage.size()!=0){
-        		lan += "<p class=\"green\">Технологии, отсутсвующие в БД: ";
-        		for(ProgramLanguage I : newLanguage)
-        			lan = lan + " " + I.getTitle() + ",";
+	        	{
+	        		if (I.getLevel()==0)
+	        			level1+=I.getTitle()+',';
+	        		if (I.getLevel()==1)
+	        			level2+=I.getTitle()+',';
+	        		if (I.getLevel()==2)
+	        			level3+=I.getTitle()+',';
+	        	}
+        
+        if (newLanguage.size()!=0){
+        		for(ProgramLanguage k : newLanguage){
+        			if (k.getLevel()==0)
+	        			level1+="<a class=\"green\">"+k.getTitle()+", </a>";
+	        		if (k.getLevel()==1)
+	        			level2+="<a class=\"green\">"+k.getTitle()+", </a>";
+	        		if (k.getLevel()==2)
+	        			level3+="<a class=\"green\">"+k.getTitle()+", </a>";
+        		}
+        	//	level3 = level3.substring(0,level3.length()-1);
         		
-        		lan = lan.substring(0, lan.length() - 1) + ".";
-        				
-        		lan+="</p>";
         	}
-
-    	lan = lan.substring(0, lan.length() - 1) + ".";	
+        if (level1 == "Владение технологиями на продвинутом уровне<br>") level1="";
+        if (level2 == "Владение технологиями на среднем уровне<br>") level2="";
+        if (level3 == "Владение технологиями на уровне начинающего<br>") level3=" ";
+        lan = level1+"<br>"+level2+"<br>"+level3;
+    	lan = lan.substring(0, lan.length() - 1) + " ";	
     	
         hLayout4.addMember(new BlueBox("*", null, lan));
     }
