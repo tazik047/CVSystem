@@ -638,6 +638,7 @@ public class RegistrationSimplePanel extends LoadingSimplePanel {
 			if(n) {
 				ProgramLanguage pnew = new ProgramLanguage();
 				pnew.setTitle(pl);
+				pnew.setLevel(level);
 				newPL.add(pnew);
 			}
 		}		
