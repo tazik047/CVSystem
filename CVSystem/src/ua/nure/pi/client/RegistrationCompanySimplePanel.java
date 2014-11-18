@@ -1,5 +1,8 @@
 package ua.nure.pi.client;
 
+import ua.nure.pi.entity.Company;
+import ua.nure.pi.entity.User;
+
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.smartgwt.client.types.TitleOrientation;
@@ -20,6 +23,8 @@ public class RegistrationCompanySimplePanel extends LoadingSimplePanel {
 	public TextItem PhonetextBox;
 	public TextItem Skypetextbox;
     public TextItem Emailtextbox;
+    public TextItem nameOfReliable;
+    public TextItem phoneOfReliable;
 
 
 	public DynamicForm mainForm;
@@ -29,6 +34,8 @@ public class RegistrationCompanySimplePanel extends LoadingSimplePanel {
 	public StaticTextItem phoneHint;
 	public StaticTextItem skypeHint;
 	public StaticTextItem emailHint;
+	public StaticTextItem nameOfRelHint;
+	public StaticTextItem phoneOfRelHint;
 
 	
 	public RegistrationCompanySimplePanel(MainServiceAsync main, Button main2) {
@@ -118,16 +125,49 @@ public class RegistrationCompanySimplePanel extends LoadingSimplePanel {
 	    skypeHint.setShowTitle(false);
 	    skypeHint.setValue("Например, skypelogin");
 	    
+        nameOfReliable = new TextItem("nameOfReliable", "Ответственное лицо");  
+        nameOfReliable.setWidth(300);  
+        nameOfReliable.setHint("Введите имя и отчество ответственного лица"); 
+        nameOfReliable.setShowHintInField(true);
+        nameOfReliable.setRequired(false);
+	    nameOfRelHint = new StaticTextItem();
+	    nameOfRelHint.setShowTitle(false);
+	    nameOfRelHint.setValue("Например, Стив");
 	    
+        phoneOfReliable = new TextItem("phoneOfReliable", "Контакнтый телефон");  
+        phoneOfReliable.setWidth(300);  
+        phoneOfReliable.setShowHintInField(true);
+        phoneOfReliable.setHint("Введите контактный телефон ответственного лица"); 
+        phoneOfReliable.setMask("+38(###) ###-####");
+        phoneOfReliable.setRequired(false);
+        phoneOfRelHint = new StaticTextItem();
+	    phoneOfRelHint.setShowTitle(false);
+	    phoneOfRelHint.setValue("Например, +38(050)145-8872");
 
 	    
 	    mainForm.setCellPadding(5);
 	    
         mainForm.setTitleOrientation(TitleOrientation.TOP);
 	    mainForm.setFields(nameOfCompany, nameHint, login, loginHint, password, passwordHint, password2,Emailtextbox, emailHint,
-	    		PhonetextBox, phoneHint, Skypetextbox, skypeHint);
+	    		PhonetextBox, phoneHint, Skypetextbox, skypeHint, nameOfReliable, nameOfRelHint, phoneOfReliable, phoneOfRelHint);
 	    mainForm.markForRedraw();
 	    add(rootPanel);
 	    
+	}
+	
+	public Company CollectData() {
+		Company c = new Company();
+		c.setName(nameOfCompany.getValueAsString());
+		c.setNameOfReliable(nameOfReliable.getValueAsString());
+		c.setEmail(Emailtextbox.getValueAsString());
+		c.setPhone(PhonetextBox.getValueAsString());
+		c.setPhoneOfReliable(phoneOfReliable.getValueAsString());
+		c.setSkype(Skypetextbox.getValueAsString());
+		User u = new User();
+		u.setLogin(login.getValueAsString());
+		u.setPassword(password.getValueAsString());
+		c.setUser(u);
+		
+		return c;
 	}
 }
