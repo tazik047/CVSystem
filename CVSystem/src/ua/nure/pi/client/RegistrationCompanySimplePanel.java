@@ -1,11 +1,16 @@
 package ua.nure.pi.client;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 import ua.nure.pi.entity.Company;
+import ua.nure.pi.entity.Faculty;
 import ua.nure.pi.entity.User;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.smartgwt.client.types.TitleOrientation;
@@ -40,10 +45,13 @@ public class RegistrationCompanySimplePanel extends LoadingSimplePanel {
 	public StaticTextItem nameOfRelHint;
 	public StaticTextItem phoneOfRelHint;
 
+	private MainServiceAsync registrationService;
+
 	
 	public RegistrationCompanySimplePanel(MainServiceAsync main, Button main2) {
 		isReady = true;
 		mainService = main;
+		
 		toMainPage = main2;
 		clear();
 		onModuleLoad();
@@ -51,7 +59,9 @@ public class RegistrationCompanySimplePanel extends LoadingSimplePanel {
 	
 	public void onModuleLoad() {
 
-	    VerticalPanel rootPanel = new VerticalPanel();
+	    
+		
+		VerticalPanel rootPanel = new VerticalPanel();
 	    mainForm = new DynamicForm();
 	    mainForm.setNumCols(1);
 	    mainForm.setTitleSuffix("");
@@ -155,12 +165,25 @@ public class RegistrationCompanySimplePanel extends LoadingSimplePanel {
             	Boolean b = mainForm.validate();
             	Company comp = CollectData();
             	if(b) {
-            		
-            	}
+            	    mainService.insertCompany(comp, new AsyncCallback<Void>() {
+
+						@Override
+						public void onFailure(Throwable caught) {
+							// TODO Auto-generated method stub
+							
+						}
+
+						@Override
+						public void onSuccess(Void result) {
+							// TODO Auto-generated method stub
+							
+						}
+
+            	});
         	}
 
-        });
-        
+        }
+        };)
 	    
 	    mainForm.setCellPadding(5);
 	    

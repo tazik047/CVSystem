@@ -26,6 +26,7 @@ import ua.nure.pi.dao.ProgramLanguageDAO;
 import ua.nure.pi.dao.PurposeDAO;
 import ua.nure.pi.dao.StudentDAO;
 import ua.nure.pi.dao.UserDAO;
+import ua.nure.pi.entity.Company;
 import ua.nure.pi.entity.Faculty;
 import ua.nure.pi.entity.Language;
 import ua.nure.pi.entity.ProgramLanguage;
@@ -224,5 +225,8 @@ public class MainServiceImpl extends RemoteServiceServlet implements
 			return;
 		}
 		throw new IllegalArgumentException("Вы не авторизированы!");
+	}
+	
+	public void insertCompany(Company c){
 	}
 }

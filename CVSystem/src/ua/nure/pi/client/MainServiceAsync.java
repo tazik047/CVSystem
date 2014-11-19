@@ -2,6 +2,7 @@ package ua.nure.pi.client;
 
 import java.util.Collection;
 
+import ua.nure.pi.entity.Company;
 import ua.nure.pi.entity.Faculty;
 import ua.nure.pi.entity.Purpose;
 import ua.nure.pi.entity.Language;
@@ -37,5 +38,7 @@ public interface MainServiceAsync {
 	void logout(AsyncCallback<Void> asyncCallback) throws IllegalArgumentException;
 	
 	void getStudents(AsyncCallback<Collection<Student>> callback) throws IllegalArgumentException;
+
+	void insertCompany(Company comp, AsyncCallback<Void> asyncCallback);
 
 }
