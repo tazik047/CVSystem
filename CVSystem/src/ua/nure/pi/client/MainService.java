@@ -41,6 +41,6 @@ public interface MainService extends RemoteService {
 	
 	Collection<Student> getStudents() throws IllegalArgumentException;
 
-	void insertCompany(Company c);
+	void insertCompany(Company c) throws IllegalArgumentException;
 
 }

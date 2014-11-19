@@ -76,7 +76,7 @@ public class RegistrationCompanySimplePanel extends LoadingSimplePanel {
         nameOfCompany.setWidth(300);  
         nameOfCompany.setHint("Введите название компании");  
         nameOfCompany.setShowHintInField(true);
-        nameOfCompany.setMask(">C<CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC");
+      //  nameOfCompany.setMask(">C<CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC");
 	    nameOfCompany.setRequired(true);
 	    nameHint = new StaticTextItem();
 	    nameHint.setShowTitle(false);
@@ -86,7 +86,7 @@ public class RegistrationCompanySimplePanel extends LoadingSimplePanel {
         login.setWidth(300);  
         login.setHint("Введите ваш логин");  
         login.setShowHintInField(true);
-        login.setMask(">C<CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC");
+       // login.setMask(">C<CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC");
         login.setRequired(true);
         loginHint = new StaticTextItem();
         loginHint.setShowTitle(false);
@@ -147,7 +147,7 @@ public class RegistrationCompanySimplePanel extends LoadingSimplePanel {
 	    nameOfRelHint.setShowTitle(false);
 	    nameOfRelHint.setValue("Например, Стив");
 	    
-        phoneOfReliable = new TextItem("phoneOfReliable", "Контакнтый телефон");  
+        phoneOfReliable = new TextItem("phoneOfReliable", "Контактный телефон ответственного лица");  
         phoneOfReliable.setWidth(300);  
         phoneOfReliable.setShowHintInField(true);
         phoneOfReliable.setHint("Введите контактный телефон ответственного лица"); 
@@ -183,12 +183,20 @@ public class RegistrationCompanySimplePanel extends LoadingSimplePanel {
         	}
 
         }
-        };)
+        });
+        nameHint.setCellStyle("hint");
+        loginHint.setCellStyle("hint");
+        passwordHint.setCellStyle("hint");
+        emailHint.setCellStyle("hint");
+	    phoneHint.setCellStyle("hint");
+	    skypeHint.setCellStyle("hint");
+	    nameOfRelHint.setCellStyle("hint");
+	    phoneOfRelHint.setCellStyle("hint");
 	    
 	    mainForm.setCellPadding(5);
 	    
         mainForm.setTitleOrientation(TitleOrientation.TOP);
-	    mainForm.setFields(nameOfCompany, nameHint, login, loginHint, password, passwordHint, password2,Emailtextbox, emailHint,
+	    mainForm.setFields(nameOfCompany, nameHint, login, loginHint, password, password2,passwordHint, Emailtextbox, emailHint,
 	    		PhonetextBox, phoneHint, Skypetextbox, skypeHint, nameOfReliable, nameOfRelHint, phoneOfReliable, phoneOfRelHint);
 	    mainForm.markForRedraw();
 	    rootPanel.add(commit);

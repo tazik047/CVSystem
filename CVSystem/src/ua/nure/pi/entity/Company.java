@@ -1,6 +1,10 @@
 package ua.nure.pi.entity;
 
-public class Company {
+import com.google.gwt.user.client.rpc.IsSerializable;
+
+import java.io.Serializable;
+
+public class Company implements Serializable, IsSerializable{
 
 	private long id;
 	private String name;

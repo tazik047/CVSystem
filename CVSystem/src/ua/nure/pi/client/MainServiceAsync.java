@@ -39,6 +39,6 @@ public interface MainServiceAsync {
 	
 	void getStudents(AsyncCallback<Collection<Student>> callback) throws IllegalArgumentException;
 
-	void insertCompany(Company comp, AsyncCallback<Void> asyncCallback);
+	void insertCompany(Company comp, AsyncCallback<Void> asyncCallback) throws IllegalArgumentException;
 
 }

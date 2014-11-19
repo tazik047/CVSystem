@@ -240,7 +240,7 @@ public class RegistrationSimplePanel extends LoadingSimplePanel {
         SurnametextBox.setWidth(300);  
         SurnametextBox.setHint("Введите фамилию");  
         SurnametextBox.setShowHintInField(true);
-        SurnametextBox.setMask(">C<CCCCCCCCCCCCCCCCCCCC");
+        //SurnametextBox.setMask(">C<CCCCCCCCCCCCCCCCCCCC");
 	    surnameHint = new StaticTextItem();
 	    surnameHint.setShowTitle(false);
 	    surnameHint.setValue("Например, Иванов");
@@ -251,7 +251,7 @@ public class RegistrationSimplePanel extends LoadingSimplePanel {
         NametextBox.setWidth(300);  
         NametextBox.setHint("Введите имя");  
         NametextBox.setShowHintInField(true);
-        NametextBox.setMask(">C<CCCCCCCCCCCCCCCCCCCC");
+       // NametextBox.setMask(">C<CCCCCCCCCCCCCCCCCCCC");
 	    nameHint = new StaticTextItem();
 	    nameHint.setShowTitle(false);
 	    nameHint.setValue("Например, Иван");
