@@ -3,6 +3,9 @@ package ua.nure.pi.client;
 import ua.nure.pi.entity.Company;
 import ua.nure.pi.entity.User;
 
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.smartgwt.client.types.TitleOrientation;
@@ -143,7 +146,21 @@ public class RegistrationCompanySimplePanel extends LoadingSimplePanel {
         phoneOfRelHint = new StaticTextItem();
 	    phoneOfRelHint.setShowTitle(false);
 	    phoneOfRelHint.setValue("Например, +38(050)145-8872");
+       
+	    
+	    Button commit = new Button("Зарегистрироваться");
+        commit.addClickHandler(new ClickHandler() {
+        	
+            public void onClick(ClickEvent event) {
+            	Boolean b = mainForm.validate();
+            	Company comp = CollectData();
+            	if(b) {
+            		
+            	}
+        	}
 
+        });
+        
 	    
 	    mainForm.setCellPadding(5);
 	    
@@ -151,7 +168,10 @@ public class RegistrationCompanySimplePanel extends LoadingSimplePanel {
 	    mainForm.setFields(nameOfCompany, nameHint, login, loginHint, password, passwordHint, password2,Emailtextbox, emailHint,
 	    		PhonetextBox, phoneHint, Skypetextbox, skypeHint, nameOfReliable, nameOfRelHint, phoneOfReliable, phoneOfRelHint);
 	    mainForm.markForRedraw();
+	    rootPanel.add(commit);
 	    add(rootPanel);
+	    
+
 	    
 	}
 	
