@@ -355,7 +355,7 @@ CREATE TABLE [dbo].[ProgramLanguagesCVs](
 	[ProgramLanguagesCVsId] [bigint] IDENTITY(1,1) NOT NULL,
 	[ProgramLanguagesId] [bigint] NOT NULL,
 	[CVsId] [bigint] NOT NULL,
-	[Level] [int] NULL
+	[Level] [int] NOT NULL DEFAULT 1
  CONSTRAINT [PK_ProgramLanguagesCVs] PRIMARY KEY CLUSTERED 
 (
 	[ProgramLanguagesCVsId] ASC
