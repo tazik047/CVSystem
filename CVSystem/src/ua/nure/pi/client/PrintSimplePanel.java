@@ -175,21 +175,21 @@ public class PrintSimplePanel extends SimplePanel {
         if(programLanguage!=null)
 	        for(ProgramLanguage I : programLanguage)
 	        	{
-	        		if (I.getLevel()==0)
+	        		if (I.getLevel()==2)
 	        			level1+=I.getTitle()+',';
 	        		if (I.getLevel()==1)
 	        			level2+=I.getTitle()+',';
-	        		if (I.getLevel()==2)
+	        		if (I.getLevel()==0)
 	        			level3+=I.getTitle()+',';
 	        	}
         
         if (newLanguage.size()!=0){
         		for(ProgramLanguage k : newLanguage){
-        			if (k.getLevel()==0)
+        			if (k.getLevel()==2)
 	        			level1+="<a class=\"green\">"+k.getTitle()+", </a>";
 	        		if (k.getLevel()==1)
 	        			level2+="<a class=\"green\">"+k.getTitle()+", </a>";
-	        		if (k.getLevel()==2)
+	        		if (k.getLevel()==0)
 	        			level3+="<a class=\"green\">"+k.getTitle()+", </a>";
         		}
         	//	level3 = level3.substring(0,level3.length()-1);
