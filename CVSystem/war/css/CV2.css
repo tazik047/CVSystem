@@ -393,6 +393,8 @@ ul.par li img
 {
 	width: 225px;
 	height: 70px;
+	display: inline-block;
+	vertical-align: middle;
 }
 ul.par li.big img
 {
