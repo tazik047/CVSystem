@@ -128,7 +128,6 @@ public class RegistrationCompanySimplePanel extends LoadingSimplePanel {
 	    phoneHint.setShowTitle(false);
 	    phoneHint.setValue("Например, +38(050)145-8872");
 
-                
         Skypetextbox = new TextItem("skype", "Skype");  
         Skypetextbox.setWidth(300);  
         Skypetextbox.setHint("Введите skype"); 
@@ -169,12 +168,12 @@ public class RegistrationCompanySimplePanel extends LoadingSimplePanel {
 
 						@Override
 						public void onFailure(Throwable caught) {
-							Window.alert(caught.getLocalizedMessage());
+							Window.alert(caught.getLocalizedMessage());							
 						}
 
 						@Override
 						public void onSuccess(Void result) {
-							Window.alert("Ваши данный сохранены и в скором времени пройдут проверку администратором.");
+							Window.alert("Ваши данный сохранены и в скором времени пройдут проверку администратором.");							
 						}
 
             	});
@@ -198,6 +197,8 @@ public class RegistrationCompanySimplePanel extends LoadingSimplePanel {
 	    		PhonetextBox, phoneHint, Skypetextbox, skypeHint, nameOfReliable, nameOfRelHint, phoneOfReliable, phoneOfRelHint);
 	    mainForm.markForRedraw();
 	    rootPanel.add(commit);
+	    rootPanel.setSpacing(15);
+
 	    add(rootPanel);
 	    
 
