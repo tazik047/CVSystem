@@ -8,7 +8,6 @@ public class User implements Serializable, IsSerializable {
 	private static final long serialVersionUID = 1L;
 
 	private long userId;
-	private long employeeId;
 	private boolean isAdmin;
 	private String login;
 	private String password;
@@ -30,14 +29,6 @@ public class User implements Serializable, IsSerializable {
 
 	public void setUserId(long userId) {
 		this.userId = userId;
-	}
-
-	public long getEmployeeId() {
-		return employeeId;
-	}
-
-	public void setEmployeeId(long employeeId) {
-		this.employeeId = employeeId;
 	}
 
 	public String getLogin() {
@@ -74,8 +65,6 @@ public class User implements Serializable, IsSerializable {
 		StringBuilder sb = new StringBuilder();
 		sb.append("User [userId=");
 		sb.append(userId);
-		sb.append(", employeeId=");
-		sb.append(employeeId);
 		sb.append(", login=");
 		sb.append(login);
 		sb.append(", isAdmin=");

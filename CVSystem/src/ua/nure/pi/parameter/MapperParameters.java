@@ -75,4 +75,14 @@ public interface MapperParameters {
 	String USER__PASSWORD = "password";
 	String USER__ROLES = "Role";
 	String EDUCATION__FACULTY = "Faculty";
+	
+	//Company
+	String COMPANY__EMAIL = "Email";
+	String COMPANY__ID = "CompamiesId";
+	String COMPANY__NAME = "Title";
+	String COMPANY__NAME_RELIABLE = "FIORespPerson";
+	String COMPANY__PHONE = "Phone";
+	String COMPANY__PHONE_RELIABLE = "PhoneRespPerson";
+	String COMPANY__SKYPE = "Skype";
+	String COMPANY__ACTIVE = "Active";
 	}

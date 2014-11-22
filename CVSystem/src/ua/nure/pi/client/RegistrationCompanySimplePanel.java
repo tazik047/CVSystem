@@ -169,14 +169,12 @@ public class RegistrationCompanySimplePanel extends LoadingSimplePanel {
 
 						@Override
 						public void onFailure(Throwable caught) {
-							// TODO Auto-generated method stub
-							
+							Window.alert(caught.getLocalizedMessage());
 						}
 
 						@Override
 						public void onSuccess(Void result) {
-							// TODO Auto-generated method stub
-							
+							Window.alert("Ваши данный сохранены и в скором времени пройдут проверку администратором.");
 						}
 
             	});

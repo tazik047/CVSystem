@@ -4,6 +4,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
+import ua.nure.pi.dao.CompanyDAO;
 import ua.nure.pi.dao.DAOFactory;
 import ua.nure.pi.dao.FacultyGroupDAO;
 import ua.nure.pi.dao.LanguageDAO;
@@ -17,6 +18,8 @@ import ua.nure.pi.parameter.AppConstants;
 
 public class ContextListener implements ServletContextListener {
 	//private static final Logger log = Logger.getLogger(ContextListener.class);
+	
+	private static final int DBType = DAOFactory.MSSQL;
 
 	@Override
 	public void contextInitialized(ServletContextEvent event) {
@@ -31,10 +34,11 @@ public class ContextListener implements ServletContextListener {
 		setPurposeAttribute(servletContext);
 		setStudentAttribute(servletContext);
 		setPassAttribute(servletContext);
+		setCompanyAttribute(servletContext);
 	}
 
 	private void setPassAttribute(ServletContext servletContext) {
-		PassDAO passDAO = DAOFactory.getDAOFactory(DAOFactory.MSSQL).getPassDAO();
+		PassDAO passDAO = DAOFactory.getDAOFactory(DBType).getPassDAO();
 		servletContext.setAttribute(AppConstants.PASS_DAO, passDAO);
 	}
 
@@ -47,39 +51,45 @@ public class ContextListener implements ServletContextListener {
 	}
 
 	private void setUserDAOAttribute(ServletContext servletContext) {
-		UserDAO userDAO = DAOFactory.getDAOFactory(DAOFactory.MSSQL)
+		UserDAO userDAO = DAOFactory.getDAOFactory(DBType)
 				.getUserDAO();
 		servletContext.setAttribute(AppConstants.USER_DAO, userDAO);
 		//log.debug("UserDAO was created");
 	}
 	
 	private void setFacultyGroupAttribute(ServletContext servletContext) {
-		FacultyGroupDAO facultyGroupDAO = DAOFactory.getDAOFactory(DAOFactory.MSSQL)
+		FacultyGroupDAO facultyGroupDAO = DAOFactory.getDAOFactory(DBType)
 				.getFacultyGroupDAO();
 		servletContext.setAttribute(AppConstants.FACULTYGROUP_DAO, facultyGroupDAO);
 	}
 	
 	private void setLanguageAttribute(ServletContext servletContext) {
-		LanguageDAO languageDAO = DAOFactory.getDAOFactory(DAOFactory.MSSQL)
+		LanguageDAO languageDAO = DAOFactory.getDAOFactory(DBType)
 				.getLanguageDAO();
 		servletContext.setAttribute(AppConstants.LANGUAGE_DAO, languageDAO);
 	}
 	
 	private void setProgramLanguageAttribute(ServletContext servletContext) {
-		ProgramLanguageDAO programLanguagesDAO = DAOFactory.getDAOFactory(DAOFactory.MSSQL)
+		ProgramLanguageDAO programLanguagesDAO = DAOFactory.getDAOFactory(DBType)
 				.getProgramLanguageDAO();
 		servletContext.setAttribute(AppConstants.PROGRAM_LANGUAGE_DAO, programLanguagesDAO);
 	}
 	
 	private void setStudentAttribute(ServletContext servletContext) {
-		StudentDAO studentDAO = DAOFactory.getDAOFactory(DAOFactory.MSSQL)
+		StudentDAO studentDAO = DAOFactory.getDAOFactory(DBType)
 				.getStudentDAO();
 		servletContext.setAttribute(AppConstants.STUDENT_DAO, studentDAO);
 	}
 	
 	private void setPurposeAttribute(ServletContext servletContext) {
-		PurposeDAO purposeDAO = DAOFactory.getDAOFactory(DAOFactory.MSSQL)
+		PurposeDAO purposeDAO = DAOFactory.getDAOFactory(DBType)
 				.getPurposeDAO();
 		servletContext.setAttribute(AppConstants.PURPOSE_DAO, purposeDAO);
+	}
+	
+	private void setCompanyAttribute(ServletContext servletContext) {
+		CompanyDAO companyDAO = DAOFactory.getDAOFactory(DBType)
+				.getCompanyDAO();
+		servletContext.setAttribute(AppConstants.COMPANY_DAO, companyDAO);
 	}
 }

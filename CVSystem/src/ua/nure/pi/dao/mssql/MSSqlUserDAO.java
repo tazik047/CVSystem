@@ -32,8 +32,8 @@ private static volatile MSSqlUserDAO instance;
 	private static final String SQL__CONTAINS_USER_WITH_LOGIN = "SELECT * FROM Users WHERE Login=?";
 	private static final String SQL__READ_USER_BY_ID = "SELECT * FROM Users WHERE UsersId=?";
 	private static final String SQL__GET_ALL_USERS = "SELECT * FROM Users";
-	private static final String SQL__INSERT_USER= "INSERT INTO Users (Password, Login, Role) VALUES (?, ?, ?)";
-
+	private static final String SQL__INSERT_USER = "INSERT INTO Users (Password, Login, Role) VALUES (?, ?, ?)";
+	private static final String SQL__DELETE_USER = "DELETE FROM Users WHERE UsersId = ?";
 	private static final String SQL__UPDATE_USER = "UPDATE Users SET Password = ? WHERE UsersId = ?";
 
 	
@@ -250,15 +250,18 @@ private static volatile MSSqlUserDAO instance;
 		return result;
 	}
 
-	private boolean insertUser(User user, Connection con)
+	boolean insertUser(User user, Connection con)
 			throws SQLException {
 		PreparedStatement pstmt = null;
 		boolean result = false;
 
 		try {
-			pstmt = con.prepareStatement(SQL__INSERT_USER);
+			pstmt = con.prepareStatement(SQL__INSERT_USER, Statement.RETURN_GENERATED_KEYS);
 			mapUser(user, pstmt);
 			result = pstmt.executeUpdate() == 1;
+			ResultSet rs = pstmt.getGeneratedKeys();
+			if(rs.next())
+				user.setUserId(rs.getLong(1));
 		} catch (SQLException e) {
 			throw e;
 		} finally {
@@ -322,5 +325,49 @@ private static volatile MSSqlUserDAO instance;
 			throws SQLException{
 		pstmt.setString(1, Hashing.salt(user.getPassword(), user.getLogin()));
 		pstmt.setLong(2, user.getUserId());
+	}
+
+	@Override
+	public boolean deleteUser(User user) {
+		Connection con = null;
+		boolean result = false;
+		try {
+			con = MSSqlDAOFactory.getConnection();
+			result = deleteUser(con, user);
+			if(result)
+				con.commit();
+		} catch (SQLException e) {
+			System.err.println("Can not update pass." + e.getMessage());
+		} finally {
+			try {
+				if (con != null)
+					con.close();
+			} catch (SQLException e) {
+				System.err.println("Can not close connection" + e.getMessage());
+			}
+		}
+		return result;
+	}
+
+	private boolean deleteUser(Connection con, User user)
+			throws SQLException {
+		boolean result;
+		PreparedStatement pstmt = null;
+		try {
+			pstmt = con.prepareStatement(SQL__DELETE_USER);
+			pstmt.setLong(1, user.getUserId());
+			result = pstmt.executeUpdate() == 1;
+		} catch (SQLException e) {
+			throw e;
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					System.err.println("Can not close statement" + e.getMessage());
+				}
+			}
+		}
+		return result;
 	}
 }

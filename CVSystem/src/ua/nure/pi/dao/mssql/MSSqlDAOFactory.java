@@ -114,6 +114,11 @@ public class MSSqlDAOFactory extends DAOFactory {
 	public PassDAO getPassDAO() {
 		return MSSqlPassDAO.getInstancce();
 	}
+
+	@Override
+	public CompanyDAO getCompanyDAO() {
+		return MSSqlCompanyDAO.getInstancce();
+	}
 	
 
 

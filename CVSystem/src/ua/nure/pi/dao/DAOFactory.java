@@ -37,4 +37,6 @@ public abstract class DAOFactory {
 	public abstract CVDAO getCVDAO();
 	
 	public abstract PassDAO getPassDAO();
+	
+	public abstract CompanyDAO getCompanyDAO();
 }

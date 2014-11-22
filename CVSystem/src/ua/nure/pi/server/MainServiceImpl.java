@@ -19,6 +19,7 @@ import ua.nure.pi.Path;
 import ua.nure.pi.client.GreetingService;
 import ua.nure.pi.client.MainService;
 import ua.nure.pi.client.RegistrationService;
+import ua.nure.pi.dao.CompanyDAO;
 import ua.nure.pi.dao.FacultyGroupDAO;
 import ua.nure.pi.dao.LanguageDAO;
 import ua.nure.pi.dao.PassDAO;
@@ -59,6 +60,8 @@ public class MainServiceImpl extends RemoteServiceServlet implements
 	
 	private UserDAO userDAO;
 	
+	private CompanyDAO companyDAO;
+	
 	@Override
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
@@ -83,6 +86,7 @@ public class MainServiceImpl extends RemoteServiceServlet implements
 		purposeDAO = (PurposeDAO) servletContext.getAttribute(AppConstants.PURPOSE_DAO);
 		passDAO = (PassDAO) servletContext.getAttribute(AppConstants.PASS_DAO);
 		userDAO = (UserDAO) servletContext.getAttribute(AppConstants.USER_DAO);
+		companyDAO = (CompanyDAO) servletContext.getAttribute(AppConstants.COMPANY_DAO);
 		
 		if (facultyGroupDAO == null) {
 			throw new IllegalStateException("FacultyGroupDAO attribute is not exists.");
@@ -109,6 +113,10 @@ public class MainServiceImpl extends RemoteServiceServlet implements
 		
 		if (userDAO == null) {
 			throw new IllegalStateException("UserDAO attribute is not exists.");
+		}
+		
+		if (companyDAO == null) {
+			throw new IllegalStateException("CompanyDAO attribute is not exists.");
 		}
 		
 	}
@@ -228,5 +236,7 @@ public class MainServiceImpl extends RemoteServiceServlet implements
 	}
 	
 	public void insertCompany(Company c){
+		if(!companyDAO.insertCompany(c))
+			throw new IllegalArgumentException("Произошла ошибка при сохранении данных");
 	}
 }

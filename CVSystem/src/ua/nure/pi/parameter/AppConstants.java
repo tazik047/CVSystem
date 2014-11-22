@@ -21,6 +21,7 @@ public interface AppConstants {
 	public static final String LANGUAGE_DAO = "languageDAO";
 	public static final String PURPOSE_DAO = "purposeDAO";
 	public static final String PASS_DAO = "passDAO";
+	public static final String COMPANY_DAO = "companyDAO";
 	
 	// TagName
 	public static final String TABLE_PROGRAM_LANGUAGE = "ProgramLanguages";
@@ -28,5 +29,6 @@ public interface AppConstants {
 
 	// security parameters
 	public static final String SECURITY_XML = "securityXML";
+	
 	
 }

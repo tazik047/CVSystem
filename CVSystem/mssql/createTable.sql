@@ -189,10 +189,14 @@ GO
 IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Companies]') AND type in (N'U'))
 BEGIN
 CREATE TABLE [dbo].[Companies](
-	[CompaniesId] [bigint] IDENTITY(1,1) NOT NULL,
-	[Title] [nchar](10) NOT NULL,
-	[Phone] [nchar](10) NOT NULL,
-	[UsersId] [bigint] NOT NULL,
+	[CompaniesId] [bigint] NOT NULL,
+	[Title] [nvarchar](max) NOT NULL,
+	[Phone] [nvarchar](max) NOT NULL,
+	[PhoneRespPerson] [nvarchar](max) NOT NULL,
+	[Email] [nvarchar](max) NOT NULL,
+	[FIORespPerson] [nvarchar](max) NOT NULL,
+	[Skype] [nvarchar](max) NULL,
+	[Active] [tinyint]  NOT NULL DEFAULT 0,
  CONSTRAINT [PK_Companies] PRIMARY KEY CLUSTERED 
 (
 	[CompaniesId] ASC
@@ -485,7 +489,7 @@ CREATE TABLE [dbo].[WorkExps](
 END
 GO
 IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Companies_Users]') AND parent_object_id = OBJECT_ID(N'[dbo].[Companies]'))
-ALTER TABLE [dbo].[Companies]  WITH CHECK ADD  CONSTRAINT [FK_Companies_Users] FOREIGN KEY([UsersId])
+ALTER TABLE [dbo].[Companies]  WITH CHECK ADD  CONSTRAINT [FK_Companies_Users] FOREIGN KEY([CompaniesId])
 REFERENCES [dbo].[Users] ([UsersId])
 ON UPDATE CASCADE
 ON DELETE CASCADE

@@ -5,7 +5,8 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 import java.io.Serializable;
 
 public class Company implements Serializable, IsSerializable{
-
+	private static final long serialVersionUID = 1L;
+	
 	private long id;
 	private String name;
 	private String email;
@@ -14,6 +15,7 @@ public class Company implements Serializable, IsSerializable{
 	private String phoneOfReliable;
 	private String nameOfReliable;
 	private User user;
+	private boolean isActivate;
 	
 	public Company() {
 		
@@ -68,5 +70,13 @@ public class Company implements Serializable, IsSerializable{
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public boolean isActivate() {
+		return isActivate;
+	}
+
+	public void setActivate(boolean isActivate) {
+		this.isActivate = isActivate;
 	}
 }
