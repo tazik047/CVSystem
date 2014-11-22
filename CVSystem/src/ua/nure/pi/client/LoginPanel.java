@@ -1,5 +1,7 @@
 package ua.nure.pi.client;
 
+import ua.nure.pi.entity.User;
+
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyCodes;
@@ -59,12 +61,12 @@ public class LoginPanel extends LoadingSimplePanel {
 			private void login() {
 				btnNewButton.setEnabled(false);
 				err.setText("");
-				mainService.login(textBox.getValue(), passwordTextBox.getValue(), new AsyncCallback<Boolean>() {
+				mainService.login(textBox.getValue(), passwordTextBox.getValue(), new AsyncCallback<User>() {
 					
 					@Override
-					public void onSuccess(Boolean result) {
-						if(result){
-							AdminManager.createProfilePanel(true);
+					public void onSuccess(User result) {
+						if(result!=null){
+							AdminManager.createProfilePanel(result.isAdmin());
 							mainTab.click();
 						}
 						else{

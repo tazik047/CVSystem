@@ -54,7 +54,6 @@ public class AdminManager {
 				}
 				else{
 					createProfilePanel(false);
-					loginPanel.add(new Label("Здравствуйте, компания"));
 					
 				}
 			}
@@ -169,8 +168,15 @@ public class AdminManager {
 		if(admin){
 			aftorizedAdmin();
 		}
+		else{
+			aftorizedCompany();
+		}
 	}
 	
+	private static void aftorizedCompany() {
+		loginPanel.add(new Label("Здравствуйте, компания"));
+	}
+
 	private static void setAdminFunc(){
 		HorizontalPanel root = new HorizontalPanel();
 		final Button getCVs = new Button("Получить списки резюме");

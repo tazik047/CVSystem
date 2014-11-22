@@ -178,7 +178,7 @@ public class MainServiceImpl extends RemoteServiceServlet implements
 	}
 
 	@Override
-	public Boolean login(String login, String password)
+	public User login(String login, String password)
 			throws IllegalArgumentException {
 		if(checkLogined()!=null)
 			throw new IllegalArgumentException("Вы уже вошли  в систему");
@@ -196,9 +196,9 @@ public class MainServiceImpl extends RemoteServiceServlet implements
 				session.setAttribute(AppConstants.COMPANY, c);
 			}
 			session.setAttribute(AppConstants.USER, user);
-			return true;
+			return user;
 		}
-		return false;
+		return null;
 	}
 	
 	@Override

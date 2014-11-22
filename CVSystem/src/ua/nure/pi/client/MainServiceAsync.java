@@ -31,7 +31,7 @@ public interface MainServiceAsync {
 	
 	void checkPass(String pass, AsyncCallback<Boolean> asyncCallback) throws IllegalArgumentException;
 	
-	void login(String login, String password, AsyncCallback<Boolean> asyncCallback) throws IllegalArgumentException;
+	void login(String login, String password, AsyncCallback<User> asyncCallback) throws IllegalArgumentException;
 	
 	void checkLogined(AsyncCallback<User> asyncCallback) throws IllegalArgumentException;
 	
