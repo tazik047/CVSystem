@@ -9,6 +9,7 @@ public interface AppConstants {
 	public static final String USER = "user";
 	public static final String LOGIN = "login";
 	public static final String PASSWORD = "password";
+	public static final String COMPANY = "company";
 	public static final String SERVER_ERROR = "An error occurred while "
 			+ "attempting to contact the server. Please check your network "
 			+ "connection and try again.";
@@ -29,6 +30,5 @@ public interface AppConstants {
 
 	// security parameters
 	public static final String SECURITY_XML = "securityXML";
-	
 	
 }

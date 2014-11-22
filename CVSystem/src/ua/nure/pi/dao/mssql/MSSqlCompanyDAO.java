@@ -42,7 +42,7 @@ public class MSSqlCompanyDAO implements CompanyDAO {
 			con = MSSqlDAOFactory.getConnection();
 			result = getCompany(companyId, con);
 		} catch (SQLException e) {
-			System.err.println("Can not get student." + e.getMessage());
+			System.err.println("Can not get Company." + e.getMessage());
 		} finally {
 			try {
 				if (con != null)
@@ -141,7 +141,7 @@ public class MSSqlCompanyDAO implements CompanyDAO {
 			if(result)
 				con.commit();
 		} catch (SQLException e) {
-			System.err.println("Can not update faculties. " + e.getMessage());
+			System.err.println("Can delete Company. " + e.getMessage());
 		} finally {
 			try {
 				if (con != null)
@@ -161,7 +161,7 @@ public class MSSqlCompanyDAO implements CompanyDAO {
 			con = MSSqlDAOFactory.getConnection();
 			result = getCompanies(con);
 		} catch (SQLException e) {
-			System.err.println("Can not get student." + e.getMessage());
+			System.err.println("Can not get companies." + e.getMessage());
 		} finally {
 			try {
 				if (con != null)
@@ -207,7 +207,7 @@ public class MSSqlCompanyDAO implements CompanyDAO {
 			con = MSSqlDAOFactory.getConnection();
 			result = getNotActiveCompanies(con);
 		} catch (SQLException e) {
-			System.err.println("Can not get student." + e.getMessage());
+			System.err.println("Can not get not active company." + e.getMessage());
 		} finally {
 			try {
 				if (con != null)
@@ -255,7 +255,7 @@ public class MSSqlCompanyDAO implements CompanyDAO {
 				if(result)
 					con.commit();
 			} catch (SQLException e) {
-				System.err.println("Can not update faculties. " + e.getMessage());
+				System.err.println("Can not activate company. " + e.getMessage());
 			} finally {
 				try {
 					if (con != null)

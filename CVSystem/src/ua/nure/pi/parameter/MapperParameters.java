@@ -78,7 +78,7 @@ public interface MapperParameters {
 	
 	//Company
 	String COMPANY__EMAIL = "Email";
-	String COMPANY__ID = "CompamiesId";
+	String COMPANY__ID = "CompaniesId";
 	String COMPANY__NAME = "Title";
 	String COMPANY__NAME_RELIABLE = "FIORespPerson";
 	String COMPANY__PHONE = "Phone";

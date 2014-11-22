@@ -187,6 +187,14 @@ public class MainServiceImpl extends RemoteServiceServlet implements
 				Hashing.salt(password, login).equals(user.getPassword())){
 			HttpServletRequest request = getThreadLocalRequest();
 			HttpSession session = request.getSession();
+			if(!user.isAdmin()){
+				Company c = companyDAO.getCompany(user.getUserId());
+				if(c==null)
+					throw new IllegalArgumentException("Произошла ошибка при получении компании.");
+				if(!c.isActivate())
+					throw new IllegalArgumentException("Ваша учетная запись еще не активирована.");
+				session.setAttribute(AppConstants.COMPANY, c);
+			}
 			session.setAttribute(AppConstants.USER, user);
 			return true;
 		}
