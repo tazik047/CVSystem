@@ -405,3 +405,7 @@ ul.par li.big img
 {
 	border: 0px;
 }
+#content .formTitle
+{
+	font: 14px PT Serif,sans-serif !important;
+}
