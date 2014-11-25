@@ -1,16 +1,20 @@
 package ua.nure.pi.dao;
 
-import ua.nure.pi.dao.mssql.MSSqlDAOFactory;
+import ua.nure.pi.dao.jdbc.mssql.MSSQLDAOFactory;
+import ua.nure.pi.dao.jdbc.mysql.MYSQLDAOFactory;
 
 
 public abstract class DAOFactory {
 	public static final int MSSQL = 1;
+	public static final int MYSQL = 2;
 	
 	public static DAOFactory getDAOFactory(int whichFactory) {
 
 		switch (whichFactory) {
 		case MSSQL:
-			return MSSqlDAOFactory.getInstancce();
+			return MSSQLDAOFactory.getInstancce();
+		case MYSQL:
+			return MYSQLDAOFactory.getInstancce();
 		default:
 			return null;
 		}

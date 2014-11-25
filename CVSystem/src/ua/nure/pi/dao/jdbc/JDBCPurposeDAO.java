@@ -1,4 +1,4 @@
-package ua.nure.pi.dao.mssql;
+package ua.nure.pi.dao.jdbc;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,35 +12,21 @@ import ua.nure.pi.dao.PurposeDAO;
 import ua.nure.pi.entity.Purpose;
 import ua.nure.pi.parameter.MapperParameters;
 
-public class MSSqlPurposeDAO implements PurposeDAO {
+public abstract class JDBCPurposeDAO implements PurposeDAO {
 	
-	private static volatile MSSqlPurposeDAO instance;
-	
-	private MSSqlPurposeDAO() {
-	}
-	
-	public static MSSqlPurposeDAO getInstancce(){
-		if(instance == null)
-			synchronized (MSSqlPurposeDAO.class){
-				if(instance == null)
-					instance = new MSSqlPurposeDAO();
-			}
-		return instance;
-	}
-	
-	private static final String SQL__SELECT_PURPOSE = "SELECT * FROM Purposes order by Title";
-	private static final String SQL__INSERT_PURPOSE= "INSERT INTO Purposes(Title) VALUES(?)";
-	private static final String SQL__UPDATE_PURPOSE = "UPDATE Purposes SET Title = ? WHERE PurposesId = ?";
-	private static final String SQL__DELETE_PURPOSE = "DELETE Purposes WHERE PurposesId = ?";	
-	private static final String SQL__FIND_PURPOSE = "SELECT * FROM Purposes where PurposesId = ?";
-	private static final String SQL__FIND_BY_TITLE = "SELECT PurposesId FROM Purposes where Title = ?";
+	protected String SQL__SELECT_PURPOSE = "SELECT * FROM Purposes order by Title";
+	protected String SQL__INSERT_PURPOSE= "INSERT INTO Purposes(Title) VALUES(?)";
+	protected String SQL__UPDATE_PURPOSE = "UPDATE Purposes SET Title = ? WHERE PurposesId = ?";
+	protected String SQL__DELETE_PURPOSE;// = "DELETE Purposes WHERE PurposesId = ?";	
+	protected String SQL__FIND_PURPOSE = "SELECT * FROM Purposes where PurposesId = ?";
+	protected String SQL__FIND_BY_TITLE = "SELECT PurposesId FROM Purposes where Title = ?";
 
 	@Override
 	public Collection<Purpose> getPurposes() {
 		Collection<Purpose> result = null;
 		Connection con = null;
 		try {
-			con = MSSqlDAOFactory.getConnection();
+			con = getConnection();
 			result = getPurposes(con);
 		} catch (SQLException e) {
 			System.err.println("Can not get purposes. " + e.getMessage());
@@ -86,7 +72,7 @@ public class MSSqlPurposeDAO implements PurposeDAO {
 		Purpose result = null;
 		Connection con = null;
 		try {
-			con = MSSqlDAOFactory.getConnection();
+			con = getConnection();
 			result = findPurposes(PurposesId, con);
 		} catch (SQLException e) {
 			System.err.println(String.format("Can not get from purpose. " + e.getMessage()));
@@ -131,7 +117,7 @@ public class MSSqlPurposeDAO implements PurposeDAO {
 		Boolean result = false;
 		Connection con = null;
 		try {
-			con = MSSqlDAOFactory.getConnection();
+			con = getConnection();
 			result = insertPurposes(purposes, con);
 			if(result)
 				con.commit();
@@ -178,7 +164,7 @@ public class MSSqlPurposeDAO implements PurposeDAO {
 		Boolean result = false;
 		Connection con = null;
 		try {
-			con = MSSqlDAOFactory.getConnection();
+			con = getConnection();
 			result = deletePurposes(purposes, con);
 			if(result)
 				con.commit();
@@ -224,7 +210,7 @@ public class MSSqlPurposeDAO implements PurposeDAO {
 		Boolean result = false;
 		Connection con = null;
 		try {
-			con = MSSqlDAOFactory.getConnection();
+			con = getConnection();
 			result = updatePurposes(purposes, con);
 			if(result)
 				con.commit();
@@ -291,7 +277,7 @@ public class MSSqlPurposeDAO implements PurposeDAO {
 		Boolean result = false;
 		Connection con = null;
 		try {
-			con = MSSqlDAOFactory.getConnection();
+			con = getConnection();
 			result = insertPurposeAndGenerateKey(purpose, con);
 			if(result)
 				con.commit();
@@ -348,4 +334,6 @@ public class MSSqlPurposeDAO implements PurposeDAO {
 		}
 		return result;
 	}
+	
+	protected abstract Connection getConnection() throws SQLException;
 }

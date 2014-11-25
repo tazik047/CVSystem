@@ -1,5 +1,7 @@
 package ua.nure.pi.dao;
 
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.Collection;
 
 import ua.nure.pi.entity.Faculty;
@@ -38,5 +40,7 @@ public interface FacultyGroupDAO {
 	Boolean deleteGroups(Collection<Group> groups);
 	
 	Boolean deleteGroup(Group group);
+
+	Group getGroup(long long1, Connection con) throws SQLException;
 
 }

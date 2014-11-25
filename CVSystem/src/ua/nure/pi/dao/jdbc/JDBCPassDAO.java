@@ -1,42 +1,22 @@
-package ua.nure.pi.dao.mssql;
+package ua.nure.pi.dao.jdbc;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.Collection;
 
-import ua.nure.pi.dao.AnyTagDAO;
 import ua.nure.pi.dao.PassDAO;
-import ua.nure.pi.entity.AnyTag;
-import ua.nure.pi.parameter.MapperParameters;
 
-public class MSSqlPassDAO implements PassDAO {
+public abstract class JDBCPassDAO implements PassDAO {
 	
-	private static volatile MSSqlPassDAO instance;
-	
-	private MSSqlPassDAO() {
-	}
-	
-	public static MSSqlPassDAO getInstancce(){
-		if(instance == null)
-			synchronized (MSSqlPassDAO.class){
-				if(instance == null)
-					instance = new MSSqlPassDAO();
-			}
-		return instance;
-	}
-	
-	private static final String SQL__SELECT_PASS = "SELECT count(*) FROM Pass where AccessPass = ?";
+	protected String SQL__SELECT_PASS = "SELECT count(*) FROM Pass where AccessPass = ?";
 
 	@Override
 	public Boolean checkPass(String pass) {
 		Boolean result = false;
 		Connection con = null;
 		try {
-			con = MSSqlDAOFactory.getConnection();
+			con = getConnection();
 			result = checkPass(pass, con);
 		} catch (SQLException e) {
 			System.err.println("Can not get pass" + e.getMessage());
@@ -77,4 +57,6 @@ public class MSSqlPassDAO implements PassDAO {
 		}
 		return result;
 	}
+	
+	protected abstract Connection getConnection() throws SQLException;
 }

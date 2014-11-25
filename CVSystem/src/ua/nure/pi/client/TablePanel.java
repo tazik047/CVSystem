@@ -24,7 +24,7 @@ import com.smartgwt.client.widgets.layout.HLayout;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import ua.nure.pi.dao.mssql.MSSqlStudentDAO;
+import ua.nure.pi.dao.jdbc.JDBCStudentDAO;
 import ua.nure.pi.entity.ProgramLanguage;
 import ua.nure.pi.entity.Student;
 

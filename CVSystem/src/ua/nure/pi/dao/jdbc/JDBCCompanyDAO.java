@@ -1,4 +1,4 @@
-package ua.nure.pi.dao.mssql;
+package ua.nure.pi.dao.jdbc;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,38 +8,27 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import ua.nure.pi.dao.CompanyDAO;
+import ua.nure.pi.dao.DAOFactory;
 import ua.nure.pi.entity.Company;
 import ua.nure.pi.parameter.MapperParameters;
 
-public class MSSqlCompanyDAO implements CompanyDAO {
+public abstract class JDBCCompanyDAO implements CompanyDAO {
 	
-	private static volatile MSSqlCompanyDAO instance;
-	
-	private MSSqlCompanyDAO() {
-	}
-	
-	public static MSSqlCompanyDAO getInstancce(){
-		if(instance == null)
-			synchronized (MSSqlCompanyDAO.class){
-				if(instance == null)
-					instance = new MSSqlCompanyDAO();
-			}
-		return instance;
-	}
-	
-	private static final String SQL__SELECT_COMPANY = "SELECT * FROM Companies WHERE CompaniesId = ?";
-	private static final String SQL__SELECT_ALL_COMPANY = "SELECT * FROM Companies";
-	private static final String SQL__INSERT_COMPANY = "INSERT INTO Companies(Title, Phone, PhoneRespPerson, "
+	protected String SQL__SELECT_COMPANY = "SELECT * FROM Companies WHERE CompaniesId = ?";
+	protected String SQL__SELECT_ALL_COMPANY = "SELECT * FROM Companies";
+	protected String SQL__INSERT_COMPANY = "INSERT INTO Companies(Title, Phone, PhoneRespPerson, "
 			+ "Email, FIORespPerson, Skype, Active, CompaniesId) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
-	private static final String SQL__SELECT_NOT_ACTIVE_COMPANY = "SELECT * FROM Companies WHERE Atcive = 1";
-	private static final String SQL__ACTIVATE_COMPANY = "UPDATE Companies SET Active=? WHERE CompaniesId=?";
+	protected String SQL__SELECT_NOT_ACTIVE_COMPANY = "SELECT * FROM Companies WHERE Atcive = 1";
+	protected String SQL__ACTIVATE_COMPANY = "UPDATE Companies SET Active=? WHERE CompaniesId=?";
+	
+	protected DAOFactory jdbcDAOFaactory;
 	
 	@Override
 	public Company getCompany(long companyId) {
 		Company result = null;
 		Connection con = null;
 		try {
-			con = MSSqlDAOFactory.getConnection();
+			con = getConnection();
 			result = getCompany(companyId, con);
 		} catch (SQLException e) {
 			System.err.println("Can not get Company." + e.getMessage());
@@ -82,7 +71,7 @@ public class MSSqlCompanyDAO implements CompanyDAO {
 		Boolean result = false;
 		Connection con = null;
 		try {
-			con = MSSqlDAOFactory.getConnection();
+			con = getConnection();
 			result = insertCompany(company, con);
 			if(result)
 				con.commit();
@@ -104,8 +93,8 @@ public class MSSqlCompanyDAO implements CompanyDAO {
 		boolean result = false;
 		PreparedStatement pstmt = null;
 		try {
-			if(!MSSqlUserDAO.getInstancce().containsUser(company.getUser().getLogin())){
-				result = MSSqlUserDAO.getInstancce().insertUser(company.getUser(), con);
+			if(!jdbcDAOFaactory.getUserDAO().containsUser(company.getUser().getLogin())){
+				result = jdbcDAOFaactory.getUserDAO().insertUser(company.getUser(), con);
 				if(!result)
 					return false;
 				pstmt = con.prepareStatement(SQL__INSERT_COMPANY);
@@ -133,24 +122,7 @@ public class MSSqlCompanyDAO implements CompanyDAO {
 
 	@Override
 	public Boolean deleteCompany(Company company) {
-		Boolean result = false;
-		Connection con = null;
-		try {
-			con = MSSqlDAOFactory.getConnection();
-			result = MSSqlUserDAO.getInstancce().deleteUser(company.getUser());
-			if(result)
-				con.commit();
-		} catch (SQLException e) {
-			System.err.println("Can delete Company. " + e.getMessage());
-		} finally {
-			try {
-				if (con != null)
-					con.close();
-			} catch (SQLException e) {
-				System.err.println("Can not close connection. " + e.getMessage());
-			}
-		}
-		return result;
+		return jdbcDAOFaactory.getUserDAO().deleteUser(company.getUser());
 	}
 	
 	@Override
@@ -158,7 +130,7 @@ public class MSSqlCompanyDAO implements CompanyDAO {
 		Collection<Company> result = null;
 		Connection con = null;
 		try {
-			con = MSSqlDAOFactory.getConnection();
+			con = getConnection();
 			result = getCompanies(con);
 		} catch (SQLException e) {
 			System.err.println("Can not get companies." + e.getMessage());
@@ -181,7 +153,7 @@ public class MSSqlCompanyDAO implements CompanyDAO {
 			ResultSet rs = pstmt.executeQuery();
 			while(rs.next()){
 				Company c = unMapCompany(rs);
-				c.setUser(MSSqlUserDAO.getInstancce().getUser(c.getId()));
+				c.setUser(jdbcDAOFaactory.getUserDAO().getUser(c.getId(), con));
 				result.add(c);
 			}
 			
@@ -204,7 +176,7 @@ public class MSSqlCompanyDAO implements CompanyDAO {
 		Collection<Company> result = null;
 		Connection con = null;
 		try {
-			con = MSSqlDAOFactory.getConnection();
+			con = getConnection();
 			result = getNotActiveCompanies(con);
 		} catch (SQLException e) {
 			System.err.println("Can not get not active company." + e.getMessage());
@@ -227,7 +199,7 @@ public class MSSqlCompanyDAO implements CompanyDAO {
 			ResultSet rs = pstmt.executeQuery();
 			while(rs.next()){
 				Company c = unMapCompany(rs);
-				c.setUser(MSSqlUserDAO.getInstancce().getUser(c.getId()));
+				c.setUser(jdbcDAOFaactory.getUserDAO().getUser(c.getId(), con));
 				result.add(c);
 			}
 			
@@ -250,7 +222,7 @@ public class MSSqlCompanyDAO implements CompanyDAO {
 			Boolean result = false;
 			Connection con = null;
 			try {
-				con = MSSqlDAOFactory.getConnection();
+				con = getConnection();
 				result = activateCompany(company, con);
 				if(result)
 					con.commit();
@@ -321,4 +293,5 @@ public class MSSqlCompanyDAO implements CompanyDAO {
 			company.setActivate(true);
 		}
 	
+		protected abstract Connection getConnection() throws SQLException;
 }

@@ -1,4 +1,4 @@
-package ua.nure.pi.dao.mssql;
+package ua.nure.pi.dao.jdbc;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,37 +12,23 @@ import ua.nure.pi.dao.LanguageDAO;
 import ua.nure.pi.entity.Language;
 import ua.nure.pi.parameter.MapperParameters;
 
-public class MSSqlLanguageDAO implements LanguageDAO {
+public abstract class JDBCLanguageDAO implements LanguageDAO {
 	
-	private static volatile MSSqlLanguageDAO instance;
+	protected String SQL__SELECT_LANGUAGE = "SELECT * FROM Languages";
+	protected String SQL__INSERT_LANGUAGE = "INSERT INTO Languages(Title) VALUES(?)";
+	protected String SQL__UPDATE_LANGUAGE = "UPDATE Languages SET Title = ? WHERE LanguagesId = ?";
+	protected String SQL__DELETE_LANGUAGE;// = "DELETE Languages WHERE LanguagesId = ?";
 	
-	private MSSqlLanguageDAO() {
-	}
-	
-	public static MSSqlLanguageDAO getInstancce(){
-		if(instance == null)
-			synchronized (MSSqlLanguageDAO.class){
-				if(instance == null)
-					instance = new MSSqlLanguageDAO();
-			}
-		return instance;
-	}
-	
-	private static final String SQL__SELECT_LANGUAGE = "SELECT * FROM Languages";
-	private static final String SQL__INSERT_LANGUAGE = "INSERT INTO Languages(Title) VALUES(?)";
-	private static final String SQL__UPDATE_LANGUAGE = "UPDATE Languages SET Title = ? WHERE LanguagesId = ?";
-	private static final String SQL__DELETE_LANGUAGE = "DELETE Languages WHERE LanguagesId = ?";
-	
-	private static final String SQL__SELECT_STUDENT_LANGUAGE = "select lc.LanguagesId, lc.LanguagesCVsId, l.Title, lc.Level from LanguagesCVs lc"
+	protected String SQL__SELECT_STUDENT_LANGUAGE = "select lc.LanguagesId, lc.LanguagesCVsId, l.Title, lc.Level from LanguagesCVs lc"
 			+" join Languages l on lc.LanguagesId = l.LanguagesId where lc.CVsId=?";
-	private static final String SQL__INSERT_STUENT_LANGUAGE = "INSERT INTO LanguagesCVs(CVsId, LanguagesId, Level) VALUES(?,?,?)";
+	protected String SQL__INSERT_STUENT_LANGUAGE = "INSERT INTO LanguagesCVs(CVsId, LanguagesId, Level) VALUES(?,?,?)";
 
 	@Override
 	public Collection<Language> getLanguages() {
 		Collection<Language> result = null;
 		Connection con = null;
 		try {
-			con = MSSqlDAOFactory.getConnection();
+			con = getConnection();
 			result = getLanguages(con);
 		} catch (SQLException e) {
 			System.err.println("Can not get languages. " + e.getMessage());
@@ -88,7 +74,7 @@ public class MSSqlLanguageDAO implements LanguageDAO {
 		Boolean result = false;
 		Connection con = null;
 		try {
-			con = MSSqlDAOFactory.getConnection();
+			con = getConnection();
 			result = insertLanguage(languages, con);
 			if(result)
 				con.commit();
@@ -136,7 +122,7 @@ public class MSSqlLanguageDAO implements LanguageDAO {
 		Boolean result = false;
 		Connection con = null;
 		try {
-			con = MSSqlDAOFactory.getConnection();
+			con = getConnection();
 			result = deleteLanguage(languages, con);
 			if(result)
 				con.commit();
@@ -183,7 +169,7 @@ public class MSSqlLanguageDAO implements LanguageDAO {
 		Boolean result = false;
 		Connection con = null;
 		try {
-			con = MSSqlDAOFactory.getConnection();
+			con = getConnection();
 			result = updateLanguage(languages, con);
 			if(result)
 				con.commit();
@@ -227,10 +213,10 @@ public class MSSqlLanguageDAO implements LanguageDAO {
 
 	@Override
 	public Boolean addLanguages(long id, Collection<Language> languages) {
-		Boolean result = false;
+		boolean result = false;
 		Connection con = null;
 		try {
-			con = MSSqlDAOFactory.getConnection();
+			con = getConnection();
 			result = addLanguage(id, languages, con);
 			if(result)
 				con.commit();
@@ -247,7 +233,8 @@ public class MSSqlLanguageDAO implements LanguageDAO {
 		return result;
 	}
 
-	public Boolean addLanguage(long id, Collection<Language> languages, Connection con) throws SQLException {
+	@Override
+	public boolean addLanguage(long id, Collection<Language> languages, Connection con) throws SQLException {
 		boolean result = true;
 		PreparedStatement pstmt = null;
 		try {
@@ -276,7 +263,7 @@ public class MSSqlLanguageDAO implements LanguageDAO {
 		Collection<Language> result = null;
 		Connection con = null;
 		try {
-			con = MSSqlDAOFactory.getConnection();
+			con = getConnection();
 			result = getStudentsLanguages(CVsId, con);
 		} catch (SQLException e) {
 			System.err.println(String.format("Can not get from languages. " + e.getMessage()));
@@ -291,6 +278,7 @@ public class MSSqlLanguageDAO implements LanguageDAO {
 		return result;
 	}
 
+	@Override
 	public Collection<Language> getStudentsLanguages(long CVsId, Connection con) 
 			throws SQLException {
 		Collection<Language> result = null;
@@ -351,4 +339,6 @@ public class MSSqlLanguageDAO implements LanguageDAO {
 	private void mapLanguageForDelete(Language at, PreparedStatement pstmt) throws SQLException {
 		pstmt.setLong(1, at.getId());
 	}
+	
+	protected abstract Connection getConnection() throws SQLException;
 }

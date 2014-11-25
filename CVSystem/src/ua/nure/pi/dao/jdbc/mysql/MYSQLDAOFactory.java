@@ -1,4 +1,4 @@
-package ua.nure.pi.dao.mssql;
+package ua.nure.pi.dao.jdbc.mysql;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -9,34 +9,53 @@ import jfork.nproperty.ConfigParser;
 import ua.nure.pi.dao.*;
 
 @Cfg(prefix = "db.")
-public class MSSqlDAOFactory extends DAOFactory {
+public class MYSQLDAOFactory extends DAOFactory {
 
-	private static volatile MSSqlDAOFactory instance;
+	private static volatile MYSQLDAOFactory instance;
 	
-	@Cfg(parametrize = true)
-	private static String sqlLink;
+	protected static String sqlLink;
 	
+	protected static String user;
 	
-	private MSSqlDAOFactory() {
+	protected static String password;
+	
+	protected static String host;
+	
+	protected static String port;
+	
+	protected static String database;
+	
+	protected static String DRIVER;
+	
+	private static boolean first = true;
+	
+	private MYSQLDAOFactory() {
 		try {
 			ClassLoader loader = this.getClass().getClassLoader();
-			ConfigParser.parse(MSSqlDAOFactory.class, 
+			ConfigParser.parse(MYSQLDAOFactory.class, 
 					loader.getResource("properties.ini").getPath().replaceAll("%20", " "));
+			DRIVER = "com.mysql.jdbc.Driver";
+			sqlLink = "jdbc:mysql://localhost:3306/cvsystem";
+			sqlLink = "jdbc:mysql://"
+					+host + ":"+ port + "/"
+					+database;//user="+user+";password="+password;
+			first = false;
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
 		}
 	}
 	
-	public static MSSqlDAOFactory getInstancce(){
+	
+	public static MYSQLDAOFactory getInstancce(){
 		if(instance == null)
-			synchronized (MSSqlDAOFactory.class){
+			synchronized (MYSQLDAOFactory.class){
 				if(instance == null)
-					instance = new MSSqlDAOFactory();
+					instance = new MYSQLDAOFactory();
 			}
 		return instance;
 	}
 	
-	private static final String DRIVER = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
+	//private static final String DRIVER = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
 	
 	/**
 	 * method to create MSSQL connections
@@ -47,9 +66,13 @@ public class MSSqlDAOFactory extends DAOFactory {
 	protected static synchronized Connection getConnection()
 			throws SQLException {
 		Connection con = null;
+		if(first){
+			MYSQLDAOFactory.getInstancce();
+			first = false;
+		}
 		try {
 			Class.forName(DRIVER);
-			con = DriverManager.getConnection(sqlLink);
+			con = DriverManager.getConnection(sqlLink, user, password);
 			con.setAutoCommit(false);
 			con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
 		} catch (SQLException e) {
@@ -62,62 +85,62 @@ public class MSSqlDAOFactory extends DAOFactory {
 
 	@Override
 	public UserDAO getUserDAO() {
-		return MSSqlUserDAO.getInstancce();
+		return MYSQLUserDAO.getInstancce();
 	}
 
 	@Override
 	public FacultyGroupDAO getFacultyGroupDAO() {
-		return MSSqlFacultyGroupDAO.getInstancce();
+		return MYSQLFacultyGroupDAO.getInstancce();
 	}
 
 	@Override
 	public EducationDAO getEducationDAO() {
-		return MSSqlEducationDAO.getInstancce();
+		return MYSQLEducationDAO.getInstancce();
 	}
 
 	@Override
 	public LanguageDAO getLanguageDAO() {
-		return MSSqlLanguageDAO.getInstancce();
+		return MYSQLLanguageDAO.getInstancce();
 	}
 
 	@Override
 	public ProgramLanguageDAO getProgramLanguageDAO() {
-		return MSSqlProgramLanguageDAO.getInstancce();
+		return MYSQLProgramLanguageDAO.getInstancce();
 	}
 
 	@Override
 	public SertificatsDAO getSertificatsDAO() {
-		return MSSqlSertificatsDAO.getInstancce();
+		return MYSQLSertificatsDAO.getInstancce();
 	}
 
 	@Override
 	public StudentDAO getStudentDAO() {
-		return MSSqlStudentDAO.getInstancce();
+		return MYSQLStudentDAO.getInstancce();
 	}
 
 	@Override
 	public WorkExpDAO getWorkExpDAO() {
-		return MSSqlWorkExpDAO.getInstancce();
+		return MYSQLWorkExpDAO.getInstancce();
 	}
 
 	@Override
 	public PurposeDAO getPurposeDAO() {
-		return MSSqlPurposeDAO.getInstancce();
+		return MYSQLPurposeDAO.getInstancce();
 	}
 
 	@Override
 	public CVDAO getCVDAO() {
-		return MSSqlCVDAO.getInstancce();
+		return MYSQLCVDAO.getInstancce();
 	}
 
 	@Override
 	public PassDAO getPassDAO() {
-		return MSSqlPassDAO.getInstancce();
+		return MYSQLPassDAO.getInstancce();
 	}
 
 	@Override
 	public CompanyDAO getCompanyDAO() {
-		return MSSqlCompanyDAO.getInstancce();
+		return MYSQLCompanyDAO.getInstancce();
 	}
 	
 

@@ -15,8 +15,8 @@ import java.util.LinkedHashMap;
 
 import java.util.List;
 
-import ua.nure.pi.dao.mssql.MSSqlFacultyGroupDAO;
-import ua.nure.pi.dao.mssql.MSSqlProgramLanguageDAO;
+import ua.nure.pi.dao.jdbc.JDBCFacultyGroupDAO;
+import ua.nure.pi.dao.jdbc.JDBCProgramLanguageDAO;
 import ua.nure.pi.entity.CV;
 import ua.nure.pi.entity.Faculty;
 import ua.nure.pi.entity.Group;

@@ -1,4 +1,4 @@
-package ua.nure.pi.dao.mssql;
+package ua.nure.pi.dao.jdbc;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,33 +11,19 @@ import ua.nure.pi.dao.SertificatsDAO;
 import ua.nure.pi.entity.Sertificate;
 import ua.nure.pi.parameter.MapperParameters;
 
-public class MSSqlSertificatsDAO implements SertificatsDAO {
+public abstract class JDBCSertificatsDAO implements SertificatsDAO {
 	
-	private static volatile MSSqlSertificatsDAO instance;
-	
-	private MSSqlSertificatsDAO() {
-	}
-	
-	public static MSSqlSertificatsDAO getInstancce(){
-		if(instance == null)
-			synchronized (MSSqlSertificatsDAO.class){
-				if(instance == null)
-					instance = new MSSqlSertificatsDAO();
-			}
-		return instance;
-	}
-	
-	private static final String SQL__SELECT_SERTIFICATE = "SELECT * FROM Sertificats WHERE CVsId = ?";
-	private static final String SQL__INSERT_SERTIFICATE = "INSERT INTO Sertificats(Name, Year, "
+	protected String SQL__SELECT_SERTIFICATE = "SELECT * FROM Sertificats WHERE CVsId = ?";
+	protected String SQL__INSERT_SERTIFICATE = "INSERT INTO Sertificats(Name, Year, "
 			+ "CVsId) VALUES(?,?,?)";
 
 
 	@Override
 	public Boolean insertSertificats(long CVsId, Collection<Sertificate> eds) {
-		Boolean result = false;
+		boolean result = false;
 		Connection con = null;
 		try {
-			con = MSSqlDAOFactory.getConnection();
+			con = getConnection();
 			result = insertSertificats(CVsId, eds, con);
 			if(result)
 				con.commit();
@@ -54,7 +40,8 @@ public class MSSqlSertificatsDAO implements SertificatsDAO {
 		return result;
 	}
 
-	public Boolean insertSertificats(long cVsId, Collection<Sertificate> eds, Connection con) 
+	@Override
+	public boolean insertSertificats(long cVsId, Collection<Sertificate> eds, Connection con) 
 			throws SQLException {
 		boolean result = true;
 		PreparedStatement pstmt = null;
@@ -86,7 +73,7 @@ public class MSSqlSertificatsDAO implements SertificatsDAO {
 		Collection<Sertificate> result = null;
 		Connection con = null;
 		try {
-			con = MSSqlDAOFactory.getConnection();
+			con = getConnection();
 			result = getSertificats(CVsId, con);
 		} catch (SQLException e) {
 			System.err.println("Can not get groups." + e.getMessage());
@@ -144,4 +131,6 @@ public class MSSqlSertificatsDAO implements SertificatsDAO {
 		pstmt.setLong(3, cVsId);
 		
 	}
+	
+	protected abstract Connection getConnection() throws SQLException;
 }

@@ -1,4 +1,4 @@
-package ua.nure.pi.dao.mssql;
+package ua.nure.pi.dao.jdbc;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,48 +8,33 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import ua.nure.pi.dao.mssql.MSSqlDAOFactory;
 import ua.nure.pi.dao.FacultyGroupDAO;
 import ua.nure.pi.entity.Faculty;
 import ua.nure.pi.entity.Group;
 import ua.nure.pi.parameter.MapperParameters;
 
 
-public class MSSqlFacultyGroupDAO implements FacultyGroupDAO {
+public abstract class JDBCFacultyGroupDAO implements FacultyGroupDAO {
 	
-	private static volatile MSSqlFacultyGroupDAO instance;
+	protected String SQL__SELECT_FACULTIES = "SELECT * FROM Faculties order by Title";
+	protected String SQL__INSERT_FACULTIES = "INSERT INTO Faculties(Title) VALUES(?)";
+	protected String SQL__UPDATE_FACULTIES = "UPDATE Faculties SET Title=? WHERE FacultiesId=?";
+	protected String SQL__DELETE_FACULTIES;// = "DELETE FROM Faculties WHERE FacultiesId=?";
+	protected String SQL__FACULTIES_IS_EMPTY = "SELECT count(*) FROM Groups WHERE FacultiesId=?";
 	
-	private MSSqlFacultyGroupDAO() {
-	}
-	
-	public static MSSqlFacultyGroupDAO getInstancce(){
-		if(instance == null)
-			synchronized (MSSqlFacultyGroupDAO.class){
-				if(instance == null)
-					instance = new MSSqlFacultyGroupDAO();
-			}
-		return instance;
-	}
-	
-	private static final String SQL__SELECT_FACULTIES = "SELECT * FROM Faculties order by Title";
-	private static final String SQL__INSERT_FACULTIES = "INSERT INTO Faculties(Title) VALUES(?)";
-	private static final String SQL__UPDATE_FACULTIES = "UPDATE Faculties SET Title=? WHERE FacultiesId=?";
-	private static final String SQL__DELETE_FACULTIES = "DELETE FROM Faculties WHERE FacultiesId=?";
-	private static final String SQL__FACULTIES_IS_EMPTY = "SELECT count(*) FROM Groups WHERE FacultiesId=?";
-	
-	private static final String SQL__SELECT_GROUPS = "SELECT * FROM Groups WHERE FacultiesId=? order by Title";
-	private static final String SQL__INSERT_GROUPS = "INSERT INTO Groups(Title, FacultiesId) VALUES(?, ?)";
-	private static final String SQL__UPDATE_GROUPS = "UPDATE Groups SET Title=?, FacultiesId=? WHERE GroupsId=?";
-	private static final String SQL__DELETE_GROUPS = "DELETE FROM Groups WHERE GroupsId = ?";
-	private static final String SQL__GROUPS_IS_EMPTY = "SELECT count(*) FROM Students where GroupsId=?";
-	private static final String SQL__SELECT_GROUP = "SELECT * FROM Groups WHERE GroupsId = ?";
+	protected String SQL__SELECT_GROUPS = "SELECT * FROM Groups WHERE FacultiesId=? order by Title";
+	protected String SQL__INSERT_GROUPS = "INSERT INTO Groups(Title, FacultiesId) VALUES(?, ?)";
+	protected String SQL__UPDATE_GROUPS = "UPDATE Groups SET Title=?, FacultiesId=? WHERE GroupsId=?";
+	protected String SQL__DELETE_GROUPS;// = "DELETE FROM Groups WHERE GroupsId = ?";
+	protected String SQL__GROUPS_IS_EMPTY = "SELECT count(*) FROM Students where GroupsId=?";
+	protected String SQL__SELECT_GROUP = "SELECT * FROM Groups WHERE GroupsId = ?";
 
 	@Override
 	public Collection<Faculty> getFaculties() {
 		Collection<Faculty> result = null;
 		Connection con = null;
 		try {
-			con = MSSqlDAOFactory.getConnection();
+			con = getConnection();
 			result = getFaculties(con);
 		} catch (SQLException e) {
 			System.err.println("Can not get faculties." + e.getMessage());
@@ -97,7 +82,7 @@ public class MSSqlFacultyGroupDAO implements FacultyGroupDAO {
 		Boolean result = false;
 		Connection con = null;
 		try {
-			con = MSSqlDAOFactory.getConnection();
+			con = getConnection();
 			result = insertFaculties(faculties, con);
 			if(result)
 				con.commit();
@@ -152,7 +137,7 @@ public class MSSqlFacultyGroupDAO implements FacultyGroupDAO {
 		Boolean result = false;
 		Connection con = null;
 		try {
-			con = MSSqlDAOFactory.getConnection();
+			con = getConnection();
 			result = updateFaculties(faculties, con);
 			if(result)
 				con.commit();
@@ -199,7 +184,7 @@ public class MSSqlFacultyGroupDAO implements FacultyGroupDAO {
 		Boolean result = false;
 		Connection con = null;
 		try {
-			con = MSSqlDAOFactory.getConnection();
+			con = getConnection();
 			result = deleteFaculties(faculties, con);
 			if(result)
 				con.commit();
@@ -259,7 +244,7 @@ public class MSSqlFacultyGroupDAO implements FacultyGroupDAO {
 		Collection<Group> result = null;
 		Connection con = null;
 		try {
-			con = MSSqlDAOFactory.getConnection();
+			con = getConnection();
 			result = getGroups(facultyId, con);
 		} catch (SQLException e) {
 			System.err.println("Can not get groups." + e.getMessage());
@@ -312,7 +297,7 @@ public class MSSqlFacultyGroupDAO implements FacultyGroupDAO {
 		Boolean result = false;
 		Connection con = null;
 		try {
-			con = MSSqlDAOFactory.getConnection();
+			con = getConnection();
 			result = insertGroups(facultiesId, groups, con);
 			if(result)
 				con.commit();
@@ -358,7 +343,7 @@ public class MSSqlFacultyGroupDAO implements FacultyGroupDAO {
 		Boolean result = false;
 		Connection con = null;
 		try {
-			con = MSSqlDAOFactory.getConnection();
+			con = getConnection();
 			result = updateGroups(groups, con);
 			if(result)
 				con.commit();
@@ -405,7 +390,7 @@ public class MSSqlFacultyGroupDAO implements FacultyGroupDAO {
 		Boolean result = false;
 		Connection con = null;
 		try {
-			con = MSSqlDAOFactory.getConnection();
+			con = getConnection();
 			result = deleteGroups(groups, con);
 			if(result)
 				con.commit();
@@ -549,7 +534,7 @@ public class MSSqlFacultyGroupDAO implements FacultyGroupDAO {
 		Group result = null;
 		Connection con = null;
 		try {
-			con = MSSqlDAOFactory.getConnection();
+			con = getConnection();
 			result = getGroup(id, con);
 		} catch (SQLException e) {
 			System.err.println("Can not select groups. " + e.getMessage());
@@ -564,7 +549,8 @@ public class MSSqlFacultyGroupDAO implements FacultyGroupDAO {
 		return result;
 	}
 	
-	private Group getGroup(long id, Connection con) throws SQLException {
+	@Override
+	public Group getGroup(long id, Connection con) throws SQLException {
 		Group result = null;
 		PreparedStatement pstmt = null;
 		try {
@@ -596,4 +582,6 @@ public class MSSqlFacultyGroupDAO implements FacultyGroupDAO {
 		gr.setFacultiesId(rs.getLong(MapperParameters.GROUP_FACULTIES_ID));
 		return gr;
 	}
+	
+	protected abstract Connection getConnection() throws SQLException;
 }

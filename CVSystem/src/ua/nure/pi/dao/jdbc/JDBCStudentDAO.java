@@ -1,4 +1,4 @@
-package ua.nure.pi.dao.mssql;
+package ua.nure.pi.dao.jdbc;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,39 +8,28 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import ua.nure.pi.dao.DAOFactory;
 import ua.nure.pi.dao.StudentDAO;
 import ua.nure.pi.entity.Student;
 import ua.nure.pi.parameter.MapperParameters;
 
-public class MSSqlStudentDAO implements StudentDAO {
+public abstract class JDBCStudentDAO implements StudentDAO {
 	
-	private static volatile MSSqlStudentDAO instance;
-	
-	private MSSqlStudentDAO() {
-	}
-	
-	public static MSSqlStudentDAO getInstancce(){
-		if(instance == null)
-			synchronized (MSSqlStudentDAO.class){
-				if(instance == null)
-					instance = new MSSqlStudentDAO();
-			}
-		return instance;
-	}
-	
-	private static final String SQL__SELECT_STUDENT = "SELECT * FROM Students WHERE StudentsId = ?";
-	private static final String SQL__SELECT_ALL_STUDENT = "SELECT * FROM Students";
-	private static final String SQL__INSERT_STUDENT = "INSERT INTO Students(Surname, Firstname, Patronymic, "
+	protected String SQL__SELECT_STUDENT = "SELECT * FROM Students WHERE StudentsId = ?";
+	protected String SQL__SELECT_ALL_STUDENT = "SELECT * FROM Students";
+	protected String SQL__INSERT_STUDENT = "INSERT INTO Students(Surname, Firstname, Patronymic, "
 			+ "GroupsId, Address, Skype, Email, Phone, Birthday) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	
-	private static final String SQL__DELETE_ANY_TAG = "DELETE Students WHERE StudentsId = ?";
+	protected String SQL__DELETE_ANY_TAG;// = "DELETE Students WHERE StudentsId = ?";
+	
+	protected DAOFactory jdbcDAOFactory;
 	
 	@Override
 	public Student getStudent(long studentId) {
 		Student result = null;
 		Connection con = null;
 		try {
-			con = MSSqlDAOFactory.getConnection();
+			con = getConnection();
 			result = getStudent(studentId, con);
 		} catch (SQLException e) {
 			System.err.println("Can not get student." + e.getMessage());
@@ -54,8 +43,8 @@ public class MSSqlStudentDAO implements StudentDAO {
 		}
 		return result;
 	}
-	
-	private Student getStudent(long studentId, Connection con) throws SQLException {
+
+	public Student getStudent(long studentId, Connection con) throws SQLException {
 		Student result = null;
 		PreparedStatement pstmt = null;
 		try {
@@ -83,7 +72,7 @@ public class MSSqlStudentDAO implements StudentDAO {
 		Boolean result = false;
 		Connection con = null;
 		try {
-			con = MSSqlDAOFactory.getConnection();
+			con = getConnection();
 			result = insertStudent(student, con);
 			if(result)
 				con.commit();
@@ -113,7 +102,7 @@ public class MSSqlStudentDAO implements StudentDAO {
 			ResultSet rs = pstmt.getGeneratedKeys();
 			if(rs.next()){
 				student.getCv().setCvsId(rs.getLong(1));
-				if(!MSSqlCVDAO.getInstancce().insertCV(student.getCv(), con))
+				if(!jdbcDAOFactory.getCVDAO().insertCV(student.getCv(), con))
 					return false;	
 				result = true;
 			}
@@ -142,7 +131,7 @@ public class MSSqlStudentDAO implements StudentDAO {
 		Collection<Student> result = null;
 		Connection con = null;
 		try {
-			con = MSSqlDAOFactory.getConnection();
+			con = getConnection();
 			result = getStudents(con);
 		} catch (SQLException e) {
 			System.err.println("Can not get student." + e.getMessage());
@@ -165,8 +154,8 @@ public class MSSqlStudentDAO implements StudentDAO {
 			ResultSet rs = pstmt.executeQuery();
 			while(rs.next()){
 				Student st = unMapStudent(rs);
-				st.setCv(MSSqlCVDAO.getInstancce().getCv(st.getStudentsId(),con));
-				st.setGroup(MSSqlFacultyGroupDAO.getInstancce().getGroup(rs.getLong(MapperParameters.STUDENT_GROUPSID)));
+				st.setCv(jdbcDAOFactory.getCVDAO().getCv(st.getStudentsId(),con));
+				st.setGroup(jdbcDAOFactory.getFacultyGroupDAO().getGroup(rs.getLong(MapperParameters.STUDENT_GROUPSID), con));
 				result.add(st);
 			}
 			
@@ -210,5 +199,7 @@ public class MSSqlStudentDAO implements StudentDAO {
 		pstmt.setString(8, st.getPhone());
 		pstmt.setDate(9, new java.sql.Date(st.getDateOfBirth().getTime()));
 	}
+	
+	protected abstract Connection getConnection() throws SQLException;
 	
 }

@@ -1,4 +1,4 @@
-package ua.nure.pi.dao.mssql;
+package ua.nure.pi.dao.jdbc;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,25 +12,10 @@ import ua.nure.pi.entity.WorkExp;
 import ua.nure.pi.entity.typeOfDuration;
 import ua.nure.pi.parameter.MapperParameters;
 
-public class MSSqlWorkExpDAO implements WorkExpDAO {
+public abstract class JDBCWorkExpDAO implements WorkExpDAO {	
 	
-	private static volatile MSSqlWorkExpDAO instance;
-	
-	private MSSqlWorkExpDAO() {
-	}
-	
-	public static MSSqlWorkExpDAO getInstancce(){
-		if(instance == null)
-			synchronized (MSSqlWorkExpDAO.class){
-				if(instance == null)
-					instance = new MSSqlWorkExpDAO();
-			}
-		return instance;
-	}
-	
-	
-	private static final String SQL__SELECT_WORKEXP = "SELECT * FROM WorkExps WHERE CVsId = ?";
-	private static final String SQL__INSERT_WORKEXP = "INSERT INTO WorkExps(StartDate, "+
+	protected String SQL__SELECT_WORKEXP = "SELECT * FROM WorkExps WHERE CVsId = ?";
+	protected String SQL__INSERT_WORKEXP = "INSERT INTO WorkExps(StartDate, "+
 	"Duration, TypeDuration, NameOfInstitution,	Role, CVsId, isNow) VALUES(?,?,?,?,?,?,?)";
 
 
@@ -40,7 +25,7 @@ public class MSSqlWorkExpDAO implements WorkExpDAO {
 		Boolean result = false;
 		Connection con = null;
 		try {
-			con = MSSqlDAOFactory.getConnection();
+			con = getConnection();
 			result = insertWorkExps(id, wes, con);
 			if(result)
 				con.commit();
@@ -57,7 +42,8 @@ public class MSSqlWorkExpDAO implements WorkExpDAO {
 		return result;
 	}
 
-	public Boolean insertWorkExps(long id, Collection<WorkExp> wes, Connection con) 
+	@Override
+	public boolean insertWorkExps(long id, Collection<WorkExp> wes, Connection con) 
 			throws SQLException {
 		boolean result = true;
 		PreparedStatement pstmt = null;
@@ -89,7 +75,7 @@ public class MSSqlWorkExpDAO implements WorkExpDAO {
 		Collection<WorkExp> result = null;
 		Connection con = null;
 		try {
-			con = MSSqlDAOFactory.getConnection();
+			con = getConnection();
 			result = getWorkExps(CVsId, con);
 		} catch (SQLException e) {
 			System.err.println("Can not get groups." + e.getMessage());
@@ -181,4 +167,5 @@ public class MSSqlWorkExpDAO implements WorkExpDAO {
 		pstmt.setBoolean(7, we.getIsNow());
 	}
 
+	protected abstract Connection getConnection() throws SQLException;
 }

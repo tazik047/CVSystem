@@ -1,4 +1,4 @@
-package ua.nure.pi.dao.mssql;
+package ua.nure.pi.dao.jdbc;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,36 +12,22 @@ import ua.nure.pi.dao.AnyTagDAO;
 import ua.nure.pi.entity.AnyTag;
 import ua.nure.pi.parameter.MapperParameters;
 
-public class MSSqlAnyTagDAO implements AnyTagDAO {
+public abstract class JDBCAnyTagDAO implements AnyTagDAO {
 	
-	private static volatile MSSqlAnyTagDAO instance;
+	protected String SQL__SELECT_ANY_TAG = "SELECT * FROM %s";
+	protected String SQL__INSERT_ANY_TAG = "INSERT INTO %s(Title) VALUES(?)";
+	protected String SQL__UPDATE_ANY_TAG = "UPDATE %1$s SET Title = ? WHERE %2$sId = ?";
+	protected String SQL__DELETE_ANY_TAG = "DELETE %1$s WHERE %2$sId = ?";
 	
-	private MSSqlAnyTagDAO() {
-	}
-	
-	public static MSSqlAnyTagDAO getInstancce(){
-		if(instance == null)
-			synchronized (MSSqlAnyTagDAO.class){
-				if(instance == null)
-					instance = new MSSqlAnyTagDAO();
-			}
-		return instance;
-	}
-	
-	private static final String SQL__SELECT_ANY_TAG = "SELECT * FROM %s";
-	private static final String SQL__INSERT_ANY_TAG = "INSERT INTO %s(Title) VALUES(?)";
-	private static final String SQL__UPDATE_ANY_TAG = "UPDATE %1$s SET Title = ? WHERE %2$sId = ?";
-	private static final String SQL__DELETE_ANY_TAG = "DELETE %1$s WHERE %2$sId = ?";
-	
-	private static final String SQL__SELECT_STUDENT_ANY_TAG = "SELECT * FROM %1$s WHERE %1$sId =?";
-	private static final String SQL__INSERT_STUENT_ANY_TAG = "INSERT INTO %1$sCVs(CVsId, %2$SId) VALUES(?,?)";
+	protected String SQL__SELECT_STUDENT_ANY_TAG = "SELECT * FROM %1$s WHERE %1$sId =?";
+	protected String SQL__INSERT_STUENT_ANY_TAG = "INSERT INTO %1$sCVs(CVsId, %2$SId) VALUES(?,?)";
 
 	@Override
 	public Collection<AnyTag> getAnyTags(String tableName) {
 		Collection<AnyTag> result = null;
 		Connection con = null;
 		try {
-			con = MSSqlDAOFactory.getConnection();
+			con = getConnection();
 			result = getAnyTags(tableName, con);
 		} catch (SQLException e) {
 			System.err.println(String.format("Can not get %1$s. %2$s",tableName ,e.getMessage()));
@@ -87,7 +73,7 @@ public class MSSqlAnyTagDAO implements AnyTagDAO {
 		Boolean result = false;
 		Connection con = null;
 		try {
-			con = MSSqlDAOFactory.getConnection();
+			con = getConnection();
 			result = insertAnyTag(anyTags, con);
 			if(result)
 				con.commit();
@@ -134,7 +120,7 @@ public class MSSqlAnyTagDAO implements AnyTagDAO {
 		Boolean result = false;
 		Connection con = null;
 		try {
-			con = MSSqlDAOFactory.getConnection();
+			con = getConnection();
 			result = deleteAnyTag(anyTags, con);
 			if(result)
 				con.commit();
@@ -183,7 +169,7 @@ public class MSSqlAnyTagDAO implements AnyTagDAO {
 		Boolean result = false;
 		Connection con = null;
 		try {
-			con = MSSqlDAOFactory.getConnection();
+			con = getConnection();
 			result = updateAnyTag(anyTags, con);
 			if(result)
 				con.commit();
@@ -232,7 +218,7 @@ public class MSSqlAnyTagDAO implements AnyTagDAO {
 		Boolean result = false;
 		Connection con = null;
 		try {
-			con = MSSqlDAOFactory.getConnection();
+			con = getConnection();
 			result = addAnyTag(id, tableName, anyTags, con);
 			if(result)
 				con.commit();
@@ -280,7 +266,7 @@ public class MSSqlAnyTagDAO implements AnyTagDAO {
 		Collection<AnyTag> result = null;
 		Connection con = null;
 		try {
-			con = MSSqlDAOFactory.getConnection();
+			con = getConnection();
 			result = getStudentsAnyTags(tableName, CVsId, con);
 		} catch (SQLException e) {
 			System.err.println(String.format("Can not get from %1$s. %2$s",tableName ,e.getMessage()));
@@ -348,4 +334,6 @@ public class MSSqlAnyTagDAO implements AnyTagDAO {
 	private void mapAnyTagForDelete(AnyTag at, PreparedStatement pstmt) throws SQLException {
 		pstmt.setLong(1, at.getId());
 	}
+	
+	protected abstract Connection getConnection() throws SQLException;
 }

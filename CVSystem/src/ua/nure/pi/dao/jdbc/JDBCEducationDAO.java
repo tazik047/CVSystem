@@ -1,4 +1,4 @@
-package ua.nure.pi.dao.mssql;
+package ua.nure.pi.dao.jdbc;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,24 +11,10 @@ import ua.nure.pi.dao.EducationDAO;
 import ua.nure.pi.entity.Education;
 import ua.nure.pi.parameter.MapperParameters;
 
-public class MSSqlEducationDAO implements EducationDAO {
+public abstract class JDBCEducationDAO implements EducationDAO {
 	
-	private static volatile MSSqlEducationDAO instance;
-	
-	private MSSqlEducationDAO() {
-	}
-	
-	public static MSSqlEducationDAO getInstancce(){
-		if(instance == null)
-			synchronized (MSSqlEducationDAO.class){
-				if(instance == null)
-					instance = new MSSqlEducationDAO();
-			}
-		return instance;
-	}
-	
-	private static final String SQL__SELECT_EDUCATION = "SELECT * FROM Educations WHERE CVsId = ?";
-	private static final String SQL__INSERT_EDUCATION = "INSERT INTO Educations(StartYear, EndYear, "
+	protected String SQL__SELECT_EDUCATION = "SELECT * FROM Educations WHERE CVsId = ?";
+	protected String SQL__INSERT_EDUCATION = "INSERT INTO Educations(StartYear, EndYear, "
 			+ "NameOfInstitution, Specialty, CVsId, Faculty) VALUES(?,?,?,?,?,?)";
 
 
@@ -37,7 +23,7 @@ public class MSSqlEducationDAO implements EducationDAO {
 		Boolean result = false;
 		Connection con = null;
 		try {
-			con = MSSqlDAOFactory.getConnection();
+			con = getConnection();
 			result = insertEducations(CVsId, eds, con);
 			if(result)
 				con.commit();
@@ -54,7 +40,8 @@ public class MSSqlEducationDAO implements EducationDAO {
 		return result;
 	}
 
-	public Boolean insertEducations(long cVsId, Collection<Education> eds, Connection con) 
+	@Override
+	public boolean insertEducations(long cVsId, Collection<Education> eds, Connection con) 
 			throws SQLException {
 		boolean result = true;
 		PreparedStatement pstmt = null;
@@ -86,7 +73,7 @@ public class MSSqlEducationDAO implements EducationDAO {
 		Collection<Education> result = null;
 		Connection con = null;
 		try {
-			con = MSSqlDAOFactory.getConnection();
+			con = getConnection();
 			result = getEducations(CVsId, con);
 		} catch (SQLException e) {
 			System.err.println("Can not get groups." + e.getMessage());
@@ -150,4 +137,6 @@ public class MSSqlEducationDAO implements EducationDAO {
 		pstmt.setString(6, ed.getFaculty());
 		
 	}
+	
+	protected abstract Connection getConnection() throws SQLException;
 }

@@ -11,8 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 import ua.nure.pi.Path;
 import ua.nure.pi.client.GreetingService;
 import ua.nure.pi.dao.UserDAO;
-import ua.nure.pi.dao.mssql.MSSqlDAOFactory;
-import ua.nure.pi.dao.mssql.MSSqlUserDAO;
 import ua.nure.pi.parameter.AppConstants;
 import ua.nure.pi.shared.FieldVerifier;
 

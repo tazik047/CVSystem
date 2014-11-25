@@ -28,4 +28,6 @@
 
   <!-- allow Super Dev Mode -->
   <add-linker name="xsiframe"/>
+  <inherits name="com.google.gwt.i18n.I18N"/>
+  <extend-property name="locale" values="en,ru,uk"/>
 </module>

@@ -1,4 +1,4 @@
-package ua.nure.pi.dao.mssql;
+package ua.nure.pi.dao.jdbc;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,38 +12,24 @@ import ua.nure.pi.dao.ProgramLanguageDAO;
 import ua.nure.pi.entity.ProgramLanguage;
 import ua.nure.pi.parameter.MapperParameters;
 
-public class MSSqlProgramLanguageDAO implements ProgramLanguageDAO {
+public abstract class JDBCProgramLanguageDAO implements ProgramLanguageDAO {
 	
-	private static volatile MSSqlProgramLanguageDAO instance;
+	protected String SQL__SELECT_PROGRAM_LANGUAGE = "SELECT * FROM ProgramLanguages order by Title";
+	protected String SQL__INSERT_PROGRAM_LANGUAGE = "INSERT INTO ProgramLanguages(Title) VALUES(?)";
+	protected String SQL__UPDATE_PROGRAM_LANGUAGE = "UPDATE ProgramLanguages SET Title = ? WHERE ProgramLanguagesId = ?";
+	protected String SQL__DELETE_PROGRAM_LANGUAGE;// = "DELETE ProgramLanguages WHERE ProgramLanguagesId = ?";
 	
-	private MSSqlProgramLanguageDAO() {
-	}
-	
-	public static MSSqlProgramLanguageDAO getInstancce(){
-		if(instance == null)
-			synchronized (MSSqlProgramLanguageDAO.class){
-				if(instance == null)
-					instance = new MSSqlProgramLanguageDAO();
-			}
-		return instance;
-	}
-	
-	private static final String SQL__SELECT_PROGRAM_LANGUAGE = "SELECT * FROM ProgramLanguages order by Title";
-	private static final String SQL__INSERT_PROGRAM_LANGUAGE = "INSERT INTO ProgramLanguages(Title) VALUES(?)";
-	private static final String SQL__UPDATE_PROGRAM_LANGUAGE = "UPDATE ProgramLanguages SET Title = ? WHERE ProgramLanguagesId = ?";
-	private static final String SQL__DELETE_PROGRAM_LANGUAGE = "DELETE ProgramLanguages WHERE ProgramLanguagesId = ?";
-	
-	private static final String SQL__SELECT_STUDENT_PROGRAM_LANGUAGE = "SELECT p.Title, pc.ProgramLanguagesId, pc.Level"
+	protected String SQL__SELECT_STUDENT_PROGRAM_LANGUAGE = "SELECT p.Title, pc.ProgramLanguagesId, pc.Level"
 			+ " FROM ProgramLanguages p, ProgramLanguagesCVs pc WHERE p.ProgramLanguagesId=pc.ProgramLanguagesId and pc.CVsId =?";
-	private static final String SQL__INSERT_STUENT_PROGRAM_LANGUAGE = "INSERT INTO ProgramLanguagesCVs(CVsId, ProgramLanguagesId, Level) VALUES(?,?,?)";
-	private static final String SQL__FIND_BY_TITLE = "SELECT ProgramLanguagesId FROM ProgramLanguages where Title = ?";
+	protected String SQL__INSERT_STUENT_PROGRAM_LANGUAGE = "INSERT INTO ProgramLanguagesCVs(CVsId, ProgramLanguagesId, Level) VALUES(?,?,?)";
+	protected String SQL__FIND_BY_TITLE = "SELECT ProgramLanguagesId FROM ProgramLanguages where Title = ?";
 
 	@Override
 	public Collection<ProgramLanguage> getProgramLanguages() {
 		Collection<ProgramLanguage> result = null;
 		Connection con = null;
 		try {
-			con = MSSqlDAOFactory.getConnection();
+			con = getConnection();
 			result = getProgramLanguages(con);
 		} catch (SQLException e) {
 			System.err.println(String.format("Can not get ProgramLanguages. " + e.getMessage()));
@@ -89,7 +75,7 @@ public class MSSqlProgramLanguageDAO implements ProgramLanguageDAO {
 		Boolean result = false;
 		Connection con = null;
 		try {
-			con = MSSqlDAOFactory.getConnection();
+			con = getConnection();
 			result = insertProgramLanguage(programLanguages, con);
 			if(result)
 				con.commit();
@@ -136,7 +122,7 @@ public class MSSqlProgramLanguageDAO implements ProgramLanguageDAO {
 		Boolean result = false;
 		Connection con = null;
 		try {
-			con = MSSqlDAOFactory.getConnection();
+			con = getConnection();
 			result = deleteProgramLanguage(programLanguages, con);
 			if(result)
 				con.commit();
@@ -183,7 +169,7 @@ public class MSSqlProgramLanguageDAO implements ProgramLanguageDAO {
 		Boolean result = false;
 		Connection con = null;
 		try {
-			con = MSSqlDAOFactory.getConnection();
+			con = getConnection();
 			result = updateProgramLanguage(programLanguages, con);
 			if(result)
 				con.commit();
@@ -227,10 +213,10 @@ public class MSSqlProgramLanguageDAO implements ProgramLanguageDAO {
 
 	@Override
 	public Boolean addProgramLanguages(long id, Collection<ProgramLanguage> programLanguages) {
-		Boolean result = false;
+		boolean result = false;
 		Connection con = null;
 		try {
-			con = MSSqlDAOFactory.getConnection();
+			con = getConnection();
 			result = addProgramLanguage(id, programLanguages, con);
 			if(result)
 				con.commit();
@@ -247,7 +233,8 @@ public class MSSqlProgramLanguageDAO implements ProgramLanguageDAO {
 		return result;
 	}
 
-	public Boolean addProgramLanguage(long id, Collection<ProgramLanguage> programLanguages, Connection con) throws SQLException {
+	@Override
+	public boolean addProgramLanguage(long id, Collection<ProgramLanguage> programLanguages, Connection con) throws SQLException {
 		boolean result = true;
 		PreparedStatement pstmt = null;
 		try {
@@ -276,7 +263,7 @@ public class MSSqlProgramLanguageDAO implements ProgramLanguageDAO {
 		Collection<ProgramLanguage> result = null;
 		Connection con = null;
 		try {
-			con = MSSqlDAOFactory.getConnection();
+			con = getConnection();
 			result = getStudentsProgramLanguages(CVsId, con);
 		} catch (SQLException e) {
 			System.err.println(String.format("Can not get from ProgramLanguagesCVs. " + e.getMessage()));
@@ -357,7 +344,7 @@ public class MSSqlProgramLanguageDAO implements ProgramLanguageDAO {
 		Boolean result = false;
 		Connection con = null;
 		try {
-			con = MSSqlDAOFactory.getConnection();
+			con = getConnection();
 			result = insertProgramLanguageAndGenerateKey(programLanguage, con);
 			if(result)
 				con.commit();
@@ -417,4 +404,6 @@ public class MSSqlProgramLanguageDAO implements ProgramLanguageDAO {
 		}
 		return result;
 	}
+	
+	protected abstract Connection getConnection() throws SQLException;
 }

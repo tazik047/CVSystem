@@ -1,4 +1,4 @@
-package ua.nure.pi.dao.mssql;
+package ua.nure.pi.dao.jdbc;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,35 +13,21 @@ import ua.nure.pi.entity.User;
 import ua.nure.pi.parameter.MapperParameters;
 import ua.nure.pi.security.Hashing;
 
-public class MSSqlUserDAO implements UserDAO {
-	
-private static volatile MSSqlUserDAO instance;
-	
-	private MSSqlUserDAO() {
-	}
-	
-	public static MSSqlUserDAO getInstancce(){
-		if(instance == null)
-			synchronized (MSSqlUserDAO.class){
-				if(instance == null)
-					instance = new MSSqlUserDAO();
-			}
-		return instance;
-	}
+public abstract class JDBCUserDAO implements UserDAO {
 
-	private static final String SQL__CONTAINS_USER_WITH_LOGIN = "SELECT * FROM Users WHERE Login=?";
-	private static final String SQL__READ_USER_BY_ID = "SELECT * FROM Users WHERE UsersId=?";
-	private static final String SQL__GET_ALL_USERS = "SELECT * FROM Users";
-	private static final String SQL__INSERT_USER = "INSERT INTO Users (Password, Login, Role) VALUES (?, ?, ?)";
-	private static final String SQL__DELETE_USER = "DELETE FROM Users WHERE UsersId = ?";
-	private static final String SQL__UPDATE_USER = "UPDATE Users SET Password = ? WHERE UsersId = ?";
+	protected String SQL__CONTAINS_USER_WITH_LOGIN = "SELECT * FROM Users WHERE Login=?";
+	protected String SQL__READ_USER_BY_ID = "SELECT * FROM Users WHERE UsersId=?";
+	protected String SQL__GET_ALL_USERS = "SELECT * FROM Users";
+	protected String SQL__INSERT_USER = "INSERT INTO Users (Password, Login, Role) VALUES (?, ?, ?)";
+	protected String SQL__DELETE_USER;// = "DELETE FROM Users WHERE UsersId = ?";
+	protected String SQL__UPDATE_USER = "UPDATE Users SET Password = ? WHERE UsersId = ?";
 
 	
 	@Override
 	public boolean containsUser(String login) {
 		Connection con = null;
 		try {
-			con = MSSqlDAOFactory.getConnection();
+			con = getConnection();
 			return containsUser(con, login);
 		} catch (SQLException e) {
 			System.err.println("Can not check user containing." + e.getMessage());
@@ -82,7 +68,7 @@ private static volatile MSSqlUserDAO instance;
 		Connection con = null;
 		User user = null;
 		try {
-			con = MSSqlDAOFactory.getConnection();
+			con = getConnection();
 			user = getUser(con, login);
 		} catch (SQLException e) {
 			System.err.println("Can not get user." + e.getMessage());
@@ -126,8 +112,8 @@ private static volatile MSSqlUserDAO instance;
 		Connection con = null;
 		User user = null;
 		try {
-			con = MSSqlDAOFactory.getConnection();
-			user = getUser(con, userId);
+			con = getConnection();
+			user = getUser(userId, con);
 		} catch (SQLException e) {
 			System.err.println("Can not get user." + e.getMessage());
 		} finally {
@@ -141,7 +127,8 @@ private static volatile MSSqlUserDAO instance;
 		return user;
 	}
 
-	private User getUser(Connection con, long userId) throws SQLException {
+	@Override
+	public User getUser(long userId, Connection con) throws SQLException {
 		PreparedStatement pstmt = null;
 		User user = null;
 		try {
@@ -169,7 +156,7 @@ private static volatile MSSqlUserDAO instance;
 	public Collection<User> getAllUsers() {
 		Connection con = null;
 		try {
-			con = MSSqlDAOFactory.getConnection();
+			con = getConnection();
 			return getAllUsers(con);
 		} catch (SQLException e) {
 			System.err.println("Can not get all users." + e.getMessage());
@@ -233,7 +220,7 @@ private static volatile MSSqlUserDAO instance;
 		boolean result = false;
 		Connection con = null;
 		try {
-			con = MSSqlDAOFactory.getConnection();
+			con = getConnection();
 			result = insertUser(user, con);
 			if(result)
 				con.commit();
@@ -250,7 +237,8 @@ private static volatile MSSqlUserDAO instance;
 		return result;
 	}
 
-	boolean insertUser(User user, Connection con)
+	@Override
+	public boolean insertUser(User user, Connection con)
 			throws SQLException {
 		PreparedStatement pstmt = null;
 		boolean result = false;
@@ -281,7 +269,7 @@ private static volatile MSSqlUserDAO instance;
 		Connection con = null;
 		boolean updateResult = false;
 		try {
-			con = MSSqlDAOFactory.getConnection();
+			con = getConnection();
 			updateResult = updateUser(con, user);
 			if(updateResult)
 				con.commit();
@@ -332,7 +320,7 @@ private static volatile MSSqlUserDAO instance;
 		Connection con = null;
 		boolean result = false;
 		try {
-			con = MSSqlDAOFactory.getConnection();
+			con = getConnection();
 			result = deleteUser(con, user);
 			if(result)
 				con.commit();
@@ -370,4 +358,6 @@ private static volatile MSSqlUserDAO instance;
 		}
 		return result;
 	}
+	
+	protected abstract Connection getConnection() throws SQLException;
 }

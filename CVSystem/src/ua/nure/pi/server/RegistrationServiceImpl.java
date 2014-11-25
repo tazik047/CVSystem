@@ -16,8 +16,6 @@ import ua.nure.pi.client.RegistrationService;
 import ua.nure.pi.dao.FacultyGroupDAO;
 import ua.nure.pi.dao.PurposeDAO;
 import ua.nure.pi.dao.UserDAO;
-import ua.nure.pi.dao.mssql.MSSqlDAOFactory;
-import ua.nure.pi.dao.mssql.MSSqlUserDAO;
 import ua.nure.pi.entity.Faculty;
 import ua.nure.pi.entity.Purpose;
 import ua.nure.pi.parameter.AppConstants;
