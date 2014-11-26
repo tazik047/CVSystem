@@ -200,6 +200,18 @@ h3.assistive-text {
 	width: 100% !important;
 }
 
+.mainForm {
+	margin-left : 80px;
+	margin-top : 20px;
+}
+
+.title {
+	font-size :20px;
+	border-bottom: 1px solid #CC4E5C;
+}
+.commit {
+	margin-left : 270px;
+}
 
 /* Right Sidebar
 -----------------------------------------------------------------------------*/
