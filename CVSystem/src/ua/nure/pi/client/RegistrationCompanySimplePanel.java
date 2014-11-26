@@ -13,7 +13,10 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import com.smartgwt.client.types.Alignment;
 import com.smartgwt.client.types.TitleOrientation;
+import com.smartgwt.client.types.VerticalAlignment;
+import com.smartgwt.client.widgets.Label;
 import com.smartgwt.client.widgets.form.DynamicForm;
 import com.smartgwt.client.widgets.form.fields.PasswordItem;
 import com.smartgwt.client.widgets.form.fields.StaticTextItem;
@@ -33,6 +36,8 @@ public class RegistrationCompanySimplePanel extends LoadingSimplePanel {
     public TextItem Emailtextbox;
     public TextItem nameOfReliable;
     public TextItem phoneOfReliable;
+    
+    public Label label;
 
 
 	public DynamicForm mainForm;
@@ -69,8 +74,25 @@ public class RegistrationCompanySimplePanel extends LoadingSimplePanel {
 	    mainForm.setRequiredRightTitleSuffix("");
 	    mainForm.setZIndex(10);
 	    rootPanel.setWidth("100%");
-	    rootPanel.add(mainForm);
 	    
+	    
+        label = new Label();  
+        label.setHeight(60);  
+        label.setPadding(10);  
+        label.setAlign(Alignment.CENTER);  
+        label.setValign(VerticalAlignment.CENTER);  
+        label.setWrap(false);  
+        label.setContents("<i>Регистрация профиля компании</i>");  
+        label.setStyleName("title");
+        label.draw();  
+        
+        
+	    
+	    rootPanel.add(label);	
+
+	    rootPanel.add(mainForm);
+	    	    
+	    mainForm.setStyleName("mainForm");
         
         nameOfCompany = new TextItem("name", "Название компании");  
         nameOfCompany.setWidth(300);  
@@ -197,6 +219,9 @@ public class RegistrationCompanySimplePanel extends LoadingSimplePanel {
 	    		PhonetextBox, phoneHint, Skypetextbox, skypeHint, nameOfReliable, nameOfRelHint, phoneOfReliable, phoneOfRelHint);
 	    mainForm.markForRedraw();
 	    rootPanel.add(commit);
+	    
+	    commit.setStyleName("commit");
+	    
 	    rootPanel.setSpacing(15);
 
 	    add(rootPanel);
