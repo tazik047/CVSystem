@@ -78,11 +78,11 @@ public class RegistrationCompanySimplePanel extends LoadingSimplePanel {
 	    
         label = new Label();  
         label.setHeight(60);  
-        label.setPadding(10);  
-        label.setAlign(Alignment.CENTER);  
+        //label.setPadding(10);  
+        label.setAlign(Alignment.LEFT);  
         label.setValign(VerticalAlignment.CENTER);  
         label.setWrap(false);  
-        label.setContents("<i>Регистрация профиля компании</i>");  
+        label.setContents("Регистрация профиля компании");  
         label.setStyleName("title");
         label.draw();  
         

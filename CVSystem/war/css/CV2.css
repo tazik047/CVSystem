@@ -201,16 +201,19 @@ h3.assistive-text {
 }
 
 .mainForm {
-	margin-left : 80px;
-	margin-top : 20px;
+	margin-left : 70px;
+	//margin-top : 20px;
 }
 
 .title {
-	font-size :20px;
-	border-bottom: 1px solid #CC4E5C;
+	font-size :19px;
+	position : absolute;
+	width : 500px ;
+	border-bottom: 3px solid MistyRose;
+	
 }
 .commit {
-	margin-left : 270px;
+	margin-left : 250px;
 }
 
 /* Right Sidebar
