@@ -179,16 +179,30 @@ public class AdminManager {
 
 	private static void setAdminFunc(){
 		HorizontalPanel root = new HorizontalPanel();
-		final Button getCVs = new Button("Получить списки резюме");
-		getCVs.setStyleName("Buttons");
-		root.add(getCVs);
-		getCVs.addClickHandler(new ClickHandler() {
+		final Button[] buttons = new Button[2];
+		buttons[0] = new Button("Получить списки резюме");
+		buttons[1] = new Button("Факультеты");
+		for(int i=0; i<buttons.length; i++){
+			buttons[i].setStyleName("Buttons");
+			root.add(buttons[i]);
+		}
+		buttons[0].addClickHandler(new ClickHandler() {
 			
 			@Override
 			public void onClick(ClickEvent event) {
-				getCVs.setFocus(false);
+				buttons[0].setFocus(false);
 				if(!uiManager.isSetted(TablePanel.class.getName()))
 					uiManager.setPanel(new TablePanel(mainService));
+			}
+		});
+		
+		buttons[1].addClickHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				buttons[1].setFocus(false);
+				if(!uiManager.isSetted(AddFacultiesCanvas.class.getName()))
+					uiManager.setPanel(new AddFacultiesCanvas(mainService));
 			}
 		});
 		
