@@ -10,6 +10,7 @@ import ua.nure.pi.entity.Group;
 
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.SimplePanel;
 import com.smartgwt.client.util.SC;  
 import com.smartgwt.client.util.ValueCallback;
 import com.smartgwt.client.widgets.Canvas;  
@@ -22,13 +23,15 @@ import com.smartgwt.client.widgets.menu.MenuItem;
 import com.smartgwt.client.widgets.menu.events.ItemClickEvent;  
 import com.smartgwt.client.widgets.menu.events.ItemClickHandler;  
 
-public class AddFacultiesCanvas extends Canvas {
+public class AddFacultiesCanvas extends LoadingSimplePanel {
 
-	AdminPanelServiceAsync adminPanelService;
+	MainServiceAsync adminPanelService;
 	Collection<Faculty> faculties;
 	Collection<MenuItem> items;
 	
-	public AddFacultiesCanvas(AdminPanelServiceAsync admservice) {
+	public AddFacultiesCanvas(MainServiceAsync admservice) {
+		isReady = true;
+		items = new ArrayList<MenuItem>();
 		this.adminPanelService = admservice;
         final Menu menu = new Menu();
         menu.setShowShadow(true);
@@ -62,7 +65,7 @@ valueIcons.put("true", "/img/close.png");
                                     if (value != null && !value.isEmpty()) {  
                                         Faculty faculty = new Faculty();  
                                         faculty.setTitle(value);
-                                        adminPanelService.setFaculties(faculty, new AsyncCallback<Void>() {
+                                        /*adminPanelService.setFaculties(faculty, new AsyncCallback<Void>() {
 											
 											@Override
 											public void onSuccess(Void result) {
@@ -75,7 +78,7 @@ valueIcons.put("true", "/img/close.png");
 												SC.say(caught.getMessage());
 												
 											}
-										});
+										});*/
                                     } 
                                 }  
                             }, dialogProperties);  
@@ -91,7 +94,8 @@ valueIcons.put("true", "/img/close.png");
         HStack layout = new HStack();
         layout.setWidth100();
         layout.setMembers(menuButton);
-        this.addChild(layout);
+        this.clear();
+        this.add(layout);
 	}
 
 	private void getFacultiesInMenu(final Menu menu,
@@ -135,7 +139,7 @@ valueIcons.put("true", "/img/close.png");
 		                                    if (value != null && !value.isEmpty()) {  
 		                                        Group group = new Group();  
 		                                        group.setTitle(value);
-		                                        adminPanelService.setGroup(group, new AsyncCallback<Void>() {
+		                                        /*adminPanelService.setGroup(group, new AsyncCallback<Void>() {
 													
 													@Override
 													public void onSuccess(Void result) {
@@ -148,7 +152,7 @@ valueIcons.put("true", "/img/close.png");
 														SC.say(caught.getMessage());
 														
 													}
-												});
+												});*/
 		                                    } 
 		                                }  
 		                            }, dialogProperties);  
