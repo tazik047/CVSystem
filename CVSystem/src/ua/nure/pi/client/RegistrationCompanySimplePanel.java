@@ -49,6 +49,8 @@ public class RegistrationCompanySimplePanel extends LoadingSimplePanel {
 	public StaticTextItem emailHint;
 	public StaticTextItem nameOfRelHint;
 	public StaticTextItem phoneOfRelHint;
+	
+	public int generalWidth = 300;
 
 	private MainServiceAsync registrationService;
 
@@ -86,36 +88,33 @@ public class RegistrationCompanySimplePanel extends LoadingSimplePanel {
         label.setStyleName("title");
         label.draw();  
         
-        
+	    mainForm.setStyleName("mainForm");
 	    
 	    rootPanel.add(label);	
 
 	    rootPanel.add(mainForm);
 	    	    
-	    mainForm.setStyleName("mainForm");
         
         nameOfCompany = new TextItem("name", "Название компании");  
-        nameOfCompany.setWidth(300);  
+        nameOfCompany.setWidth(generalWidth);  
         nameOfCompany.setHint("Введите название компании");  
         nameOfCompany.setShowHintInField(true);
-      //  nameOfCompany.setMask(">C<CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC");
 	    nameOfCompany.setRequired(true);
 	    nameHint = new StaticTextItem();
 	    nameHint.setShowTitle(false);
 	    nameHint.setValue("Например, OOO \"Apple\"");
 	    
         login = new TextItem("login", "Ваш логин");  
-        login.setWidth(300);  
+        login.setWidth(generalWidth);  
         login.setHint("Введите ваш логин");  
         login.setShowHintInField(true);
-       // login.setMask(">C<CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC");
         login.setRequired(true);
         loginHint = new StaticTextItem();
         loginHint.setShowTitle(false);
         loginHint.setValue("Например, apple_1");
         
         password = new PasswordItem("password", "Ваш пароль");  
-        password.setWidth(300);  
+        password.setWidth(generalWidth);  
         password.setRequired(true);
         
         passwordHint = new StaticTextItem();
@@ -123,7 +122,7 @@ public class RegistrationCompanySimplePanel extends LoadingSimplePanel {
         passwordHint.setValue("Например, password_1");
         
         password2 = new PasswordItem("password2", "Ваш пароль еще раз");  
-        password2.setWidth(300);  
+        password2.setWidth(generalWidth);  
         password2.setShowHintInField(true);
         password2.setRequired(true);
         
@@ -131,7 +130,7 @@ public class RegistrationCompanySimplePanel extends LoadingSimplePanel {
         emailValidator.setExpression("^([a-zA-Z0-9_.\\-+])+@(([a-zA-Z0-9\\-])+\\.)+[a-zA-Z0-9]{2,4}$");  
         
         Emailtextbox = new TextItem("email", "Email");  
-        Emailtextbox.setWidth(300);  
+        Emailtextbox.setWidth(generalWidth);  
         Emailtextbox.setHint("Введите email"); 
         Emailtextbox.setShowHintInField(true);
         Emailtextbox.setValidators(emailValidator);
@@ -141,7 +140,7 @@ public class RegistrationCompanySimplePanel extends LoadingSimplePanel {
 	    Emailtextbox.setRequired(true);
 
         PhonetextBox = new TextItem("phone", "Контакнтый телефон");  
-        PhonetextBox.setWidth(300);  
+        PhonetextBox.setWidth(generalWidth);  
         PhonetextBox.setShowHintInField(true);
         PhonetextBox.setHint("Введите контактный телефон"); 
         PhonetextBox.setMask("+38(###) ###-####");
@@ -151,7 +150,7 @@ public class RegistrationCompanySimplePanel extends LoadingSimplePanel {
 	    phoneHint.setValue("Например, +38(050)145-8872");
 
         Skypetextbox = new TextItem("skype", "Skype");  
-        Skypetextbox.setWidth(300);  
+        Skypetextbox.setWidth(generalWidth);  
         Skypetextbox.setHint("Введите skype"); 
         Skypetextbox.setShowHintInField(true);
         Skypetextbox.setRequired(false);
@@ -160,7 +159,7 @@ public class RegistrationCompanySimplePanel extends LoadingSimplePanel {
 	    skypeHint.setValue("Например, skypelogin");
 	    
         nameOfReliable = new TextItem("nameOfReliable", "Ответственное лицо");  
-        nameOfReliable.setWidth(300);  
+        nameOfReliable.setWidth(generalWidth);  
         nameOfReliable.setHint("Введите имя и отчество ответственного лица"); 
         nameOfReliable.setShowHintInField(true);
         nameOfReliable.setRequired(false);
@@ -169,7 +168,7 @@ public class RegistrationCompanySimplePanel extends LoadingSimplePanel {
 	    nameOfRelHint.setValue("Например, Стив");
 	    
         phoneOfReliable = new TextItem("phoneOfReliable", "Контактный телефон ответственного лица");  
-        phoneOfReliable.setWidth(300);  
+        phoneOfReliable.setWidth(generalWidth);  
         phoneOfReliable.setShowHintInField(true);
         phoneOfReliable.setHint("Введите контактный телефон ответственного лица"); 
         phoneOfReliable.setMask("+38(###) ###-####");

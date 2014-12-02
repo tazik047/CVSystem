@@ -62,6 +62,7 @@ import com.smartgwt.client.types.DragDataAction;
 import com.smartgwt.client.types.MultiComboBoxLayoutStyle;
 import com.smartgwt.client.types.TitleOrientation;
 import com.smartgwt.client.types.TreeModelType;
+import com.smartgwt.client.types.VerticalAlignment;
 import com.smartgwt.client.util.EventHandler;
 import com.smartgwt.client.widgets.TransferImgButton;
 import com.smartgwt.client.widgets.events.DragStartEvent;
@@ -183,6 +184,10 @@ public class RegistrationSimplePanel extends LoadingSimplePanel {
     StaticTextItem skypeHint;
     StaticTextItem goalHint;
     
+    Label label;
+    
+    public int generalWidth = 300;
+    
     public RegistrationSimplePanel(MainServiceAsync reg, final Button btnNewButton){
     	registrationService = reg;
     	onModuleLoad(btnNewButton);
@@ -202,9 +207,29 @@ public class RegistrationSimplePanel extends LoadingSimplePanel {
 	    mainForm.setZIndex(10);
 	    rootPanel.setWidth("100%");
 	    final SimplePanel facultiesPanel = new SimplePanel();
-	    rootPanel.add(facultiesPanel);
-	    rootPanel.add(mainForm);
+	    facultiesPanel.addStyleName("mainForm");
 	    
+        label = new Label();  
+        label.setHeight(60);  
+        //label.setPadding(10);  
+        //label.setAlign(Alignment.LEFT);  
+        label.setValign(VerticalAlignment.CENTER);  
+        label.setWrap(false);  
+        label.setContents("Добавление резюме студента");  
+        label.setStyleName("title");
+        label.draw();  
+        
+        
+	    
+	    rootPanel.add(label);	
+
+	    rootPanel.add(facultiesPanel);
+
+	    
+	    rootPanel.add(mainForm);
+	    	    
+	    mainForm.setStyleName("mainForm");
+
 
 	    // Факультеты и группы
 	    
@@ -237,7 +262,7 @@ public class RegistrationSimplePanel extends LoadingSimplePanel {
 	    
                 
         SurnametextBox = new TextItem("surname", "Фамилия");  
-        SurnametextBox.setWidth(300);  
+        SurnametextBox.setWidth(generalWidth);  
         SurnametextBox.setHint("Введите фамилию");  
         SurnametextBox.setShowHintInField(true);
         //SurnametextBox.setMask(">C<CCCCCCCCCCCCCCCCCCCC");
@@ -248,7 +273,7 @@ public class RegistrationSimplePanel extends LoadingSimplePanel {
 
                
         NametextBox = new TextItem("name", "Имя");  
-        NametextBox.setWidth(300);  
+        NametextBox.setWidth(generalWidth);  
         NametextBox.setHint("Введите имя");  
         NametextBox.setShowHintInField(true);
        // NametextBox.setMask(">C<CCCCCCCCCCCCCCCCCCCC");
@@ -257,17 +282,6 @@ public class RegistrationSimplePanel extends LoadingSimplePanel {
 	    nameHint.setValue("Например, Иван");
 	    NametextBox.setRequired(true);
 
-
-        /*
-        dateItem = new DateItem();
-		dateItem.setTitle("Дата рождения");
-		dateItem.setUseTextField(true);
-		dateItem.setWidth(300);
-		dateItem.setHint("Введите дату рождения или выберите справа");
-		dateItem.setShowHintInField(true);
-		dateItem.setEndDate(new Date());
-	    dateItem.setRequired(true);
-		*/
 	    dateHint = new StaticTextItem();
 	    dateHint.setShowTitle(false);
 	    dateHint.setValue("Например, 01.01.1970");
@@ -281,7 +295,7 @@ public class RegistrationSimplePanel extends LoadingSimplePanel {
 
         
         AddresstextBox = new TextItem("address", "Домашний адрес");  
-        AddresstextBox.setWidth(300);  
+        AddresstextBox.setWidth(generalWidth);  
         AddresstextBox.setHint("Введите домашний адрес");  
         AddresstextBox.setShowHintInField(true);
         AddresstextBox.setMask("");
@@ -293,7 +307,7 @@ public class RegistrationSimplePanel extends LoadingSimplePanel {
         emailValidator.setExpression("^([a-zA-Z0-9_.\\-+])+@(([a-zA-Z0-9\\-])+\\.)+[a-zA-Z0-9]{2,4}$");  
         
         Emailtextbox = new TextItem("email", "Email");  
-        Emailtextbox.setWidth(300);  
+        Emailtextbox.setWidth(generalWidth);  
         Emailtextbox.setHint("Введите email"); 
         Emailtextbox.setShowHintInField(true);
         Emailtextbox.setValidators(emailValidator);
@@ -304,7 +318,7 @@ public class RegistrationSimplePanel extends LoadingSimplePanel {
 
         
         PhonetextBox = new TextItem("phone", "Контакнтый телефон");  
-        PhonetextBox.setWidth(300);  
+        PhonetextBox.setWidth(generalWidth);  
         PhonetextBox.setShowHintInField(true);
         PhonetextBox.setHint("Введите контактный телефон"); 
         PhonetextBox.setMask("+38(###) ###-####");
@@ -315,7 +329,7 @@ public class RegistrationSimplePanel extends LoadingSimplePanel {
 
                 
         Skypetextbox = new TextItem("skype", "Skype");  
-        Skypetextbox.setWidth(300);  
+        Skypetextbox.setWidth(generalWidth);  
         Skypetextbox.setHint("Введите skype"); 
         Skypetextbox.setShowHintInField(true);
         Skypetextbox.setRequired(false);
@@ -323,23 +337,13 @@ public class RegistrationSimplePanel extends LoadingSimplePanel {
 	    skypeHint.setShowTitle(false);
 	    skypeHint.setValue("Например, skypelogin");
 
-        /*
-        goalComboBox = new SelectItem("Goal");
-        goalComboBox.setTitle("Желаемая должность");
-        goalComboBox.setHint("-Должности-");
-        goalComboBox.setShowHintInField(true);
-        goalComboBox.setWidth(300);
-        goalComboBox.setHeight(22);
-        goalComboBox.setRequired(true);
-		*/
-	    
 	    goalHint = new StaticTextItem();
 	    goalHint.setShowTitle(false);
 	    goalHint.setValue("Например, Junior Java developer");
 
 	    goalComboBox = new ComboBoxItem("goal", "Желаемая должность");
         goalComboBox.setHint("-Должность-");
-	    goalComboBox.setWidth(300);
+	    goalComboBox.setWidth(generalWidth);
 	    goalComboBox.setRequired(true);
 	    goalComboBox.setShowHintInField(true);
 	    
@@ -430,9 +434,13 @@ public class RegistrationSimplePanel extends LoadingSimplePanel {
         highLevelTech = new MultiComboBox("Владение технологиями на продвинутом уровне");
 
         rootPanel.add(lowLevelTech);
-        
         rootPanel.add(midLevelTech);
         rootPanel.add(highLevelTech);
+        lowLevelTech.addStyleName("mainForm");
+        midLevelTech.addStyleName("mainForm");
+        highLevelTech.addStyleName("mainForm");
+
+        
 
         final Collection<String> lhm = new ArrayList<String>();
         
@@ -520,8 +528,10 @@ public class RegistrationSimplePanel extends LoadingSimplePanel {
 	    
 	    cb = new CheckBox();
 	    cb.setText("Я даю согласие отделу практики \"Центр-Карьера\" ХНУРЭ на электронную обработку моих персональных данных");
-	    cb.setSize("343px", "44px");
+	    cb.setSize("300px", "44px");
 	    
+        otherForm.addStyleName("mainForm");
+        cb.addStyleName("mainForm");
 	    
 	    
 	    surnameHint.setCellStyle("hint");
@@ -542,6 +552,14 @@ public class RegistrationSimplePanel extends LoadingSimplePanel {
         
 	    
 	    mainForm.markForRedraw();
+	    
+	    
+        lanPanel.addStyleName("mainForm");
+        eduPanel.addStyleName("mainForm");
+        expPanel.addStyleName("mainForm");
+        ssp.addStyleName("mainForm");
+	    commit.setStyleName("commit");
+
 	    
 	    rootPanel.add(lanPanel);
 	    rootPanel.add(eduPanel);
