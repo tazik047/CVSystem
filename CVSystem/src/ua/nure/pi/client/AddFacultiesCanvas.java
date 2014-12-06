@@ -7,21 +7,37 @@ import java.util.Map;
 
 import ua.nure.pi.entity.Faculty;
 import ua.nure.pi.entity.Group;
+import ua.nure.pi.entity.Student;
 
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.SimplePanel;
+import com.google.gwt.user.client.ui.VerticalPanel;
+import com.smartgwt.client.types.Alignment;
+import com.smartgwt.client.types.Side;
+import com.smartgwt.client.types.TabTitleEditEvent;
 import com.smartgwt.client.util.SC;  
 import com.smartgwt.client.util.ValueCallback;
 import com.smartgwt.client.widgets.Canvas;  
 import com.smartgwt.client.widgets.Dialog;
+import com.smartgwt.client.widgets.IButton;
+import com.smartgwt.client.widgets.events.ClickEvent;
+import com.smartgwt.client.widgets.events.ClickHandler;
+import com.smartgwt.client.widgets.grid.ListGrid;
 import com.smartgwt.client.widgets.grid.ListGridField;  
+import com.smartgwt.client.widgets.grid.ListGridRecord;
 import com.smartgwt.client.widgets.layout.HStack;  
 import com.smartgwt.client.widgets.menu.Menu;  
 import com.smartgwt.client.widgets.menu.MenuButton;  
 import com.smartgwt.client.widgets.menu.MenuItem;  
 import com.smartgwt.client.widgets.menu.events.ItemClickEvent;  
 import com.smartgwt.client.widgets.menu.events.ItemClickHandler;  
+import com.smartgwt.client.widgets.tab.Tab;
+import com.smartgwt.client.widgets.tab.TabSet;
+import com.smartgwt.client.widgets.tab.events.TabTitleChangedEvent;
+import com.smartgwt.client.widgets.tab.events.TabTitleChangedHandler;
 
 public class AddFacultiesCanvas extends LoadingSimplePanel {
 
@@ -31,156 +47,134 @@ public class AddFacultiesCanvas extends LoadingSimplePanel {
 	
 	public AddFacultiesCanvas(MainServiceAsync admservice) {
 		isReady = true;
-		items = new ArrayList<MenuItem>();
-		this.adminPanelService = admservice;
-        final Menu menu = new Menu();
-        menu.setShowShadow(true);
-        menu.setShadowDepth(10);
-
-        final ListGridField closeField = new ListGridField();
-        closeField.setName("canDismiss");
-        closeField.setShowValueIconOnly(true);
-Map<String, String> valueIcons = new HashMap<String, String>();
-valueIcons.put("true", "/img/close.png");
-        closeField.setValueIcons(valueIcons);
-        closeField.setValueIconSize(16);
-        closeField.setWidth(16);
-
-        menu.setFields(Menu.TITLE_FIELD, closeField);
-        
-        getFacultiesInMenu(menu, closeField);
-
-        menu.addItemClickHandler(new ItemClickHandler() {
-                public void onItemClick(ItemClickEvent event) {
-                        MenuItem clicked = event.getItem();
-                        if ((event.getColNum() == 1) && clicked.getAttributeAsBoolean("canDismiss")) {
-            menu.removeItem(clicked);
-                        } else if(clicked.getAttributeAsBoolean("addButton")){
-                        	final Dialog dialogProperties = new Dialog();  
-                            dialogProperties.setWidth(300);  
-                          
-                            SC.askforValue("Добавление факультета", "Введите название факультета", "", new ValueCallback() {  
-                                @Override  
-                                public void execute(String value) {  
-                                    if (value != null && !value.isEmpty()) {  
-                                        Faculty faculty = new Faculty();  
-                                        faculty.setTitle(value);
-                                        /*adminPanelService.setFaculties(faculty, new AsyncCallback<Void>() {
-											
-											@Override
-											public void onSuccess(Void result) {
-												SC.say("Факультет успешно добавлен");
-												getFacultiesInMenu(menu, closeField);
-											}
-											
-											@Override
-											public void onFailure(Throwable caught) {
-												SC.say(caught.getMessage());
-												
-											}
-										});*/
-                                    } 
-                                }  
-                            }, dialogProperties);  
-                        }
-                        else {
-                                SC.say("You Selected '" + clicked.getTitle() + "'.");
-                        }
-                }
-        });
-
-        MenuButton menuButton = new MenuButton("Show Menu", menu);
-
-        HStack layout = new HStack();
-        layout.setWidth100();
-        layout.setMembers(menuButton);
-        this.clear();
-        this.add(layout);
-	}
-
-	private void getFacultiesInMenu(final Menu menu,
-			final ListGridField closeField) {
-		adminPanelService.getFaculties(new AsyncCallback<Collection<Faculty>>() {
+		adminPanelService = admservice;
+		final TabSet tabSet = new TabSet();  
+        tabSet.setTabBarPosition(Side.TOP);  
+        tabSet.setTabBarAlign(Side.LEFT); 
+        tabSet.setWidth("60%");
+        tabSet.setHeight("60%");
+        tabSet.setCanEditTabTitles(true);  
+        tabSet.setTitleEditEvent(TabTitleEditEvent.DOUBLECLICK);  
+        tabSet.setTitleEditorTopOffset(2);
+        admservice.getFaculties(new AsyncCallback<Collection<Faculty>>() {
 			
 			@Override
 			public void onSuccess(Collection<Faculty> result) {
-				faculties = new ArrayList<Faculty>(result);
-				cleanMenu(menu);
-				for(Faculty f: result){
-					MenuItem item = new MenuItem(f.getTitle());
-					Menu subMenu = new Menu();
-					MenuItem addNew = new MenuItem("Добавить группу");
-					addNew.setAttribute("addButton", true);
-					addNew.setAttribute("selectedObject", new Group());
-					if(f.getGroups().size()!=0){
-						for(Group g : f.getGroups()){
-							MenuItem subItem = new MenuItem(g.getTitle());
-							subItem.setAttribute("canDismass", true);
-							subItem.setAttribute("selectedObject", g);
-							subMenu.addItem(subItem);
+				faculties = result;
+				for(Faculty f : result)
+				{
+					Tab t = new Tab(f.getTitle());
+					Canvas page = new Canvas();
+					VerticalPanel vp = new VerticalPanel();
+					final ListGrid grid= createGreate(f);
+					vp.add(grid);
+					vp.add(new Button("Добавить группу", new com.google.gwt.event.dom.client.ClickHandler() {
+						
+						@Override
+						public void onClick(com.google.gwt.event.dom.client.ClickEvent event) {
+							ListGridRecord rec = new ListGridRecord(); 
+					        rec.setAttribute("idField", 0);
+					        rec.setAttribute("title", "dfsdf");
+					        rec.setAttribute("edit", "");
+					        rec.setAttribute("del", "");
+							grid.addData(rec);
 						}
-					}
-					else{
-						item.setAttribute("canDismiss", true);
-					}
-					subMenu.addItem(addNew);
-					subMenu.addItemClickHandler(new ItemClickHandler() {
-		                public void onItemClick(ItemClickEvent event) {
-		                        MenuItem clicked = event.getItem();
-		                        if ((event.getColNum() == 1) && clicked.getAttributeAsBoolean("canDismiss")) {
-		                        	menu.removeItem(clicked);
-		                        } else if(clicked.getAttributeAsBoolean("addButton")){
-		                        	final Dialog dialogProperties = new Dialog();  
-		                            dialogProperties.setWidth(300);  
-		                          
-		                            SC.askforValue("Добавление группы", "Введите название группы", "", new ValueCallback() {  
-		                                @Override  
-		                                public void execute(String value) {  
-		                                    if (value != null && !value.isEmpty()) {  
-		                                        Group group = new Group();  
-		                                        group.setTitle(value);
-		                                        /*adminPanelService.setGroup(group, new AsyncCallback<Void>() {
-													
-													@Override
-													public void onSuccess(Void result) {
-														SC.say("Группа успешно добавлен");
-														getFacultiesInMenu(menu, closeField);
-													}
-													
-													@Override
-													public void onFailure(Throwable caught) {
-														SC.say(caught.getMessage());
-														
-													}
-												});*/
-		                                    } 
-		                                }  
-		                            }, dialogProperties);  
-		                        }
-		                        else {
-		                                SC.say("You Selected '" + clicked.getTitle() + "'.");
-		                        }
-		                }
-					});
-					item.setAttribute("selectedObject",f);
-					item.setSubmenu(subMenu);
-					menu.addItem(item);
+					}));
+					page.addChild(vp);
+					t.setPane(page);
+					tabSet.addTab(t);
 				}
-				MenuItem addNew = new MenuItem("Добавить факультет");
-				addNew.setAttribute("addButton", true);
-				addNew.setAttribute("selectedObject", new Faculty());
-				menu.addItem(addNew);
 			}
 			
 			@Override
 			public void onFailure(Throwable caught) {
-				SC.say("Ошибка при загрузки факультетов.");
+				clear();
+				add(new Label(caught.getLocalizedMessage()));
 			}
 		});
+        
+  
+        tabSet.addTabTitleChangedHandler(new TabTitleChangedHandler() {  
+            @Override  
+            public void onTabTitleChanged(TabTitleChangedEvent event) {  
+                Tab tab = event.getTab();  
+                Window.alert(tab.getTitle());
+            }  
+        });  
+  
+        tabSet.draw();
+        clear();
+        add(tabSet);
 	}
 	
-	private void cleanMenu(Menu menu){
-		for(MenuItem item: items)
-			menu.removeItem(item);
+	private ListGrid createGreate(final Faculty f)
+	{
+		final ListGrid CVGrid = new ListGrid(){
+        	@Override  
+            protected Canvas createRecordComponent(final ListGridRecord record, final Integer colNum) {  
+        		String fieldName = this.getFieldName(colNum);
+        		if (fieldName.equals("edit")) {  
+                    IButton button = new IButton();                
+                    button.setTitle("Редактировать");  
+                    button.addClickHandler(new ClickHandler() {  
+                        public void onClick(ClickEvent event) {  
+                            int id  = Integer.parseInt(record.getAttribute("idField"));
+                            for(Group g : f.getGroups())
+                            {
+                            	if(g.getGroupId()==id)
+                            	Window.alert(g.getTitle());
+                            }
+                        }  
+                    });  
+                    return button;  
+                } 
+        		else if (fieldName.equals("del")) {  
+                    IButton button1 = new IButton();                   
+                    button1.setTitle("Удалить");  
+                    button1.addClickHandler(new ClickHandler() {  
+                        public void onClick(ClickEvent event) {  
+                            int id  = Integer.parseInt(record.getAttribute("idField"));
+                            for(Group g : f.getGroups())
+                            {
+                            	if(g.getGroupId()==id)
+                            	Window.alert(g.getTitle());
+                            }
+                        }  
+                    });  
+                    return button1;  
+                }
+                else {  
+                    return null;  
+        	}
+        };  
+        
+        };
+        CVGrid.setShowRecordComponents(true);          
+        CVGrid.setShowRecordComponentsByCell(true);  
+        CVGrid.setCanRemoveRecords(false);  
+  
+        CVGrid.setWidth("100%");  
+        CVGrid.setHeight("100%");  
+        CVGrid.setShowAllRecords(true);  
+        ListGridField idField = new ListGridField("idField", "ID");  
+        ListGridField SurnameField = new ListGridField("title", "Группа");  
+        ListGridField edit = new ListGridField("edit", "Редактировать");
+        ListGridField del = new ListGridField("del", "Удалить");
+        edit.setAlign(Alignment.CENTER);  
+        CVGrid.setFields(idField, SurnameField, edit, del);  
+        CVGrid.setCanResizeFields(true);
+        ListGridRecord[] recs = new ListGridRecord[f.getGroups().size()];
+        int ind = 0;
+        for(Group i : f.getGroups()){
+	    ListGridRecord rec = new ListGridRecord(); 
+        rec.setAttribute("idField", i.getGroupId());
+        rec.setAttribute("title", i.getTitle());
+        rec.setAttribute("edit", "");
+        rec.setAttribute("del", "");
+        recs[ind++]=rec;
+        }
+        CVGrid.setRecords(recs);
+        CVGrid.markForRedraw(); 
+        return CVGrid;
 	}
 }
