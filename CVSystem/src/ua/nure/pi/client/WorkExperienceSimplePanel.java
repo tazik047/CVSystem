@@ -21,6 +21,8 @@ import com.smartgwt.client.widgets.layout.events.SectionHeaderClickHandler;
 
 public class WorkExperienceSimplePanel extends SimplePanel{
 	
+	private final int BLOCK_HEIGHT = 188;
+	
 	public ArrayList<WorkExperinceElementSimplePanel> works;
 	private SectionStack sectionStack;
 	private int countColor = -1;
@@ -92,7 +94,7 @@ public class WorkExperienceSimplePanel extends SimplePanel{
 						
 		}
 		final WorkExperinceElementSimplePanel exp = new WorkExperinceElementSimplePanel();
-		pixelCount+=163;
+		pixelCount+=BLOCK_HEIGHT;
 		sectionStack.setHeight(String.valueOf(pixelCount)+"px");
 		countColor = (++countColor)%2;
 		if(countColor == 0){
@@ -106,7 +108,7 @@ public class WorkExperienceSimplePanel extends SimplePanel{
 			public void onClick(ClickEvent event) {
 				vp.remove(exp);
 				works.remove(exp);
-				pixelCount-=163;
+				pixelCount-=BLOCK_HEIGHT;
 				sectionStack.setHeight(String.valueOf(pixelCount)+"px");
 				if(works.size()==0){
 					sectionStack.removeFromParent();

@@ -51,6 +51,7 @@ public class EducationElementSimplePanel extends SimplePanel{
 		imgDel.setTitle("Удалить образование");
 		rootPanel.add(imgDel);
 		setWidth("343px");
+		setHeight("169px");
 		labelPanel.setSpacing(5);
 		textPanel.setSpacing(5);
 		

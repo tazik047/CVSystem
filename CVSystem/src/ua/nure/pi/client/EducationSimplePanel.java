@@ -21,6 +21,8 @@ import com.smartgwt.client.widgets.layout.events.SectionHeaderClickHandler;
 
 public class EducationSimplePanel extends SimplePanel{
 	
+	private final int BLOCK_HEIGHT = 179;
+	
 	public ArrayList<EducationElementSimplePanel> educations;
 	private SectionStack sectionStack;
 	private int countColor = -1;
@@ -94,7 +96,7 @@ public class EducationSimplePanel extends SimplePanel{
 						
 		}
 		final EducationElementSimplePanel exp = new EducationElementSimplePanel();
-		pixelCount+=155;
+		pixelCount+=BLOCK_HEIGHT;
 		sectionStack.setHeight(String.valueOf(pixelCount)+"px");
 		countColor  = (++countColor)%2;
 		if(countColor == 0){
@@ -108,7 +110,7 @@ public class EducationSimplePanel extends SimplePanel{
 			public void onClick(ClickEvent event) {
 				vp.remove(exp);
 				educations.remove(exp);
-				pixelCount-=155;
+				pixelCount-=BLOCK_HEIGHT;
 				sectionStack.setHeight(String.valueOf(pixelCount)+"px");
 				if(educations.size()==0){
 					sectionStack.removeFromParent();

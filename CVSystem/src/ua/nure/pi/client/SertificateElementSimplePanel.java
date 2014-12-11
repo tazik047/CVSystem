@@ -52,6 +52,7 @@ public class SertificateElementSimplePanel extends SimplePanel{
 		rootPanel.add(imgDel);
 		
 		setWidth("343px");
+		setHeight("70px");
 		labelPanel.setSpacing(5);
 		textPanel.setSpacing(5);
 		

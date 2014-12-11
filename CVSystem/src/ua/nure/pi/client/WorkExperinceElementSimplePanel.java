@@ -53,7 +53,8 @@ public class WorkExperinceElementSimplePanel extends SimplePanel{
 		rootPanel.add(imgDel);
 		
 		setWidth("343px");
-
+		setHeight("178px");
+		
 		
 		controls = new DynamicForm();
 		
