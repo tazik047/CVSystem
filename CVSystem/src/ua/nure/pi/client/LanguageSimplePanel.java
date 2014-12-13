@@ -34,12 +34,11 @@ public class LanguageSimplePanel extends SimplePanel{
 	public LanguageSimplePanel() {
 		sectionStack = new SectionStack();  
         sectionStack.setVisibilityMode(VisibilityMode.MULTIPLE);
-  
+        
         sectionStack.setWidth("355px");
         sectionStack.setHeight(String.valueOf(pixelCount)+"px");
         SectionStackSection section1 = new SectionStackSection("Языки");
         sectionStack.addSection(section1);
-		
 		root = new VerticalPanel();
 		root.setWidth("100%");
 		final AbsolutePanel absP = new AbsolutePanel();
@@ -49,6 +48,7 @@ public class LanguageSimplePanel extends SimplePanel{
 		languages = new ArrayList<LanguageElementSimplePanel>();
 		DynamicForm form = new DynamicForm();
 		form.setStyleName("fixFormFox");
+		form.setZIndex(2);
 		section1.addItem(form);
         form.setNumCols(4);
         final VerticalPanel vp = new VerticalPanel();

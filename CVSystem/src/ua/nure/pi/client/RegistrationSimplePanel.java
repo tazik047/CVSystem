@@ -204,7 +204,7 @@ public class RegistrationSimplePanel extends LoadingSimplePanel {
 	    mainForm.setTitleSuffix("");
 	    mainForm.setRequiredTitleSuffix("");
 	    mainForm.setRequiredRightTitleSuffix("");
-	    mainForm.setZIndex(10);
+	    mainForm.setZIndex(1);
 	    rootPanel.setWidth("100%");
 	    final SimplePanel facultiesPanel = new SimplePanel();
 	    facultiesPanel.addStyleName("mainForm");
@@ -516,6 +516,7 @@ public class RegistrationSimplePanel extends LoadingSimplePanel {
 		otherForm.setCellPadding(15);
 
 		otherForm.setNumCols(1);
+		otherForm.setZIndex(2);
 		otherForm.setTitleSuffix("");
 	    qualities = new TextAreaItem("Qualities");
 	    qualities.setCellStyle("fixTextArea");

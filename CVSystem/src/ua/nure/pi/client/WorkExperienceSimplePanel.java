@@ -33,7 +33,6 @@ public class WorkExperienceSimplePanel extends SimplePanel{
 	public WorkExperienceSimplePanel() {
 		sectionStack = new SectionStack();  
         sectionStack.setVisibilityMode(VisibilityMode.MULTIPLE);
-  
         sectionStack.setWidth("355px");
         sectionStack.setHeight(String.valueOf(pixelCount)+"px");
         SectionStackSection section1 = new SectionStackSection("Опыт работы");

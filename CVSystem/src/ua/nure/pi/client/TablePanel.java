@@ -97,17 +97,19 @@ public class TablePanel extends LoadingSimplePanel{
 	        CVGrid.setShowAllRecords(true);  
 	        ListGridField idField = new ListGridField("idField", "ID");  
 	        ListGridField SurnameField = new ListGridField("surname", "ФИО");  
-	        ListGridField show = new ListGridField("show", "Показать резюме");  
+	        ListGridField show = new ListGridField("show", "Показать резюме");
+	        ListGridField group = new ListGridField("group", "Группа");
 	        show.setAlign(Alignment.CENTER);  
-	        CVGrid.setFields(idField, SurnameField, show);  
+	        CVGrid.setFields(idField, SurnameField, show, group);  
 	        CVGrid.setCanResizeFields(true);
 	        ListGridRecord[] recs = new ListGridRecord[students.size()];
 	        int ind = 0;
 	        for(Student i : students){
 		    ListGridRecord rec = new ListGridRecord(); 
 	        rec.setAttribute("idField", i.getStudentsId());
-	        rec.setAttribute("surname", i.getSurname()+" " + i.getFirstname()+" "+i.getPatronymic());
+	        rec.setAttribute("surname", i.getSurname()+" " + i.getFirstname());
 	        rec.setAttribute("show", "");
+	        rec.setAttribute("group", i.getGroup().getTitle());
 	        recs[ind++]=rec;
 	        }
 	        CVGrid.setRecords(recs);

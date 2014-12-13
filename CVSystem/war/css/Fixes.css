@@ -30,3 +30,7 @@
 .fixMultiComboBox{
 	padding-left:5px;
 }
+
+.mainForm>table>tbody>tr>td>div>div>div{
+	z-index:2 !important;
+}

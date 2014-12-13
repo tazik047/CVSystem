@@ -35,7 +35,6 @@ public class EducationSimplePanel extends SimplePanel{
 	public EducationSimplePanel() {
 		sectionStack = new SectionStack();  
         sectionStack.setVisibilityMode(VisibilityMode.MULTIPLE);
-  
         sectionStack.setWidth("355px");
         sectionStack.setHeight(String.valueOf(pixelCount)+"px");
         SectionStackSection section1 = new SectionStackSection("Образование");

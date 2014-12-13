@@ -34,7 +34,6 @@ public class SertificateSimplePanel extends SimplePanel{
 	public SertificateSimplePanel() {
 		sectionStack = new SectionStack();  
         sectionStack.setVisibilityMode(VisibilityMode.MULTIPLE);
-  
         sectionStack.setWidth("355px");
         sectionStack.setHeight(String.valueOf(pixelCount)+"px");
         SectionStackSection section1 = new SectionStackSection("Сертификаты");
