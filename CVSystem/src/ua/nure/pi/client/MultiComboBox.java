@@ -14,15 +14,7 @@ public class MultiComboBox extends SimplePanel {
 	private Label title;
 	private String h;
 	private String id;
-	private int zindex;
-	
-	public int getZindex(){
-		return zindex;
-	}
-	
-	public void setZindex(int value) {
-		zindex = value;
-	}
+
 	
 	public String getTitle(){
 		return title.getText();
@@ -35,14 +27,12 @@ public class MultiComboBox extends SimplePanel {
 	public MultiComboBox(Collection<String> val, String title) {
 		VerticalPanel root = new VerticalPanel();
 		this.title = new Label(title);
-		this.zindex = 12;
 		this.title.setStyleName("formTitle");
 		root.add(this.title);
 		id = "MultiComboBox" +  String.valueOf(this.hashCode());
 		h = "<div id='" + id + "'></div>";
 		values = val;
 		HTML html = new HTML(h);
-		html.getElement().setAttribute("tabindex", String.valueOf(zindex));
 		root.setStyleName("fixMultiComboBox");
 		root.add(html);
 		add(root);
