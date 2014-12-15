@@ -41,4 +41,5 @@ public interface MainServiceAsync {
 
 	void insertCompany(Company comp, AsyncCallback<Void> asyncCallback) throws IllegalArgumentException;
 
+	void updateFaculty(Faculty faculty, AsyncCallback<Void> asyncCallback) throws IllegalArgumentException;
 }

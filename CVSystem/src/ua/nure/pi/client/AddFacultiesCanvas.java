@@ -29,6 +29,7 @@ import com.smartgwt.client.widgets.grid.ListGrid;
 import com.smartgwt.client.widgets.grid.ListGridField;  
 import com.smartgwt.client.widgets.grid.ListGridRecord;
 import com.smartgwt.client.widgets.layout.HStack;  
+import com.smartgwt.client.widgets.layout.VLayout;
 import com.smartgwt.client.widgets.menu.Menu;  
 import com.smartgwt.client.widgets.menu.MenuButton;  
 import com.smartgwt.client.widgets.menu.MenuItem;  
@@ -64,14 +65,13 @@ public class AddFacultiesCanvas extends LoadingSimplePanel {
 				for(Faculty f : result)
 				{
 					Tab t = new Tab(f.getTitle());
-					Canvas page = new Canvas();
-					VerticalPanel vp = new VerticalPanel();
+					VLayout vp = new VLayout();
 					final ListGrid grid= createGreate(f);
-					vp.add(grid);
-					vp.add(new Button("Добавить группу", new com.google.gwt.event.dom.client.ClickHandler() {
+					vp.addMember(grid);
+					vp.addMember(new IButton("Добавить группу", new ClickHandler() {
 						
 						@Override
-						public void onClick(com.google.gwt.event.dom.client.ClickEvent event) {
+						public void onClick(ClickEvent event) {
 							ListGridRecord rec = new ListGridRecord(); 
 					        rec.setAttribute("idField", 0);
 					        rec.setAttribute("title", "dfsdf");
@@ -80,10 +80,12 @@ public class AddFacultiesCanvas extends LoadingSimplePanel {
 							grid.addData(rec);
 						}
 					}));
-					page.addChild(vp);
-					t.setPane(page);
+					vp.setMembersMargin(5); 
+					t.setPane(vp);
 					tabSet.addTab(t);
+					grid.markForRedraw();
 				}
+				tabSet.markForRedraw();
 			}
 			
 			@Override
@@ -101,8 +103,6 @@ public class AddFacultiesCanvas extends LoadingSimplePanel {
                 Window.alert(tab.getTitle());
             }  
         });  
-  
-        tabSet.draw();
         clear();
         add(tabSet);
 	}
@@ -114,7 +114,9 @@ public class AddFacultiesCanvas extends LoadingSimplePanel {
             protected Canvas createRecordComponent(final ListGridRecord record, final Integer colNum) {  
         		String fieldName = this.getFieldName(colNum);
         		if (fieldName.equals("edit")) {  
-                    IButton button = new IButton();                
+                    IButton button = new IButton();    
+                    button.setHeight(18);  
+                    button.setWidth(65); 
                     button.setTitle("Редактировать");  
                     button.addClickHandler(new ClickHandler() {  
                         public void onClick(ClickEvent event) {  
@@ -125,11 +127,13 @@ public class AddFacultiesCanvas extends LoadingSimplePanel {
                             	Window.alert(g.getTitle());
                             }
                         }  
-                    });  
+                    }); 
                     return button;  
                 } 
         		else if (fieldName.equals("del")) {  
-                    IButton button1 = new IButton();                   
+                    IButton button1 = new IButton();   
+                    button1.setHeight(18);  
+                    button1.setWidth(65); 
                     button1.setTitle("Удалить");  
                     button1.addClickHandler(new ClickHandler() {  
                         public void onClick(ClickEvent event) {  
@@ -140,7 +144,7 @@ public class AddFacultiesCanvas extends LoadingSimplePanel {
                             	Window.alert(g.getTitle());
                             }
                         }  
-                    });  
+                    }); 
                     return button1;  
                 }
                 else {  
@@ -153,9 +157,9 @@ public class AddFacultiesCanvas extends LoadingSimplePanel {
         CVGrid.setShowRecordComponentsByCell(true);  
         CVGrid.setCanRemoveRecords(false);  
   
-        CVGrid.setWidth("100%");  
-        CVGrid.setHeight("100%");  
-        CVGrid.setShowAllRecords(true);  
+        CVGrid.setWidth(550);  
+        CVGrid.setHeight(224);  
+        CVGrid.setShowAllRecords(true);    
         ListGridField idField = new ListGridField("idField", "ID");  
         ListGridField SurnameField = new ListGridField("title", "Группа");  
         ListGridField edit = new ListGridField("edit", "Редактировать");

@@ -247,4 +247,10 @@ public class MainServiceImpl extends RemoteServiceServlet implements
 		if(!companyDAO.insertCompany(c))
 			throw new IllegalArgumentException("Произошла ошибка при сохранении данных");
 	}
+
+	@Override
+	public void updateFaculty(Faculty f) throws IllegalArgumentException {
+		if(!facultyGroupDAO.updateFaculty(f))
+			throw new IllegalArgumentException("Не удалось обновить факультет.");
+	}
 }
