@@ -488,10 +488,55 @@ public abstract class JDBCFacultyGroupDAO implements FacultyGroupDAO {
 	}
 
 	@Override
-	public Boolean insertFaculty(Faculty faculty) {
-		Collection<Faculty> faculties = new ArrayList<Faculty>();
-		faculties.add(faculty);
-		return insertFaculties(faculties);
+	public long insertFaculty(Faculty faculty) {
+		long result = -1;
+		Connection con = null;
+		try {
+			con = getConnection();
+			result = insertFaculty(faculty, con);
+			if(result != -1)
+				con.commit();
+		} catch (SQLException e) {
+			System.err.println("Can not insert faculties. " + e.getMessage());
+		} finally {
+			try {
+				if (con != null)
+					con.close();
+			} catch (SQLException e) {
+				System.err.println("Can not close connection. " + e.getMessage());
+			}
+		}
+		return result;
+	}
+	
+	private long insertFaculty(Faculty f, Connection con)
+			throws SQLException {
+		long result = -1;
+		PreparedStatement pstmt = null;
+		try {
+			pstmt = con.prepareStatement(SQL__INSERT_FACULTIES, Statement.RETURN_GENERATED_KEYS);
+				mapFacultyForInsert(f, pstmt);
+				if(pstmt.executeUpdate()!=1)
+					return -1;
+				ResultSet rs = pstmt.getGeneratedKeys();
+				if(rs.next()){
+					result = rs.getLong(1);
+					if(f.getGroups()!=null)
+						if(!insertGroups(result, f.getGroups(), con))
+							return -1;
+				}
+		} catch (SQLException e) {
+			throw e;
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					System.err.println("Can not close statement. " + e.getMessage());
+				}
+			}
+		}
+		return result;
 	}
 
 	@Override
@@ -509,10 +554,51 @@ public abstract class JDBCFacultyGroupDAO implements FacultyGroupDAO {
 	}
 
 	@Override
-	public Boolean insertGroup(Group group) {
-		Collection<Group> groups = new ArrayList<Group>();
-		groups.add(group);
-		return insertGroups(group.getGroupId(), groups);
+	public long insertGroup(Group group) {
+		long result = -1;
+		Connection con = null;
+		try {
+			con = getConnection();
+			result = insertGroup(group, con);
+			if(result == -1)
+				con.commit();
+		} catch (SQLException e) {
+			System.err.println("Can not insert group. " + e.getMessage());
+		} finally {
+			try {
+				if (con != null)
+					con.close();
+			} catch (SQLException e) {
+				System.err.println("Can not close connection. " + e.getMessage());
+			}
+		}
+		return result;
+	}
+	
+	private long insertGroup(Group g, Connection con) throws SQLException {
+		long result = -1;
+		PreparedStatement pstmt = null;
+		try {
+			pstmt = con.prepareStatement(SQL__INSERT_GROUPS, Statement.RETURN_GENERATED_KEYS);
+			mapGroupForInsert(g, g.getFacultiesId(), pstmt);
+			pstmt.addBatch();
+			if(pstmt.execute()) {
+				ResultSet rs = pstmt.getGeneratedKeys();
+				if(rs.next())
+					result = rs.getLong(1);
+			}
+		} catch (SQLException e) {
+			throw e;
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					System.err.println("Can not close statement. " + e.getMessage());
+				}
+			}
+		}
+		return result;
 	}
 
 	@Override

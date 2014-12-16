@@ -4,6 +4,7 @@ import java.util.Collection;
 
 import ua.nure.pi.entity.Company;
 import ua.nure.pi.entity.Faculty;
+import ua.nure.pi.entity.Group;
 import ua.nure.pi.entity.Language;
 import ua.nure.pi.entity.ProgramLanguage;
 import ua.nure.pi.entity.Purpose;
@@ -45,4 +46,13 @@ public interface MainService extends RemoteService {
 	
 	void updateFaculty(Faculty f) throws IllegalArgumentException;
 
+	long addFaculty(Faculty f) throws IllegalArgumentException;
+	
+	void deleteFaculty(Faculty f) throws IllegalArgumentException;
+	
+	long addGroup(Group g) throws IllegalArgumentException;
+	
+	void updateGroup(Group f) throws IllegalArgumentException;
+	
+	void deleteGroup(Group f) throws IllegalArgumentException;
 }

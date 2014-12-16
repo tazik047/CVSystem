@@ -11,7 +11,7 @@ public interface FacultyGroupDAO {
 	
 	Collection<Faculty> getFaculties();
 	
-	Boolean insertFaculty(Faculty faculty);
+	long insertFaculty(Faculty faculty);
 	
 	Boolean insertFaculties(Collection<Faculty> faculties);
 	
@@ -31,7 +31,7 @@ public interface FacultyGroupDAO {
 	
 	Boolean insertGroups(long FacultiesId, Collection<Group> groups);
 	
-	Boolean insertGroup(Group group);
+	long insertGroup(Group group);
 	
 	Boolean updateGroups(Collection<Group> groups);
 	

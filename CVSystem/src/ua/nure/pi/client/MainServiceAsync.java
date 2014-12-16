@@ -4,6 +4,7 @@ import java.util.Collection;
 
 import ua.nure.pi.entity.Company;
 import ua.nure.pi.entity.Faculty;
+import ua.nure.pi.entity.Group;
 import ua.nure.pi.entity.Purpose;
 import ua.nure.pi.entity.Language;
 import ua.nure.pi.entity.ProgramLanguage;
@@ -42,4 +43,14 @@ public interface MainServiceAsync {
 	void insertCompany(Company comp, AsyncCallback<Void> asyncCallback) throws IllegalArgumentException;
 
 	void updateFaculty(Faculty faculty, AsyncCallback<Void> asyncCallback) throws IllegalArgumentException;
+	
+	void addFaculty(Faculty faculty, AsyncCallback<Long> asyncCallback) throws IllegalArgumentException;
+	
+	void deleteFaculty(Faculty faculty, AsyncCallback<Void> asyncCallback) throws IllegalArgumentException;
+	
+	void addGroup(Group group, AsyncCallback<Long> asyncCallback) throws IllegalArgumentException;
+	
+	void updateGroup(Group group, AsyncCallback<Void> asyncCallback) throws IllegalArgumentException;
+	
+	void deleteGroup(Group group, AsyncCallback<Void> asyncCallback) throws IllegalArgumentException;
 }

@@ -3,7 +3,6 @@ package ua.nure.pi.server;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Collection;
@@ -16,9 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import ua.nure.pi.Path;
-import ua.nure.pi.client.GreetingService;
 import ua.nure.pi.client.MainService;
-import ua.nure.pi.client.RegistrationService;
 import ua.nure.pi.dao.CompanyDAO;
 import ua.nure.pi.dao.FacultyGroupDAO;
 import ua.nure.pi.dao.LanguageDAO;
@@ -29,6 +26,7 @@ import ua.nure.pi.dao.StudentDAO;
 import ua.nure.pi.dao.UserDAO;
 import ua.nure.pi.entity.Company;
 import ua.nure.pi.entity.Faculty;
+import ua.nure.pi.entity.Group;
 import ua.nure.pi.entity.Language;
 import ua.nure.pi.entity.ProgramLanguage;
 import ua.nure.pi.entity.Purpose;
@@ -204,10 +202,8 @@ public class MainServiceImpl extends RemoteServiceServlet implements
 	@Override
 	public Collection<Student> getStudents()
 			throws IllegalArgumentException {
-		if(checkAdminRole()){
-			return studentDAO.getStudents();
-		}
-		throw new IllegalArgumentException("У вас недостаточно прав для просмотра этой информации.");
+		checkAdminRoleAndThrowEx();
+		return studentDAO.getStudents();
 	}
 	
 	/**
@@ -219,6 +215,11 @@ public class MainServiceImpl extends RemoteServiceServlet implements
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute(AppConstants.USER);
 		return user==null?false:user.isAdmin();
+	}
+	
+	private void checkAdminRoleAndThrowEx() throws IllegalArgumentException{
+		if(!checkAdminRole())
+			throw new IllegalArgumentException("У вас недостаточно прав для выполнения этого действия.");
 	}
 
 	/**
@@ -250,7 +251,47 @@ public class MainServiceImpl extends RemoteServiceServlet implements
 
 	@Override
 	public void updateFaculty(Faculty f) throws IllegalArgumentException {
+		checkAdminRoleAndThrowEx();
 		if(!facultyGroupDAO.updateFaculty(f))
 			throw new IllegalArgumentException("Не удалось обновить факультет.");
+	}
+
+	@Override
+	public long addFaculty(Faculty f) throws IllegalArgumentException {
+		checkAdminRoleAndThrowEx();
+		long id = facultyGroupDAO.insertFaculty(f);
+		if(id==-1)
+			throw new IllegalArgumentException("Не удалось вставить новый факультет");
+		return id;
+	}
+
+	@Override
+	public void deleteFaculty(Faculty f) throws IllegalArgumentException {
+		checkAdminRoleAndThrowEx();
+		if(!facultyGroupDAO.deleteFaculty(f))
+			throw new IllegalArgumentException("Не удалось удалить факультет");
+	}
+
+	@Override
+	public long addGroup(Group g) throws IllegalArgumentException {
+		checkAdminRoleAndThrowEx();
+		long id = facultyGroupDAO.insertGroup(g);
+		if(id == -1)
+			throw new IllegalArgumentException("Не удалось вставить новую группу");
+		return id;
+	}
+
+	@Override
+	public void updateGroup(Group g) throws IllegalArgumentException {
+		checkAdminRoleAndThrowEx();
+		if(!facultyGroupDAO.updateGroup(g))
+			throw new IllegalArgumentException("Не удалось обновить группу.");
+	}
+
+	@Override
+	public void deleteGroup(Group g) throws IllegalArgumentException {
+		checkAdminRoleAndThrowEx();
+		if(!facultyGroupDAO.deleteGroup(g))
+			throw new IllegalArgumentException("Не удалось удалить группу");		
 	}
 }

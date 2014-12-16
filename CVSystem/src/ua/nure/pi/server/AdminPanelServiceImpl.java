@@ -109,13 +109,13 @@ public class AdminPanelServiceImpl extends RemoteServiceServlet
 
 	@Override
 	public void setFaculties(Faculty faculty) throws IllegalArgumentException {
-		if(!facultyGroupDAO.insertFaculty(faculty))
+		if(-1 == facultyGroupDAO.insertFaculty(faculty))
 			throw new IllegalArgumentException("Невозможно добавить этот факультет");
 	}
 
 	@Override
 	public void setGroup(Group group) throws IllegalArgumentException {
-		if(!facultyGroupDAO.insertGroup(group))
+		if(-1 == facultyGroupDAO.insertGroup(group))
 			throw new IllegalArgumentException("Невозможно добавить эту групу");		
 	}
 
