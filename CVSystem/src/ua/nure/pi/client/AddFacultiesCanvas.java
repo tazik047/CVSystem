@@ -2,18 +2,12 @@ package ua.nure.pi.client;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
 
 import ua.nure.pi.entity.Faculty;
 import ua.nure.pi.entity.Group;
-import ua.nure.pi.entity.Student;
-
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.smartgwt.client.types.Alignment;
 import com.smartgwt.client.types.Side;
@@ -30,13 +24,8 @@ import com.smartgwt.client.widgets.grid.ListGrid;
 import com.smartgwt.client.widgets.grid.ListGridField;  
 import com.smartgwt.client.widgets.grid.ListGridRecord;
 import com.smartgwt.client.widgets.layout.HLayout;
-import com.smartgwt.client.widgets.layout.HStack;  
 import com.smartgwt.client.widgets.layout.VLayout;
-import com.smartgwt.client.widgets.menu.Menu;  
-import com.smartgwt.client.widgets.menu.MenuButton;  
 import com.smartgwt.client.widgets.menu.MenuItem;  
-import com.smartgwt.client.widgets.menu.events.ItemClickEvent;  
-import com.smartgwt.client.widgets.menu.events.ItemClickHandler;  
 import com.smartgwt.client.widgets.tab.Tab;
 import com.smartgwt.client.widgets.tab.TabSet;
 import com.smartgwt.client.widgets.tab.events.TabTitleChangedEvent;
@@ -175,10 +164,11 @@ public class AddFacultiesCanvas extends LoadingSimplePanel {
 						@Override
 						public void onSuccess(Long result) {
 							ListGridRecord rec = new ListGridRecord(); 
-					        rec.setAttribute("idField", 0);
-					        rec.setAttribute("title", "dfsdf");
+					        rec.setAttribute("idField", result);
+					        rec.setAttribute("title", g.getTitle());
 					        rec.setAttribute("edit", "");
 					        rec.setAttribute("del", "");
+					        rec.setAttribute("idFaculty", g.getFacultiesId());
 							grid.addData(rec);
 							/*
 							f.setFacultiesId(result);
@@ -249,6 +239,7 @@ public class AddFacultiesCanvas extends LoadingSimplePanel {
                     button.setHeight(18);  
                     button.setWidth(65); 
                     button.setTitle("Редактировать");  
+                    final ListGrid thisGrid = this;
                     button.addClickHandler(new ClickHandler() {  
                         public void onClick(ClickEvent event) {  
                             int id  = Integer.parseInt(record.getAttribute("idField"));
@@ -270,7 +261,8 @@ public class AddFacultiesCanvas extends LoadingSimplePanel {
 										
 										@Override
 										public void onSuccess(Void result) {
-											record.setAttribute("idField", g.getTitle());
+											thisGrid.setEditValue(thisGrid.getRecordIndex(record), 1, g.getTitle());
+											record.setAttribute("title", g.getTitle());
 										}
 										
 										@Override
@@ -289,14 +281,35 @@ public class AddFacultiesCanvas extends LoadingSimplePanel {
                     button1.setHeight(18);  
                     button1.setWidth(65); 
                     button1.setTitle("Удалить");  
+                    final ListGrid thisGrid = this;
                     button1.addClickHandler(new ClickHandler() {  
                         public void onClick(ClickEvent event) {  
-                            int id  = Integer.parseInt(record.getAttribute("idField"));
-                            for(Group g : f.getGroups())
-                            {
-                            	if(g.getGroupId()==id)
-                            	Window.alert(g.getTitle());
-                            }
+                        	int id  = Integer.parseInt(record.getAttribute("idField"));
+                            int idF  = Integer.parseInt(record.getAttribute("idFaculty"));
+                            final Group g = new Group();
+                            g.setFacultiesId(idF);
+                            g.setGroupId(id);
+                            g.setTitle(record.getAttribute("title"));
+                            SC.ask("Вы уверены?", "Вы точно хотите удалить безвозвртано группу " + g.getTitle() + "?", new BooleanCallback() {
+								
+								@Override
+								public void execute(Boolean value) {
+									if(!value) return;
+									adminPanelService.deleteGroup(g, new AsyncCallback<Void>() {
+										
+										@Override
+										public void onSuccess(Void result) {
+											thisGrid.removeData(record);
+											SC.say("Группа успешно удалена");
+										}
+										
+										@Override
+										public void onFailure(Throwable caught) {
+											SC.say("Ошибка при удалении группы " + g.getTitle(), caught.getMessage());
+										}
+									});
+								}
+							});
                         }  
                     }); 
                     return button1;  

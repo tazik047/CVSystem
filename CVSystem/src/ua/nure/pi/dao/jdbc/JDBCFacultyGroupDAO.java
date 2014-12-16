@@ -472,12 +472,11 @@ public abstract class JDBCFacultyGroupDAO implements FacultyGroupDAO {
 	}
 	
 	private void mapGroupForInsert(Group g, PreparedStatement pstmt)  throws SQLException{
-		pstmt.setString(1,g.getTitle());
-		pstmt.setLong(2, g.getFacultiesId());
+		mapGroupForInsert(g, g.getFacultiesId(),pstmt);
 	}
 	
 	private void mapGroupForInsert(Group g, long facultiesId, PreparedStatement pstmt) throws SQLException {
-		mapGroupForInsert(g, pstmt);
+		pstmt.setString(1, g.getTitle());
 		pstmt.setLong(2, facultiesId);
 		
 	}
@@ -560,7 +559,7 @@ public abstract class JDBCFacultyGroupDAO implements FacultyGroupDAO {
 		try {
 			con = getConnection();
 			result = insertGroup(group, con);
-			if(result == -1)
+			if(result != -1)
 				con.commit();
 		} catch (SQLException e) {
 			System.err.println("Can not insert group. " + e.getMessage());
@@ -581,8 +580,7 @@ public abstract class JDBCFacultyGroupDAO implements FacultyGroupDAO {
 		try {
 			pstmt = con.prepareStatement(SQL__INSERT_GROUPS, Statement.RETURN_GENERATED_KEYS);
 			mapGroupForInsert(g, g.getFacultiesId(), pstmt);
-			pstmt.addBatch();
-			if(pstmt.execute()) {
+			if(pstmt.executeUpdate() == 1) {
 				ResultSet rs = pstmt.getGeneratedKeys();
 				if(rs.next())
 					result = rs.getLong(1);
