@@ -2,7 +2,7 @@
 	position: fixed;
 	width: 98%;
 	background-color: rgba(157, 95, 95, 0.43);
-	height: 30px;
+	height: 44px;
 	top: 0px;
 	margin-left: 1%;
 	border-radius: 0px 0px 10px 10px;
@@ -17,7 +17,7 @@
 }
 
 .forAdminFix{
-	margin-top:30px;
+	margin-top:44px;
 }
 
 .triangle{

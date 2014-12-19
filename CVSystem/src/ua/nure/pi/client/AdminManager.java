@@ -2,8 +2,12 @@ package ua.nure.pi.client;
 
 import ua.nure.pi.entity.User;
 
+import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.DOM;
+import com.google.gwt.user.client.Event;
+import com.google.gwt.user.client.EventListener;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AbsolutePanel;
@@ -15,6 +19,7 @@ import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.user.client.ui.Widget;
 
 public class AdminManager {
 
@@ -178,35 +183,47 @@ public class AdminManager {
 	}
 
 	private static void setAdminFunc(){
-		HorizontalPanel root = new HorizontalPanel();
-		final Button[] buttons = new Button[2];
-		buttons[0] = new Button("Получить списки резюме");
-		buttons[1] = new Button("Факультеты");
-		for(int i=0; i<buttons.length; i++){
-			buttons[i].setStyleName("Buttons");
-			root.add(buttons[i]);
-		}
-		buttons[0].addClickHandler(new ClickHandler() {
-			
-			@Override
-			public void onClick(ClickEvent event) {
-				buttons[0].setFocus(false);
-				if(!uiManager.isSetted(TablePanel.class.getName()))
-					uiManager.setPanel(new TablePanel(mainService));
-			}
-		});
+		createMenu();
+
+		Element item = DOM.getElementById("menu1");
+		item.setInnerText("Получить списки резюме");
+		Event.sinkEvents(item, Event.ONCLICK);
+	    Event.setEventListener(item, new EventListener() {
+
+	        @Override
+	        public void onBrowserEvent(Event event) {
+	             if(Event.ONCLICK == event.getTypeInt()) {
+	            	 if(!uiManager.isSetted(TablePanel.class.getName()))
+	            		 uiManager.setPanel(new TablePanel(mainService));
+	             }
+
+	        }
+	    });
 		
-		buttons[1].addClickHandler(new ClickHandler() {
-			
-			@Override
-			public void onClick(ClickEvent event) {
-				buttons[1].setFocus(false);
-				if(!uiManager.isSetted(AddFacultiesCanvas.class.getName()))
-					uiManager.setPanel(new AddFacultiesCanvas(mainService));
-			}
-		});
+		item = DOM.getElementById("menu2");
+		item.setInnerText("Работа с БД");
 		
-		adminPanel.add(root);
+		item = DOM.getElementById("menu2.1");
+		item.setInnerText("Факультеты");
+		Event.sinkEvents(item, Event.ONCLICK);
+	    Event.setEventListener(item, new EventListener() {
+
+	        @Override
+	        public void onBrowserEvent(Event event) {
+	             if(Event.ONCLICK == event.getTypeInt()) {
+	            	 if(!uiManager.isSetted(AddFacultiesCanvas.class.getName()))
+	 					uiManager.setPanel(new AddFacultiesCanvas(mainService));
+	             }
+
+	        }
+	    });
+		
+		item = DOM.getElementById("menu2.2");
+		item.setInnerText("Объединение технологий");
+		
+		item = DOM.getElementById("menu3");
+		item.setInnerText("Компании");
+
 	}
 	
 	
@@ -223,6 +240,32 @@ public class AdminManager {
 	public static native boolean isShow()/*-{
 		return $wnd.$('.profilePanel').is(':visible');
 	}-*/;
+	
+	private static native void createMenu() /*-{
+	var res = '<div id = "cssmenu"><ul>';
+	res+='<li><div id="menu1"></div></li>'+
+		 '<li class="has-sub"><div id="menu2"></div>'+
+			'<ul>'+
+				'<li><div id="menu2.1"></div></li>'+
+				'<li><div id="menu2.2"></div></li>'+
+			'</ul>'+
+		 '</li>'+
+		 '<li><div id="menu3"></div></li>';
+		
+	res+='</ul></div>';
+	
+	$wnd.$('#lifjhil').prepend(res);
+	
+	var link  = $wnd.document.createElement('link');
+    link.rel  = 'stylesheet';
+    link.type = 'text/css';
+    link.href = 'css/cssmenu.css';
+    $wnd.document.getElementsByTagName('head')[0].appendChild(link);
+    
+	var script = $wnd.document.createElement("SCRIPT");
+	script.src = "js/cssmenu.js";
+	$wnd.document.getElementsByTagName("HEAD")[0].appendChild(script);
+}-*/;
 	
 	////////////////////////////////////////////////////////////////////////
 }
