@@ -35,7 +35,7 @@ public class MYSQLDAOFactory extends DAOFactory {
 			ConfigParser.parse(MYSQLDAOFactory.class, 
 					loader.getResource("properties.ini").getPath().replaceAll("%20", " "));
 			DRIVER = "com.mysql.jdbc.Driver";
-			sqlLink = "jdbc:mysql://localhost:3306/cvsystem";
+			//sqlLink = "jdbc:mysql://localhost:3306/cvsystem";
 			sqlLink = "jdbc:mysql://"
 					+host + ":"+ port + "/"
 					+database;//user="+user+";password="+password;
@@ -58,7 +58,7 @@ public class MYSQLDAOFactory extends DAOFactory {
 	//private static final String DRIVER = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
 	
 	/**
-	 * method to create MSSQL connections
+	 * method to create MYSQL connections
 	 * 
 	 * @return
 	 * @throws SQLException

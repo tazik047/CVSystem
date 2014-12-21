@@ -21,11 +21,72 @@ SET time_zone = "+00:00";
 --
 
 --
--- Дамп данных таблицы `companies`
+-- Дамп данных таблицы `faculties`
 --
 
-INSERT INTO `companies` (`CompaniesId`, `Title`, `Phone`, `PhoneRespPerson`, `Email`, `FIORespPerson`, `Skype`, `Active`) VALUES
-(3, 'OOO "Apple"', '1111111111', '3333333333', 'example@gmail.com', 'Стив', 'skypelogin', 1);
+INSERT INTO `faculties` (`FacultiesId`, `Title`) VALUES
+(4, 'ПММ'),
+(5, 'ФНІГ');
+
+--
+-- Дамп данных таблицы `groups`
+--
+
+INSERT INTO `groups` (`GroupsId`, `FacultiesId`, `Title`) VALUES
+(1, 4, 'ЕК-11-1'),
+(2, 4, 'ІНФу-12-1'),
+(3, 4, 'ІНФ-11-1'),
+(4, 4, 'ІНФ-11-2'),
+(5, 4, 'ПМу-12-1'),
+(6, 4, 'ПМ-11-1'),
+(7, 4, 'САу-12-1'),
+(8, 4, 'СА-11-1'),
+(9, 5, 'ЕКи-11-2'),
+(10, 5, 'ЕКи-11-3');
+
+--
+-- Дамп данных таблицы `purposes`
+--
+
+INSERT INTO `purposes` (`PurposesId`, `Title`, `TitleEN`, `TitleUA`) VALUES
+(1, 'Java Junior', NULL, NULL),
+(2, 'C# Junior', NULL, NULL),
+(3, 'C# Middle', NULL, NULL),
+(4, 'C# Senior', NULL, NULL),
+(5, 'Senior Java developer', NULL, NULL),
+(6, 'Senior .Net developer co знанием frontend-технологий', NULL, NULL),
+(7, 'Middle .Net / SharePoint developer', NULL, NULL),
+(8, 'PHP/CMS developer', NULL, NULL),
+(9, 'Requirements Analyst/Sales', NULL, NULL),
+(10, 'Project Manager', NULL, NULL),
+(12, '3d дизайнер', NULL, NULL),
+(13, 'Junior Java developer', NULL, NULL),
+(15, 'QA Engineer', NULL, NULL),
+(16, 'Junior C++ developer', NULL, NULL),
+(17, 'Junior front-end developer', NULL, NULL),
+(18, 'ыфвфыв', NULL, NULL);
+
+--
+-- Дамп данных таблицы `students`
+--
+
+INSERT INTO `students` (`StudentsId`, `Surname`, `Firstname`, `Patronymic`, `Email`, `Phone`, `Birthday`, `GroupsId`, `Address`, `Skype`) VALUES
+(4, 'Решетняк', 'Евгений', 'Андреевич', 'ugene.reshetnyak@gmail.com', '0677373134', '1993-11-05', 2, 'смт. Солоницевка, Ленина, 11, кв.39', 'ugene.reshenyak'),
+(6, 'Березина', 'Татьяна', 'Игоревна', 'berezina_tanya@gmail.com', '0931822605', '1993-11-30', 2, 'г. Харьков, пр. Славы 7, кв.60 ', NULL),
+(7, 'Бабич', 'Владимир', 'Иванович', 'vladimirbabich18@gmail.com', '0501071467', '1994-05-14', 4, 'г. Харьков, ул. Целиноградская, 58, к.315', 'vladimirbabich100'),
+(8, 'Циркуленко', 'Владислав', 'Олегович', 'murmundir@gmail.ru', '0957894974', '1993-02-17', 2, 'г. Харьков, ул. Целеноградьська 58', 'umbra__dei'),
+(9, 'Данильченко', 'Дмитрий', 'Сергеевич', 'vspervyj@gmail.com', '0668372715', '1994-11-06', 4, 'г. Харьков, Целиноградская, 58, комн. 315', 'vspervyj'),
+(10, 'Винокурова', 'Юлия', 'Валерьевна', 'vinokurova.juli@gmail.com', '0982809325', '1994-08-10', 4, 'г.Харьков, ул.Клочковская, 101 В, кв.55', 'vinokurova335'),
+(11, 'Корженко', 'Виталий', 'Влодимирович', 'university.korzenko.vitaliy@gmail.com', '0505997257', '1993-12-16', 4, 'г. Харьков, ул. Дмитриевская 22 кв.18', 'cessathion13'),
+(12, 'Третьяк', 'Антон', 'Олегович', 'tretjak.anton@gmail.com', '0639694209', '1994-07-24', 4, 'Харьковская область, г. Дергачи, пер.Комунальный д.1', 'tretjak.anton'),
+(13, 'Рогулина', 'Анна', 'Александровна', 'arogulina@gmail.com', '0979309538', '1993-04-19', 4, 'г.Харьков, пр.Победы, 56, кв.283', 'ane4ka.rogulina'),
+(14, 'Семёнова', 'Елизвета', 'Юрьевна', 'VincentSlimer@yandex.ru', '0991622212', '1994-01-29', 4, 'Харьков, ул. Чугуевская д. 27А кв. 84', 'certain_slimer'),
+(15, 'Кучеренко', 'Наталья', 'Петровна', 'natalya-ok@yandex.ru', '0958205171', '1993-04-27', 2, 'г. Харьков, Целиноградская, 58', 'formulaw'),
+(16, 'Косяк', 'Александр', 'Александрович', 'blace90@mail.ru', '0982345665', '1994-09-22', 4, 'г.Харьков, ул.Целиноградская, 58', 'nightshade66'),
+(17, 'Филимонов', 'Юрий', 'Геннадьевич', 'filimonovyurii1@gmail.com', '0969049050', '1992-09-28', 2, 'пр. 50 -летия ВЛКСМ д.32 кв.66', 'filimoonovyurii1'),
+(18, 'Иванов', 'Иван', NULL, 'example@gmail.com', '0501458872', '2014-11-24', 9, 'г. Харьков, пр.Ленина, 9, кв.3', 'skypelogin'),
+(19, 'ываыва', 'ываыва', NULL, 'xample@gmail.com', '3443333333', '2014-11-25', 4, 'ывыва', NULL);
+
 
 --
 -- Дамп данных таблицы `cvs`
@@ -71,29 +132,6 @@ INSERT INTO `educations` (`EducationsId`, `StartYear`, `EndYear`, `NameOfInstitu
 (19, 2011, 2015, 'Харьковский национальный университет радио-электроники', 'Информатика', NULL, 17),
 (20, 2013, 2017, 'хнурэ', 'пи', 'кн', 19);
 
---
--- Дамп данных таблицы `faculties`
---
-
-INSERT INTO `faculties` (`FacultiesId`, `Title`) VALUES
-(4, 'ПММ'),
-(5, 'ФНІГ');
-
---
--- Дамп данных таблицы `groups`
---
-
-INSERT INTO `groups` (`GroupsId`, `FacultiesId`, `Title`) VALUES
-(1, 4, 'ЕК-11-1'),
-(2, 4, 'ІНФу-12-1'),
-(3, 4, 'ІНФ-11-1'),
-(4, 4, 'ІНФ-11-2'),
-(5, 4, 'ПМу-12-1'),
-(6, 4, 'ПМ-11-1'),
-(7, 4, 'САу-12-1'),
-(8, 4, 'СА-11-1'),
-(9, 5, 'ЕКи-11-2'),
-(10, 5, 'ЕКи-11-3');
 
 --
 -- Дамп данных таблицы `languages`
@@ -319,55 +357,12 @@ INSERT INTO `programlanguagescvs` (`ProgramLanguagesCVsId`, `ProgramLanguagesId`
 (136, 60, 19, 2);
 
 --
--- Дамп данных таблицы `purposes`
---
-
-INSERT INTO `purposes` (`PurposesId`, `Title`, `TitleEN`, `TitleUA`) VALUES
-(1, 'Java Junior', NULL, NULL),
-(2, 'C# Junior', NULL, NULL),
-(3, 'C# Middle', NULL, NULL),
-(4, 'C# Senior', NULL, NULL),
-(5, 'Senior Java developer', NULL, NULL),
-(6, 'Senior .Net developer co знанием frontend-технологий', NULL, NULL),
-(7, 'Middle .Net / SharePoint developer', NULL, NULL),
-(8, 'PHP/CMS developer', NULL, NULL),
-(9, 'Requirements Analyst/Sales', NULL, NULL),
-(10, 'Project Manager', NULL, NULL),
-(12, '3d дизайнер', NULL, NULL),
-(13, 'Junior Java developer', NULL, NULL),
-(15, 'QA Engineer', NULL, NULL),
-(16, 'Junior C++ developer', NULL, NULL),
-(17, 'Junior front-end developer', NULL, NULL),
-(18, 'ыфвфыв', NULL, NULL);
-
---
 -- Дамп данных таблицы `sertificats`
 --
 
 INSERT INTO `sertificats` (`SertificatsId`, `Name`, `Year`, `CVsId`) VALUES
 (1, 'Сертификат об окончании курса 3D графики Autodesk Maya', 2013, 10),
 (2, 'ждолждо', 2014, 19);
-
---
--- Дамп данных таблицы `students`
---
-
-INSERT INTO `students` (`StudentsId`, `Surname`, `Firstname`, `Patronymic`, `Email`, `Phone`, `Birthday`, `GroupsId`, `Address`, `Skype`) VALUES
-(4, 'Решетняк', 'Евгений', 'Андреевич', 'ugene.reshetnyak@gmail.com', '0677373134', '1993-11-05', 2, 'смт. Солоницевка, Ленина, 11, кв.39', 'ugene.reshenyak'),
-(6, 'Березина', 'Татьяна', 'Игоревна', 'berezina_tanya@gmail.com', '0931822605', '1993-11-30', 2, 'г. Харьков, пр. Славы 7, кв.60 ', NULL),
-(7, 'Бабич', 'Владимир', 'Иванович', 'vladimirbabich18@gmail.com', '0501071467', '1994-05-14', 4, 'г. Харьков, ул. Целиноградская, 58, к.315', 'vladimirbabich100'),
-(8, 'Циркуленко', 'Владислав', 'Олегович', 'murmundir@gmail.ru', '0957894974', '1993-02-17', 2, 'г. Харьков, ул. Целеноградьська 58', 'umbra__dei'),
-(9, 'Данильченко', 'Дмитрий', 'Сергеевич', 'vspervyj@gmail.com', '0668372715', '1994-11-06', 4, 'г. Харьков, Целиноградская, 58, комн. 315', 'vspervyj'),
-(10, 'Винокурова', 'Юлия', 'Валерьевна', 'vinokurova.juli@gmail.com', '0982809325', '1994-08-10', 4, 'г.Харьков, ул.Клочковская, 101 В, кв.55', 'vinokurova335'),
-(11, 'Корженко', 'Виталий', 'Влодимирович', 'university.korzenko.vitaliy@gmail.com', '0505997257', '1993-12-16', 4, 'г. Харьков, ул. Дмитриевская 22 кв.18', 'cessathion13'),
-(12, 'Третьяк', 'Антон', 'Олегович', 'tretjak.anton@gmail.com', '0639694209', '1994-07-24', 4, 'Харьковская область, г. Дергачи, пер.Комунальный д.1', 'tretjak.anton'),
-(13, 'Рогулина', 'Анна', 'Александровна', 'arogulina@gmail.com', '0979309538', '1993-04-19', 4, 'г.Харьков, пр.Победы, 56, кв.283', 'ane4ka.rogulina'),
-(14, 'Семёнова', 'Елизвета', 'Юрьевна', 'VincentSlimer@yandex.ru', '0991622212', '1994-01-29', 4, 'Харьков, ул. Чугуевская д. 27А кв. 84', 'certain_slimer'),
-(15, 'Кучеренко', 'Наталья', 'Петровна', 'natalya-ok@yandex.ru', '0958205171', '1993-04-27', 2, 'г. Харьков, Целиноградская, 58', 'formulaw'),
-(16, 'Косяк', 'Александр', 'Александрович', 'blace90@mail.ru', '0982345665', '1994-09-22', 4, 'г.Харьков, ул.Целиноградская, 58', 'nightshade66'),
-(17, 'Филимонов', 'Юрий', 'Геннадьевич', 'filimonovyurii1@gmail.com', '0969049050', '1992-09-28', 2, 'пр. 50 -летия ВЛКСМ д.32 кв.66', 'filimoonovyurii1'),
-(18, 'Иванов', 'Иван', NULL, 'example@gmail.com', '0501458872', '2014-11-24', 9, 'г. Харьков, пр.Ленина, 9, кв.3', 'skypelogin'),
-(19, 'ываыва', 'ываыва', NULL, 'xample@gmail.com', '3443333333', '2014-11-25', 4, 'ывыва', NULL);
 
 --
 -- Дамп данных таблицы `sysdiagrams`
@@ -394,6 +389,13 @@ INSERT INTO `workexps` (`WorkExpsId`, `StartDate`, `Duration`, `TypeDuration`, `
 (7, 2014, 8, 1, 'Promo-prom', '3d дизайнер', 6, NULL),
 (8, 2014, 3, 1, 'Infostroy Ltd', 'C# Junior (стажер)', 13, NULL),
 (9, 2014, 0, 0, '644', '465', 19, 1);
+
+--
+-- Дамп данных таблицы `companies`
+--
+
+INSERT INTO `companies` (`CompaniesId`, `Title`, `Phone`, `PhoneRespPerson`, `Email`, `FIORespPerson`, `Skype`, `Active`) VALUES
+(3, 'OOO "Apple"', '1111111111', '3333333333', 'example@gmail.com', 'Стив', 'skypelogin', 1);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
