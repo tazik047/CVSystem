@@ -174,12 +174,12 @@ public abstract class JDBCCVDAO implements CVDAO {
 	@Override
 	public Collection<CV> searchCV(Collection<Language> languages,
 			Collection<ProgramLanguage> planguages,
-			Collection<Purpose> purposes ) {
+			Collection<Purpose> purposes, int start, int end ) {
 		Collection<CV> result = null;
 		Connection con = null;
 		try {
 			con = getConnection();
-			result = searchCV(languages, planguages, purposes, con);
+			result = searchCV(languages, planguages, purposes, start, end, con);
 		} catch (SQLException e) {
 			System.err.println("Can not find cvs." + e.getMessage());
 		} finally {
@@ -193,7 +193,7 @@ public abstract class JDBCCVDAO implements CVDAO {
 		return result;
 	}
 	
-	private void createQuery(StringBuilder query, String title, Collection<Long> objs){
+	protected void createQuery(StringBuilder query, String title, Collection<Long> objs){
 		query.append(" AND (");
 		int ind = 0;
 		for(long i : objs){
@@ -205,13 +205,14 @@ public abstract class JDBCCVDAO implements CVDAO {
 		query.append(')');
 	}
 	
-	private Collection<CV> searchCV(Collection<Language> languages,
+	
+	protected Collection<CV> searchCV(Collection<Language> languages,
 			Collection<ProgramLanguage> planguages,
-			Collection<Purpose> purposes, Connection con ) throws SQLException{
+			Collection<Purpose> purposes, int start, int end, Connection con) throws SQLException{
 		Collection<CV> result = null;
 		PreparedStatement pstmt = null;
 		try {
-			StringBuilder query = new StringBuilder(SQL__SEARCH_CV);
+			StringBuilder query = new StringBuilder();
 			
 			if(languages!= null && languages.size()!=0){
 				Collection<Long> langIds = new ArrayList<Long>();
@@ -234,8 +235,10 @@ public abstract class JDBCCVDAO implements CVDAO {
 				createQuery(query, "p." + MapperParameters.PURPOSE__ID, purpIds);
 			}
 			
-			Statement st = con.createStatement();
-			ResultSet rs = st.executeQuery(query.toString());
+			query.append(" ORDER BY cv."+MapperParameters.CV__ID);
+			
+			pstmt = con.prepareStatement(createInterval(start, end, query));
+			ResultSet rs = pstmt.executeQuery();
 			result = new ArrayList<CV>();
 			while(rs.next()){
 				result.add(getCv(rs.getLong(MapperParameters.CV__ID)));
@@ -255,5 +258,7 @@ public abstract class JDBCCVDAO implements CVDAO {
 		return result;
 	}
 	
+	protected abstract String createInterval(int start, int end, StringBuilder query);
+
 	protected abstract Connection getConnection() throws SQLException;
 }

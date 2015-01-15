@@ -23,5 +23,5 @@ public interface CVDAO {
 			
 	Collection<CV> searchCV(Collection<Language> languages,
 			Collection<ProgramLanguage> planguages,
-			Collection<Purpose> purposes );
+			Collection<Purpose> purposes, int start, int end );
 }
