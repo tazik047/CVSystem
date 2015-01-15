@@ -84,9 +84,19 @@ public class MainEntryPoint implements EntryPoint {
     rootPanel.add(btnNewButton_3);
     
     
-    Button btnNewButton_1 = new Button("Списки резюме");
+    final Button btnNewButton_1 = new Button("Списки резюме");
     btnNewButton_1.setStyleName("buttons");
     rootPanel.add(btnNewButton_1);
+    btnNewButton_1.addClickHandler(new ClickHandler() {
+		
+		@Override
+		public void onClick(ClickEvent event) {
+			btnNewButton_1.setFocus(false);
+			if(!uiManager.isSetted(SearchSimplePanel.class.getName()))
+				uiManager.setPanel(new SearchSimplePanel(mainService));
+			
+		}
+	});
     
 
     Button btnNewButton_2 = new Button("Статистика");

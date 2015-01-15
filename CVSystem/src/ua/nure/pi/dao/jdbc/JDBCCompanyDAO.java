@@ -224,8 +224,10 @@ public abstract class JDBCCompanyDAO implements CompanyDAO {
 			try {
 				con = getConnection();
 				result = activateCompany(company, con);
-				if(result)
+				if(result){
 					con.commit();
+					company.setActivate(true);
+				}
 			} catch (SQLException e) {
 				System.err.println("Can not activate company. " + e.getMessage());
 			} finally {
@@ -290,7 +292,6 @@ public abstract class JDBCCompanyDAO implements CompanyDAO {
 				PreparedStatement pstmt) throws SQLException {
 			pstmt.setBoolean(1, true);
 			pstmt.setLong(2, company.getId());
-			company.setActivate(true);
 		}
 	
 		protected abstract Connection getConnection() throws SQLException;

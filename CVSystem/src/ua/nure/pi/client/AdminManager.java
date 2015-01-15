@@ -223,6 +223,20 @@ public class AdminManager {
 		
 		item = DOM.getElementById("menu3");
 		item.setInnerText("Компании");
+		
+		item = DOM.getElementById("menu3.1");
+		item.setInnerText("Активация");
+		Event.setEventListener(item, new EventListener() {
+
+	        @Override
+	        public void onBrowserEvent(Event event) {
+	             if(Event.ONCLICK == event.getTypeInt()) {
+	            	 if(!uiManager.isSetted(ActivateCompanyPanel.class.getName()))
+	 					uiManager.setPanel(new ActivateCompanyPanel(mainService));
+	             }
+
+	        }
+	    });
 
 	}
 	
@@ -242,30 +256,34 @@ public class AdminManager {
 	}-*/;
 	
 	private static native void createMenu() /*-{
-	var res = '<div id = "cssmenu"><ul>';
-	res+='<li><div id="menu1"></div></li>'+
-		 '<li class="has-sub"><div id="menu2"></div>'+
-			'<ul>'+
-				'<li><div id="menu2.1"></div></li>'+
-				'<li><div id="menu2.2"></div></li>'+
-			'</ul>'+
-		 '</li>'+
-		 '<li><div id="menu3"></div></li>';
+		var res = '<div id = "cssmenu"><ul>';
+		res+='<li><div id="menu1"></div></li>'+
+			 '<li class="has-sub"><div id="menu2"></div>'+
+				'<ul>'+
+					'<li><div id="menu2.1"></div></li>'+
+					'<li><div id="menu2.2"></div></li>'+
+				'</ul>'+
+			 '</li>'+
+			 '<li class="has-sub"><div id="menu3"></div>' +
+				 '<ul>' +
+				 	'<li><div id="menu3.1"></div></li>'+
+				 '</ul>' +
+			 '</li>';
+			
+		res+='</ul></div>';
 		
-	res+='</ul></div>';
-	
-	$wnd.$('#lifjhil').prepend(res);
-	
-	var link  = $wnd.document.createElement('link');
-    link.rel  = 'stylesheet';
-    link.type = 'text/css';
-    link.href = 'css/cssmenu.css';
-    $wnd.document.getElementsByTagName('head')[0].appendChild(link);
-    
-	var script = $wnd.document.createElement("SCRIPT");
-	script.src = "js/cssmenu.js";
-	$wnd.document.getElementsByTagName("HEAD")[0].appendChild(script);
-}-*/;
+		$wnd.$('#lifjhil').prepend(res);
+		
+		var link  = $wnd.document.createElement('link');
+	    link.rel  = 'stylesheet';
+	    link.type = 'text/css';
+	    link.href = 'css/cssmenu.css';
+	    $wnd.document.getElementsByTagName('head')[0].appendChild(link);
+	    
+		var script = $wnd.document.createElement("SCRIPT");
+		script.src = "js/cssmenu.js";
+		$wnd.document.getElementsByTagName("HEAD")[0].appendChild(script);
+	}-*/;
 	
 	////////////////////////////////////////////////////////////////////////
 }

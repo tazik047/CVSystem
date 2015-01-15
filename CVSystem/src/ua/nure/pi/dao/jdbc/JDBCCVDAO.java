@@ -4,16 +4,24 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Collection;
 
 import ua.nure.pi.dao.CVDAO;
 import ua.nure.pi.dao.DAOFactory;
 import ua.nure.pi.entity.CV;
+import ua.nure.pi.entity.Language;
+import ua.nure.pi.entity.ProgramLanguage;
+import ua.nure.pi.entity.Purpose;
 import ua.nure.pi.parameter.MapperParameters;
 
 public abstract class JDBCCVDAO implements CVDAO {
 	
 	protected String SQL__INSERT_CV; //= "INSERT INTO CVs(PurposesId, Qualities, Others, DateStamp, CVsId) VALUES(?, ?, ?, getdate(), ?)";
 	protected String SQL__SELECT_CV = "SELECT * FROM CVs WHERE CVsId=?";
+	protected String SQL__SEARCH_CV = "select distinct cv.CVsId from CVs cv,LanguagesCVs lcv, ProgramLanguagesCVs pcv, Purposes p"
+			+ " WHERE cv.CVsId=lcv.CVsId and pcv.CVsId=cv.CVsId and p.PurposesId=cv.PurposesId";
 
 	
 	protected DAOFactory jdbcDAOFactory;
@@ -122,6 +130,117 @@ public abstract class JDBCCVDAO implements CVDAO {
 				result.setQualities(rs.getString(MapperParameters.CV__QUALITIES));
 				result.setOthers(rs.getString(MapperParameters.CV__OTHERS));
 			}
+		} catch (SQLException e) {
+			throw e;
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					System.err.println("Can not close statement. " + e.getMessage());
+				}
+			}
+		}
+		return result;
+	}
+	
+	@Override
+	public Collection<CV> getCvs(Collection<Long> cvsids) {
+		Collection<CV> result = null;
+		Connection con = null;
+		try {
+			con = getConnection();
+			result = getCvs(cvsids, con);
+		} catch (SQLException e) {
+			System.err.println("Can not get cvs." + e.getMessage());
+		} finally {
+			try {
+				if (con != null)
+					con.close();
+			} catch (SQLException e) {
+				System.err.println("Can not close connection. " + e.getMessage());
+			}
+		}
+		return result;
+	}
+	
+	private Collection<CV> getCvs(Collection<Long> cvsids, Connection con) throws SQLException {
+		Collection<CV> res = new ArrayList<CV>();
+		for(long i : cvsids)
+			res.add(getCv(i, con));
+		return res;
+	}
+	
+	@Override
+	public Collection<CV> searchCV(Collection<Language> languages,
+			Collection<ProgramLanguage> planguages,
+			Collection<Purpose> purposes ) {
+		Collection<CV> result = null;
+		Connection con = null;
+		try {
+			con = getConnection();
+			result = searchCV(languages, planguages, purposes, con);
+		} catch (SQLException e) {
+			System.err.println("Can not find cvs." + e.getMessage());
+		} finally {
+			try {
+				if (con != null)
+					con.close();
+			} catch (SQLException e) {
+				System.err.println("Can not close connection. " + e.getMessage());
+			}
+		}
+		return result;
+	}
+	
+	private void createQuery(StringBuilder query, String title, Collection<Long> objs){
+		query.append(" AND (");
+		int ind = 0;
+		for(long i : objs){
+			if(ind+1==objs.size())
+				query.append(String.format("%s = %d", title, i));
+			else
+				query.append(String.format("%s = %d OR ", title, i));
+		}
+		query.append(')');
+	}
+	
+	private Collection<CV> searchCV(Collection<Language> languages,
+			Collection<ProgramLanguage> planguages,
+			Collection<Purpose> purposes, Connection con ) throws SQLException{
+		Collection<CV> result = null;
+		PreparedStatement pstmt = null;
+		try {
+			StringBuilder query = new StringBuilder(SQL__SEARCH_CV);
+			
+			if(languages!= null && languages.size()!=0){
+				Collection<Long> langIds = new ArrayList<Long>();
+				for(Language l : languages)
+					langIds.add(l.getId());
+				createQuery(query, "lcv." + MapperParameters.LANGUAGE__ID, langIds);
+			}
+			
+			if(planguages!= null && planguages.size()!=0){
+				Collection<Long> plangIds = new ArrayList<Long>();
+				for(ProgramLanguage l : planguages)
+					plangIds.add(l.getId());
+				createQuery(query, "pcv." + MapperParameters.PROGRAM_LANGUAGE__ID, plangIds);
+			}
+			
+			if(purposes!= null && purposes.size()!=0){
+				Collection<Long> purpIds = new ArrayList<Long>();
+				for(Purpose l : purposes)
+					purpIds.add(l.getId());
+				createQuery(query, "p." + MapperParameters.PURPOSE__ID, purpIds);
+			}
+			
+			Statement st = con.createStatement();
+			ResultSet rs = st.executeQuery(query.toString());
+			result = new ArrayList<CV>();
+			while(rs.next()){
+				result.add(getCv(rs.getLong(MapperParameters.CV__ID)));
+			}
+			
 		} catch (SQLException e) {
 			throw e;
 		} finally {
