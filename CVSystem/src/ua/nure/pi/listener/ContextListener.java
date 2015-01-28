@@ -4,6 +4,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
+import ua.nure.pi.dao.CVDAO;
 import ua.nure.pi.dao.CompanyDAO;
 import ua.nure.pi.dao.DAOFactory;
 import ua.nure.pi.dao.FacultyGroupDAO;
@@ -35,6 +36,7 @@ public class ContextListener implements ServletContextListener {
 		setStudentAttribute(servletContext);
 		setPassAttribute(servletContext);
 		setCompanyAttribute(servletContext);
+		setCVAttribute(servletContext);
 	}
 
 	private void setPassAttribute(ServletContext servletContext) {
@@ -91,5 +93,11 @@ public class ContextListener implements ServletContextListener {
 		CompanyDAO companyDAO = DAOFactory.getDAOFactory(DBType)
 				.getCompanyDAO();
 		servletContext.setAttribute(AppConstants.COMPANY_DAO, companyDAO);
+	}
+	
+	private void setCVAttribute(ServletContext servletContext) {
+		CVDAO cvDAO = DAOFactory.getDAOFactory(DBType)
+				.getCVDAO();
+		servletContext.setAttribute(AppConstants.CV_DAO, cvDAO);
 	}
 }

@@ -18,7 +18,7 @@ public abstract class JDBCCompanyDAO implements CompanyDAO {
 	protected String SQL__SELECT_ALL_COMPANY = "SELECT * FROM Companies";
 	protected String SQL__INSERT_COMPANY = "INSERT INTO Companies(Title, Phone, PhoneRespPerson, "
 			+ "Email, FIORespPerson, Skype, Active, CompaniesId) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
-	protected String SQL__SELECT_NOT_ACTIVE_COMPANY = "SELECT * FROM Companies WHERE Atcive = 1";
+	protected String SQL__SELECT_NOT_ACTIVE_COMPANY = "SELECT * FROM Companies WHERE Active = 1";
 	protected String SQL__ACTIVATE_COMPANY = "UPDATE Companies SET Active=? WHERE CompaniesId=?";
 	
 	protected DAOFactory jdbcDAOFaactory;

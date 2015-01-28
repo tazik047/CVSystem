@@ -16,6 +16,7 @@ import javax.servlet.http.HttpSession;
 
 import ua.nure.pi.Path;
 import ua.nure.pi.client.MainService;
+import ua.nure.pi.dao.CVDAO;
 import ua.nure.pi.dao.CompanyDAO;
 import ua.nure.pi.dao.FacultyGroupDAO;
 import ua.nure.pi.dao.LanguageDAO;
@@ -24,6 +25,7 @@ import ua.nure.pi.dao.ProgramLanguageDAO;
 import ua.nure.pi.dao.PurposeDAO;
 import ua.nure.pi.dao.StudentDAO;
 import ua.nure.pi.dao.UserDAO;
+import ua.nure.pi.entity.CV;
 import ua.nure.pi.entity.Company;
 import ua.nure.pi.entity.Faculty;
 import ua.nure.pi.entity.Group;
@@ -60,6 +62,8 @@ public class MainServiceImpl extends RemoteServiceServlet implements
 	
 	private CompanyDAO companyDAO;
 	
+	private CVDAO cvDAO; 
+	
 	@Override
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
@@ -85,6 +89,7 @@ public class MainServiceImpl extends RemoteServiceServlet implements
 		passDAO = (PassDAO) servletContext.getAttribute(AppConstants.PASS_DAO);
 		userDAO = (UserDAO) servletContext.getAttribute(AppConstants.USER_DAO);
 		companyDAO = (CompanyDAO) servletContext.getAttribute(AppConstants.COMPANY_DAO);
+		cvDAO = (CVDAO) servletContext.getAttribute(AppConstants.CV_DAO);
 		
 		if (facultyGroupDAO == null) {
 			throw new IllegalStateException("FacultyGroupDAO attribute is not exists.");
@@ -117,6 +122,9 @@ public class MainServiceImpl extends RemoteServiceServlet implements
 			throw new IllegalStateException("CompanyDAO attribute is not exists.");
 		}
 		
+		if (cvDAO == null) {
+			throw new IllegalStateException("CVDAO attribute is not exists.");
+		}
 	}
 	
 	  public Collection<Faculty> getFaculties() throws IllegalArgumentException {
@@ -294,4 +302,25 @@ public class MainServiceImpl extends RemoteServiceServlet implements
 		if(!facultyGroupDAO.deleteGroup(g))
 			throw new IllegalArgumentException("Не удалось удалить группу");		
 	}
+
+	@Override
+	public Collection<Company> getNotActivedCompany()
+			throws IllegalArgumentException {
+		checkAdminRoleAndThrowEx();
+		Collection<Company> companies = companyDAO.getNotActiveCompanies();
+		if(companies==null)
+			throw new IllegalArgumentException("Не удалось получить список компаний");	
+		return companies;
+	}
+
+	@Override
+	public Collection<CV> searchCV(Collection<Language> languages,
+			Collection<ProgramLanguage> planguages,
+			Collection<Purpose> purposes, int startIndex, int endIndex)
+			throws IllegalArgumentException {
+		
+		return cvDAO.searchCV(languages, planguages, purposes, startIndex, endIndex);
+	}
+	
+	
 }

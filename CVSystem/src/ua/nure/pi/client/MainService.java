@@ -2,6 +2,7 @@ package ua.nure.pi.client;
 
 import java.util.Collection;
 
+import ua.nure.pi.entity.CV;
 import ua.nure.pi.entity.Company;
 import ua.nure.pi.entity.Faculty;
 import ua.nure.pi.entity.Group;
@@ -55,4 +56,10 @@ public interface MainService extends RemoteService {
 	void updateGroup(Group f) throws IllegalArgumentException;
 	
 	void deleteGroup(Group f) throws IllegalArgumentException;
+	
+	Collection<Company> getNotActivedCompany() throws IllegalArgumentException;
+	
+	Collection<CV> searchCV(Collection<Language> languages,
+			Collection<ProgramLanguage> planguages,
+			Collection<Purpose> purposes, int startIndex, int endIndex) throws IllegalArgumentException;
 }
