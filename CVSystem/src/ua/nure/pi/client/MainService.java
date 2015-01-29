@@ -62,4 +62,6 @@ public interface MainService extends RemoteService {
 	Collection<CV> searchCV(Collection<Language> languages,
 			Collection<ProgramLanguage> planguages,
 			Collection<Purpose> purposes, int startIndex, int endIndex) throws IllegalArgumentException;
+	
+	void activateCompany(Company c) throws IllegalArgumentException;
 }

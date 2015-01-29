@@ -61,4 +61,6 @@ public interface MainServiceAsync {
 			Collection<ProgramLanguage> planguages,
 			Collection<Purpose> purposes, int startIndex, int endIndex,
 			AsyncCallback<Collection<CV>> asyncCallback) throws IllegalArgumentException;
+	
+	void activateCompany(Company c, AsyncCallback<Void> asyncCallback) throws IllegalArgumentException;
 }

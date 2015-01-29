@@ -428,3 +428,7 @@ ul.par li.big img
 {
 	font: 14px PT Serif,sans-serif !important;
 }
+
+[class*="activated"]{
+	background-color:rgb(20, 229, 20);
+}

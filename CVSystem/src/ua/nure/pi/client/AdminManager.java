@@ -226,13 +226,15 @@ public class AdminManager {
 		
 		item = DOM.getElementById("menu3.1");
 		item.setInnerText("Активация");
+		Event.sinkEvents(item, Event.ONCLICK);
 		Event.setEventListener(item, new EventListener() {
 
 	        @Override
 	        public void onBrowserEvent(Event event) {
 	             if(Event.ONCLICK == event.getTypeInt()) {
-	            	 if(!uiManager.isSetted(ActivateCompanyPanel.class.getName()))
+	            	 if(!uiManager.isSetted(ActivateCompanyPanel.class.getName())){
 	 					uiManager.setPanel(new ActivateCompanyPanel(mainService));
+	            	 }
 	             }
 
 	        }

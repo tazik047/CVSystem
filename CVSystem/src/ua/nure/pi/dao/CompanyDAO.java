@@ -10,6 +10,8 @@ public interface CompanyDAO {
 	
 	Collection<Company> getNotActiveCompanies();
 	
+	Collection<Company> getActiveCompanies();
+	
 	Company getCompany(long companiesId);
 		
 	Boolean insertCompany(Company company);

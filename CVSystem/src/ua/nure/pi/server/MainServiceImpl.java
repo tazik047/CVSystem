@@ -321,6 +321,14 @@ public class MainServiceImpl extends RemoteServiceServlet implements
 		
 		return cvDAO.searchCV(languages, planguages, purposes, startIndex, endIndex);
 	}
+
+	@Override
+	public void activateCompany(Company c) throws IllegalArgumentException {
+		checkAdminRoleAndThrowEx();
+		if(!companyDAO.activateCompany(c)){
+			throw new IllegalArgumentException("Не удалось активировать компанию");
+		}
+	}
 	
 	
 }

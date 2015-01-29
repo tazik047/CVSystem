@@ -18,7 +18,7 @@ public abstract class JDBCCompanyDAO implements CompanyDAO {
 	protected String SQL__SELECT_ALL_COMPANY = "SELECT * FROM Companies";
 	protected String SQL__INSERT_COMPANY = "INSERT INTO Companies(Title, Phone, PhoneRespPerson, "
 			+ "Email, FIORespPerson, Skype, Active, CompaniesId) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
-	protected String SQL__SELECT_NOT_ACTIVE_COMPANY = "SELECT * FROM Companies WHERE Active = 1";
+	protected String SQL__SELECT_NOT_ACTIVE_COMPANY = "SELECT * FROM Companies WHERE Active = ?";
 	protected String SQL__ACTIVATE_COMPANY = "UPDATE Companies SET Active=? WHERE CompaniesId=?";
 	
 	protected DAOFactory jdbcDAOFaactory;
@@ -177,7 +177,7 @@ public abstract class JDBCCompanyDAO implements CompanyDAO {
 		Connection con = null;
 		try {
 			con = getConnection();
-			result = getNotActiveCompanies(con);
+			result = getCompaniesWereActivated(false, con);
 		} catch (SQLException e) {
 			System.err.println("Can not get not active company." + e.getMessage());
 		} finally {
@@ -191,11 +191,32 @@ public abstract class JDBCCompanyDAO implements CompanyDAO {
 		return result;
 	}
 	
-	private Collection<Company> getNotActiveCompanies(Connection con) throws SQLException {
+	@Override
+	public Collection<Company> getActiveCompanies() {
+		Collection<Company> result = null;
+		Connection con = null;
+		try {
+			con = getConnection();
+			result = getCompaniesWereActivated(true, con);
+		} catch (SQLException e) {
+			System.err.println("Can not get not active company." + e.getMessage());
+		} finally {
+			try {
+				if (con != null)
+					con.close();
+			} catch (SQLException e) {
+				System.err.println("Can not close connection. " + e.getMessage());
+			}
+		}
+		return result;
+	}
+	
+	private Collection<Company> getCompaniesWereActivated(boolean activate, Connection con) throws SQLException {
 		Collection<Company> result = new ArrayList<Company>();
 		PreparedStatement pstmt = null;
 		try {
 			pstmt = con.prepareStatement(SQL__SELECT_NOT_ACTIVE_COMPANY);
+			pstmt.setBoolean(1, activate);
 			ResultSet rs = pstmt.executeQuery();
 			while(rs.next()){
 				Company c = unMapCompany(rs);
