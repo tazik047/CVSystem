@@ -58,8 +58,24 @@ public class MultiSelect extends SimplePanel {
 		runSelect(jsOpt, jsValue, id);
 	}
 	
-	public Collection<String> getValues(){
-		return toJCollection(getJSValues(id));
+	public HashMap<Integer, Collection<String>> getValues(){
+		Collection<String> temp = toJCollection(getJSValues(id));
+		HashMap<Integer, Collection<String>> res = new HashMap<Integer, Collection<String>>();
+		for(String i : temp){
+			String[] t = i.split("_");
+			if(t.length!=3)
+				continue;
+			int opt = Integer.parseInt(t[2]);
+			if(res.containsKey(opt)){
+				res.get(opt).add(t[1]);
+			}
+			else{
+				ArrayList<String> item = new ArrayList<String>();
+				item.add(t[1]);
+				res.put(opt, item);
+			}
+		}
+		return res;
 	}
 	
 	private Collection<String> toJCollection(JsArrayString jsValues) {
@@ -118,10 +134,10 @@ public class MultiSelect extends SimplePanel {
 	}-*/;	
 	
 	private static native JsArrayString getJSValues(String id)/*-{
-	var s = $wnd.$("#"+id).select2('data');
+	var s = $wnd.$("#"+id+' .search-choice');
 	var res = [];
 	for(var i = 0; i < s.length; i++)
-		res[i]=s[i].text;
+		res[i]=s[i].id;
 	return res;
 	}-*/;
 }
