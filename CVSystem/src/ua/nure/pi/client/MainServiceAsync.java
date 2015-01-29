@@ -55,7 +55,7 @@ public interface MainServiceAsync {
 	
 	void deleteGroup(Group group, AsyncCallback<Void> asyncCallback) throws IllegalArgumentException;
 	
-	void getNotActivedCompany(AsyncCallback<Collection<Company>> asyncCallback) throws IllegalArgumentException;
+	void getCompany(boolean active, AsyncCallback<Collection<Company>> asyncCallback) throws IllegalArgumentException;
 	
 	void searchCV(Collection<Language> languages,
 			Collection<ProgramLanguage> planguages,

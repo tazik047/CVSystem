@@ -1,6 +1,7 @@
 package ua.nure.pi.client;
 
-import com.google.gwt.user.client.Window;
+import java.util.ArrayList;
+
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.SimplePanel;
@@ -10,6 +11,8 @@ public class UIManager {
 	RootPanel rootPanel;
 	Image loadImg;
 	LoadListener event;
+	ArrayList<String> canOverrite;
+	
 	
 	public UIManager(RootPanel root){
 		rootPanel = root;
@@ -22,6 +25,8 @@ public class UIManager {
 				afterLoad(e.getPanel());
 			}
 		};
+		canOverrite = new ArrayList<String>();
+		canOverrite.add(CompanyPanel.class.getName());
 	}
 	
 	protected void afterLoad(LoadingSimplePanel panel) {
@@ -109,7 +114,7 @@ public class UIManager {
 	}
 	
 	public boolean isSetted(String panel){
-		if(current!=null){
+		if(current!=null && !canOverrite.contains(panel)){
 			return current.getClass().getName().equals(panel);
 		}
 		return false;

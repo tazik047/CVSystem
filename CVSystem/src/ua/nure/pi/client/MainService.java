@@ -57,7 +57,7 @@ public interface MainService extends RemoteService {
 	
 	void deleteGroup(Group f) throws IllegalArgumentException;
 	
-	Collection<Company> getNotActivedCompany() throws IllegalArgumentException;
+	Collection<Company> getCompany(boolean active) throws IllegalArgumentException;
 	
 	Collection<CV> searchCV(Collection<Language> languages,
 			Collection<ProgramLanguage> planguages,

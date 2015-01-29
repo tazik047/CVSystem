@@ -199,7 +199,7 @@ public abstract class JDBCCompanyDAO implements CompanyDAO {
 			con = getConnection();
 			result = getCompaniesWereActivated(true, con);
 		} catch (SQLException e) {
-			System.err.println("Can not get not active company." + e.getMessage());
+			System.err.println("Can not get active company." + e.getMessage());
 		} finally {
 			try {
 				if (con != null)

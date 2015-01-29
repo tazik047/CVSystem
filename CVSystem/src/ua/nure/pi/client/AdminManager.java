@@ -225,6 +225,21 @@ public class AdminManager {
 		item.setInnerText("Компании");
 		
 		item = DOM.getElementById("menu3.1");
+		item.setInnerText("Все компании");
+		Event.sinkEvents(item, Event.ONCLICK);
+		Event.setEventListener(item, new EventListener() {
+
+	        @Override
+	        public void onBrowserEvent(Event event) {
+	             if(Event.ONCLICK == event.getTypeInt()) {
+	            	 if(!uiManager.isSetted(CompanyPanel.class.getName()))
+	            		 uiManager.setPanel(new CompanyPanel(true, mainService));
+	             }
+
+	        }
+	    });
+		
+		item = DOM.getElementById("menu3.2");
 		item.setInnerText("Активация");
 		Event.sinkEvents(item, Event.ONCLICK);
 		Event.setEventListener(item, new EventListener() {
@@ -232,9 +247,8 @@ public class AdminManager {
 	        @Override
 	        public void onBrowserEvent(Event event) {
 	             if(Event.ONCLICK == event.getTypeInt()) {
-	            	 if(!uiManager.isSetted(ActivateCompanyPanel.class.getName())){
-	 					uiManager.setPanel(new ActivateCompanyPanel(mainService));
-	            	 }
+	            	 if(!uiManager.isSetted(CompanyPanel.class.getName()))
+	            		 uiManager.setPanel(new CompanyPanel(false, mainService));
 	             }
 
 	        }
@@ -269,6 +283,7 @@ public class AdminManager {
 			 '<li class="has-sub"><div id="menu3"></div>' +
 				 '<ul>' +
 				 	'<li><div id="menu3.1"></div></li>'+
+				 	'<li><div id="menu3.2"></div></li>'+
 				 '</ul>' +
 			 '</li>';
 			

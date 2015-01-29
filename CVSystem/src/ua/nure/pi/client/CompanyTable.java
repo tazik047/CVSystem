@@ -3,12 +3,9 @@ package ua.nure.pi.client;
 import java.util.Collection;
 
 import ua.nure.pi.entity.Company;
-import ua.nure.pi.entity.Student;
 
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.ui.HasHorizontalAlignment;
-import com.google.gwt.user.client.ui.HasVerticalAlignment;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.smartgwt.client.types.Alignment;
 import com.smartgwt.client.widgets.Canvas;
@@ -44,7 +41,8 @@ public class CompanyTable extends SimplePanel{
 		
 		@Override  
         protected String getBaseStyle(ListGridRecord record, int rowNum, int colNum) { 
-			if(record.getAttribute("activate").equals("Активировано")) {  
+			String s = record.getAttribute("activate");
+			if(s!=null && !s.isEmpty() && s.equals("Активировано")) {  
                 return "activated";
             } else {  
                 return super.getBaseStyle(record, rowNum, colNum);  

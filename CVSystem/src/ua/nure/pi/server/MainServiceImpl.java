@@ -304,10 +304,14 @@ public class MainServiceImpl extends RemoteServiceServlet implements
 	}
 
 	@Override
-	public Collection<Company> getNotActivedCompany()
+	public Collection<Company> getCompany(boolean active)
 			throws IllegalArgumentException {
 		checkAdminRoleAndThrowEx();
-		Collection<Company> companies = companyDAO.getNotActiveCompanies();
+		Collection<Company> companies = null;
+		if(active)
+			companies = companyDAO.getActiveCompanies();
+		else
+			companies = companyDAO.getNotActiveCompanies();
 		if(companies==null)
 			throw new IllegalArgumentException("Не удалось получить список компаний");	
 		return companies;
