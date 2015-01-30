@@ -6,7 +6,9 @@ import java.util.HashMap;
 
 import com.google.gwt.core.client.JsArrayString;
 import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.SimplePanel;
+import com.google.gwt.user.client.ui.VerticalPanel;
 
 public class MultiSelect extends SimplePanel {
 	private HashMap<String, String> values;
@@ -15,6 +17,9 @@ public class MultiSelect extends SimplePanel {
 	private String id;
 	private int width;
 	private int height;
+	private Label title;
+	private boolean withOptions = true;
+	
 	
 	public void setWidth(int width){
 		this.width=width;
@@ -26,19 +31,43 @@ public class MultiSelect extends SimplePanel {
 		setHeight(id, height);
 	}
 	
+	public void setTitle(String t){
+		title.setText(t);
+	}
+	
+	public String getTitle(){
+		return title.getText();
+	}
+	
+	public MultiSelect(HashMap<String, String> val, String title) {
+		this(val, new ArrayList<String>(), title);
+		withOptions = false;
+	}
+	
+	public MultiSelect(HashMap<String, String> val) {
+		this(val, "");
+	}
+	
 	public MultiSelect(HashMap<String, String> val, Collection<String> option) {
+		this(val, option, "");
+	}
+	
+	public MultiSelect(HashMap<String, String> val, Collection<String> option, String title) {
+		VerticalPanel root = new VerticalPanel();
 		id = "MultiSelect" +  String.valueOf(this.hashCode());
 		values = val;
 		options = option;
 		h = "<div id='" + id + "'></div>";
 		HTML html = new HTML(h);
-		setWidget(html);
+		this.title = new Label();
+		setTitle(title);
+		root.add(this.title);
+		root.add(html);
+		root.setSpacing(5);
+		setWidget(root);
 	}
-
-	/*
-	public void addValues(Collection<String> val){
-		values.addAll(val);
-	}*/
+	
+	
 	
 	public void draw(){
 		String jsOpt = "$wnd.loadOpt."+id+" = function(node, level, id){";
@@ -51,7 +80,8 @@ public class MultiSelect extends SimplePanel {
 		index = 0;
 		for(String i : values.keySet()){
 			jsValue+="id=" +i + "; node.children.push({id:id,title:'"+values.get(i) 
-					+"',has_children:true, level: node.level + 1,children:[]});"
+					+"',has_children:"+withOptions+", level: node.level + 1,children:[]});"
+					+"if("+withOptions+")"
 					+ "$wnd.loadOpt."+id+"(node.children["+(index++)+"],(level+1), id);";
 		}
 		jsValue +="return node;};";
@@ -63,9 +93,13 @@ public class MultiSelect extends SimplePanel {
 		HashMap<Integer, Collection<String>> res = new HashMap<Integer, Collection<String>>();
 		for(String i : temp){
 			String[] t = i.split("_");
-			if(t.length!=3)
+			if(t.length!=3 && withOptions)
 				continue;
-			int opt = Integer.parseInt(t[2]);
+			int opt;
+			if(withOptions)
+				opt = Integer.parseInt(t[2]);
+			else
+				opt = 0;
 			if(res.containsKey(opt)){
 				res.get(opt).add(t[1]);
 			}
