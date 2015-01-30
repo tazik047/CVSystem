@@ -41,18 +41,18 @@ public class MultiSelect extends SimplePanel {
 	}*/
 	
 	public void draw(){
-		String jsOpt = "$wnd.loadOpt = function(node, level, id){";
+		String jsOpt = "$wnd.loadOpt."+id+" = function(node, level, id){";
 		int index= 0;
 		for(String i : options)
 			jsOpt+= "node.children.push({id:id +'_'+"+(index++)+",title:'"+i
 				+"',has_children:false, level: node.level + 1,children:[]});";
 		jsOpt+="return node;};";
-		String jsValue = "$wnd.loadChildren = function(node, level) { var id;";
+		String jsValue = "$wnd.loadChildren."+id+" = function(node, level) { var id;";
 		index = 0;
 		for(String i : values.keySet()){
 			jsValue+="id=" +i + "; node.children.push({id:id,title:'"+values.get(i) 
 					+"',has_children:true, level: node.level + 1,children:[]});"
-					+ "$wnd.loadOpt(node.children["+(index++)+"],(level+1), id);";
+					+ "$wnd.loadOpt."+id+"(node.children["+(index++)+"],(level+1), id);";
 		}
 		jsValue +="return node;};";
 		runSelect(jsOpt, jsValue, id);
@@ -126,7 +126,7 @@ public class MultiSelect extends SimplePanel {
       		showtree: true,
 			load: function(node, callback) {
 		        setTimeout(function() {
-		          callback($wnd.loadChildren(node, 0));
+		          callback($wnd.loadChildren[id](node, 0));
 		        }, 1000);
 		      }
 			});

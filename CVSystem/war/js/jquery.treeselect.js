@@ -9,8 +9,8 @@
  *  License:  GPL version 3.
  */
 
-var loadChildren = 2;
-var loadOpt;
+var loadChildren = {};
+var loadOpt = {};
 
 (function($) {
   jQuery.fn.moreorless = function(min_height, more_text, less_text) {

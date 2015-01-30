@@ -323,6 +323,7 @@ h3.assistive-text {
 	top:0px;
 	right:0px;
 	cursor:pointer;
+	z-index: 999999; 
 }
 
 .panel-startAddButton{
