@@ -89,7 +89,7 @@ public class SearchSimplePanel extends LoadingSimplePanel {
         	for(ProgramLanguage pl : result){
         	map.put(String.valueOf(pl.getId()), pl.getTitle());
         	}
-        	MultiSelect mstech = new MultiSelect(map, opt, "Владение технологиями");
+        	mstech = new MultiSelect(map, opt, "Владение технологиями");
         	filters.add(mstech);
         	mstech.setWidth(200);
         	mstech.setHeight(200);
@@ -111,7 +111,7 @@ public class SearchSimplePanel extends LoadingSimplePanel {
         	for(Language lang : result1){
         	map1.put(String.valueOf(lang.getId()), lang.getTitle());
         	}
-        	MultiSelect mslang = new MultiSelect(map1, opt, "Владение языками");
+        	mslang = new MultiSelect(map1, opt, "Владение языками");
         	filters.add(mslang);
         	mslang.setWidth(200);
         	mslang.setHeight(150);
