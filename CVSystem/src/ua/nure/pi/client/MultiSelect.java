@@ -112,6 +112,11 @@ public class MultiSelect extends SimplePanel {
 		return res;
 	}
 	
+	@Override
+	public void setStyleName(String style) {
+		setStyle(id, style);
+	};
+	
 	private Collection<String> toJCollection(JsArrayString jsValues) {
 		Collection<String> res = new ArrayList<String>();
 		for(int i = 0; i<jsValues.length(); i++){
@@ -148,6 +153,10 @@ public class MultiSelect extends SimplePanel {
 	
 	private native void setHeight(String id, int height)/*-{
 		$wnd.$('#'+id+' .treeselect').css('height', height);
+	}-*/;
+	
+	private native void setStyle(String id, String style)/*-{
+		$wnd.$('#'+id).addClass(style);
 	}-*/;
 	
 	private native void runSelect(String jsOpt,String jsVal, String id)/*-{
