@@ -10,6 +10,7 @@ import ua.nure.pi.entity.Purpose;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.FlexTable;
+import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
@@ -32,6 +33,7 @@ public class SearchSimplePanel extends LoadingSimplePanel {
 	MultiSelect mstech;
 	MultiSelect mslang;
 	final IButton findButton;
+	final VerticalPanel filters;
 
 	public SearchSimplePanel(MainServiceAsync mainService) {
 		this.mainService = mainService;
@@ -39,8 +41,9 @@ public class SearchSimplePanel extends LoadingSimplePanel {
 		//TODO: создать поиск
 		HorizontalPanel rootPanel = new HorizontalPanel();
 		
-		final VerticalPanel filters = new VerticalPanel();
-        
+		filters = new VerticalPanel();
+        filters.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_RIGHT);
+		
         FlexTable results = new FlexTable();
 		results.setHeight("500px");
 		results.setWidth("800px");
@@ -66,9 +69,6 @@ public class SearchSimplePanel extends LoadingSimplePanel {
         	map.put(String.valueOf(prp.getId()), prp.getTitle());
         	}
         	mspurp = new MultiSelect(map, "Цель работы");
-        	filters.add(mspurp);
-        	mspurp.setWidth(200);
-        	mspurp.setHeight(200);
         	flagpurp = true;
         	tryDraw();
         	}
@@ -90,9 +90,6 @@ public class SearchSimplePanel extends LoadingSimplePanel {
         	map.put(String.valueOf(pl.getId()), pl.getTitle());
         	}
         	mstech = new MultiSelect(map, opt, "Владение технологиями");
-        	filters.add(mstech);
-        	mstech.setWidth(200);
-        	mstech.setHeight(200);
         	flagtech = true;
         	tryDraw();
         	}
@@ -112,9 +109,6 @@ public class SearchSimplePanel extends LoadingSimplePanel {
         	map1.put(String.valueOf(lang.getId()), lang.getTitle());
         	}
         	mslang = new MultiSelect(map1, opt, "Владение языками");
-        	filters.add(mslang);
-        	mslang.setWidth(200);
-        	mslang.setHeight(150);
         	flaglang = true;
         	tryDraw();
         	}
@@ -124,14 +118,12 @@ public class SearchSimplePanel extends LoadingSimplePanel {
         	setWidget(new Label(caught.getMessage()));
         	}
         	});
-        findButton.setAlign(Alignment.RIGHT);
+        findButton.setAlign(Alignment.CENTER);
         findButton.setWidth(120);  
-
-        filters.add(findButton);
+        
         
         rootPanel.add(filters);
         rootPanel.add(results);
-        tryDraw();
         
         setWidget(rootPanel);
 
@@ -141,10 +133,23 @@ public class SearchSimplePanel extends LoadingSimplePanel {
 	private void tryDraw() {
         
         if (flaglang && flagpurp && flagtech) {
-        	findButton.draw();
+        	//mspurp.setWidth(200);
+        	//mspurp.setHeight(200);
+        	mspurp.setStyleName("filterPanel");
+        	filters.add(mspurp);
         	mspurp.draw();
+        	//mstech.setWidth(200);
+        	//mstech.setHeight(200);
+        	mstech.setStyleName("filterPanel");
+        	filters.add(mstech);
         	mstech.draw();
+        	//mslang.setWidth(200);
+        	//mslang.setHeight(150);
+        	mslang.setStyleName("filterPanel");
+        	filters.add(mslang);
         	mslang.draw();
+            filters.add(findButton);
+        	findButton.draw();
         }
         
 	}
