@@ -135,19 +135,19 @@ public class SearchSimplePanel extends LoadingSimplePanel {
         if (flaglang && flagpurp && flagtech) {
         	//mspurp.setWidth(200);
         	//mspurp.setHeight(200);
-        	mspurp.setStyleName("filterPanel");
         	filters.add(mspurp);
         	mspurp.draw();
+        	mspurp.setStyleName("filterPanel");
         	//mstech.setWidth(200);
         	//mstech.setHeight(200);
-        	mstech.setStyleName("filterPanel");
         	filters.add(mstech);
         	mstech.draw();
+        	mstech.setStyleName("filterPanel");
         	//mslang.setWidth(200);
         	//mslang.setHeight(150);
-        	mslang.setStyleName("filterPanel");
         	filters.add(mslang);
         	mslang.draw();
+        	mslang.setStyleName("filterPanel");
             filters.add(findButton);
         	findButton.draw();
         }
