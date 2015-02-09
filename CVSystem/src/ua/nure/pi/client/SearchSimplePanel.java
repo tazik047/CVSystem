@@ -3,12 +3,16 @@ package ua.nure.pi.client;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Map.Entry;
 
 import ua.nure.pi.entity.Language;
 import ua.nure.pi.entity.ProgramLanguage;
 import ua.nure.pi.entity.Purpose;
+import ua.nure.pi.entity.CV;
 
+import com.google.gwt.dev.util.collect.HashSet;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HorizontalPanel;
@@ -20,6 +24,8 @@ import com.smartgwt.client.types.SelectionAppearance;
 import com.smartgwt.client.types.SelectionStyle;
 import com.smartgwt.client.types.VerticalAlignment;
 import com.smartgwt.client.widgets.IButton;
+import com.smartgwt.client.widgets.events.ClickEvent;
+import com.smartgwt.client.widgets.events.ClickHandler;
 import com.smartgwt.client.widgets.grid.ListGrid;
 import com.smartgwt.client.widgets.grid.ListGridField;
 
@@ -35,7 +41,7 @@ public class SearchSimplePanel extends LoadingSimplePanel {
 	final IButton findButton;
 	final VerticalPanel filters;
 
-	public SearchSimplePanel(MainServiceAsync mainService) {
+	public SearchSimplePanel(final MainServiceAsync mainService) {
 		this.mainService = mainService;
 		isReady = true;
 		//TODO: создать поиск
@@ -58,7 +64,36 @@ public class SearchSimplePanel extends LoadingSimplePanel {
     	opt.add("Хорошо");
     	opt.add("Отлично");
     	
-        findButton = new IButton("Искать");  
+        findButton = new IButton("Искать"); 
+        findButton.addClickHandler(new ClickHandler() {
+
+			@Override
+			public void onClick(ClickEvent event) {
+				HashMap<Integer, Collection<String>> techs = mstech.getValues();
+				HashMap<Integer, Collection<String>> langs = mslang.getValues();
+				HashMap<Integer, Collection<String>> purps = mspurp.getValues();
+				Collection<ProgramLanguage> ts = getTechsFromMap(techs);
+				Collection<Language> ls = getLangsFromMap(langs);
+				Collection<Purpose> ps = getPurpsFromMap(purps);
+				
+		        mainService.searchCV(ls, ts, ps, 0, 10, new AsyncCallback<Collection<CV>>() {
+
+		        	@Override
+		        	public void onSuccess(Collection<CV> result) {
+		        	for(CV cv : result){
+			        setWidget(new Label(cv.getPurpose().getTitle()));
+		        	}		        	}
+
+		        	@Override
+		        	public void onFailure(Throwable caught) {
+		        	setWidget(new Label(caught.getMessage()));
+		        	}
+		        	});
+
+
+			}
+        	
+        });
 
         mainService.getPurposes(new AsyncCallback<Collection<Purpose>>() {
 
@@ -133,25 +168,61 @@ public class SearchSimplePanel extends LoadingSimplePanel {
 	private void tryDraw() {
         
         if (flaglang && flagpurp && flagtech) {
-        	//mspurp.setWidth(200);
-        	//mspurp.setHeight(200);
         	filters.add(mspurp);
         	mspurp.draw();
+        	mspurp.setWidth(200);
+        	mspurp.setHeight(200);
         	mspurp.setStyleName("filterPanel");
-        	//mstech.setWidth(200);
-        	//mstech.setHeight(200);
         	filters.add(mstech);
         	mstech.draw();
+        	mstech.setWidth(200);
+        	mstech.setHeight(200);
         	mstech.setStyleName("filterPanel");
-        	//mslang.setWidth(200);
-        	//mslang.setHeight(150);
         	filters.add(mslang);
         	mslang.draw();
+        	mslang.setWidth(200);
+        	mslang.setHeight(150);
         	mslang.setStyleName("filterPanel");
             filters.add(findButton);
         	findButton.draw();
         }
         
+	}
+	
+	private Collection<Language> getLangsFromMap(HashMap<Integer, Collection<String>> hash) {
+		Collection<Language> ls = new ArrayList<Language>();
+		for (Entry<Integer, Collection<String>> entry : hash.entrySet()) {
+		    for (String s : entry.getValue()) {
+			Language curr = new Language();
+		    curr.setLevel(entry.getKey());
+		    curr.setId(Long.parseLong(s));
+		    ls.add(curr);
+		    }
+		}
+		return ls;
+	}
+	private Collection<ProgramLanguage> getTechsFromMap(HashMap<Integer, Collection<String>> hash) {
+		Collection<ProgramLanguage> ls = new ArrayList<ProgramLanguage>();
+		for (Entry<Integer, Collection<String>> entry : hash.entrySet()) {
+		    for (String s : entry.getValue()) {
+		    ProgramLanguage curr = new ProgramLanguage();
+		    curr.setLevel(entry.getKey());
+		    curr.setId(Long.parseLong(s));
+		    ls.add(curr);
+		    }
+		}
+		return ls;
+	}
+	private Collection<Purpose> getPurpsFromMap(HashMap<Integer, Collection<String>> hash) {
+		Collection<Purpose> ls = new ArrayList<Purpose>();
+		for (Entry<Integer, Collection<String>> entry : hash.entrySet()) {
+		    for (String s : entry.getValue()) {
+		    Purpose curr = new Purpose();
+		    curr.setId(Long.parseLong(s));
+		    ls.add(curr);
+		    }
+		}
+		return ls;
 	}
 	
 }
