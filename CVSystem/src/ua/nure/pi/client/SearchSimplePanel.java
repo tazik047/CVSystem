@@ -80,8 +80,11 @@ public class SearchSimplePanel extends LoadingSimplePanel {
 
 		        	@Override
 		        	public void onSuccess(Collection<CV> result) {
-		        	for(CV cv : result) {
-			        results.add(new Label(cv.getPurpose().getTitle()));
+		        	Label l = new Label();
+		        	int i = 0;
+	        		for(CV cv : result) {
+	        		results.setWidget(i / 5, i % 5, new PrintSmallSimplePanel(cv));
+	        		i++;
 		        	}
 		        	}
 		        	@Override
