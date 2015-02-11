@@ -2,11 +2,11 @@ package ua.nure.pi.client;
 import java.util.Collection;
 
 import ua.nure.pi.client.PrintSimplePanel.BlueBox;
+import ua.nure.pi.entity.CV;
 import ua.nure.pi.entity.Education;
 import ua.nure.pi.entity.Language;
 import ua.nure.pi.entity.ProgramLanguage;
 import ua.nure.pi.entity.Sertificate;
-import ua.nure.pi.entity.Student;
 import ua.nure.pi.entity.WorkExp;
 
 import com.smartgwt.client.types.Alignment;  
@@ -20,20 +20,20 @@ import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.SimplePanel;
 
-public class PrintSmallSimplePanel {
-	private Student student;
+public class PrintSmallSimplePanel extends SimplePanel{
+	private CV cv;
 	
 	private Collection<Language> languages;
 	
 	private Collection<ProgramLanguage> programLanguage;
 	
 	private String purpose;
-	public PrintSmallSimplePanel(Student student)
+	public PrintSmallSimplePanel(CV cv)
 	{
-		this.student = student;
-		languages = student.getCv().getLanguages();
-		programLanguage = student.getCv().getProgramLanguages();
-		purpose = student.getCv().getPurpose().getTitle();
+		this.cv = cv;
+		languages = cv.getLanguages();
+		programLanguage = cv.getProgramLanguages();
+		purpose = cv.getPurpose().getTitle();
 		onModuleLoad();
 	}
 public void onModuleLoad() {  
@@ -44,66 +44,22 @@ public void onModuleLoad() {
         layout.setWidth(600);  
        // layout.setHeight("*");  
         VLayout vLayout = new VLayout(); 
-        vLayout.addMember(new BlueBox((String) null, "30", "Желаемая должность", true));
+        vLayout.addMember(new BlueBox((String) null, "30", "Резюме № ", true));
         HLayout hLayout16 = new HLayout();  
         vLayout.addMember(hLayout16);  
         hLayout16.setHeight100();
         hLayout16.addMember(new BlueBox("40%", null, ""));  
         hLayout16.addMember(new BlueBox("10px", null, "")); 
-        hLayout16.addMember(new BlueBox("*", null, purpose));  
-        if ((programLanguage!=null && programLanguage.size()!=0))
-        {
-        vLayout.addMember(new BlueBox((String) null, "30", "Профессиональные навыки", true));
+        hLayout16.addMember(new BlueBox("*", null, String.valueOf(cv.getCvsId())));  
+        vLayout.addMember(new BlueBox((String) null, "30", "Желаемая должность", true));
         HLayout hLayout4 = new HLayout();  
         vLayout.addMember(hLayout4);  
         hLayout4.setHeight100();
-        hLayout4.addMember(new BlueBox("20%", null, ""));  
-        hLayout4.addMember(new BlueBox("20%", null, "Технологии"));
-        hLayout4.addMember(new BlueBox("10px", null, "")); 
-        String lan = "";
-        String level1 = "Владение технологиями на продвинутом уровне<br>";
-        String level2 = "Владение технологиями на среднем уровне<br>";
-        String level3 = "Владение технологиями на уровне начинающего<br>";
-        
-        if(programLanguage!=null)
-	        for(ProgramLanguage I : programLanguage)
-	        	{
-	        		if (I.getLevel()==2)
-	        			level1+=I.getTitle()+',';
-	        		if (I.getLevel()==1)
-	        			level2+=I.getTitle()+',';
-	        		if (I.getLevel()==0)
-	        			level3+=I.getTitle()+',';
-	        	}
-        
-       
-        if(languages!=null && languages.size()!=0){
-        vLayout.addMember(new BlueBox((String) null, "30", "Знания языков", true));
-        
-        	String level = "";
-        for(Language I : languages){
-        	
-        	switch(I.getLevel())
-	    	{
-	        	case 0: level = "начальный";
-	        		break;
-	        	case 1: level = "средний";
-        			break;
-	        	case 2: level = "продвинутый";
-        			break;
-	    	}
-        HLayout hLayout11 = new HLayout();  
-        vLayout.addMember(hLayout11);  
-        hLayout11.setHeight100();
-        hLayout11.addMember(new BlueBox("40%", null, ""));  
-        hLayout11.addMember(new BlueBox("10px", null, "")); 
-        
-        hLayout11.addMember(new BlueBox("*", null, I.getTitle() + " - " + level));
-        
-        }
-        }
-        
-    }  
+        hLayout4.addMember(new BlueBox("40%", null, ""));  
+        hLayout4.addMember(new BlueBox("10px", null, ""));
+        hLayout4.addMember(new BlueBox("*", null, purpose)); 
+        layout.addMember(vLayout);
+        setWidget(layout);
 }
     class BlueBox extends Label {  
   
