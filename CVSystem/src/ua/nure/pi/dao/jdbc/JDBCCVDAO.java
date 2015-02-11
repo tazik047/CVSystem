@@ -201,6 +201,7 @@ public abstract class JDBCCVDAO implements CVDAO {
 				query.append(String.format("%s = %d", title, i));
 			else
 				query.append(String.format("%s = %d OR ", title, i));
+			ind++;
 		}
 		query.append(')');
 	}
@@ -210,6 +211,7 @@ public abstract class JDBCCVDAO implements CVDAO {
 			Collection<ProgramLanguage> planguages,
 			Collection<Purpose> purposes, int start, int end, Connection con) throws SQLException{
 		Collection<CV> result = null;
+		String q = "";
 		PreparedStatement pstmt = null;
 		try {
 			StringBuilder query = new StringBuilder();
@@ -233,11 +235,11 @@ public abstract class JDBCCVDAO implements CVDAO {
 				for(Purpose l : purposes)
 					purpIds.add(l.getId());
 				createQuery(query, "p." + MapperParameters.PURPOSE__ID, purpIds);
-			}
-			
+			}			
 			query.append(" ORDER BY cv."+MapperParameters.CV__ID);
-			
-			pstmt = con.prepareStatement(createInterval(start, end, query));
+			q = createInterval(start, end, query);
+			//System.out.println(q);
+			pstmt = con.prepareStatement(q);
 			ResultSet rs = pstmt.executeQuery();
 			result = new ArrayList<CV>();
 			while(rs.next()){
@@ -245,7 +247,7 @@ public abstract class JDBCCVDAO implements CVDAO {
 			}
 			
 		} catch (SQLException e) {
-			throw e;
+			throw new SQLException("Query: "+q+"\n"+e.getMessage());
 		} finally {
 			if (pstmt != null) {
 				try {
