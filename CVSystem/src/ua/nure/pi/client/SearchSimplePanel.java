@@ -50,7 +50,7 @@ public class SearchSimplePanel extends LoadingSimplePanel {
 		filters = new VerticalPanel();
         filters.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_RIGHT);
 		
-        FlexTable results = new FlexTable();
+        final FlexTable results = new FlexTable();
 		results.setHeight("500px");
 		results.setWidth("800px");
 
@@ -80,14 +80,15 @@ public class SearchSimplePanel extends LoadingSimplePanel {
 
 		        	@Override
 		        	public void onSuccess(Collection<CV> result) {
-		        	for(CV cv : result){
-			        setWidget(new Label(cv.getPurpose().getTitle()));
-		        	}		        	}
-
+		        	for(CV cv : result) {
+			        results.add(new Label(cv.getPurpose().getTitle()));
+		        	}
+		        	}
 		        	@Override
 		        	public void onFailure(Throwable caught) {
 		        	setWidget(new Label(caught.getMessage()));
 		        	}
+		 
 		        	});
 
 
@@ -153,6 +154,7 @@ public class SearchSimplePanel extends LoadingSimplePanel {
         	setWidget(new Label(caught.getMessage()));
         	}
         	});
+        
         findButton.setAlign(Alignment.CENTER);
         findButton.setWidth(120);  
         
