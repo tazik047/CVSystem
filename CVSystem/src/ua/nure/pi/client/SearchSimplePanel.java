@@ -41,10 +41,12 @@ public class SearchSimplePanel extends LoadingSimplePanel {
 	final IButton findButton;
 	final IButton moreButton;
 	final VerticalPanel filters;
+	final VerticalPanel right;
 	Collection<ProgramLanguage> ts = null;
 	Collection<Language> ls = null;
 	Collection<Purpose> ps = null;
 	int curr;
+	int i;
 
 	
 
@@ -55,14 +57,18 @@ public class SearchSimplePanel extends LoadingSimplePanel {
 		HorizontalPanel rootPanel = new HorizontalPanel();
 		filters = new VerticalPanel();
         filters.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_RIGHT);
+        right = new VerticalPanel();
         curr = 0;
+        
+        
 		
         final FlexTable results = new FlexTable();
 		results.setHeight("500px");
 		results.setWidth("800px");
+		right.add(results);
 
-		
-		moreButton = new IButton();
+		moreButton = new IButton("Ещё");
+		right.add(moreButton);
 		moreButton.addClickHandler(new ClickHandler() {
 
 			@Override
@@ -72,14 +78,14 @@ public class SearchSimplePanel extends LoadingSimplePanel {
 
 		        	@Override
 		        	public void onSuccess(Collection<CV> result) {
-		        	results.remove(moreButton);
-		        	int i = 0;
-		        	results.clear();
+		        		right.remove(moreButton);
 	        		for(CV cv : result) {
-	        		results.setWidget(i / 5, i % 5, new PrintSmallSimplePanel(cv));
+	        		results.setWidget(i, 0, new PrintSmallSimplePanel(cv));
 	        		i++;
 		        	}
-	        		results.add(moreButton);
+	        		right.add(moreButton);
+	        		moreButton.redraw();
+	        		curr+=12;
 		        	}
 		        	@Override
 		        	public void onFailure(Throwable caught) {
@@ -120,10 +126,10 @@ public class SearchSimplePanel extends LoadingSimplePanel {
 		        	@Override
 		        	public void onSuccess(Collection<CV> result) {
 		        	Label l = new Label();
-		        	int i = 0;
+		        	i = 0;
 		        	results.clear();
 	        		for(CV cv : result) {
-	        		results.setWidget(i / 5, i % 5, new PrintSmallSimplePanel(cv));
+	        		results.setWidget(i, i % 5, new PrintSmallSimplePanel(cv));
 	        		i++;
 		        	}
 		        	}
@@ -201,12 +207,14 @@ public class SearchSimplePanel extends LoadingSimplePanel {
         	@Override
         	public void onSuccess(Collection<CV> result) {
         	Label l = new Label();
-        	int i = 0;
+        	i = 0;
     		for(CV cv : result) {
-    		results.setWidget(i / 5, i % 5, new PrintSmallSimplePanel(cv));
+    		results.setWidget(i, 0, new PrintSmallSimplePanel(cv));
     		i++;
         	}
-    		results.add(moreButton);
+    		right.add(moreButton);
+    		moreButton.redraw();
+    		curr+=12;
         	}
         	@Override
         	public void onFailure(Throwable caught) {
@@ -218,9 +226,8 @@ public class SearchSimplePanel extends LoadingSimplePanel {
         findButton.setAlign(Alignment.CENTER);
         findButton.setWidth(120);  
         
-        
         rootPanel.add(filters);
-        rootPanel.add(results);
+        rootPanel.add(right);
         
         setWidget(rootPanel);
 
