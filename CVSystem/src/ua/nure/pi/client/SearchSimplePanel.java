@@ -39,20 +39,59 @@ public class SearchSimplePanel extends LoadingSimplePanel {
 	MultiSelect mstech;
 	MultiSelect mslang;
 	final IButton findButton;
+	final IButton moreButton;
 	final VerticalPanel filters;
+	Collection<ProgramLanguage> ts = null;
+	Collection<Language> ls = null;
+	Collection<Purpose> ps = null;
+	int curr;
+
+	
 
 	public SearchSimplePanel(final MainServiceAsync mainService) {
 		this.mainService = mainService;
 		isReady = true;
 		//TODO: создать поиск
 		HorizontalPanel rootPanel = new HorizontalPanel();
-		
 		filters = new VerticalPanel();
         filters.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_RIGHT);
+        curr = 0;
 		
         final FlexTable results = new FlexTable();
 		results.setHeight("500px");
 		results.setWidth("800px");
+
+		
+		moreButton = new IButton();
+		moreButton.addClickHandler(new ClickHandler() {
+
+			@Override
+			public void onClick(ClickEvent event) {
+				
+		        mainService.searchCV(ls, ts, ps, curr, curr+12, new AsyncCallback<Collection<CV>>() {
+
+		        	@Override
+		        	public void onSuccess(Collection<CV> result) {
+		        	results.remove(moreButton);
+		        	int i = 0;
+		        	results.clear();
+	        		for(CV cv : result) {
+	        		results.setWidget(i / 5, i % 5, new PrintSmallSimplePanel(cv));
+	        		i++;
+		        	}
+	        		results.add(moreButton);
+		        	}
+		        	@Override
+		        	public void onFailure(Throwable caught) {
+		        	setWidget(new Label(caught.getMessage()));
+		        	}
+		 
+		        	});
+
+
+			}
+        	
+        });
 
         //results.add(findButton);
        	
@@ -72,16 +111,17 @@ public class SearchSimplePanel extends LoadingSimplePanel {
 				HashMap<Integer, Collection<String>> techs = mstech.getValues();
 				HashMap<Integer, Collection<String>> langs = mslang.getValues();
 				HashMap<Integer, Collection<String>> purps = mspurp.getValues();
-				Collection<ProgramLanguage> ts = getTechsFromMap(techs);
-				Collection<Language> ls = getLangsFromMap(langs);
-				Collection<Purpose> ps = getPurpsFromMap(purps);
-				
-		        mainService.searchCV(ls, ts, ps, 0, 10, new AsyncCallback<Collection<CV>>() {
+				ts = getTechsFromMap(techs);
+				ls = getLangsFromMap(langs);
+				ps = getPurpsFromMap(purps);
+				curr = 0;
+		        mainService.searchCV(ls, ts, ps, curr, curr+12, new AsyncCallback<Collection<CV>>() {
 
 		        	@Override
 		        	public void onSuccess(Collection<CV> result) {
 		        	Label l = new Label();
 		        	int i = 0;
+		        	results.clear();
 	        		for(CV cv : result) {
 	        		results.setWidget(i / 5, i % 5, new PrintSmallSimplePanel(cv));
 	        		i++;
@@ -117,8 +157,6 @@ public class SearchSimplePanel extends LoadingSimplePanel {
         	setWidget(new Label(caught.getMessage()));
         	}
         	});
-        
-
 
         mainService.getProgramLanguages(new AsyncCallback<Collection<ProgramLanguage>>() {
 
@@ -156,6 +194,25 @@ public class SearchSimplePanel extends LoadingSimplePanel {
         	public void onFailure(Throwable caught) {
         	setWidget(new Label(caught.getMessage()));
         	}
+        	});
+        
+        mainService.searchCV(null, null, null, 0, 12, new AsyncCallback<Collection<CV>>() {
+
+        	@Override
+        	public void onSuccess(Collection<CV> result) {
+        	Label l = new Label();
+        	int i = 0;
+    		for(CV cv : result) {
+    		results.setWidget(i / 5, i % 5, new PrintSmallSimplePanel(cv));
+    		i++;
+        	}
+    		results.add(moreButton);
+        	}
+        	@Override
+        	public void onFailure(Throwable caught) {
+        	setWidget(new Label(caught.getMessage()));
+        	}
+ 
         	});
         
         findButton.setAlign(Alignment.CENTER);
