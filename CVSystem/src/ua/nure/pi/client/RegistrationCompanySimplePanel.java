@@ -162,7 +162,7 @@ public class RegistrationCompanySimplePanel extends LoadingSimplePanel {
         nameOfReliable.setWidth(generalWidth);  
         nameOfReliable.setHint("Введите имя и отчество ответственного лица"); 
         nameOfReliable.setShowHintInField(true);
-        nameOfReliable.setRequired(false);
+        nameOfReliable.setRequired(true);
 	    nameOfRelHint = new StaticTextItem();
 	    nameOfRelHint.setShowTitle(false);
 	    nameOfRelHint.setValue("Например, Стив");
@@ -172,7 +172,7 @@ public class RegistrationCompanySimplePanel extends LoadingSimplePanel {
         phoneOfReliable.setShowHintInField(true);
         phoneOfReliable.setHint("Введите контактный телефон ответственного лица"); 
         phoneOfReliable.setMask("+38(###) ###-####");
-        phoneOfReliable.setRequired(false);
+        phoneOfReliable.setRequired(true);
         phoneOfRelHint = new StaticTextItem();
 	    phoneOfRelHint.setShowTitle(false);
 	    phoneOfRelHint.setValue("Например, +38(050)145-8872");
@@ -231,14 +231,14 @@ public class RegistrationCompanySimplePanel extends LoadingSimplePanel {
 	
 	public Company CollectData() {
 		Company c = new Company();
-		c.setName(nameOfCompany.getValueAsString());
-		c.setNameOfReliable(nameOfReliable.getValueAsString());
-		c.setEmail(Emailtextbox.getValueAsString());
-		c.setPhone(PhonetextBox.getValueAsString());
-		c.setPhoneOfReliable(phoneOfReliable.getValueAsString());
-		c.setSkype(Skypetextbox.getValueAsString());
+		c.setName(nameOfCompany.getValueAsString().trim().replaceAll("[\\s]{2,}", " "));
+		c.setNameOfReliable(nameOfReliable.getValueAsString().trim().replaceAll("[\\s]{2,}", " "));
+		c.setEmail(Emailtextbox.getValueAsString().trim().replaceAll("[\\s]{2,}", " "));
+		c.setPhone(PhonetextBox.getValueAsString().trim().replaceAll("[\\s]{2,}", " "));
+		c.setPhoneOfReliable(phoneOfReliable.getValueAsString().trim().replaceAll("[\\s]{2,}", " "));
+		c.setSkype(Skypetextbox.getValueAsString().trim().replaceAll("[\\s]{2,}", " "));
 		User u = new User();
-		u.setLogin(login.getValueAsString());
+		u.setLogin(login.getValueAsString().trim().replaceAll("[\\s]{2,}", " "));
 		u.setPassword(password.getValueAsString());
 		c.setUser(u);
 		

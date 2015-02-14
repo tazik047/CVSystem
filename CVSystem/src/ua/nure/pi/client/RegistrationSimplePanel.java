@@ -697,13 +697,13 @@ public class RegistrationSimplePanel extends LoadingSimplePanel {
 		// 
 
 		st = new Student();
-		st.setFirstname(NametextBox.getValueAsString());
-		st.setSurname(SurnametextBox.getValueAsString());
+		st.setFirstname(NametextBox.getValueAsString().trim().replaceAll("[\\s]{2,}", " "));
+		st.setSurname(SurnametextBox.getValueAsString().trim().replaceAll("[\\s]{2,}", " "));
 
 		st.setDateOfBirth((Date)dateItem.getValue());
-		st.setEmail(Emailtextbox.getValueAsString());
-		st.setPhone(PhonetextBox.getValueAsString());
-		st.setAddress(AddresstextBox.getValueAsString());
+		st.setEmail(Emailtextbox.getValueAsString().trim().replaceAll("[\\s]{2,}", " "));
+		st.setPhone(PhonetextBox.getValueAsString().trim().replaceAll("[\\s]{2,}", " "));
+		st.setAddress(AddresstextBox.getValueAsString().trim().replaceAll("[\\s]{2,}", " "));
 		for (Faculty f : faculties)
 			for (Group g : f.getGroups())
 				if (pickDepartment.getValue().toString().equals(g.getTitle()))
@@ -711,7 +711,7 @@ public class RegistrationSimplePanel extends LoadingSimplePanel {
 					st.setGroup(g);
 					break;
 				}
-		st.setSkype(Skypetextbox.getValueAsString());
+		st.setSkype(Skypetextbox.getValueAsString().trim().replaceAll("[\\s]{2,}", " "));
 		cv = new CV();
 		newPurp=false;
 		for(Purpose i : purposes){
@@ -729,8 +729,8 @@ public class RegistrationSimplePanel extends LoadingSimplePanel {
 		oth = oth.replaceAll("\n", "<br/>");
 		String qua = qualities.getDisplayValue();
 		qua = qua.replaceAll("\n", "<br/>");
-		cv.setOthers(oth);
-		cv.setQualities(qua);
+		cv.setOthers(oth.trim().replaceAll("[\\s]{2,}", " "));
+		cv.setQualities(qua.trim().replaceAll("[\\s]{2,}", " "));
 		cv.setEducations(eduPanel.getEducation());
 		cv.setLanguages(lanPanel.getLanguages());
 		cv.setSertificates(ssp.getSerts());
