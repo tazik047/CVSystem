@@ -41,7 +41,7 @@ public void onModuleLoad() {
     	
     	
         HLayout layout = new HLayout();
-        layout.setWidth(600);  
+        layout.setWidth(150);  
        // layout.setHeight("*");  
         VLayout vLayout = new VLayout(); 
         vLayout.addMember(new BlueBox((String) null, "30", "Резюме № ", true));
