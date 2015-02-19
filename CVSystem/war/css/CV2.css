@@ -433,3 +433,60 @@ ul.par li.big img
 [class*="activated"]{
 	background-color:rgb(20, 229, 20);
 }
+
+.id {
+    font-size: 25px;
+    text-align: center;
+    width: 100%;
+    overflow: hidden;
+    padding-top:50px;
+}
+
+.purpose {
+    text-align: center;
+    vertical-align: bottom;
+    font-style: italic;
+    position: absolute;
+    bottom:2px;
+    width:100%;
+    max-height: 35px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.cv_block>.image{
+	background-image: url('http://monroeny.org/images/man-icon.png');
+	background-repeat:no-repeat;
+	width: 100px;
+	height: 102px;
+	background-size: 100% 100%;
+	margin-left: auto;
+	margin-right: auto;
+	background-position: 0px 2px;
+}
+
+.cv_block{
+	width:150px;
+	height:154px;
+	position:relative;
+	cursor:pointer;
+	background-color: #FEF3EE;
+}
+
+.cv_block:hover{
+	border: 2px solid #F79D77;
+	border-radius:15px;
+	width:146px;
+	height:150px;
+}
+.cv_block:hover>.purpose{
+	bottom:0;
+}
+
+.cv_block:hover>.id{
+	margin-top:-2px
+}
+
+.cv_block:hover>.image{
+	background-position: 0px 0px;
+}

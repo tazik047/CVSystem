@@ -18,7 +18,9 @@ import com.smartgwt.client.widgets.layout.VLayout;
 import com.google.gwt.core.client.EntryPoint;  
 import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.SimplePanel;
+import com.google.gwt.user.client.ui.VerticalPanel;
 
 public class PrintSmallSimplePanel extends SimplePanel{
 	private CV cv;
@@ -40,7 +42,7 @@ public void onModuleLoad() {
   
     	
     	
-        HLayout layout = new HLayout();
+        /*HLayout layout = new HLayout();
         layout.setWidth(150);  
        // layout.setHeight("*");  
         VLayout vLayout = new VLayout(); 
@@ -59,9 +61,25 @@ public void onModuleLoad() {
         hLayout4.addMember(new BlueBox("10px", null, ""));
         hLayout4.addMember(new BlueBox("*", null, purpose)); 
         layout.addMember(vLayout);
-        setWidget(layout);
+        setWidget(layout);*/
+	
+		setStyleName("cv_block");
+		/*VerticalPanel root= new VerticalPanel();
+		root.add(new Label("№ " + cv.getCvsId()));
+		root.add(new Label(purpose));
+		setWidget(root);*/
+        getElement().setId("cv_block"+cv.getCvsId());
+        getElement().setInnerHTML("<div class='image'></div><div class='id'>№&nbsp;"+cv.getCvsId()+"</div><div class='purpose' title='"+purpose+"'>" + purpose+"</div>");
+        //insert(String.valueOf(cv.getCvsId()), purpose);
+        
 }
-    class BlueBox extends Label {  
+
+private native void insert(String i,  String p)/*-{
+	//alert(i);
+	$wnd.$('#cv_block'+i).html('<div class="id">'+i+'</div><div class="purpose">' + p+'</div>');
+}-*/;
+
+class BlueBox extends Label {  
   
         public BlueBox(String contents) {  
             setAlign(Alignment.LEFT);
