@@ -41,7 +41,7 @@ public class MSSQLCVDAO extends JDBCCVDAO {
 			+ " WHERE cv.CVsId=lcv.CVsId and pcv.CVsId=cv.CVsId and p.PurposesId=cv.PurposesId "
 			+ "and cv.CVsId not in (select distinct top %2$d cv.CVsId from CVs cv,LanguagesCVs lcv, ProgramLanguagesCVs pcv, Purposes p"
 			+ " WHERE cv.CVsId=lcv.CVsId and pcv.CVsId=cv.CVsId and p.PurposesId=cv.PurposesId %3$s) %3$s";
-		return String.format(query, end, start, where.toString());
+		return String.format(query, end-start, start, where.toString());
 	}
 	
 	@Override

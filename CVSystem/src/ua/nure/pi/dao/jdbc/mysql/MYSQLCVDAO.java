@@ -33,7 +33,7 @@ public class MYSQLCVDAO extends JDBCCVDAO {
 
 	@Override
 	protected String createInterval(int start, int end, StringBuilder query) {
-		return String.format("select distinct top %1$d cv.CVsId from CVs cv,LanguagesCVs lcv, ProgramLanguagesCVs pcv, Purposes p"
+		return String.format("select distinct cv.CVsId from CVs cv,LanguagesCVs lcv, ProgramLanguagesCVs pcv, Purposes p"
 				+ " WHERE cv.CVsId=lcv.CVsId and pcv.CVsId=cv.CVsId and p.PurposesId=cv.PurposesId " + query.toString()
 				+ " LIMIT %1$d, %2$d", start, end-start);
 	}
