@@ -20,7 +20,7 @@ import ua.nure.pi.parameter.AppConstants;
 public class ContextListener implements ServletContextListener {
 	//private static final Logger log = Logger.getLogger(ContextListener.class);
 	
-	private static final int DBType = DAOFactory.MSSQL;
+	private static final int DBType = DAOFactory.MYSQL;
 
 	@Override
 	public void contextInitialized(ServletContextEvent event) {
