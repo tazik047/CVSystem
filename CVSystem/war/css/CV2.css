@@ -87,8 +87,9 @@ h3 {
     height: 30px;
     overflow: hidden;
 	background-color: #FEF3EE !important;
-	border-bottom: 1px solid rgba(76,114,191,0.72);
-	border-top: 1px solid rgba(76,114,191,0.72);
+	/* border-bottom: 1px solid rgba(76,114,191,0.72); 
+	border-top: 1px solid rgba(76,114,191,0.72); */
+	border-top: 1px solid white; 
 }
 #menu-right{}
 
@@ -178,7 +179,7 @@ h3.assistive-text {
 /* Middle
 -----------------------------------------------------------------------------*/
 .middle {
-	margin-top: 5 px;
+	margin-top: 10px;
 	padding: 0 0 100px;
 	position: relative;
 	margin-left: 20px;
@@ -245,9 +246,9 @@ h3.assistive-text {
 }
 #footer {
 	position: relative;
-	margin: -70px auto 0;
-	height: 70px;
-	border-top: 1px solid #2300ab;
+	margin: -80px auto 0;
+	height: 80px;
+	/*border-top: 1px solid #2300ab; */
 	width:900px;
 	background-color: #FEF3EE !important;
 }
