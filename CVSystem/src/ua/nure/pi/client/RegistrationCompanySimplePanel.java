@@ -236,7 +236,12 @@ public class RegistrationCompanySimplePanel extends LoadingSimplePanel {
 		c.setEmail(Emailtextbox.getValueAsString().trim().replaceAll("[\\s]{2,}", " "));
 		c.setPhone(PhonetextBox.getValueAsString().trim().replaceAll("[\\s]{2,}", " "));
 		c.setPhoneOfReliable(phoneOfReliable.getValueAsString().trim().replaceAll("[\\s]{2,}", " "));
+		try {
 		c.setSkype(Skypetextbox.getValueAsString().trim().replaceAll("[\\s]{2,}", " "));
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
 		User u = new User();
 		u.setLogin(login.getValueAsString().trim().replaceAll("[\\s]{2,}", " "));
 		u.setPassword(password.getValueAsString());
