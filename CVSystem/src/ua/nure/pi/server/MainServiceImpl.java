@@ -333,6 +333,24 @@ public class MainServiceImpl extends RemoteServiceServlet implements
 			throw new IllegalArgumentException("Не удалось активировать компанию");
 		}
 	}
+
+	@Override
+	public void divideProgramLanguages(ProgramLanguage old,
+			Collection<ProgramLanguage> newProgramLanguages)
+			throws IllegalArgumentException {
+		checkAdminRoleAndThrowEx();
+		if(!programLanguageDAO.divideProgramLanguages(old, newProgramLanguages))
+			throw new IllegalArgumentException("Не удалось разбить технологии");
+	}
+
+	@Override
+	public void mergeProgramLanguages(
+			Collection<ProgramLanguage> oldProgramLanguages,
+			ProgramLanguage newProgramLanguage) throws IllegalArgumentException {
+		checkAdminRoleAndThrowEx();
+		if(!programLanguageDAO.mergeProgramLanguages(oldProgramLanguages, newProgramLanguage))
+			throw new IllegalArgumentException("Не удалось объеденить технологии");		
+	}
 	
 	
 }

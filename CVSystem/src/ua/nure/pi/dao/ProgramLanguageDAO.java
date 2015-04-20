@@ -27,4 +27,8 @@ public interface ProgramLanguageDAO {
 
 	Collection<ProgramLanguage> getStudentsProgramLanguages(long cVsId,
 			Connection con) throws SQLException;
+	
+	boolean divideProgramLanguages(ProgramLanguage old, Collection<ProgramLanguage> newProgramLanguages);
+	
+	boolean mergeProgramLanguages(Collection<ProgramLanguage> oldProgramLanguages, ProgramLanguage newProgramLanguage);
 }

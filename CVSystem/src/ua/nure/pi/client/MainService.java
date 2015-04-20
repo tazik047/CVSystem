@@ -64,4 +64,8 @@ public interface MainService extends RemoteService {
 			Collection<Purpose> purposes, int startIndex, int endIndex) throws IllegalArgumentException;
 	
 	void activateCompany(Company c) throws IllegalArgumentException;
+	
+	void divideProgramLanguages(ProgramLanguage old, Collection<ProgramLanguage> newProgramLanguages) throws IllegalArgumentException;
+	
+	void mergeProgramLanguages(Collection<ProgramLanguage> oldProgramLanguages, ProgramLanguage newProgramLanguage) throws IllegalArgumentException;
 }

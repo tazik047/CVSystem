@@ -63,4 +63,10 @@ public interface MainServiceAsync {
 			AsyncCallback<Collection<CV>> asyncCallback) throws IllegalArgumentException;
 	
 	void activateCompany(Company c, AsyncCallback<Void> asyncCallback) throws IllegalArgumentException;
+	
+void divideProgramLanguages(ProgramLanguage old, Collection<ProgramLanguage> newProgramLanguages,
+		AsyncCallback<Void> asyncCallback) throws IllegalArgumentException;
+	
+	void mergeProgramLanguages(Collection<ProgramLanguage> oldProgramLanguages, ProgramLanguage newProgramLanguage,
+			AsyncCallback<Void> asyncCallback) throws IllegalArgumentException;
 }

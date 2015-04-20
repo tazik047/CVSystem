@@ -154,8 +154,8 @@ CREATE TABLE IF NOT EXISTS `CVSystem`.`ProgramLanguagesCVs` (
   CONSTRAINT `FK_ProgramLanguagesCVs_ProgramLanguages`
     FOREIGN KEY (`ProgramLanguagesId`)
     REFERENCES `CVSystem`.`ProgramLanguages` (`ProgramLanguagesId`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
+    ON UPDATE CASCADE
+    ON DELETE CASCADE);
 
 -- ----------------------------------------------------------------------------
 -- Table CVSystem.Purposes
@@ -250,4 +250,5 @@ CREATE TABLE IF NOT EXISTS `CVSystem`.`sysdiagrams` (
   `definition` LONGBLOB NULL,
   PRIMARY KEY (`diagram_id`),
   UNIQUE INDEX `UK_principal_name` (`principal_id` ASC, `name` ASC));
+  
 SET FOREIGN_KEY_CHECKS = 1;;

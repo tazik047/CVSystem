@@ -217,9 +217,39 @@ public class AdminManager {
 
 	        }
 	    });
+	    
+	    item = DOM.getElementById("menu2.2");
+		item.setInnerText("Технологии");
 		
-		item = DOM.getElementById("menu2.2");
+		item = DOM.getElementById("menu2.2.1");
 		item.setInnerText("Объединение технологий");
+		Event.sinkEvents(item, Event.ONCLICK);
+	    Event.setEventListener(item, new EventListener() {
+
+	        @Override
+	        public void onBrowserEvent(Event event) {
+	             if(Event.ONCLICK == event.getTypeInt()) {
+	            	 if(!uiManager.isSetted(MergeProgramLanguagesSimplePanel.class.getName()))
+	 					uiManager.setPanel(new MergeProgramLanguagesSimplePanel(mainService));
+	             }
+
+	        }
+	    });
+	    
+	    item = DOM.getElementById("menu2.2.2");
+		item.setInnerText("Разбиение технологий");
+		/*Event.sinkEvents(item, Event.ONCLICK);
+	    Event.setEventListener(item, new EventListener() {
+
+	        @Override
+	        public void onBrowserEvent(Event event) {
+	             if(Event.ONCLICK == event.getTypeInt()) {
+	            	 if(!uiManager.isSetted(MergeProgramLanguagesSimplePanel.class.getName()))
+	 					uiManager.setPanel(new MergeProgramLanguagesSimplePanel(mainService));
+	             }
+
+	        }
+	    });*/
 		
 		item = DOM.getElementById("menu3");
 		item.setInnerText("Компании");
@@ -277,7 +307,12 @@ public class AdminManager {
 			 '<li class="has-sub"><div id="menu2"></div>'+
 				'<ul>'+
 					'<li><div id="menu2.1"></div></li>'+
-					'<li><div id="menu2.2"></div></li>'+
+					'<li class="has-sub"><div id="menu2.2"></div>'+
+						'<ul>'+
+							'<li><div id="menu2.2.1"></div></li>'+
+							'<li><div id="menu2.2.2"></div></li>'+
+						'</ul>'+
+					'</li>'+
 				'</ul>'+
 			 '</li>'+
 			 '<li class="has-sub"><div id="menu3"></div>' +

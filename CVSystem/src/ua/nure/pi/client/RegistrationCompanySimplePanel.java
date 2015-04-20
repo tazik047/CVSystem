@@ -1,10 +1,6 @@
 package ua.nure.pi.client;
 
-import java.util.ArrayList;
-import java.util.Collection;
-
 import ua.nure.pi.entity.Company;
-import ua.nure.pi.entity.Faculty;
 import ua.nure.pi.entity.User;
 
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -39,7 +35,6 @@ public class RegistrationCompanySimplePanel extends LoadingSimplePanel {
     
     public Label label;
 
-
 	public DynamicForm mainForm;
 	public StaticTextItem nameHint;
 	public StaticTextItem loginHint;
@@ -51,9 +46,6 @@ public class RegistrationCompanySimplePanel extends LoadingSimplePanel {
 	public StaticTextItem phoneOfRelHint;
 	
 	public int generalWidth = 300;
-
-	private MainServiceAsync registrationService;
-
 	
 	public RegistrationCompanySimplePanel(MainServiceAsync main, Button main2) {
 		isReady = true;
