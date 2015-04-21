@@ -15,7 +15,12 @@ import ua.nure.pi.parameter.MapperParameters;
 
 public abstract class JDBCProgramLanguageDAO implements ProgramLanguageDAO {
 
-	protected String SQL_SELECT_STUDENTS_WICH_HAVE_PROGRAM_LANGUAGE = "select CVsId, Level from ProgramLanguagesCVs where ProgramLanguagesId = ?";
+	protected String SQL_SELECT_STUDENTS_WICH_HAVE_PROGRAM_LANGUAGE_FOR_DEVIDE = "select p1.*, p2.ProgramLanguagesId from ProgramLanguagesCVs p1, ProgramLanguagesCVs p2 where p1.CVsId=p2.CVsId and p1.ProgramLanguagesId=? and "
+			+ "p2.ProgramLanguagesId<>p1.ProgramLanguagesId and p2.Level>p1.Level and (%s) "
+			+ "union "
+			+ "select distinct p1.*, -1 from ProgramLanguagesCVs p1, ProgramLanguagesCVs p2 where p1.CVsId=p2.CVsId and p1.ProgramLanguagesId=? and "
+			+ "p2.ProgramLanguagesId<>p1.ProgramLanguagesId and not (p2.Level>p1.Level and (%s))";
+	protected String SQL_DELETE_UNNEEDED_PROGRAM_LANGUAGES = "delete ProgramLanguagesCVs where Level<? and (ProgramLanguagesId = 12143 or ProgramLanguagesId = 121763) and (CVsId = 1 or CVsId = 2)";	
 	protected String SQL_SELECT_STUDENTS_WICH_HAVE_ONE_OF_PROGRAM_LANGUAGE = "select CVsId, Level from ProgramLanguagesCVs where ";
 	protected String SQL__SELECT_PROGRAM_LANGUAGE = "SELECT * FROM ProgramLanguages order by Title";
 	protected String SQL__INSERT_PROGRAM_LANGUAGE = "INSERT INTO ProgramLanguages(Title) VALUES(?)";
@@ -478,43 +483,106 @@ public abstract class JDBCProgramLanguageDAO implements ProgramLanguageDAO {
 			Collection<ProgramLanguage> newProgramLanguages, Connection con)
 			throws SQLException {
 		boolean result = true;
-		PreparedStatement pstmt = null;
+		PreparedStatement pstmt1 = null;
+		PreparedStatement pstmt2 = null;
 		try {
-			pstmt = con
-					.prepareStatement(SQL_SELECT_STUDENTS_WICH_HAVE_PROGRAM_LANGUAGE);
-			pstmt.setLong(1, old.getId());
-			ResultSet rs = pstmt.executeQuery();
+
+			result = insertProgramLanguageAndGenerateKey(newProgramLanguages,
+					con);
+			if (!result)
+				return false;
+			StringBuilder newPL = new StringBuilder();
+			for (ProgramLanguage p : newProgramLanguages) {
+				newPL.append("p2.ProgramLanguagesId = " + p.getId() + " OR ");
+			}
+			newPL.replace(newPL.length() - 4, newPL.length() - 1, "");
+			String newQuery = String.format(
+					SQL_SELECT_STUDENTS_WICH_HAVE_PROGRAM_LANGUAGE_FOR_DEVIDE,
+					newPL, newPL);
+			pstmt1 = con.prepareStatement(newQuery);
+			pstmt1.setLong(1, old.getId());
+			pstmt1.setLong(2, old.getId());
+			ResultSet rs = pstmt1.executeQuery();
 			HashMap<Long, Integer> cvs = new HashMap<Long, Integer>();
-			long id;
+			HashMap<Long, ArrayList<Long>> cvsNotInsert = new HashMap<Long, ArrayList<Long>>();
+			long id = -1;
 			int level;
+			long tempId; 
+			ArrayList<Long> ids;
+			
 			while (rs.next()) {
+				if (id != -1)
+					rs.previous();
 				id = rs.getLong(1);
 				level = rs.getInt(2);
+				ids = new ArrayList<Long>();
+				tempId = rs.getLong(3);
+				if(tempId!=-1){
+					ids.add(tempId);
+					while(rs.next()){
+						if(rs.getLong(1)!= id)
+							break;
+						tempId = rs.getLong(3);
+						ids.add(tempId);
+					}
+					cvsNotInsert.put(id, ids);
+				}
+				else{
+					id = -1;
+				}
 				cvs.put(id, level);
 			}
-			
+
 			Collection<ProgramLanguage> pls = new ArrayList<ProgramLanguage>(1);
 			pls.add(old);
 			result = deleteProgramLanguage(pls, con);
-			if (!result) return false;
-			
-			result = insertProgramLanguageAndGenerateKey(newProgramLanguages, con);
-			if (!result) return false;
+			if (!result)
+				return false;
+
+			StringBuilder cvQuery = new StringBuilder();
+			StringBuilder plQuery = new StringBuilder();
+			ids = new ArrayList<Long>();
 			
 			for (Long i : cvs.keySet()) {
-				for (ProgramLanguage pl : newProgramLanguages)
+				ArrayList<ProgramLanguage> toAddPL = new ArrayList<ProgramLanguage>(); 
+				for (ProgramLanguage pl : newProgramLanguages){
+					if(cvsNotInsert.containsKey(i) && cvsNotInsert.get(i).contains(pl.getId())){
+						if(!ids.contains(pl.getId())){
+							ids.add(pl.getId());
+							plQuery.append("ProgramLanguagesId = " + pl.getId() + " OR");
+						}
+						continue;
+					}
 					pl.setLevel(cvs.get(i));
-				result = addProgramLanguage(i, newProgramLanguages, con);
+					toAddPL.add(pl);
+				}
+				cvQuery.append("(CVsId = " + i + "AND Level<" + cvs.get(i) + ") OR ");
+				result = addProgramLanguage(i, toAddPL, con);
 				if (!result)
 					return false;
 			}
 			
+			cvQuery.replace(cvQuery.length() - 4, cvQuery.length() - 1, "");
+			plQuery.replace(plQuery.length() - 4, plQuery.length() - 1, "");
+			newQuery = String.format(SQL_DELETE_UNNEEDED_PROGRAM_LANGUAGES, cvQuery, plQuery);
+			
+			pstmt2 = con.prepareStatement(newQuery);
+			result = pstmt2.execute();
+
 		} catch (SQLException e) {
 			throw e;
 		} finally {
-			if (pstmt != null) {
+			if (pstmt1 != null) {
 				try {
-					pstmt.close();
+					pstmt1.close();
+				} catch (SQLException e) {
+					System.err.println("Can not close statement. "
+							+ e.getMessage());
+				}
+			}
+			if (pstmt2 != null) {
+				try {
+					pstmt2.close();
 				} catch (SQLException e) {
 					System.err.println("Can not close statement. "
 							+ e.getMessage());
@@ -570,27 +638,27 @@ public abstract class JDBCProgramLanguageDAO implements ProgramLanguageDAO {
 			HashMap<Long, Integer> cvs = new HashMap<Long, Integer>();
 			long id;
 			int level;
-			while(rs.next()){
+			while (rs.next()) {
 				id = rs.getLong(1);
 				level = rs.getInt(2);
-				if(!cvs.containsKey(id))
+				if (!cvs.containsKey(id))
 					cvs.put(id, level);
-				else if(level>cvs.get(id)){
+				else if (level > cvs.get(id)) {
 					cvs.remove(id);
 					cvs.put(id, level);
 				}
 			}
-			
+
 			result = deleteProgramLanguage(oldProgramLanguages, con);
 			if (!result)
 				return false;
-			
+
 			Collection<ProgramLanguage> pls = new ArrayList<ProgramLanguage>(1);
 			pls.add(newProgramLanguage);
 			result = insertProgramLanguageAndGenerateKey(pls, con);
 			if (!result)
 				return false;
-			
+
 			for (long i : cvs.keySet()) {
 				pls = new ArrayList<ProgramLanguage>(1);
 				newProgramLanguage.setLevel(cvs.get(i));
@@ -598,7 +666,7 @@ public abstract class JDBCProgramLanguageDAO implements ProgramLanguageDAO {
 				result = addProgramLanguage(i, pls, con);
 				if (!result)
 					return false;
-			}			
+			}
 		} catch (SQLException e) {
 			throw e;
 		} finally {

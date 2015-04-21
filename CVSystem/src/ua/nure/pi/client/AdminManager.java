@@ -238,18 +238,18 @@ public class AdminManager {
 	    
 	    item = DOM.getElementById("menu2.2.2");
 		item.setInnerText("Разбиение технологий");
-		/*Event.sinkEvents(item, Event.ONCLICK);
+		Event.sinkEvents(item, Event.ONCLICK);
 	    Event.setEventListener(item, new EventListener() {
 
 	        @Override
 	        public void onBrowserEvent(Event event) {
 	             if(Event.ONCLICK == event.getTypeInt()) {
-	            	 if(!uiManager.isSetted(MergeProgramLanguagesSimplePanel.class.getName()))
-	 					uiManager.setPanel(new MergeProgramLanguagesSimplePanel(mainService));
+	            	 if(!uiManager.isSetted(DivideProgramLanguageSimplePanel.class.getName()))
+	 					uiManager.setPanel(new DivideProgramLanguageSimplePanel(mainService));
 	             }
 
 	        }
-	    });*/
+	    });
 		
 		item = DOM.getElementById("menu3");
 		item.setInnerText("Компании");

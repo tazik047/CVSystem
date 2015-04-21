@@ -16,5 +16,6 @@
 	<classpathentry kind="lib" path="lib/russian-1.0.jar"/>
 	<classpathentry kind="lib" path="lib/nproperty-1.4.jar"/>
 	<classpathentry kind="lib" path="lib/mysql-connector-java-3.1.14-bin.jar"/>
+	<classpathentry kind="lib" path="lib/xchart-2.5.0.jar"/>
 	<classpathentry kind="output" path="war/WEB-INF/classes"/>
 </classpath>
