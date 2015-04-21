@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 
 import ua.nure.pi.dao.CVDAO;
 import ua.nure.pi.dao.DAOFactory;
@@ -23,8 +24,55 @@ public abstract class JDBCCVDAO implements CVDAO {
 	protected String SQL__SEARCH_CV = "select distinct cv.CVsId from CVs cv,LanguagesCVs lcv, ProgramLanguagesCVs pcv, Purposes p"
 			+ " WHERE cv.CVsId=lcv.CVsId and pcv.CVsId=cv.CVsId and p.PurposesId=cv.PurposesId";
 
-	
+	protected String SQL__COUNT_STUDENTS_BY_PURPOSE = "SELECT Title, COUNT(CVsId) FROM CVs, Purposes "
+			+ "WHERE Purposes.PurposesId = CVs.PurposesId GROUP BY Title ";
+
 	protected DAOFactory jdbcDAOFactory;
+	
+	@Override
+	public HashMap<String, Integer> getPurposeStat() {
+		HashMap<String, Integer> result = null;
+		Connection con = null;
+		try {
+			con = getConnection();
+			result = getPurposeStat(con);
+		} catch (SQLException e) {
+			System.err.println("Can not get stat." + e.getMessage());
+		} finally {
+			try {
+				if (con != null)
+					con.close();
+			} catch (SQLException e) {
+				System.err.println("Can not close connection. "
+						+ e.getMessage());
+			}
+		}
+		return result;
+	}
+
+	public HashMap<String, Integer> getPurposeStat(Connection con) throws SQLException {
+		ResultSet rs = null;
+		Statement st = null;
+		 HashMap<String, Integer> result = new  HashMap<String, Integer> ();
+		try {
+			st = con.createStatement();
+			rs = st.executeQuery(SQL__COUNT_STUDENTS_BY_PURPOSE);
+			while(rs.next())
+				result.put(rs.getString(1), rs.getInt(2));
+		} catch (SQLException e) {
+			throw e;
+		} finally {
+			if (st != null) {
+				try {
+					st.close();
+				} catch (SQLException e) {
+					System.err.println("Can not close statement. " + e.getMessage());
+				}
+			}
+		}
+		return result;
+	}
+
 	
 	@Override
 	public boolean insertCV(CV cv) {
@@ -238,7 +286,7 @@ public abstract class JDBCCVDAO implements CVDAO {
 			}			
 			query.append(" ORDER BY cv."+MapperParameters.CV__ID);
 			q = createInterval(start, end, query);
-			//System.out.println(q);
+			System.out.println(q);
 			pstmt = con.prepareStatement(q);
 			ResultSet rs = pstmt.executeQuery();
 			result = new ArrayList<CV>();

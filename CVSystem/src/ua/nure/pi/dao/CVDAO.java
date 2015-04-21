@@ -3,6 +3,7 @@ package ua.nure.pi.dao;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Collection;
+import java.util.HashMap;
 
 import ua.nure.pi.entity.CV;
 import ua.nure.pi.entity.Language;
@@ -24,4 +25,6 @@ public interface CVDAO {
 	Collection<CV> searchCV(Collection<Language> languages,
 			Collection<ProgramLanguage> planguages,
 			Collection<Purpose> purposes, int start, int end );
+
+	HashMap<String, Integer> getPurposeStat();
 }

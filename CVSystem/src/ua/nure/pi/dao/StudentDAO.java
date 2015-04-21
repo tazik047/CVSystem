@@ -3,6 +3,7 @@ package ua.nure.pi.dao;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Collection;
+import java.util.HashMap;
 
 import ua.nure.pi.entity.Language;
 import ua.nure.pi.entity.Student;
@@ -16,5 +17,6 @@ public interface StudentDAO {
 	Boolean insertStudent(Student student);
 	
 	Boolean deleteStudent(Student student);
+
 
 }

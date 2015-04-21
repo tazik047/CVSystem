@@ -5,7 +5,11 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -38,6 +42,13 @@ import ua.nure.pi.parameter.AppConstants;
 import ua.nure.pi.security.Hashing;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
+import com.xeiam.xchart.BitmapEncoder;
+import com.xeiam.xchart.BitmapEncoder.BitmapFormat;
+import com.xeiam.xchart.Chart;
+import com.xeiam.xchart.ChartBuilder;
+import com.xeiam.xchart.Series;
+import com.xeiam.xchart.StyleManager.ChartType;
+import com.xeiam.xchart.StyleManager.LegendPosition;
 
 /**
  * The server-side implementation of the RPC service.
@@ -90,6 +101,8 @@ public class MainServiceImpl extends RemoteServiceServlet implements
 		userDAO = (UserDAO) servletContext.getAttribute(AppConstants.USER_DAO);
 		companyDAO = (CompanyDAO) servletContext.getAttribute(AppConstants.COMPANY_DAO);
 		cvDAO = (CVDAO) servletContext.getAttribute(AppConstants.CV_DAO);
+		
+		makeStatistics();
 		
 		if (facultyGroupDAO == null) {
 			throw new IllegalStateException("FacultyGroupDAO attribute is not exists.");
@@ -350,6 +363,36 @@ public class MainServiceImpl extends RemoteServiceServlet implements
 		checkAdminRoleAndThrowEx();
 		if(!programLanguageDAO.mergeProgramLanguages(oldProgramLanguages, newProgramLanguage))
 			throw new IllegalArgumentException("Не удалось объеденить технологии");		
+	}
+	
+	public void makeStatistics() {
+		HashMap<String, Integer> purpsStat = cvDAO.getPurposeStat();
+		
+		String[] keys = new String[purpsStat.size()];
+		Integer[] values = new Integer[purpsStat.size()];
+		int index = 0;
+		for (Entry<String, Integer> mapEntry : purpsStat.entrySet()) {
+		    keys[index] = mapEntry.getKey();
+		    values[index] =mapEntry.getValue();
+		    index++;
+		}
+		
+		Chart chart = new ChartBuilder().chartType(ChartType.Bar).width(1600).height(600).title("Популярность должностей").xAxisTitle("Purpose").yAxisTitle("Quantity").build();
+		
+		chart.addSeries("test 1", purpsStat.keySet(), purpsStat.values());
+		
+		// Customize Chart
+		chart.getStyleManager().setLegendPosition(LegendPosition.InsideSE);
+		chart.getStyleManager().setXAxisLabelRotation(60);
+
+
+	    try {
+			BitmapEncoder.saveBitmap(chart, "./Sample_Chart", BitmapFormat.PNG);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		keys[0] = "";
 	}
 	
 	
