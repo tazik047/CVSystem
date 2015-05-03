@@ -7,7 +7,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -102,7 +104,9 @@ public class MainServiceImpl extends RemoteServiceServlet implements
 		companyDAO = (CompanyDAO) servletContext.getAttribute(AppConstants.COMPANY_DAO);
 		cvDAO = (CVDAO) servletContext.getAttribute(AppConstants.CV_DAO);
 		
-		makeStatistics();
+		makeStatistics(cvDAO.getPurposeStat(), "Purposes", "Quantity", "Popularity of purposes");
+		makeStatistics(cvDAO.getProgLangStat(), "Technologies", "Quantity", "Popularity of technologies");
+
 		
 		if (facultyGroupDAO == null) {
 			throw new IllegalStateException("FacultyGroupDAO attribute is not exists.");
@@ -365,35 +369,47 @@ public class MainServiceImpl extends RemoteServiceServlet implements
 			throw new IllegalArgumentException("Не удалось объеденить технологии");		
 	}
 	
-	public void makeStatistics() {
-		HashMap<String, Integer> purpsStat = cvDAO.getPurposeStat();
+	public void makeStatistics(HashMap<String, Integer> stat, String title1, String title2, String fileName) {
+	
+		Collection<Integer> numbers = stat.values();
+		List<Integer> l = new ArrayList<Integer>(numbers);
+		Collections.sort(l, Collections.reverseOrder());
+		l = l.subList(0, 15);
 		
-		String[] keys = new String[purpsStat.size()];
-		Integer[] values = new Integer[purpsStat.size()];
+		ArrayList<String> k = new ArrayList<String>();
+		ArrayList<Integer> v = new ArrayList<Integer>();
+		
 		int index = 0;
-		for (Entry<String, Integer> mapEntry : purpsStat.entrySet()) {
-		    keys[index] = mapEntry.getKey();
-		    values[index] =mapEntry.getValue();
+		for (Entry<String, Integer> mapEntry : stat.entrySet()) {
+			if (l.contains(mapEntry.getValue())) {
+			String tmp = mapEntry.getKey();
+			    if (tmp.length() > 20) {
+			    	tmp = tmp.substring(0, 20) + "...";
+			    }
+				k.add(tmp);
+		    v.add(mapEntry.getValue());
 		    index++;
+			}
 		}
 		
-		Chart chart = new ChartBuilder().chartType(ChartType.Bar).width(1600).height(600).title("Популярность должностей").xAxisTitle("Purpose").yAxisTitle("Quantity").build();
+		Chart chart = new ChartBuilder().chartType(ChartType.Bar).width(1000).height(800).title(fileName).xAxisTitle(title1).yAxisTitle(title2).build();
 		
-		chart.addSeries("test 1", purpsStat.keySet(), purpsStat.values());
+		chart.addSeries(fileName, k, v);
 		
 		// Customize Chart
 		chart.getStyleManager().setLegendPosition(LegendPosition.InsideSE);
-		chart.getStyleManager().setXAxisLabelRotation(60);
+		chart.getStyleManager().setXAxisLabelRotation(85);
 
 
 	    try {
-			BitmapEncoder.saveBitmap(chart, "./Sample_Chart", BitmapFormat.PNG);
+			BitmapEncoder.saveBitmap(chart, "./" + fileName, BitmapFormat.PNG);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		keys[0] = "";
 	}
+	
+	
 	
 	
 }

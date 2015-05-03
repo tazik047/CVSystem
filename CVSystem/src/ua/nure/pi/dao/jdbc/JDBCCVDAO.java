@@ -26,7 +26,9 @@ public abstract class JDBCCVDAO implements CVDAO {
 
 	protected String SQL__COUNT_STUDENTS_BY_PURPOSE = "SELECT Title, COUNT(CVsId) FROM CVs, Purposes "
 			+ "WHERE Purposes.PurposesId = CVs.PurposesId GROUP BY Title ";
-
+	
+	protected String SQL__COUNT_STUDENTS_BY_TECH = "SELECT pl.Title, COUNT(CVsID) from ProgramLanguagesCVs plc, ProgramLanguages pl WHERE plc.ProgramLanguagesId = pl.ProgramLanguagesId"
+			+ " GROUP BY pl.Title";
 	protected DAOFactory jdbcDAOFactory;
 	
 	@Override
@@ -73,6 +75,51 @@ public abstract class JDBCCVDAO implements CVDAO {
 		return result;
 	}
 
+	@Override
+	public HashMap<String, Integer> getProgLangStat() {
+		HashMap<String, Integer> result = null;
+		Connection con = null;
+		try {
+			con = getConnection();
+			result = getProgLangStat(con);
+		} catch (SQLException e) {
+			System.err.println("Can not get stat." + e.getMessage());
+		} finally {
+			try {
+				if (con != null)
+					con.close();
+			} catch (SQLException e) {
+				System.err.println("Can not close connection. "
+						+ e.getMessage());
+			}
+		}
+		return result;
+	}
+
+	public HashMap<String, Integer> getProgLangStat(Connection con) throws SQLException {
+		ResultSet rs = null;
+		Statement st = null;
+		 HashMap<String, Integer> result = new  HashMap<String, Integer> ();
+		try {
+			st = con.createStatement();
+			rs = st.executeQuery(SQL__COUNT_STUDENTS_BY_TECH);
+			while(rs.next())
+				result.put(rs.getString(1), rs.getInt(2));
+		} catch (SQLException e) {
+			throw e;
+		} finally {
+			if (st != null) {
+				try {
+					st.close();
+				} catch (SQLException e) {
+					System.err.println("Can not close statement. " + e.getMessage());
+				}
+			}
+		}
+		return result;
+	}
+
+	
 	
 	@Override
 	public boolean insertCV(CV cv) {

@@ -27,4 +27,6 @@ public interface CVDAO {
 			Collection<Purpose> purposes, int start, int end );
 
 	HashMap<String, Integer> getPurposeStat();
+
+	HashMap<String, Integer> getProgLangStat();
 }
