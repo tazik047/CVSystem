@@ -104,8 +104,8 @@ public class MainServiceImpl extends RemoteServiceServlet implements
 		companyDAO = (CompanyDAO) servletContext.getAttribute(AppConstants.COMPANY_DAO);
 		cvDAO = (CVDAO) servletContext.getAttribute(AppConstants.CV_DAO);
 		
-		makeStatistics(cvDAO.getPurposeStat(), "Purposes", "Quantity", "Popularity of purposes");
-		makeStatistics(cvDAO.getProgLangStat(), "Technologies", "Quantity", "Popularity of technologies");
+		makeStatistics(cvDAO.getPurposeStat(), "Должность", "Количество анкет", "purps");
+		makeStatistics(cvDAO.getProgLangStat(), "Технологии", "Количество анкет", "techs");
 
 		
 		if (facultyGroupDAO == null) {
@@ -392,7 +392,7 @@ public class MainServiceImpl extends RemoteServiceServlet implements
 			}
 		}
 		
-		Chart chart = new ChartBuilder().chartType(ChartType.Bar).width(1000).height(800).title(fileName).xAxisTitle(title1).yAxisTitle(title2).build();
+		Chart chart = new ChartBuilder().chartType(ChartType.Bar).width(800).height(500).title("Популярность: "+title1).xAxisTitle(title1).yAxisTitle(title2).build();
 		
 		chart.addSeries(fileName, k, v);
 		
