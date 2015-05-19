@@ -489,3 +489,16 @@ ul.par li.big img
 .cv_block:hover>.image{
 	background-position: 0px 0px;
 }
+
+.pic1
+{
+    background: url(/Purps.png);
+    height: 500px;
+    width: 800px;
+}
+.pic2
+{
+    background: url(/Techs.png);
+    height: 500px;
+    width: 800px;
+}
