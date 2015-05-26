@@ -16,6 +16,7 @@ public class Company implements Serializable, IsSerializable{
 	private String nameOfReliable;
 	private User user;
 	private boolean isActivate;
+	private Favorite[] favorites;
 	
 	public Company() {
 		
@@ -78,5 +79,13 @@ public class Company implements Serializable, IsSerializable{
 
 	public void setActivate(boolean isActivate) {
 		this.isActivate = isActivate;
+	}
+
+	public Favorite[] getFavorites() {
+		return favorites;
+	}
+
+	public void setFavorites(Favorite[] favorites) {
+		this.favorites = favorites;
 	}
 }
