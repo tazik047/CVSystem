@@ -209,6 +209,26 @@ CREATE TABLE IF NOT EXISTS `CVSystem`.`Students` (
     REFERENCES `CVSystem`.`Groups` (`GroupsId`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
+   
+-- ----------------------------------------------------------------------------
+-- Table CVSystem.Favorites
+-- ----------------------------------------------------------------------------    
+CREATE TABLE IF NOT EXISTS `CVSystem`.`Favorites` (
+  `FavoritesId` BIGINT NOT NULL AUTO_INCREMENT,
+  `StudentsId` BIGINT NOT NULL,
+  `CompaniesId` BIGINT NOT NULL,
+  `DateStamp` DATETIME(6) NOT NULL,
+  PRIMARY KEY (`FavoritesId`),
+  CONSTRAINT `FK_Favorites_Companies`
+    FOREIGN KEY (`CompaniesId`)
+    REFERENCES `CVSystem`.`Companies` (`CompaniesId`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT `FK_Favorites_Students`
+    FOREIGN KEY (`StudentsId`)
+    REFERENCES `CVSystem`.`Students` (`StudentsId`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 
 -- ----------------------------------------------------------------------------
 -- Table CVSystem.Users

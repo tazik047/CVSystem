@@ -15,6 +15,8 @@ import ua.nure.pi.parameter.MapperParameters;
 public abstract class JDBCFavoritesDAO implements FavoritesDAO {
 
 	protected String SQL__SELECT_FAVORITES = "SELECT * FROM Favorites WHERE CompaniesId = ?";
+	protected String SQL__CHECK_FAVORITES = "SELECT FavoritesId FROM Favorites WHERE StudentsId= ? "
+			+ "AND CompaniesId = ?";
 	protected String SQL__INSERT_FAVORITES;
 
 	protected DAOFactory jdbcDAOFactory;
@@ -46,7 +48,13 @@ public abstract class JDBCFavoritesDAO implements FavoritesDAO {
 			Connection con) throws SQLException {
 		boolean result = true;
 		PreparedStatement pstmt = null;
+		PreparedStatement pstmt2 = null;
 		try {
+			pstmt2 = con.prepareStatement(SQL__CHECK_FAVORITES);
+			mapEducationForInsert(companiesId, studentId, pstmt2);
+			ResultSet rs = pstmt2.executeQuery();
+			if(rs.next())
+				return false;
 			pstmt = con.prepareStatement(SQL__INSERT_FAVORITES);
 			mapEducationForInsert(companiesId, studentId, pstmt);
 			if (pstmt.executeUpdate() != 1)
@@ -54,6 +62,14 @@ public abstract class JDBCFavoritesDAO implements FavoritesDAO {
 		} catch (SQLException e) {
 			throw e;
 		} finally {
+			if (pstmt2 != null) {
+				try {
+					pstmt2.close();
+				} catch (SQLException e) {
+					System.err.println("Can not close statement. "
+							+ e.getMessage());
+				}
+			}
 			if (pstmt != null) {
 				try {
 					pstmt.close();

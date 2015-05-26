@@ -69,4 +69,6 @@ void divideProgramLanguages(ProgramLanguage old, Collection<ProgramLanguage> new
 	
 	void mergeProgramLanguages(Collection<ProgramLanguage> oldProgramLanguages, ProgramLanguage newProgramLanguage,
 			AsyncCallback<Void> asyncCallback) throws IllegalArgumentException;
+	
+	void addFavorite(long studentId, AsyncCallback<Void> asyncCallback) throws IllegalArgumentException;
 }

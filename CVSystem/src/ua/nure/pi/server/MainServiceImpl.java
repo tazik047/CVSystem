@@ -35,6 +35,7 @@ import ua.nure.pi.dao.UserDAO;
 import ua.nure.pi.entity.CV;
 import ua.nure.pi.entity.Company;
 import ua.nure.pi.entity.Faculty;
+import ua.nure.pi.entity.Favorite;
 import ua.nure.pi.entity.Group;
 import ua.nure.pi.entity.Language;
 import ua.nure.pi.entity.ProgramLanguage;
@@ -146,6 +147,10 @@ public class MainServiceImpl extends RemoteServiceServlet implements
 		if (cvDAO == null) {
 			throw new IllegalStateException("CVDAO attribute is not exists.");
 		}
+		
+		if (favoritesDAO == null) {
+			throw new IllegalStateException("FavoritesDAO attribute is not exists.");
+		}
 	}
 	
 	  public Collection<Faculty> getFaculties() throws IllegalArgumentException {
@@ -248,7 +253,11 @@ public class MainServiceImpl extends RemoteServiceServlet implements
 	
 	private void checkAdminRoleAndThrowEx() throws IllegalArgumentException{
 		if(!checkAdminRole())
-			throw new IllegalArgumentException("У вас недостаточно прав для выполнения этого действия.");
+			accessError();
+	}
+	
+	private void accessError(){
+		throw new IllegalArgumentException("У вас недостаточно прав для выполнения этого действия.");
 	}
 
 	/**
@@ -343,7 +352,8 @@ public class MainServiceImpl extends RemoteServiceServlet implements
 			Collection<ProgramLanguage> planguages,
 			Collection<Purpose> purposes, int startIndex, int endIndex)
 			throws IllegalArgumentException {
-		
+		if(!checkCompanyRole()&& !checkAdminRole())
+			accessError();
 		return cvDAO.searchCV(languages, planguages, purposes, startIndex, endIndex);
 	}
 
@@ -411,6 +421,25 @@ public class MainServiceImpl extends RemoteServiceServlet implements
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public void addFavorite(long studentId) throws IllegalArgumentException {
+		HttpServletRequest request = getThreadLocalRequest();
+		HttpSession session = request.getSession();
+		Company c = (Company) session.getAttribute(AppConstants.COMPANY);
+		if(c==null){
+			accessError();
+		}
+		if(!favoritesDAO.insertFavorites(c.getId(), studentId))
+			throw new IllegalArgumentException("Не удалось добавить студента в закладки");
+	}
+	
+	private boolean checkCompanyRole(){
+		HttpServletRequest request = getThreadLocalRequest();
+		HttpSession session = request.getSession();
+		User user = (User) session.getAttribute(AppConstants.USER);
+		return user==null?false:!user.isAdmin();
 	}
 	
 	

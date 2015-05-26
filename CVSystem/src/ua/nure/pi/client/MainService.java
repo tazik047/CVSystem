@@ -12,7 +12,6 @@ import ua.nure.pi.entity.Purpose;
 import ua.nure.pi.entity.Student;
 import ua.nure.pi.entity.User;
 
-import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
@@ -68,4 +67,6 @@ public interface MainService extends RemoteService {
 	void divideProgramLanguages(ProgramLanguage old, Collection<ProgramLanguage> newProgramLanguages) throws IllegalArgumentException;
 	
 	void mergeProgramLanguages(Collection<ProgramLanguage> oldProgramLanguages, ProgramLanguage newProgramLanguage) throws IllegalArgumentException;
+	
+	void addFavorite(long studentId) throws IllegalArgumentException;
 }

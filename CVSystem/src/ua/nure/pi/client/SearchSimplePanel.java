@@ -5,12 +5,26 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map.Entry;
  
+
+
+
+
+
+
 import ua.nure.pi.entity.Language;
 import ua.nure.pi.entity.ProgramLanguage;
 import ua.nure.pi.entity.Purpose;
 import ua.nure.pi.entity.CV;
  
+
+
+
+
+
+
 import com.google.gwt.dev.util.collect.HashSet;
+import com.google.gwt.user.client.Event;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FlexTable;
@@ -210,7 +224,17 @@ public class SearchSimplePanel extends LoadingSimplePanel {
                 Label l = new Label();
                 i = 0;
                 for(CV cv : result) {
-                results.setWidget(i / 3, i % 3, new PrintSmallSimplePanel(cv));
+                PrintSmallSimplePanel p = new PrintSmallSimplePanel(cv);
+                p.addDomHandler(new com.google.gwt.event.dom.client.ClickHandler() {
+					
+					@Override
+					public void onClick(com.google.gwt.event.dom.client.ClickEvent event) {
+						CV cv = ((PrintSmallSimplePanel)event.getSource()).getCV();
+						new CVDialogBox(cv, mainService);
+						//Window.alert(cv.getPurpose().getTitle());
+					}
+				}, com.google.gwt.event.dom.client.ClickEvent.getType());
+                results.setWidget(i / 3, i % 3, p);
                 i++;
                 }
                 right.add(moreButton);
@@ -255,7 +279,7 @@ public class SearchSimplePanel extends LoadingSimplePanel {
                 mslang.setHeight(150);
                 mslang.setStyleName("filterPanel");
             filters.add(findButton);
-                findButton.draw();
+                findButton.redraw();
         }
        
         }

@@ -285,7 +285,7 @@ GO
 IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Favorites]') AND type in (N'U'))
 BEGIN
 CREATE TABLE [dbo].[Favorites](
-	[FavoritesId] [bigint] NOT NULL,
+	[FavoritesId] [bigint] IDENTITY(1,1) NOT NULL,
 	[StudentsId] [bigint] NOT NULL,
 	[CompaniesId] [bigint] NOT NULL,
 	[DateStamp] [datetime] NOT NULL,

@@ -454,7 +454,7 @@ ul.par li.big img
 }
 
 .cv_block>.image{
-	background-image: url('http://monroeny.org/images/man-icon.png');
+	background-image: url('/img/stud.png');
 	background-repeat:no-repeat;
 	width: 100px;
 	height: 102px;
