@@ -301,6 +301,29 @@ public abstract class JDBCCVDAO implements CVDAO {
 		query.append(')');
 	}
 	
+	private class Pair{
+		private long id;
+		
+		private int level;		
+		
+		public Pair(long i, int l){
+			id= i;
+			level = l;
+		}
+	}
+	
+	protected void createQuery(StringBuilder query, String pref, String title, Collection<Pair> objs){
+		query.append(" AND (");
+		int ind = 0;
+		for(Pair i : objs){
+			if(ind+1==objs.size())
+				query.append(String.format(" (%s.%s = %d AND %s.Level = %d)", pref, title, i.id, pref, i.level));
+			else
+				query.append(String.format(" (%s.%s = %d AND %s.Level = %d) OR", pref, title, i.id, pref, i.level));
+			ind++;
+		}
+		query.append(')');
+	}
 	
 	protected Collection<CV> searchCV(Collection<Language> languages,
 			Collection<ProgramLanguage> planguages,
@@ -312,17 +335,17 @@ public abstract class JDBCCVDAO implements CVDAO {
 			StringBuilder query = new StringBuilder();
 			
 			if(languages!= null && languages.size()!=0){
-				Collection<Long> langIds = new ArrayList<Long>();
+				Collection<Pair> langIds = new ArrayList<Pair>();
 				for(Language l : languages)
-					langIds.add(l.getId());
-				createQuery(query, "lcv." + MapperParameters.LANGUAGE__ID, langIds);
+					langIds.add(new Pair(l.getId(), l.getLevel()));
+				createQuery(query, "lcv",MapperParameters.LANGUAGE__ID, langIds);
 			}
 			
 			if(planguages!= null && planguages.size()!=0){
-				Collection<Long> plangIds = new ArrayList<Long>();
+				Collection<Pair> plangIds = new ArrayList<Pair>();
 				for(ProgramLanguage l : planguages)
-					plangIds.add(l.getId());
-				createQuery(query, "pcv." + MapperParameters.PROGRAM_LANGUAGE__ID, plangIds);
+					plangIds.add(new Pair(l.getId(), l.getLevel()));
+				createQuery(query, "pcv", MapperParameters.PROGRAM_LANGUAGE__ID, plangIds);
 			}
 			
 			if(purposes!= null && purposes.size()!=0){

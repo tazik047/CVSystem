@@ -143,7 +143,17 @@ public class SearchSimplePanel extends LoadingSimplePanel {
                                 i = 0;
                                 results.clear();
                                 for(CV cv : result) {
-                                results.setWidget(i / 3, i % 3, new PrintSmallSimplePanel(cv));
+                                	PrintSmallSimplePanel p = new PrintSmallSimplePanel(cv);
+                                    p.addDomHandler(new com.google.gwt.event.dom.client.ClickHandler() {
+                    					
+                    					@Override
+                    					public void onClick(com.google.gwt.event.dom.client.ClickEvent event) {
+                    						CV cv = ((PrintSmallSimplePanel)event.getSource()).getCV();
+                    						new CVDialogBox(cv, mainService);
+                    						//Window.alert(cv.getPurpose().getTitle());
+                    					}
+                    				}, com.google.gwt.event.dom.client.ClickEvent.getType());
+                                    results.setWidget(i / 3, i % 3, p);
                                 curr = 12;
                                 i++;
                                 }
