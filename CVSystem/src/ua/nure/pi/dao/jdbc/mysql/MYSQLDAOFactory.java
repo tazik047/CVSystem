@@ -142,6 +142,12 @@ public class MYSQLDAOFactory extends DAOFactory {
 	public CompanyDAO getCompanyDAO() {
 		return MYSQLCompanyDAO.getInstancce();
 	}
+
+
+	@Override
+	public FavoritesDAO getFavoritesDAO() {
+		return MYSQLFavoritesDAO.getInstancce();
+	}
 	
 
 

@@ -8,6 +8,7 @@ import ua.nure.pi.dao.CVDAO;
 import ua.nure.pi.dao.CompanyDAO;
 import ua.nure.pi.dao.DAOFactory;
 import ua.nure.pi.dao.FacultyGroupDAO;
+import ua.nure.pi.dao.FavoritesDAO;
 import ua.nure.pi.dao.LanguageDAO;
 import ua.nure.pi.dao.PassDAO;
 import ua.nure.pi.dao.ProgramLanguageDAO;
@@ -37,6 +38,7 @@ public class ContextListener implements ServletContextListener {
 		setPassAttribute(servletContext);
 		setCompanyAttribute(servletContext);
 		setCVAttribute(servletContext);
+		setFavoritesAttribute(servletContext);
 	}
 
 	private void setPassAttribute(ServletContext servletContext) {
@@ -99,5 +101,11 @@ public class ContextListener implements ServletContextListener {
 		CVDAO cvDAO = DAOFactory.getDAOFactory(DBType)
 				.getCVDAO();
 		servletContext.setAttribute(AppConstants.CV_DAO, cvDAO);
+	}
+	
+	private void setFavoritesAttribute(ServletContext servletContext) {
+		FavoritesDAO favoritesDAO = DAOFactory.getDAOFactory(DBType)
+				.getFavoritesDAO();
+		servletContext.setAttribute(AppConstants.FAVORITES_DAO, favoritesDAO);
 	}
 }

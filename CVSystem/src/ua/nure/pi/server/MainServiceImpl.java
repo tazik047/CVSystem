@@ -25,6 +25,7 @@ import ua.nure.pi.client.MainService;
 import ua.nure.pi.dao.CVDAO;
 import ua.nure.pi.dao.CompanyDAO;
 import ua.nure.pi.dao.FacultyGroupDAO;
+import ua.nure.pi.dao.FavoritesDAO;
 import ua.nure.pi.dao.LanguageDAO;
 import ua.nure.pi.dao.PassDAO;
 import ua.nure.pi.dao.ProgramLanguageDAO;
@@ -77,6 +78,8 @@ public class MainServiceImpl extends RemoteServiceServlet implements
 	
 	private CVDAO cvDAO; 
 	
+	private FavoritesDAO favoritesDAO;
+	
 	@Override
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
@@ -103,6 +106,7 @@ public class MainServiceImpl extends RemoteServiceServlet implements
 		userDAO = (UserDAO) servletContext.getAttribute(AppConstants.USER_DAO);
 		companyDAO = (CompanyDAO) servletContext.getAttribute(AppConstants.COMPANY_DAO);
 		cvDAO = (CVDAO) servletContext.getAttribute(AppConstants.CV_DAO);
+		favoritesDAO = (FavoritesDAO) servletContext.getAttribute(AppConstants.FAVORITES_DAO);
 		
 		makeStatistics(cvDAO.getPurposeStat(), "Должность", "Количество анкет", "purps");
 		makeStatistics(cvDAO.getProgLangStat(), "Технологии", "Количество анкет", "techs");

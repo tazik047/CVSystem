@@ -43,4 +43,6 @@ public abstract class DAOFactory {
 	public abstract PassDAO getPassDAO();
 	
 	public abstract CompanyDAO getCompanyDAO();
+	
+	public abstract FavoritesDAO getFavoritesDAO();
 }

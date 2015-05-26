@@ -141,6 +141,12 @@ public class MSSQLDAOFactory extends DAOFactory {
 	public CompanyDAO getCompanyDAO() {
 		return MSSQLCompanyDAO.getInstancce();
 	}
+
+
+	@Override
+	public FavoritesDAO getFavoritesDAO() {
+		return MSSQLFavoritesDAO.getInstancce();
+	}
 	
 
 
