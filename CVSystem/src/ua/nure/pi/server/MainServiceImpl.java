@@ -441,6 +441,20 @@ public class MainServiceImpl extends RemoteServiceServlet implements
 		User user = (User) session.getAttribute(AppConstants.USER);
 		return user==null?false:!user.isAdmin();
 	}
+
+	@Override
+	public Collection<Favorite> getFavorite() throws IllegalArgumentException {
+		HttpServletRequest request = getThreadLocalRequest();
+		HttpSession session = request.getSession();
+		Company c = (Company) session.getAttribute(AppConstants.COMPANY);
+		if(c==null){
+			accessError();
+		}
+		Collection<Favorite> res = favoritesDAO.getFavorites(c.getId());
+		if(res==null)
+			throw new IllegalArgumentException("Не удалось получить закладки");
+		return res;
+	}
 	
 	
 	

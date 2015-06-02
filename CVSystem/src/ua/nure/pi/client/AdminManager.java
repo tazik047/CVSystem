@@ -138,6 +138,20 @@ public class AdminManager {
 		profilePanel.add(pan);
 		pan.add(new HTML("<div class=\"triangle\"></div><div class=\"triangle1\"></div>"));
 		pan.add(edit);
+		if(!admin){
+			Button fav = new Button("Закладки");
+			fav.addClickHandler(new ClickHandler() {
+				
+				@Override
+				public void onClick(ClickEvent event) {
+					if(!uiManager.isSetted(FavoritesSimplePanel.class.getName()))
+						uiManager.setPanel(new FavoritesSimplePanel(mainService));
+				}
+			});
+			pan.add(fav);
+			pan.setSpacing(10);
+			pan.setWidth("350px");
+		}
 		pan.add(exit);
 		pan.setStyleName("profilePanel");
 		exit.addClickHandler(new ClickHandler() {

@@ -5,6 +5,7 @@ import java.util.Collection;
 import ua.nure.pi.entity.CV;
 import ua.nure.pi.entity.Company;
 import ua.nure.pi.entity.Faculty;
+import ua.nure.pi.entity.Favorite;
 import ua.nure.pi.entity.Group;
 import ua.nure.pi.entity.Language;
 import ua.nure.pi.entity.ProgramLanguage;
@@ -69,4 +70,6 @@ public interface MainService extends RemoteService {
 	void mergeProgramLanguages(Collection<ProgramLanguage> oldProgramLanguages, ProgramLanguage newProgramLanguage) throws IllegalArgumentException;
 	
 	void addFavorite(long studentId) throws IllegalArgumentException;
+	
+	Collection<Favorite> getFavorite() throws IllegalArgumentException;
 }

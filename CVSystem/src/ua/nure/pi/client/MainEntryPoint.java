@@ -75,9 +75,19 @@ public class MainEntryPoint implements EntryPoint {
 			}
 		});
 
-		Button btnNewButton_3 = new Button("Партнеры");
+		final Button btnNewButton_3 = new Button("Партнеры");
 		btnNewButton_3.setStyleName("buttons");
 		rootPanel.add(btnNewButton_3);
+		btnNewButton_3.addClickHandler(new ClickHandler() {
+
+			@Override
+			public void onClick(ClickEvent event) {
+				btnNewButton_3.setFocus(false);
+				if (!uiManager.isSetted(CompanyStaticPanel.class.getName()))
+					uiManager.setPanel(new CompanyStaticPanel(mainService));
+
+			}
+		});
 
 		final Button btnNewButton_1 = new Button("Списки резюме");
 		btnNewButton_1.setStyleName("buttons");
@@ -93,14 +103,14 @@ public class MainEntryPoint implements EntryPoint {
 			}
 		});
 
-		Button btnNewButton_2 = new Button("Статистика");
+		final Button btnNewButton_2 = new Button("Статистика");
 		btnNewButton_2.setStyleName("buttons");
 		rootPanel.add(btnNewButton_2);
 		btnNewButton_2.addClickHandler(new ClickHandler() {
 
 			@Override
 			public void onClick(ClickEvent event) {
-				btnNewButton_1.setFocus(false);
+				btnNewButton_2.setFocus(false);
 				if (!uiManager.isSetted(StatisticSimplePanel.class.getName()))
 					uiManager.setPanel(new StatisticSimplePanel(mainService));
 

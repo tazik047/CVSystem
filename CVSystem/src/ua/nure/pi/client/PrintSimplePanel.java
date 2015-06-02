@@ -335,8 +335,9 @@ public class PrintSimplePanel extends SimplePanel {
 		DateTimeFormat format = DateTimeFormat.getFormat("dd.MM.yyyy");
 		String d = others == null ? "" : others;
 		if(student!=null)
-		hLayout15.addMember(new BlueBox("*", null, "Дата рождения "
-				+ format.format(student.getDateOfBirth()) + "<br>" + d));
+			d = "Дата рождения "
+					+ format.format(student.getDateOfBirth()) + "<br>" + d;
+		hLayout15.addMember(new BlueBox("*", null, d));
 
 		layout.addMember(vLayout);
 		layout.markForRedraw();

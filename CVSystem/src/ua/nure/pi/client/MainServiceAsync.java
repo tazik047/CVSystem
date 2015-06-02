@@ -5,6 +5,7 @@ import java.util.Collection;
 import ua.nure.pi.entity.CV;
 import ua.nure.pi.entity.Company;
 import ua.nure.pi.entity.Faculty;
+import ua.nure.pi.entity.Favorite;
 import ua.nure.pi.entity.Group;
 import ua.nure.pi.entity.Purpose;
 import ua.nure.pi.entity.Language;
@@ -71,4 +72,6 @@ void divideProgramLanguages(ProgramLanguage old, Collection<ProgramLanguage> new
 			AsyncCallback<Void> asyncCallback) throws IllegalArgumentException;
 	
 	void addFavorite(long studentId, AsyncCallback<Void> asyncCallback) throws IllegalArgumentException;
+	
+	void getFavorite(AsyncCallback<Collection<Favorite> > asyncCallback) throws IllegalArgumentException;
 }
