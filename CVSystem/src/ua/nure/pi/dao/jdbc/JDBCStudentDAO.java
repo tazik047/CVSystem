@@ -56,7 +56,7 @@ public abstract class JDBCStudentDAO implements StudentDAO {
 			pstmt.setLong(1, studentId);
 			ResultSet rs = pstmt.executeQuery();
 			if (rs.next())
-				result = unMapStudent(rs);
+				result = unMapStudent(rs, con);
 		} catch (SQLException e) {
 			throw e;
 		} finally {
@@ -163,11 +163,7 @@ public abstract class JDBCStudentDAO implements StudentDAO {
 			pstmt = con.prepareStatement(SQL__SELECT_ALL_STUDENT);
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
-				Student st = unMapStudent(rs);
-				st.setCv(jdbcDAOFactory.getCVDAO().getCv(st.getStudentsId(),
-						con));
-				st.setGroup(jdbcDAOFactory.getFacultyGroupDAO().getGroup(
-						rs.getLong(MapperParameters.STUDENT_GROUPSID), con));
+				Student st = unMapStudent(rs, con);				
 				result.add(st);
 			}
 
@@ -186,7 +182,7 @@ public abstract class JDBCStudentDAO implements StudentDAO {
 		return result;
 	}
 
-	private Student unMapStudent(ResultSet rs) throws SQLException {
+	private Student unMapStudent(ResultSet rs, Connection con) throws SQLException {
 		Student st = new Student();
 		st.setStudentsId(rs.getLong(MapperParameters.STUDENT_ID));
 		st.setFirstname(rs.getString(MapperParameters.STUDENT_FIRSTNAME));
@@ -197,6 +193,10 @@ public abstract class JDBCStudentDAO implements StudentDAO {
 		st.setEmail(rs.getString(MapperParameters.STUDENT_EMAIL));
 		st.setDateOfBirth(rs.getDate(MapperParameters.STUDENT_BIRTHDAY));
 		st.setPhone(rs.getString(MapperParameters.STUDENT_PHONE));
+		st.setCv(jdbcDAOFactory.getCVDAO().getCv(st.getStudentsId(),
+				con));
+		st.setGroup(jdbcDAOFactory.getFacultyGroupDAO().getGroup(
+				rs.getLong(MapperParameters.STUDENT_GROUPSID), con));
 		return st;
 	}
 
